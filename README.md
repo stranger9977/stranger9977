@@ -5,8 +5,6 @@
 
 - 🔭 I’m currently working on [Market Implied Projections App](https://github.com/stranger9977/market_implied_fantasy_football)
 
-- 👨‍💻 I’m currently pursuing AWS certification here: **https://d1.awsstatic.com/training-and-certification/docs/AWS_certification_paths.pdf**
-
 - 🐍 Ask me about **Machine Learning**
 
 - 📫 How to reach me **nickgurol@gmail.com**
@@ -21,6 +19,7 @@
 
 <h3 align="left">Support:</h3>
 <p><a href="https://www.buymeacoffee.com/run_the_sims"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="run_the_sims" /></a></p><br><br>
+
 
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=stranger9977&show_icons=true&locale=en&layout=compact" alt="stranger9977" /></p>
 
