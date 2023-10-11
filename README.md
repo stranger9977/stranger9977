@@ -7,7 +7,7 @@
 
   🔭 I’m currently working on [Market Implied Projections App](https://github.com/stranger9977/market_implied_fantasy_football)
 
-  🐍 Ask me about **Teaching Middle Schoolers how to Code**
+  🐍 Ask me about **Teaching Middle Schoolers How to Code**
 
   📫 How to reach me **nickgurol@gmail.com**
 
