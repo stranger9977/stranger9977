@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Nick</h1>
-<h3 align="center">Python Developer | Machine Learning Specialist | Data Engineer</h3>
+<h3 align="center">Software Engineer from Phildalphia 🌆</h3>
 
 
 <p align="left"> <a href="https://twitter.com/run_the_sims" target="blank"><img src="https://img.shields.io/twitter/follow/run_the_sims?logo=twitter&style=for-the-badge" alt="run_the_sims" /></a> </p>
@@ -7,7 +7,7 @@
 
   🔭 I’m currently working on [Market Implied Projections App](https://github.com/stranger9977/market_implied_fantasy_football)
 
-  🐍 Ask me about **Machine Learning**
+  🐍 Ask me about **Teaching Middle Schoolers how to Code**
 
   📫 How to reach me **nickgurol@gmail.com**
 
