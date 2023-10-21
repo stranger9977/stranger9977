@@ -8,7 +8,7 @@
 - 🏈 I’m looking to collaborate on [2024 NFL Big Data Bowl](https://github.com/stranger9977/BigDataBowl2024)
 - 🤵 I created a full stack e-vite application with Flask for my wedding check it out here: [Rehearsal Dinner E-Vite](https://rehearsal-dinner.herokuapp.com/samandnick)
 - 🐍 Ask me about **Teaching Middle Schoolers How to Code**
-- 👷 Currently learning [AWS Cloud Practitioner Certification](https://aws.amazon.com/certification/certified-cloud-practitioner/?c=sec&sec=resources)
+- 👷 Currently learning [AWS Cloud Practitioner Certification]([https://aws.amazon.com/certification/certified-cloud-practitioner/?c=sec&sec=resources](https://github.com/stranger9977/aws_certification))
 
   📫 How to reach me **nickgurol@gmail.com**
 
