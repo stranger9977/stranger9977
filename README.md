@@ -4,7 +4,7 @@
 
 <p align="left"> <a href="https://twitter.com/run_the_sims" target="blank"><img src="https://img.shields.io/twitter/follow/run_the_sims?logo=twitter&style=for-the-badge" alt="run_the_sims" /></a> </p>
 
-- 🔭 I’m currently working on [Market Implied Projections App](https://github.com/stranger9977/market_implied_fantasy_football)
+- 🔭 I’m currently working on [NFL Next Gen Stats Player Comparison Tool](https://github.com/stranger9977/fl_player_comps)
 - 🏈 I’m looking to collaborate on [2024 NFL Big Data Bowl](https://github.com/stranger9977/BigDataBowl2024)
 - 🤵 I created a full stack e-vite application with Flask for my wedding, check it out here: [Rehearsal Dinner E-Vite](https://rehearsal-dinner.herokuapp.com/samandnick)
 - 🐍 Ask me about **Teaching Middle Schoolers How to Code**
