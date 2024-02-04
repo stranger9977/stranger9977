@@ -5,7 +5,8 @@
 <p align="left"> <a href="https://twitter.com/run_the_sims" target="blank"><img src="https://img.shields.io/twitter/follow/run_the_sims?logo=twitter&style=for-the-badge" alt="run_the_sims" /></a> </p>
 
 - 🔭 I’m currently working on [NFL NextGenStats Player Comparison Tool](https://nflplayercomps.streamlit.app/)
-- 🏈 Runner-Up! [2024 NFL Big Data Bowl](https://www.kaggle.com/code/brochillington/pasta/edit/run/158233365)
+- 🏈 Runner-Up! [Notebook](https://www.kaggle.com/code/brochillington/pasta/edit/run/158233365)
+- 🏆 [2024 NFL Big Data Bowl Announcement ](https://www.kaggle.com/competitions/nfl-big-data-bowl-2024/discussion/472712))
 - 🤵 I created a full stack e-vite application with Flask for my wedding, check it out here: [Rehearsal Dinner E-Vite](https://rehearsal-dinner.herokuapp.com/samandnick)
 - 🐍 Ask me about **Teaching Middle Schoolers How to Code**
 - 👷 Currently learning [AWS Cloud Practitioner Certification](https://github.com/stranger9977/aws_certification)
