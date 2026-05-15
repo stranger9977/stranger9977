@@ -1,21 +1,68 @@
 <h1 align="center">Hi 👋, I'm Nick</h1>
-<h3 align="center">Data Scientist from Phildalphia 🌆</h3>
+<h3 align="center">Senior Data Scientist · NFL & NCAA modeling, simulation, and pricing</h3>
 
+<p align="center">
+  <a href="https://www.linkedin.com/in/nick-gurol-87738a1b7"><img src="https://img.shields.io/badge/LinkedIn-Nick%20Gurol-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+  <a href="mailto:nickgurol@gmail.com"><img src="https://img.shields.io/badge/Email-nickgurol%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
+  <a href="https://twitter.com/run_the_sims"><img src="https://img.shields.io/twitter/follow/run_the_sims?logo=twitter&style=for-the-badge" alt="Twitter"/></a>
+</p>
 
-<p align="left"> <a href="https://twitter.com/run_the_sims" target="blank"><img src="https://img.shields.io/twitter/follow/run_the_sims?logo=twitter&style=for-the-badge" alt="run_the_sims" /></a> </p>
+---
 
-- 🔭 I’m currently working on [NFL NextGenStats Player Comparison Tool](https://nflplayercomps.streamlit.app/)
-- 🏈 Runner-Up! [Notebook](https://www.kaggle.com/code/brochillington/pasta)
-- 🏆 [2024 NFL Big Data Bowl Announcement](https://www.kaggle.com/competitions/nfl-big-data-bowl-2024/discussion/472712)
-- 🤵 I created a full stack e-vite application with Flask for my wedding, check it out here: [Rehearsal Dinner E-Vite](https://rehearsal-dinner.herokuapp.com/samandnick)
-- 🐍 Ask me about **Teaching Middle Schoolers How to Code**
-- 👷 Currently learning [AWS Cloud Practitioner Certification](https://github.com/stranger9977/aws_certification)
+### About
 
-  📫 How to reach me **nickgurol@gmail.com**
+Senior Data Scientist at **Penn Entertainment**, building NFL and NCAA simulation, pricing, and player-talent models. Previously GLM pricing at **Chubb**, and before that a science teacher in North Philadelphia. Philadelphia born and raised.
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://flask.palletsprojects.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-icon.svg" alt="flask" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://heroku.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://pandas.pydata.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/2ae2a900d2f041da66e950e4d48052658d850630/icons/pandas/pandas-original.svg" alt="pandas" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://scikit-learn.org/" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="scikit_learn" width="40" height="40"/> </a> </p>
+I work end-to-end — Bayesian / state-space inference, hierarchical talent models, play-outcome distributions, and the production plumbing (Python, SQL, Docker, Argo, MLflow) to ship them. I care just as much about whether the work is *understood* as whether it's correct.
 
-<h3 align="left">Support:</h3>
+---
 
-<p><a href="https://www.buymeacoffee.com/run_the_sims"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="run_the_sims" /></a></p><br><br>
+### 🏈 Featured: Draft Sharpe Series
+
+A two-part research project that applies a quasi-Sharpe ratio to NFL draft picks — risk-adjusted value by position and slot, then a stress test of the conclusions.
+
+- 📈 **Part 1 — [The Draft Sharpe Ratio](https://stranger9977.github.io/draft-sharpe-analysis/analysis.html)** · positional risk / return, surplus value, and how Sharpe correlates with wins
+- 🧪 **Part 2 — [Stress Testing the Sharpe Ratio](https://stranger9977.github.io/draft-sharpe-analysis/counter_analysis.html)** · counterfactuals, a Career-AV lens, and a quantile-regression crossover model for 2026 prospects
+- 📺 **Featured on [YouTube](https://www.youtube.com/watch?v=H8rolEibsPg)**
+- 💻 Source: [`draft-sharpe-analysis`](https://github.com/stranger9977/draft-sharpe-analysis)
+
+---
+
+### 🏆 NFL Big Data Bowl
+
+| Year | Project | Result |
+|------|---------|--------|
+| 2024 | [**PASTA** — Path Analysis via Swarm-Tackle Accuracy](https://www.kaggle.com/code/brochillington/pasta) · biomimetic swarm-tackling / YAC-prevention metric | [🥈 Runner-Up](https://operations.nfl.com/gameday/analytics/big-data-bowl/2024-big-data-bowl-winner-and-finalists/) (300+ submissions) |
+| 2025 | [**CAMO** — The Art of Pre-Snap Disguise](https://www.kaggle.com/code/brochillington/camo-the-art-of-pre-snap-disguise) · transformer-inspired model of pre-snap disguise & post-snap defense | [🎖 Honorable Mention](https://operations.nfl.com/updates/football-ops/nfl-announces-the-finalists-for-the-seventh-annual-big-data-bowl/) (record 400+ field) |
+
+---
+
+### 🛠 Other Public Work
+
+- 🤖 [`nfl_player_comps`](https://github.com/stranger9977/nfl_player_comps) — NFL Next Gen Stats player-comparison tool ([live app](https://nflplayercomps.streamlit.app/))
+- 📊 [`dynasty-dashboard`](https://github.com/stranger9977/dynasty-dashboard) — Streamlit dynasty-FF dashboard with rankings, waiver wire, and Sleeper integration
+- 📚 [`LearnPythonWithFantasyFootball`](https://github.com/stranger9977/LearnPythonWithFantasyFootball) — course materials for the Fantasy Data Pros Python course
+
+---
+
+### Tech I reach for
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/SQL-4479A1?style=flat&logo=postgresql&logoColor=white" alt="SQL"/>
+  <img src="https://img.shields.io/badge/R-276DC3?style=flat&logo=r&logoColor=white" alt="R"/>
+  <img src="https://img.shields.io/badge/PySpark-E25A1C?style=flat&logo=apachespark&logoColor=white" alt="PySpark"/>
+  <img src="https://img.shields.io/badge/Databricks-FF3621?style=flat&logo=databricks&logoColor=white" alt="Databricks"/>
+  <img src="https://img.shields.io/badge/MLflow-0194E2?style=flat&logo=mlflow&logoColor=white" alt="MLflow"/>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker"/>
+  <img src="https://img.shields.io/badge/Argo%20Workflows-EF7B4D?style=flat&logo=argo&logoColor=white" alt="Argo"/>
+  <img src="https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazonaws&logoColor=white" alt="AWS"/>
+  <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat&logo=scikitlearn&logoColor=white" alt="scikit-learn"/>
+  <img src="https://img.shields.io/badge/pandas-150458?style=flat&logo=pandas&logoColor=white" alt="pandas"/>
+</p>
+
+Bayesian inference · state-space models · hierarchical / mixed-effects · GLMs · calibration & backtesting · simulation
+
+---
+
+<p align="center"><i>Philadelphia · always interested in football, modeling, and the messy space where they meet.</i></p>
