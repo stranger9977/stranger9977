@@ -283,6 +283,13 @@
   .klog .kk.miss .rs { color: var(--red); }
   .klog .kk .tag { color: var(--panel-dim); font-weight: 400; }
 
+  /* type grid (current coaches) */
+  .tgrid { display: grid; gap: 15px; }
+  .tt { display: grid; gap: 3px; }
+  .th { font-family: var(--font-mono); font-size: .67rem; letter-spacing: .1em; text-transform: uppercase; color: var(--panel-dim); }
+  .th.good { color: var(--green); } .th.bad { color: var(--red); }
+  .tn { font-family: var(--font-display); font-weight: 600; font-size: .92rem; color: var(--panel-ink); }
+
   .takeaway { border-top: 1px solid var(--hair); padding: clamp(60px,9vw,110px) 0; }
   .takeaway h2 { font-size: clamp(1.7rem, 4.6vw, 2.7rem); max-width: 20ch; }
   .thread { margin-top: 30px; display: grid; gap: 0; }
@@ -705,6 +712,31 @@
             </div>
           </div>
           <div class="callout">League average: coaches leave a timeout unused in <b>15%</b> of one-score losses. Mike Shanahan is the only coach in the worst eight of <b>both</b> lists.</div>
+        </div>
+      </div>
+
+      <div class="beat2">
+        <p class="beatlab rv">This year's coaches</p>
+        <div class="fgrid">
+          <div class="fbody rv">
+            <p class="pull">Zoom in on the coaches who'll be on your screen this fall and a pattern jumps out: managing the clock <em>early</em> and managing it <em>late</em> are two different skills, and most coaches only have one.</p>
+            <p class="dim">Sean McVay and Kyle Shanahan burn timeouts early at some of the highest rates in the league, then almost never leave one unused with a game on the line. Kevin Stefanski and John Harbaugh are the mirror image: tidy before the two-minute warning, then repeatedly walking off one-score losses with a timeout still in the pocket. Only a handful, Dan Campbell, Brian Daboll, Dan Quinn, keep it clean at both ends, and Matt LaFleur is loose at both.</p>
+          </div>
+          <div class="panel rv">
+            <div class="panel-label"><span>Two skills, few coaches have both</span><span>active in 2025</span></div>
+            <div class="tgrid">
+              <div class="tt"><span class="th good">Sharp at both ends</span><span class="tn">Dan Campbell · Brian Daboll · Dan Quinn</span></div>
+              <div class="tt"><span class="th bad">Loose at both ends</span><span class="tn">Matt LaFleur · Mike McDaniel</span></div>
+              <div class="tt"><span class="th">Sloppy early, clutch late</span><span class="tn">Sean McVay · Kyle Shanahan · Jim Harbaugh</span></div>
+              <div class="tt"><span class="th">Sharp early, sloppy late</span><span class="tn">Kevin Stefanski · John Harbaugh · Mike Tomlin</span></div>
+            </div>
+            <div class="callout">And the coach the booth roasts for clock management: <b>Andy Reid</b> burns a few early, but across 61 one-score losses he left a timeout unused just <b>4 times</b>, the best rate of any coach with real mileage.</div>
+          </div>
+        </div>
+
+        <div class="exhibit rv">
+          <div class="exfig"><img src="CHART:timeout-current" alt="Map of every 2025 head coach on burning timeouts early vs leaving them on the table."></div>
+          <p class="excap">Every head coach active in 2025, career figures. Bottom-left is disciplined, top-right is loose with both, and the two off-diagonal corners are the coaches good at one skill and not the other. Click to enlarge.</p>
         </div>
       </div>
       <div class="charts rv">
