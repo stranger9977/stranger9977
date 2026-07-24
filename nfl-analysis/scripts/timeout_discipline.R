@@ -118,7 +118,7 @@ pick <- function(dt, val, k = 8) {
 }
 pa <- pick(copy(A), "burn_vs")
 pb <- pick(copy(B), "died_rate")
-pa[, `:=`(panel = "1. BURNING THEM EARLY (per game vs league average)",
+pa[, `:=`(panel = "1. BURNING THEM EARLY (per game vs league avg)",
           value = burn_vs,
           lab = sprintf("%+.2f", burn_vs),
           nm  = sprintf("%s%s  (%d gms)", coach, fifelse(cur, "*", ""), n_games))]
@@ -149,7 +149,7 @@ p <- ggplot(pd, aes(x = value, y = ord, fill = grp)) +
   geom_text(data = ref, aes(x = x, y = 15.5, label = "league 15%"),
             inherit.aes = FALSE, size = 2.9, color = ink_muted, hjust = -0.08) +
   scale_y_discrete(labels = setNames(pd$nm, as.character(pd$ord))) +
-  scale_x_continuous(expand = expansion(mult = c(0.16, 0.30))) +
+  scale_x_continuous(expand = expansion(mult = c(0.16, 0.42))) +
   scale_fill_manual(values = c(best = pal_div$low, worst = pal_div$high),
                     guide = "none") +
   facet_wrap(~panel, scales = "free") +
@@ -159,9 +159,10 @@ p <- ggplot(pd, aes(x = value, y = ord, fill = grp)) +
     x = NULL, y = NULL,
     caption = paste0(
       "nflfastR pbp + games.csv, 2000-2025 incl. playoffs; timeouts attributed to the head coach | * = active head coach in 2024-25\n",
-      "Burned: charged offensive TOs with >4:00 left in a half (injury TOs excluded), vs season league mean (0.98/gm in 2000 down to 0.62 in 2025); min 80 games, 65 qualify. Martz: 2.02/gm raw, 2x league in all 6 seasons.\n",
-      "Died: regulation losses, trailing 1-8 at Q4 2:00, ending with 1+ TO unused; league 15%, no era trend; min 20 such losses, 33 qualify. Norv Turner 11/31: p = 0.003 vs league.\n",
-      "Mike Shanahan is the only coach in the worst 8 of BOTH panels; Herm Edwards (9%, 2/23) is top-8 in both. Companion analysis prices a banked timeout at ~0.08 pts when a two-minute drill arises."
+      "Burned: charged offensive TOs with >4:00 left in a half (injury TOs excluded), vs season league mean (0.98/gm in 2000 down to 0.62 in 2025); min 80 games, 65 qualify.\n",
+      "Died: regulation losses, trailing 1-8 at Q4 2:00, ending with 1+ TO unused; league 15%, no era trend; min 20 such losses, 33 qualify. Norv Turner 11/31: p = 0.003.\n",
+      "Martz raw rate: 2.02 burns/gm, double the league, in all 6 of his seasons. Mike Shanahan is the only coach in the worst 8 of BOTH panels; Herm Edwards is top-8 in both.\n",
+      "Companion analysis in this repo prices a banked timeout at ~0.08 pts when a two-minute drill arises."
     )
   ) +
   theme_nfl(base_size = 12.5) +
