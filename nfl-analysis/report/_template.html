@@ -189,15 +189,21 @@
   .robust .ri .d { font-family: var(--font-mono); font-size: .74rem; color: var(--panel-dim); line-height: 1.4; }
 
   /* inline chart carousel + lightbox */
-  .charts { margin-top: 12px; }
-  .chartset { border-top: 1px solid var(--hair); }
-  .chartset > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-mono); font-size: .78rem; letter-spacing: .04em; color: var(--accent-ink); padding: 15px 0; }
+  .charts { margin-top: 22px; }
+  .chartset > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 11px;
+    padding: 13px 20px; border: 1px solid var(--hair-strong); border-radius: 999px;
+    background: color-mix(in srgb, var(--accent-ink) 9%, transparent); color: var(--accent-ink);
+    font-family: var(--font-mono); font-size: .82rem; font-weight: 600; letter-spacing: .04em;
+    transition: background .2s, border-color .2s, transform .08s; }
   .chartset > summary::-webkit-details-marker { display: none; }
-  .chartset > summary::before { content: "\25B8"; transition: transform .2s; display: inline-block; }
-  .chartset[open] > summary::before { transform: rotate(90deg); }
-  .chartset > summary .cnt { color: var(--ink-dim); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
-  .chartset > summary:hover .ctoggle { text-decoration: underline; }
+  .chartset > summary:hover { background: color-mix(in srgb, var(--accent-ink) 17%, transparent); border-color: var(--accent-ink); }
+  .chartset > summary:active { transform: translateY(1px); }
+  .chartset > summary:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+  .chartset[open] > summary { border-radius: 12px; }
+  .cico { flex: none; } .cico rect { fill: currentColor; }
+  .cchev { flex: none; margin-left: 2px; transition: transform .25s; }
+  .chartset[open] .cchev { transform: rotate(180deg); }
+  .chartset > summary .cnt { color: var(--ink-dim); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; padding-left: 4px; }
   .carousel { position: relative; margin: 4px 0 22px; }
   .ctrack { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 2px 14px;
     scrollbar-width: thin; scrollbar-color: var(--hair-strong) transparent; }
@@ -383,7 +389,7 @@
       </div>
       <div class="charts rv">
         <details class="chartset">
-          <summary><span class="ctoggle">Explore the full charts</span> <span class="cnt">6 charts</span></summary>
+          <summary><svg class="cico" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="1" y="8" width="3.4" height="7" rx="1"/><rect x="6.3" y="4" width="3.4" height="11" rx="1"/><rect x="11.6" y="6" width="3.4" height="9" rx="1"/></svg><span class="ctoggle">Explore the full charts</span> <span class="cnt">6 charts</span><svg class="cchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="carousel multi">
             <button class="cnav prev" type="button" aria-label="Previous chart">‹</button>
             <div class="ctrack">
@@ -465,7 +471,7 @@
       </div>
       <div class="charts rv">
         <details class="chartset">
-          <summary><span class="ctoggle">Explore the full charts</span> <span class="cnt">4 charts</span></summary>
+          <summary><svg class="cico" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="1" y="8" width="3.4" height="7" rx="1"/><rect x="6.3" y="4" width="3.4" height="11" rx="1"/><rect x="11.6" y="6" width="3.4" height="9" rx="1"/></svg><span class="ctoggle">Explore the full charts</span> <span class="cnt">4 charts</span><svg class="cchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="carousel multi">
             <button class="cnav prev" type="button" aria-label="Previous chart">‹</button>
             <div class="ctrack">
@@ -515,7 +521,7 @@
       </div>
       <div class="charts rv">
         <details class="chartset">
-          <summary><span class="ctoggle">Explore both charts</span> <span class="cnt">2 charts</span></summary>
+          <summary><svg class="cico" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="1" y="8" width="3.4" height="7" rx="1"/><rect x="6.3" y="4" width="3.4" height="11" rx="1"/><rect x="11.6" y="6" width="3.4" height="9" rx="1"/></svg><span class="ctoggle">Explore both charts</span> <span class="cnt">2 charts</span><svg class="cchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="carousel multi">
             <button class="cnav prev" type="button" aria-label="Previous chart">‹</button>
             <div class="ctrack">
@@ -563,7 +569,7 @@
       </div>
       <div class="charts rv">
         <details class="chartset">
-          <summary><span class="ctoggle">Explore the leaderboard</span> <span class="cnt">1 chart</span></summary>
+          <summary><svg class="cico" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="1" y="8" width="3.4" height="7" rx="1"/><rect x="6.3" y="4" width="3.4" height="11" rx="1"/><rect x="11.6" y="6" width="3.4" height="9" rx="1"/></svg><span class="ctoggle">Explore the leaderboard</span> <span class="cnt">1 chart</span><svg class="cchev" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="carousel">
             <div class="ctrack">
               <figure><img src="CHART:timeout_discipline" alt="Timeout discipline leaderboard"><figcaption>Martz burns them early; Norv Turner leaves them on the table; Andy Reid rarely does either.</figcaption></figure>
