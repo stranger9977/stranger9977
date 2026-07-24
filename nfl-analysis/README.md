@@ -10,7 +10,57 @@ draft picks.
 Reproduce: download data per `scripts/prep_data.R` comments, run
 `Rscript scripts/prep_data.R`, then any `Rscript scripts/<slug>.R`.
 
-## The five
+---
+
+## Round 2 — Directed deep dives (timeouts, icing, sequencing, predictability)
+
+Four commissioned tracks, each with a coach/play-caller leaderboard through the
+**2025 season**. Play callers attributed from the samhoppen/NFL_public dataset
+(offensive + defensive play caller per team-game 1999–2025); coach timeout
+decisions from `games.csv` head coaches.
+
+### T1. Timeout discipline — "The two ways to waste a timeout"
+(`charts/timeout_discipline.png`) — 2000–2025, 14,030 team-games. Two distinct
+sins: **burning them early** (delay-of-game bailouts before the last 4:00) —
+Mike Martz is the runaway worst at +1.02/game over his era, double the league in
+all six seasons; current burners are Jim Harbaugh, LaFleur, McVay, Payton — and
+**dying with them late** (one-score Q4 losses ending with a timeout unused) —
+Norv Turner 35% (11/31, p=0.003) vs the 15% league rate; Gary Kubiak 0/26.
+Twists: Mike Shanahan is the only coach in the worst-8 of *both*; Andy Reid, the
+most-mocked clock manager alive, almost never dies with timeouts (4/61, best
+large-sample rate).
+
+### T2. Icing the kicker — "Shaves ~3 pts off makes, but 26 seasons can't prove it"
+(`charts/icing-the-kicker.png`, `charts/icing-coach-funnel.png`) — 2,221 pressure
+FGs; controlled inside the 1,782 where the defense had a timeout to spend. After
+controlling for distance, EB kicker quality, weather, era, and situation, icing's
+effect is **−2.9 pts of make probability, 95% CI [−7.0, +1.2]** — suggestive but
+statistically indistinguishable from nothing. Heaviest icer: Matt LaFleur (67%);
+the funnel shows **20 of 21 coaches' icing effects sit inside the pure-luck
+cone** — nobody owns the ice.
+
+### T3. Play sequencing — the equilibrium map & the death of "establish the run"
+(`charts/equilibrium_map.png`, `charts/sequencing_death.png`) — 2015–2025. The
+pass-minus-run EPA gap runs from **+0.22** (late & close, 1st down; league passes
+63%) to **−0.50** at 4th-&-1 and **−0.21** on goal-to-go 3rd down (league passes
+68% — the mix flips inside the 5). And "establish the run" is a myth: a pass after
+a prior run gains −0.015 EPA vs after a pass on 1st-and-10 — every game-state cell
+sits inside the negligible band. (Self-selected cells drawn as hollow points.)
+
+### T4. Play-caller predictability — "The best play-callers are more predictable"
+(`charts/predictability_vs_epa_scatter.png`, `charts/predictability_leaderboard.png`)
+— 305,827 called plays, conditional-entropy predictability with empirical-Bayes
+de-biasing. The "elite coaches are unpredictable" trope is a game-script illusion:
+raw entropy says unpredictable=good (r=+0.33), but that's because good offenses
+live in balanced down-and-distance. Controlling for situation, **the sign flips —
+more predictable callers run better offenses (r=−0.37)**. Andy Reid is the poster
+child: a situational guesser gets ~3.1 more calls right per 100 against him than
+against an average caller, and he runs the league's best offense. Unpredictability
+is mostly a symptom of bad callers; Ben Johnson is the lone hard-to-read elite.
+
+---
+
+## Round 1 — The five
 
 ### 1. Offense — Motion barely taxes man coverage (`charts/motion-man-tax.png`)
 Over 31,468 charted dropbacks (2022–23), pre-snap motion's celebrated
