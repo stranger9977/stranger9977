@@ -255,6 +255,7 @@
       <div class="fhead"><span class="fnum rv">01</span><span class="kicker rv">Offense</span></div>
       <p class="belief rv"><span class="q">"</span>Establish the run and the pass opens up.<span class="q">"</span></p>
       <div class="verdict-tag rv"><span class="dot"></span> Verdict: it doesn't</div>
+      <p class="beatlab rv" style="margin-top:26px">Beat 1 &nbsp;/&nbsp; The next play</p>
       <div class="fgrid">
         <div class="fbody rv">
           <p class="pull">The usual version is about sequence: pound the run on first and second down, and the third down throw comes open. So we lined up every third down pass by how the offense got there.</p>
@@ -272,6 +273,29 @@
           <div class="bignum">0.00<span class="u">EPA gained</span></div>
           <div class="bigcap">by grinding the run first. <span class="dim">If anything the ground-and-pound path throws a little worse on the down that matters.</span></div>
           <div class="panel-note">Third down dropbacks split by the first and second down calls, within distance. <b>n = 666 to 2,549</b> per group. The immediate next play test agrees: a pass right after a run gains <b>0.015 EPA fewer</b>, statistically zero.</div>
+        </div>
+      </div>
+
+      <div class="beat2">
+        <p class="beatlab rv">Beat 2 &nbsp;/&nbsp; The long game</p>
+        <div class="fgrid rev">
+          <div class="fbody rv">
+            <p class="pull">There is a bigger version too: grind it early and the pass opens up later, in the second half, in the fourth quarter, when it counts. <strong>That doesn't happen either.</strong></p>
+            <p class="dim">Line up how much a team ran in the first half against how well it threw later, in neutral game states so a lead isn't quietly doing the work. The connection is nothing. Later in the same half, the second half, the fourth quarter: all flat. Flat even when the early runs actually gained yards. Flat for play-action, the one throw that supposedly needs a run game to sell it. Teams that ran the most early passed a touch worse late, not better.</p>
+            <div class="foot-link"><a class="chartlink" href="#ax1">See the game-level chart</a></div>
+          </div>
+          <div class="panel rv">
+            <div class="panel-label"><span>Does early running predict later passing?</span><span>game-script controlled</span></div>
+            <div class="robust">
+              <div class="ri"><span class="k">&minus;0.03</span><span class="d">Later in the same half (Q1 running, then Q2 passing)</span></div>
+              <div class="ri"><span class="k">&minus;0.05</span><span class="d">The second half</span></div>
+              <div class="ri"><span class="k">&minus;0.05</span><span class="d">The fourth quarter</span></div>
+              <div class="ri"><span class="k">&minus;0.02</span><span class="d">Play-action, second half (the last-resort claim)</span></div>
+            </div>
+            <div class="bignum" style="margin-top:22px">&asymp;&#8202;0</div>
+            <div class="bigcap">correlation at every timescale. <span class="dim">Pounding it early does nothing for the pass later.</span></div>
+            <div class="panel-note">First-half run volume vs later passing EPA, neutral win probability only. <b>1,848 to 3,778</b> team-games per row. The pattern holds inside each team's own games.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -422,7 +446,7 @@
       <p class="eyebrow rv" style="margin-bottom:16px">The thread</p>
       <h2 class="rv">Football's folk wisdom is mostly about looking decisive. The math rewards something quieter.</h2>
       <div class="thread read rv" style="max-width:74ch">
-        <div class="ti"><span class="n">01</span><span class="x"><b>The run doesn't set up the pass.</b> Sequence is a story we tell. The defense doesn't read it.</span></div>
+        <div class="ti"><span class="n">01</span><span class="x"><b>The run doesn't set up the pass.</b> Not the next play, not the fourth quarter. Sequence is a story we tell. The defense doesn't read it.</span></div>
         <div class="ti"><span class="n">02</span><span class="x"><b>Predictable isn't the weakness.</b> The best callers commit to the right call, dare you to stop it, and it holds up even after you strip out the quarterback.</span></div>
         <div class="ti"><span class="n">03</span><span class="x"><b>Icing the kicker is theater.</b> A quarter century of kicks can't separate it from luck.</span></div>
         <div class="ti"><span class="n">04</span><span class="x"><b>Timeouts get wasted in public.</b> The tape shows who burns them and who leaves them on the table.</span></div>
@@ -438,11 +462,14 @@
       <p class="dim read" style="margin-top:14px">Every headline above compresses a fully controlled analysis. These are the source charts, with samples, confidence intervals, era splits and the named leaderboards. Built in R over nflverse and nflfastR play-by-play.</p>
 
       <div class="ax" id="ax1">
-        <div class="axhead"><span class="n">01</span><h3>The run does not set up the pass</h3></div>
-        <p class="axsub">Third down passing by the first and second down calls, within distance; and the drive-sequence test across every game state.</p>
+        <div class="axhead"><span class="n">01</span><h3>The run does not set up the pass, near or far</h3></div>
+        <p class="axsub">Two timescales. Left: the third down throw by the first and second down calls, within distance. Right: first-half running vs later passing, game-script controlled, at every horizon including play-action.</p>
         <div class="figrow two">
-          <figure><img src="CHART:establish-run-setup" alt="Third-down pass EPA split by whether the offense ran or passed on first and second down."><figcaption>Ran twice, then threw sits at or below passed twice at the distances that decide drives.</figcaption></figure>
-          <figure><img src="CHART:sequencing_death" alt="The extra EPA a pass gains after a prior run vs a prior pass, by game state, all within the negligible band."><figcaption>The immediate next-play version: no game state shows a real run-then-pass bump.</figcaption></figure>
+          <figure><img src="CHART:establish-run-setup" alt="Third-down pass EPA split by whether the offense ran or passed on first and second down."><figcaption>The next play: ran twice then threw sits at or below passed twice, at the distances that decide drives.</figcaption></figure>
+          <figure><img src="CHART:establish-run-latepass" alt="Correlation of first-half running with later passing efficiency, flat at every timescale."><figcaption>The long game: early running predicts later passing at essentially zero, later in the half, the second half, the fourth quarter, and play-action.</figcaption></figure>
+        </div>
+        <div class="figrow" style="margin-top:18px">
+          <figure><img src="CHART:sequencing_death" alt="The extra EPA a pass gains after a prior run vs a prior pass, by game state, all within the negligible band."><figcaption>And the granular next-play test: no game state shows a real run-then-pass bump.</figcaption></figure>
         </div>
       </div>
 
