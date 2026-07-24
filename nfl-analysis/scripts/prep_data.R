@@ -1,4 +1,4 @@
-# Build a slim combined play-by-play file (2015-2024) with the columns most
+# Build a slim combined play-by-play file (2015-2025) with the columns most
 # analyses need, so downstream scripts load in seconds. Full per-season files
 # remain in data/ for anything needing extra columns (use fread select=).
 suppressMessages(library(data.table))
@@ -29,7 +29,7 @@ cols <- c(
   "timeout","timeout_team","play_clock","st_play_type","qb_kneel","qb_spike"
 )
 
-files <- sprintf(file.path(dir, "play_by_play_%d.csv.gz"), 2015:2024)
+files <- sprintf(file.path(dir, "play_by_play_%d.csv.gz"), 2015:2025)
 pbp <- rbindlist(lapply(files, function(f) {
   hdr <- names(fread(f, nrows = 0))
   fread(f, select = intersect(cols, hdr), showProgress = FALSE)
