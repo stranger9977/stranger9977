@@ -226,6 +226,23 @@
   .lightbox.on { display: flex; }
   .lightbox img { max-width: 96vw; max-height: 93vh; border-radius: 10px; background: #fbfbf9; box-shadow: 0 30px 90px rgba(0,0,0,.6); }
 
+  /* metric-toggle exhibit */
+  .exhibit { margin-top: 34px; }
+  .exhibit .exlabel { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-dim); margin: 0 0 10px; }
+  .segtoggle { display: inline-flex; flex-wrap: wrap; gap: 3px; padding: 3px; border: 1px solid var(--hair-strong);
+    border-radius: 999px; background: color-mix(in srgb, var(--field) 60%, transparent); margin-bottom: 16px; }
+  .seg { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .02em; font-weight: 600; color: var(--ink-dim);
+    background: transparent; border: none; padding: 8px 16px; border-radius: 999px; cursor: pointer; transition: background .18s, color .18s; }
+  .seg:hover { color: var(--ink); }
+  .seg.on { background: var(--accent-ink); color: var(--field); }
+  .seg:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+  .exfig img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--hair);
+    background: #fbfbf9; cursor: zoom-in; }
+  .exfig img[hidden] { display: none; }
+  .excap { font-family: var(--font-mono); font-size: .74rem; color: var(--ink-dim); margin-top: 10px; line-height: 1.5; }
+  .excap b { color: var(--ink); font-weight: 600; }
+
   .takeaway { border-top: 1px solid var(--hair); padding: clamp(60px,9vw,110px) 0; }
   .takeaway h2 { font-size: clamp(1.7rem, 4.6vw, 2.7rem); max-width: 20ch; }
   .thread { margin-top: 30px; display: grid; gap: 0; }
@@ -319,7 +336,7 @@
         <div class="fgrid rev">
           <div class="fbody rv">
             <p class="pull">There is a bigger version too: grind it early and the pass opens up later, in the second half, in the fourth quarter, when it counts. <strong>That doesn't happen either.</strong></p>
-            <p class="dim">Line up how much a team ran in the first half against how well it threw later, in neutral game states so a lead isn't quietly doing the work. The connection is nothing. Later in the same half, the second half, the fourth quarter: all flat. Flat even when the early runs actually gained yards. Flat for play-action, the one throw that supposedly needs a run game to sell it. Teams that ran the most early passed a touch worse late, not better.</p>
+            <p class="dim">Line up how much a team ran in the first half against how well it threw later, in neutral game states so a lead isn't quietly doing the work. The connection is nothing. Later in the same half, the second half, the fourth quarter: all flat. Flat for play-action, the one throw that supposedly needs a run game to sell it. And it isn't about running <em>well</em> versus running a <em>lot</em>: an efficient early run game does just as little for later offense as a busy one. Pick your yardstick, expected points, success rate, or win probability. The answer holds. Use the toggle below.</p>
           </div>
           <div class="panel rv">
             <div class="panel-label"><span>Does early running predict later passing?</span><span>game-script controlled</span></div>
@@ -333,6 +350,21 @@
             <div class="bigcap">correlation at every timescale. <span class="dim">Pounding it early does nothing for the pass later.</span></div>
             <div class="panel-note">First-half run volume vs later passing EPA, neutral win probability only. <b>1,848 to 3,778</b> team-games per row. The pattern holds inside each team's own games.</div>
           </div>
+        </div>
+
+        <div class="exhibit rv">
+          <p class="exlabel">Volume and efficiency, any metric you like</p>
+          <div class="segtoggle" role="group" aria-label="Choose a metric">
+            <button class="seg on" type="button" data-m="epa">Expected points</button>
+            <button class="seg" type="button" data-m="success">Success rate</button>
+            <button class="seg" type="button" data-m="wpa">Win probability</button>
+          </div>
+          <div class="exfig">
+            <img data-m="epa" src="CHART:establish-run-quality-epa" alt="Correlation of early running with later passing and running, EPA, all near zero.">
+            <img data-m="success" src="CHART:establish-run-quality-success" alt="Correlation of early running with later play, success rate, all near zero." hidden>
+            <img data-m="wpa" src="CHART:establish-run-quality-wpa" alt="Correlation of early running with later play, win probability added, all near zero." hidden>
+          </div>
+          <p class="excap">Whether a team ran a <b>lot</b> early or ran <b>well</b> early, the effect on later passing and later running is indistinguishable from zero. Switch metrics and nothing moves. Click to enlarge.</p>
         </div>
       </div>
 
@@ -633,10 +665,22 @@
       c.querySelector('.next').addEventListener('click', function () { track.scrollBy({ left: track.clientWidth * 0.9, behavior: 'smooth' }); });
     });
     var lb = document.getElementById('lightbox'), lbimg = lb.querySelector('img');
-    document.querySelectorAll('.ctrack img').forEach(function (im) {
+    document.querySelectorAll('.ctrack img, .exfig img').forEach(function (im) {
       im.addEventListener('click', function () { lbimg.src = im.src; lb.classList.add('on'); });
     });
     lb.addEventListener('click', function () { lb.classList.remove('on'); lbimg.removeAttribute('src'); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('on'); } });
+    // metric toggle
+    document.querySelectorAll('.exhibit').forEach(function (ex) {
+      var segs = ex.querySelectorAll('.seg'), imgs = ex.querySelectorAll('.exfig img');
+      segs.forEach(function (b) {
+        b.addEventListener('click', function () {
+          segs.forEach(function (x) { x.classList.remove('on'); });
+          b.classList.add('on');
+          var m = b.getAttribute('data-m');
+          imgs.forEach(function (im) { im.hidden = (im.getAttribute('data-m') !== m); });
+        });
+      });
+    });
   })();
 </script>
