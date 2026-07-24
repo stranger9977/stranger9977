@@ -1,0 +1,516 @@
+<style>
+  /* ============================================================
+     EVERYBODY KNOWS. THE DATA DOESN'T.
+     Broadcast-telestrator explainer. Editorial ground shifts
+     day/night with theme; data panels stay dark (scoreboard).
+     ============================================================ */
+
+  :root {
+    /* day game (light default) */
+    --field:      #e9ede4;
+    --field-soft: #f3f6ef;
+    --ink:        #16241d;
+    --ink-dim:    #55685e;
+    --hair:       rgba(22,36,29,.14);
+    --hair-strong:rgba(22,36,29,.28);
+    --accent-ink: #8a6206;
+
+    /* broadcast panel, constant across themes */
+    --panel:      #0e1613;
+    --panel-2:    #16211c;
+    --panel-ink:  #f1f4ef;
+    --panel-dim:  #93a89d;
+    --panel-hair: rgba(241,244,239,.14);
+    --gold:       #f6c445;
+    --gold-deep:  #d9a318;
+    --cyan:       #54c6ea;
+    --red:        #ff6f55;
+    --green:      #5ccf8e;
+
+    --font-display: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, "Times New Roman", serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+    --maxw: 1080px;
+    --readw: 62ch;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      --field:#0b1210; --field-soft:#101a16; --ink:#eef2ec; --ink-dim:#94a89e;
+      --hair:rgba(238,242,236,.12); --hair-strong:rgba(238,242,236,.24); --accent-ink:#f6c445;
+    }
+  }
+  :root[data-theme="dark"] {
+    --field:#0b1210; --field-soft:#101a16; --ink:#eef2ec; --ink-dim:#94a89e;
+    --hair:rgba(238,242,236,.12); --hair-strong:rgba(238,242,236,.24); --accent-ink:#f6c445;
+  }
+
+  * { box-sizing: border-box; }
+  .wrap { background: var(--field); color: var(--ink); font-family: var(--font-body);
+          -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  .wrap *::selection { background: var(--gold); color: #16110a; }
+
+  .col { max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 40px); }
+  .read { max-width: var(--readw); }
+
+  .eyebrow { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .22em;
+             text-transform: uppercase; color: var(--accent-ink); font-weight: 600; }
+  .kicker  { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--ink-dim); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em;
+               text-wrap: balance; margin: 0; line-height: 1.02; }
+  p { line-height: 1.62; margin: 0 0 1em; font-size: 1.06rem; }
+  .lede { font-size: clamp(1.12rem, 2.2vw, 1.4rem); line-height: 1.5; color: var(--ink); }
+  .dim { color: var(--ink-dim); }
+  a.chartlink { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .04em;
+                color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--hair-strong);
+                padding-bottom: 2px; transition: border-color .2s, color .2s; white-space: nowrap; }
+  a.chartlink:hover { border-color: var(--accent-ink); }
+  a.chartlink:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 2px; }
+
+  .hero { position: relative; padding: clamp(90px, 16vh, 170px) 0 clamp(60px, 9vh, 96px); }
+  .hero-field { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .yardline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--hair); }
+  .hero h1 { font-size: clamp(2.7rem, 8.2vw, 6rem); line-height: .96; }
+  .hero h1 .off { color: var(--ink-dim); }
+  .hero h1 .on  { color: var(--gold); }
+  .hero .lede { margin-top: clamp(24px, 4vw, 36px); max-width: 48ch; }
+  .hero .meta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: baseline; }
+  .hero .meta .stat { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem;
+                      color: var(--ink); font-variant-numeric: tabular-nums; }
+  .hero .meta .stat b { color: var(--accent-ink); }
+  .scrollcue { margin-top: 46px; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .18em;
+               text-transform: uppercase; color: var(--ink-dim); display: inline-flex; align-items: center; gap: 10px; }
+  .scrollcue::before { content: ""; width: 34px; height: 1px; background: var(--hair-strong); }
+
+  .finding { border-top: 1px solid var(--hair); padding: clamp(56px, 9vw, 104px) 0; position: relative; }
+  .fhead { display: flex; align-items: baseline; gap: 18px; margin-bottom: 8px; }
+  .fnum { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--gold-deep);
+          font-variant-numeric: tabular-nums; }
+  @media (prefers-color-scheme: dark){ :root:where(:not([data-theme="light"])) .fnum{ color: var(--gold);} }
+  :root[data-theme="dark"] .fnum{ color: var(--gold); }
+  .belief { font-family: var(--font-body); font-style: italic; font-size: clamp(1.5rem, 4.4vw, 2.5rem);
+            line-height: 1.14; letter-spacing: -.01em; color: var(--ink); margin: 6px 0 4px; max-width: 22ch; font-weight: 400; }
+  .belief .q { color: var(--ink-dim); font-style: normal; }
+  .verdict-tag { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-mono);
+                 font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-dim); margin-top: 6px; }
+  .verdict-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px color-mix(in srgb, var(--red) 22%, transparent); }
+  .verdict-tag.mixed .dot { background: var(--gold-deep); box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold-deep) 22%, transparent); }
+
+  .fgrid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 44px); margin-top: clamp(26px, 4vw, 40px); align-items: start; }
+  @media (min-width: 860px) { .fgrid { grid-template-columns: 0.92fr 1.08fr; gap: clamp(36px, 4vw, 60px); } }
+  .fgrid.rev { direction: rtl; } .fgrid.rev > * { direction: ltr; }
+  .fbody p:last-child { margin-bottom: 0; }
+  .pull { font-family: var(--font-body); font-size: 1.16rem; line-height: 1.5; }
+  .pull strong { font-weight: 400; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--gold) 55%, transparent) 62%); }
+  .foot-link { margin-top: 22px; }
+  .beatlab { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+             color: var(--accent-ink); margin: 0 0 10px; }
+  .beat2 { margin-top: clamp(30px,5vw,56px); padding-top: clamp(28px,4vw,40px); border-top: 1px dashed var(--hair-strong); }
+
+  .panel { background:
+             radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--gold) 7%, transparent), transparent 55%),
+             linear-gradient(180deg, var(--panel-2), var(--panel));
+           color: var(--panel-ink); border: 1px solid var(--panel-hair); border-radius: 14px;
+           padding: clamp(22px, 3vw, 32px); box-shadow: 0 30px 60px -34px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.04);
+           position: relative; overflow: hidden; }
+  .panel::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+                   background: linear-gradient(var(--gold), var(--gold-deep)); }
+  .panel-label { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+                 color: var(--panel-dim); margin-bottom: 18px; display: flex; justify-content: space-between; gap: 12px; }
+  .bignum { font-family: var(--font-display); font-weight: 800; font-variant-numeric: tabular-nums;
+            font-size: clamp(3.2rem, 9vw, 5rem); line-height: .9; letter-spacing: -.03em; color: var(--gold); }
+  .bignum.red { color: var(--red); }
+  .bignum .u { font-size: .34em; letter-spacing: .02em; color: var(--panel-ink); font-weight: 700; margin-left: .1em; }
+  .bigcap { color: var(--panel-ink); font-family: var(--font-display); font-weight: 600; font-size: 1.02rem;
+            line-height: 1.32; margin-top: 14px; max-width: 32ch; }
+  .bigcap .dim { color: var(--panel-dim); }
+  .panel-note { font-family: var(--font-mono); font-size: .72rem; color: var(--panel-dim); margin-top: 18px; line-height: 1.5; }
+  .panel-note b { color: var(--panel-ink); font-weight: 700; }
+
+  /* number line */
+  .numline { margin-top: 6px; }
+  .numline .track { position: relative; height: 60px; }
+  .numline .zeroband { position: absolute; top: 8px; bottom: 8px; background: color-mix(in srgb, var(--cyan) 16%, transparent);
+                       border-left: 1px dashed var(--panel-hair); border-right: 1px dashed var(--panel-hair); }
+  .numline .axis { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--panel-hair); }
+  .numline .zero { position: absolute; top: 2px; bottom: 2px; width: 2px; background: var(--panel-dim); }
+  .numline .ci { position: absolute; top: 50%; height: 2px; background: var(--gold); transform: translateY(-50%); }
+  .numline .dot { position: absolute; top: 50%; width: 15px; height: 15px; border-radius: 50%; background: var(--gold);
+                  transform: translate(-50%,-50%); box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 22%, transparent); }
+  .numline .ticks { position: relative; height: 1.2em; margin-top: 4px; font-family: var(--font-mono); font-size: .66rem; color: var(--panel-dim); }
+  .numline .ticks span { position: absolute; transform: translateX(-50%); font-variant-numeric: tabular-nums; }
+  .numline .bandlab { position: absolute; top: -4px; font-family: var(--font-mono); font-size: .64rem; letter-spacing: .12em;
+                      text-transform: uppercase; color: var(--cyan); transform: translateX(-50%); }
+
+  /* horizontal bars (where it pays / leaderboards) */
+  .hb { display: grid; gap: 12px; margin-top: 4px; }
+  .hb .r { display: grid; grid-template-columns: 1fr; gap: 5px; }
+  .hb .rt { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .hb .rt .t { font-family: var(--font-display); font-weight: 600; font-size: .86rem; color: var(--panel-ink); }
+  .hb .rt .n { font-family: var(--font-display); font-weight: 800; font-variant-numeric: tabular-nums; font-size: 1.02rem; color: var(--gold); }
+  .hb .rt .n.z { color: var(--panel-dim); }
+  .hb .track { position: relative; height: 9px; border-radius: 5px; background: var(--panel-hair); overflow: hidden; }
+  .hb .track .zc { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--panel-dim); }
+  .hb .fill { position: absolute; top: 0; bottom: 0; border-radius: 5px; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); }
+  .hb .fill.z { background: var(--panel-dim); opacity: .5; }
+
+  /* mini board (timeouts) */
+  .board { display: grid; grid-template-columns: 1fr; gap: 22px; }
+  @media (min-width: 560px){ .board { grid-template-columns: 1fr 1fr; gap: 26px; } }
+  .board h4 { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+              color: var(--panel-dim); margin: 0 0 14px; font-weight: 600; }
+  .brow { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px 10px; margin-bottom: 9px; }
+  .brow .nm { font-family: var(--font-display); font-size: .84rem; font-weight: 600; color: var(--panel-ink); }
+  .brow .nm.best { color: var(--green); } .brow .nm.hi { color: var(--gold); }
+  .brow .v { font-family: var(--font-mono); font-size: .76rem; color: var(--panel-dim); font-variant-numeric: tabular-nums; text-align: right; }
+  .brow .bw { grid-column: 1 / -1; height: 5px; border-radius: 3px; background: var(--panel-hair); overflow: hidden; }
+  .brow .bf { height: 100%; border-radius: 3px; background: var(--red); }
+  .brow .bf.best { background: var(--green); } .brow .bf.hi { background: var(--gold); }
+  .callout { margin-top: 20px; border-top: 1px solid var(--panel-hair); padding-top: 16px;
+             font-family: var(--font-body); font-size: .96rem; line-height: 1.5; color: var(--panel-ink); }
+  .callout b { color: var(--gold); font-weight: 400; }
+
+  /* funnel + slope svg */
+  .funnel, .slope { width: 100%; height: auto; display: block; }
+  .funnel .cone { fill: color-mix(in srgb, var(--panel-ink) 8%, transparent); stroke: var(--panel-hair); stroke-dasharray: 3 4; }
+  .funnel .zero { stroke: var(--panel-dim); stroke-width: 1; }
+  .funnel .d  { fill: var(--panel-dim); } .funnel .d.out { fill: var(--red); } .funnel .d.hi { fill: var(--gold); }
+  .funnel text, .slope text { font-family: var(--font-mono); }
+  .slope .trend { stroke: var(--gold); stroke-width: 2.4; fill: none; }
+  .slope .band { fill: color-mix(in srgb, var(--gold) 12%, transparent); }
+  .slope .grid { stroke: var(--panel-hair); stroke-width: 1; }
+  .slope .d { fill: var(--panel-dim); } .slope .d.hi { fill: var(--gold); }
+
+  .robust { margin-top: 18px; display: grid; gap: 10px; }
+  .robust .ri { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+  .robust .ri .k { font-family: var(--font-display); font-weight: 800; font-variant-numeric: tabular-nums;
+                   font-size: 1.1rem; color: var(--cyan); min-width: 3.4em; }
+  .robust .ri .d { font-family: var(--font-mono); font-size: .74rem; color: var(--panel-dim); line-height: 1.4; }
+
+  .takeaway { border-top: 1px solid var(--hair); padding: clamp(60px,9vw,110px) 0; }
+  .takeaway h2 { font-size: clamp(1.7rem, 4.6vw, 2.7rem); max-width: 20ch; }
+  .thread { margin-top: 30px; display: grid; gap: 0; }
+  .thread .ti { display: grid; grid-template-columns: auto 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
+  .thread .ti .n { font-family: var(--font-mono); font-size: .72rem; color: var(--accent-ink); letter-spacing: .1em; padding-top: 3px; }
+  .thread .ti .x { font-family: var(--font-body); font-size: 1.08rem; line-height: 1.45; }
+  .thread .ti .x b { font-family: var(--font-display); font-weight: 700; }
+
+  .appendix { border-top: 3px solid var(--gold); padding: clamp(60px,9vw,100px) 0 40px; background: var(--field-soft); }
+  .appendix h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); }
+  .ax { margin-top: 40px; border-top: 1px solid var(--hair); padding-top: 30px; }
+  .ax:first-of-type { border-top: none; }
+  .ax .axhead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .ax .axhead .n { font-family: var(--font-mono); font-size: .72rem; color: var(--accent-ink); letter-spacing: .12em; }
+  .ax h3 { font-size: 1.2rem; }
+  .ax .axsub { font-family: var(--font-mono); color: var(--ink-dim); font-size: .78rem; margin: 4px 0 18px; line-height: 1.5; }
+  .figrow { display: grid; gap: 18px; }
+  @media (min-width: 760px){ .figrow.two { grid-template-columns: 1fr 1fr; } }
+  figure { margin: 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--hair); background: #fbfbf9; }
+  figcaption { font-family: var(--font-mono); font-size: .72rem; color: var(--ink-dim); margin-top: 8px; line-height: 1.5; }
+
+  footer { border-top: 1px solid var(--hair); padding: 40px 0 70px; }
+  footer p { font-family: var(--font-mono); font-size: .74rem; color: var(--ink-dim); line-height: 1.7; margin: 0; }
+
+  .toggle { position: fixed; top: 16px; right: 16px; z-index: 20; width: 40px; height: 40px; border-radius: 50%;
+            border: 1px solid var(--hair-strong); background: color-mix(in srgb, var(--field) 82%, transparent);
+            backdrop-filter: blur(8px); color: var(--ink); cursor: pointer; display: grid; place-items: center;
+            font-size: 16px; transition: transform .2s; }
+  .toggle:hover { transform: scale(1.08); }
+  .toggle:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+
+  .rv { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+</style>
+
+<div class="wrap">
+  <button class="toggle" id="themeToggle" aria-label="Toggle day or night">◑</button>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero-field" aria-hidden="true">
+      <span class="yardline" style="left:16%"></span><span class="yardline" style="left:33%"></span>
+      <span class="yardline" style="left:50%"></span><span class="yardline" style="left:67%"></span>
+      <span class="yardline" style="left:84%"></span>
+    </div>
+    <div class="col">
+      <p class="eyebrow rv">NFL Play-by-Play, 2000 to 2025, every snap</p>
+      <h1 class="rv" style="margin-top:22px">Everybody knows.<br><span class="off">The data</span> <span class="on">doesn't.</span></h1>
+      <p class="lede read rv">Establish the run. Keep the defense guessing. Ice the kicker. Four things the whole sport takes as gospel, checked against a quarter century of every play ever charted. They don't hold up, and the coaches you would least expect come out looking smart.</p>
+      <div class="meta rv">
+        <span class="stat"><b>532k+</b> plays modeled</span>
+        <span class="stat"><b>26</b> seasons</span>
+        <span class="stat"><b>4</b> ideas on trial</span>
+      </div>
+      <div class="scrollcue rv">Scroll to the first snap</div>
+    </div>
+  </header>
+
+  <main class="col">
+
+    <!-- ============ 01 ESTABLISH THE RUN ============ -->
+    <section class="finding" id="f1">
+      <div class="fhead"><span class="fnum rv">01</span><span class="kicker rv">Offense</span></div>
+      <p class="belief rv"><span class="q">"</span>Establish the run and the pass opens up.<span class="q">"</span></p>
+      <div class="verdict-tag rv"><span class="dot"></span> Verdict: it doesn't</div>
+      <div class="fgrid">
+        <div class="fbody rv">
+          <p class="pull">The usual version is about sequence: pound the run on first and second down, and the third down throw comes open. So we lined up every third down pass by how the offense got there.</p>
+          <p class="dim">Hold the third down distance fixed, because how you reach third down sets the yardage you face, and the pattern reverses the folk wisdom. At the medium distances that decide drives, teams that <b>passed</b> on first and second throw better on third than teams that ran twice. Run, run, then pass sits at the bottom of the group. Stacking more runs earlier in a drive doesn't lift the next pass either once the situation is held equal. Running first doesn't soften the defense. It just spends a down.</p>
+          <div class="foot-link"><a class="chartlink" href="#ax1">See the third down and sequencing charts</a></div>
+        </div>
+        <div class="panel rv">
+          <div class="panel-label"><span>Third down pass, EPA at 3rd and 3 to 7</span><span>2015 to 2025</span></div>
+          <div class="hb" style="margin-bottom:22px">
+            <div class="r"><div class="rt"><span class="t">Passed on 1st and 2nd, then threw</span><span class="n">+0.03</span></div>
+              <div class="track"><span class="zc" style="left:38%"></span><span class="fill" style="left:38%; width:9%"></span></div></div>
+            <div class="r"><div class="rt"><span class="t">Ran on 1st and 2nd, then threw</span><span class="n z">-0.04</span></div>
+              <div class="track"><span class="zc" style="left:38%"></span><span class="fill z" style="left:26%; width:12%"></span></div></div>
+          </div>
+          <div class="bignum">0.00<span class="u">EPA gained</span></div>
+          <div class="bigcap">by grinding the run first. <span class="dim">If anything the ground-and-pound path throws a little worse on the down that matters.</span></div>
+          <div class="panel-note">Third down dropbacks split by the first and second down calls, within distance. <b>n = 666 to 2,549</b> per group. The immediate next play test agrees: a pass right after a run gains <b>0.015 EPA fewer</b>, statistically zero.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 PREDICTABILITY (two beats) ============ -->
+    <section class="finding" id="f2">
+      <div class="fhead"><span class="fnum rv">02</span><span class="kicker rv">Play-calling</span></div>
+      <p class="belief rv"><span class="q">"</span>The great play-callers keep a defense guessing.<span class="q">"</span></p>
+      <div class="verdict-tag rv"><span class="dot"></span> Verdict: backwards</div>
+
+      <p class="beatlab rv" style="margin-top:26px">Beat 1 &nbsp;/&nbsp; The flip</p>
+      <div class="fgrid">
+        <div class="fbody rv">
+          <p class="pull">It runs the other way. Account for the situation a caller faces, and the most predictable ones run the <strong>best</strong> offenses.</p>
+          <p class="dim">Raw numbers say unpredictable teams score more, but that is a mirage. Good offenses simply live in friendlier down and distance, where the run-pass split is naturally balanced. Compare each caller to the league in the exact same spots and the sign flips. The clearest case is the man the booth needles for it: <b>Andy Reid</b> is the easiest elite caller to predict, and he runs the single best offense in football. It also holds up as more than a quarterback effect, and it is a real trait, not a one-year blip.</p>
+          <div class="foot-link"><a class="chartlink" href="#ax2">See the leaderboard and the quarterback control</a></div>
+        </div>
+        <div class="panel rv">
+          <div class="panel-label"><span>Predictability vs offensive EPA</span><span>2015 to 2025</span></div>
+          <svg class="slope" viewBox="0 0 340 190" role="img" aria-label="More predictable play-callers have better offenses; Andy Reid is the most predictable and the best.">
+            <line class="grid" x1="34" y1="26" x2="34" y2="164"/><line class="grid" x1="34" y1="96" x2="330" y2="96"/>
+            <path class="band" d="M40,128 L326,56 L326,82 L40,156 Z"/>
+            <line class="trend" x1="40" y1="142" x2="326" y2="70"/>
+            <circle class="d" cx="70" cy="146" r="3.5"/><circle class="d" cx="96" cy="122" r="3.5"/>
+            <circle class="d" cx="120" cy="136" r="3.5"/><circle class="d" cx="150" cy="108" r="3.5"/>
+            <circle class="d" cx="176" cy="116" r="3.5"/><circle class="d" cx="150" cy="64" r="3.5"/>
+            <circle class="d" cx="205" cy="92" r="3.5"/><circle class="d" cx="232" cy="100" r="3.5"/>
+            <circle class="d" cx="250" cy="78" r="3.5"/><circle class="d" cx="278" cy="86" r="3.5"/>
+            <circle class="d hi" cx="300" cy="56" r="6"/>
+            <text x="300" y="44" fill="var(--gold)" font-size="9" text-anchor="middle" font-weight="700">A. Reid</text>
+            <text x="30" y="22" fill="var(--panel-dim)" font-size="8" text-anchor="end">better</text>
+            <text x="322" y="182" fill="var(--panel-dim)" font-size="8" text-anchor="end">more predictable</text>
+          </svg>
+          <div class="bignum" style="margin-top:16px">r = &minus;0.37</div>
+          <div class="bigcap">more predictable, <span class="dim">once you control for the situation,</span> means better offense.</div>
+          <div class="robust">
+            <div class="ri"><span class="k">&minus;0.26</span><span class="d">still negative after removing quarterback accuracy (CPOE). It is the caller, not just the passer.</span></div>
+            <div class="ri"><span class="k">0.54</span><span class="d">season to season correlation. Predictability is a stable coaching trait, not noise.</span></div>
+          </div>
+          <div class="panel-note">Conditional-entropy predictability across <b>305,827</b> called plays, empirical-Bayes de-biased. The raw signal (r = +0.33 the other way) is a game-script illusion.</div>
+        </div>
+      </div>
+
+      <div class="beat2">
+        <p class="beatlab rv">Beat 2 &nbsp;/&nbsp; Where it pays</p>
+        <div class="fgrid rev">
+          <div class="fbody rv">
+            <p class="pull">So should a caller ever go off script to stay unpredictable? The data says the payoff is a gradient, and <strong>surprise pays nowhere.</strong></p>
+            <p class="dim">Being predictable helps most on early downs, where committing to what works matters more than disguise. The edge is smaller on obvious passing downs and vanishes in the thin late-and-short samples. But no situation rewards being harder to guess. On early downs, Andy Reid and Joe Brady are both near the top for predictability and near the top for offense, well clear of the league. The early down edge survives a quarterback quality control too, so it is not just star passers.</p>
+            <div class="foot-link"><a class="chartlink" href="#ax2b">See the situation breakdown</a></div>
+          </div>
+          <div class="panel rv">
+            <div class="panel-label"><span>Predictability paired with better offense, by situation</span><span>correlation</span></div>
+            <div class="hb">
+              <div class="r"><div class="rt"><span class="t">Early downs (1st and 2nd)</span><span class="n">+0.38</span></div>
+                <div class="track"><span class="zc" style="left:6%"></span><span class="fill" style="left:6%; width:80%"></span></div></div>
+              <div class="r"><div class="rt"><span class="t">Obvious passing downs (3rd and 7+)</span><span class="n">+0.16</span></div>
+                <div class="track"><span class="zc" style="left:6%"></span><span class="fill" style="left:6%; width:34%"></span></div></div>
+              <div class="r"><div class="rt"><span class="t">Two-minute drill</span><span class="n">+0.15</span></div>
+                <div class="track"><span class="zc" style="left:6%"></span><span class="fill" style="left:6%; width:32%"></span></div></div>
+              <div class="r"><div class="rt"><span class="t">Red zone</span><span class="n z">n.s.</span></div>
+                <div class="track"><span class="zc" style="left:6%"></span><span class="fill z" style="left:6%; width:13%"></span></div></div>
+              <div class="r"><div class="rt"><span class="t">Short yardage</span><span class="n z">n.s.</span></div>
+                <div class="track"><span class="zc" style="left:6%"></span><span class="fill z" style="left:2%; width:5%"></span></div></div>
+            </div>
+            <div class="panel-note" style="margin-top:20px">Correlation of a caller's predictability with offensive EPA, within each slice. Positive means predictable goes with better. <b>Nothing lands negative:</b> no slice rewards surprise. Early down edge survives a CPOE control (partial r = +0.25).</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 ICE THE KICKER ============ -->
+    <section class="finding" id="f3">
+      <div class="fhead"><span class="fnum rv">03</span><span class="kicker rv">Special teams</span></div>
+      <p class="belief rv"><span class="q">"</span>Call timeout, freeze him, ice the kicker.<span class="q">"</span></p>
+      <div class="verdict-tag rv"><span class="dot"></span> Verdict: no signal</div>
+      <div class="fgrid">
+        <div class="fbody rv">
+          <p class="pull">Twenty-six seasons and <strong>2,221 pressure kicks</strong> in, icing shaves maybe three points off a make. The catch is that you cannot tell that apart from doing nothing at all.</p>
+          <p class="dim">Control for distance, kicker quality, weather and the moment, and icing is worth about 2.9 fewer points of make probability, with a confidence interval that runs straight through zero. Score every coach's personal icing record against luck and 20 of 21 land inside the noise cone. The one that pokes out, Pete Carroll, is exactly the single fluke you would expect from 21 tries. Nobody owns the ice.</p>
+          <div class="foot-link"><a class="chartlink" href="#ax3">See the coach funnel and make curve</a></div>
+        </div>
+        <div class="panel rv">
+          <div class="panel-label"><span>Each coach's icing effect vs pure luck</span><span>min 8 iced kicks</span></div>
+          <svg class="funnel" viewBox="0 0 340 200" role="img" aria-label="20 of 21 coaches' icing effects fall inside the luck cone; Pete Carroll is the lone outlier chance predicts.">
+            <path class="cone" d="M32,100 L320,54 L320,146 Z"/><line class="zero" x1="32" y1="100" x2="320" y2="100"/>
+            <text x="326" y="58" fill="var(--panel-dim)" font-size="8">+18</text>
+            <text x="326" y="150" fill="var(--panel-dim)" font-size="8">&minus;18</text>
+            <text x="326" y="103" fill="var(--panel-dim)" font-size="8">0</text>
+            <circle class="d" cx="70" cy="88"/><circle class="d" cx="78" cy="112"/><circle class="d" cx="92" cy="96"/>
+            <circle class="d hi" cx="100" cy="70" r="4.5"/><circle class="d" cx="112" cy="118"/><circle class="d" cx="120" cy="92"/>
+            <circle class="d" cx="130" cy="108"/><circle class="d" cx="146" cy="84"/><circle class="d" cx="150" cy="112"/>
+            <circle class="d" cx="168" cy="98"/><circle class="d" cx="176" cy="120"/><circle class="d" cx="190" cy="90"/>
+            <circle class="d" cx="205" cy="110"/><circle class="d" cx="214" cy="96"/><circle class="d" cx="230" cy="112"/>
+            <circle class="d" cx="250" cy="100"/><circle class="d" cx="262" cy="90"/><circle class="d" cx="280" cy="108"/>
+            <circle class="d" cx="298" cy="98"/><circle class="d" cx="196" cy="86"/>
+            <circle class="d out" cx="66" cy="176" r="5"/>
+            <text x="76" y="180" fill="var(--red)" font-size="8.5">P. Carroll, the 1 in 21</text>
+            <text x="106" y="63" fill="var(--gold)" font-size="8" text-anchor="middle">K. Shanahan</text>
+          </svg>
+          <div class="bignum" style="margin-top:18px">20&#8202;/&#8202;21</div>
+          <div class="bigcap">coaches whose icing record is <span class="dim">indistinguishable from random chance.</span></div>
+          <div class="panel-note">Adjusted effect <b>2.9 points</b> lower, 95% CI runs from 7.0 lower to 1.2 higher. Heaviest icer: <b>Matt LaFleur, 67%</b> of chances. The ritual is not fading, near 33% every era.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 TIMEOUTS ============ -->
+    <section class="finding" id="f4">
+      <div class="fhead"><span class="fnum rv">04</span><span class="kicker rv">Game management</span></div>
+      <p class="belief rv">Two ways to waste a timeout, <span class="q">and who does it most.</span></p>
+      <div class="verdict-tag mixed rv"><span class="dot"></span> Verdict: names named</div>
+      <div class="fgrid">
+        <div class="fbody rv">
+          <p class="pull">A timeout gets wasted two ways: <strong>burned early</strong> to escape a play clock jam, or <strong>left on the table</strong>, still in hand at the gun of a one-score loss. Different coaches, different habit.</p>
+          <p class="dim">Mike Martz burned them at twice the league rate in every season he coached. Norv Turner walked off 35% of his close losses with a timeout unused, against a league mark of 15%. And the twist the booth never mentions: <b>Andy Reid</b>, forever roasted for clock management, almost never leaves them unused, 4 times in 61 close losses, the best rate of any long-tenured coach.</p>
+          <div class="foot-link"><a class="chartlink" href="#ax4">See the full coach leaderboard</a></div>
+        </div>
+        <div class="panel rv">
+          <div class="panel-label"><span>Timeout discipline, head coaches</span><span>2000 to 2025</span></div>
+          <div class="board">
+            <div>
+              <h4>Burned early, per game vs league</h4>
+              <div class="brow"><span class="nm hi">Mike Martz</span><span class="v">+1.02</span><span class="bw"><span class="bf hi" style="width:100%"></span></span></div>
+              <div class="brow"><span class="nm">Jim Harbaugh</span><span class="v">+0.52</span><span class="bw"><span class="bf" style="width:64%"></span></span></div>
+              <div class="brow"><span class="nm">Matt LaFleur</span><span class="v">+0.52</span><span class="bw"><span class="bf" style="width:64%"></span></span></div>
+              <div class="brow"><span class="nm">Sean Payton</span><span class="v">+0.43</span><span class="bw"><span class="bf" style="width:56%"></span></span></div>
+              <div class="brow"><span class="nm best">Jim Caldwell</span><span class="v">&minus;0.48</span><span class="bw"><span class="bf best" style="width:47%"></span></span></div>
+            </div>
+            <div>
+              <h4>Left on the table, share of close losses</h4>
+              <div class="brow"><span class="nm hi">Norv Turner</span><span class="v">35% · 11/31</span><span class="bw"><span class="bf hi" style="width:100%"></span></span></div>
+              <div class="brow"><span class="nm">Brian Billick</span><span class="v">30% · 6/20</span><span class="bw"><span class="bf" style="width:86%"></span></span></div>
+              <div class="brow"><span class="nm">K. Stefanski</span><span class="v">29% · 6/21</span><span class="bw"><span class="bf" style="width:83%"></span></span></div>
+              <div class="brow"><span class="nm best">Andy Reid</span><span class="v">7% · 4/61</span><span class="bw"><span class="bf best" style="width:20%"></span></span></div>
+              <div class="brow"><span class="nm best">Gary Kubiak</span><span class="v">0% · 0/26</span><span class="bw"><span class="bf best" style="width:3%"></span></span></div>
+            </div>
+          </div>
+          <div class="callout">League average: coaches leave a timeout unused in <b>15%</b> of one-score losses. Mike Shanahan is the only coach in the worst eight of <b>both</b> lists.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ TAKEAWAY ============ -->
+  <section class="takeaway">
+    <div class="col">
+      <p class="eyebrow rv" style="margin-bottom:16px">The thread</p>
+      <h2 class="rv">Football's folk wisdom is mostly about looking decisive. The math rewards something quieter.</h2>
+      <div class="thread read rv" style="max-width:74ch">
+        <div class="ti"><span class="n">01</span><span class="x"><b>The run doesn't set up the pass.</b> Sequence is a story we tell. The defense doesn't read it.</span></div>
+        <div class="ti"><span class="n">02</span><span class="x"><b>Predictable isn't the weakness.</b> The best callers commit to the right call, dare you to stop it, and it holds up even after you strip out the quarterback.</span></div>
+        <div class="ti"><span class="n">03</span><span class="x"><b>Icing the kicker is theater.</b> A quarter century of kicks can't separate it from luck.</span></div>
+        <div class="ti"><span class="n">04</span><span class="x"><b>Timeouts get wasted in public.</b> The tape shows who burns them and who leaves them on the table.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPENDIX ============ -->
+  <section class="appendix" id="appendix">
+    <div class="col">
+      <p class="eyebrow" style="margin-bottom:14px">Appendix</p>
+      <h2>The full charts</h2>
+      <p class="dim read" style="margin-top:14px">Every headline above compresses a fully controlled analysis. These are the source charts, with samples, confidence intervals, era splits and the named leaderboards. Built in R over nflverse and nflfastR play-by-play.</p>
+
+      <div class="ax" id="ax1">
+        <div class="axhead"><span class="n">01</span><h3>The run does not set up the pass</h3></div>
+        <p class="axsub">Third down passing by the first and second down calls, within distance; and the drive-sequence test across every game state.</p>
+        <div class="figrow two">
+          <figure><img src="CHART:establish-run-setup" alt="Third-down pass EPA split by whether the offense ran or passed on first and second down."><figcaption>Ran twice, then threw sits at or below passed twice at the distances that decide drives.</figcaption></figure>
+          <figure><img src="CHART:sequencing_death" alt="The extra EPA a pass gains after a prior run vs a prior pass, by game state, all within the negligible band."><figcaption>The immediate next-play version: no game state shows a real run-then-pass bump.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="ax" id="ax2">
+        <div class="axhead"><span class="n">02a</span><h3>The best play-callers are more predictable, and it is not the quarterback</h3></div>
+        <p class="axsub">Career predictability leaderboard, and the trait's stability plus the quarterback control.</p>
+        <div class="figrow two">
+          <figure><img src="CHART:predictability_leaderboard" alt="Leaderboard of most and least predictable play-callers colored by offensive quality."><figcaption>Most predictable callers are elite offenses; the unpredictable skew below average.</figcaption></figure>
+          <figure><img src="CHART:caller-vs-qb" alt="Predictability is stable season to season and its link to offense survives controlling for the quarterback."><figcaption>Stable year to year, and the offense link holds after removing quarterback quality.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="ax" id="ax2b">
+        <div class="axhead"><span class="n">02b</span><h3>Where predictability pays</h3></div>
+        <p class="axsub">The predictability-to-offense link by situation, and what a readable-but-elite tendency actually looks like on the grid.</p>
+        <div class="figrow two">
+          <figure><img src="CHART:pred_by_situation" alt="Correlation of predictability with offense by situation; largest on early downs, never negative."><figcaption>Biggest edge on early downs, nothing negative anywhere. Surprise pays nowhere.</figcaption></figure>
+          <figure><img src="CHART:tendency-fingerprints" alt="Pass-rate fingerprints by down and distance for named callers vs the league."><figcaption>Read Andy Reid's tendencies right off the grid. His offense is still the best.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="ax" id="ax3">
+        <div class="axhead"><span class="n">03</span><h3>Icing the kicker: nobody owns the ice</h3></div>
+        <p class="axsub">Adjusted make probability iced vs not, and each coach's icing effect against a binomial noise cone.</p>
+        <div class="figrow two">
+          <figure><img src="CHART:icing-the-kicker" alt="Make probability by distance, iced vs not iced, with adjusted effect and confidence interval."><figcaption>The adjusted effect of 2.9 points has a confidence interval that runs through zero.</figcaption></figure>
+          <figure><img src="CHART:icing-coach-funnel" alt="Funnel plot: 20 of 21 coaches' icing effects inside the luck cone."><figcaption>20 of 21 coaches inside the luck cone; one outlier chance predicts.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="ax" id="ax4">
+        <div class="axhead"><span class="n">04</span><h3>The two ways to waste a timeout</h3></div>
+        <p class="axsub">Head-coach leaderboards, 2000 to 2025: burning them early, and leaving them on the table in one-score losses.</p>
+        <div class="figrow">
+          <figure><img src="CHART:timeout_discipline" alt="Dual-panel coach leaderboard: burned-early rate and left-on-the-table rate, best and worst named."><figcaption>Martz burns them early; Norv Turner leaves them on the table; Andy Reid rarely does either.</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="col">
+      <p>Source: nflverse and nflfastR play-by-play, 2000 to 2025, plus FTN charting, Next Gen Stats and samhoppen play-caller data. Analyses and charts built in R (data.table, ggplot2). Each finding controls for down, distance, field position, score state, era and the relevant confounders; see the source charts for samples and confidence intervals. Headlines compress full results. A null with a tight interval is reported as a null, not a discovery. EPA is expected points added.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    function cur() {
+      if (root.getAttribute('data-theme')) return root.getAttribute('data-theme');
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    btn.addEventListener('click', function () {
+      var next = cur() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      btn.textContent = next === 'dark' ? '◐' : '◑';
+    });
+    var rvs = [].slice.call(document.querySelectorAll('.rv'));
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      rvs.forEach(function (el) { el.classList.add('in'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
+      rvs.forEach(function (el, i) { el.style.transitionDelay = ((i % 5) * 55) + 'ms'; io.observe(el); });
+    }
+  })();
+</script>

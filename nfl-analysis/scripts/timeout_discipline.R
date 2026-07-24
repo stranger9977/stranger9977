@@ -17,9 +17,9 @@
 
 library(data.table)
 library(ggplot2)
-source("/home/user/stranger9977/nfl-analysis/scripts/theme_nfl.R")
+source("/Users/nick/stranger9977/nfl-analysis/scripts/theme_nfl.R")
 
-DATA <- "/home/user/stranger9977/nfl-analysis/data"
+DATA <- "/Users/nick/stranger9977/nfl-analysis/data"
 
 # ---- 1. Extract timeout events + end-of-game state, season by season -------
 # Timeout rows in nflfastR are standalone no_play rows with blank posteam, so
@@ -122,7 +122,7 @@ pa[, `:=`(panel = "1. BURNING THEM EARLY (per game vs league avg)",
           value = burn_vs,
           lab = sprintf("%+.2f", burn_vs),
           nm  = sprintf("%s%s  (%d gms)", coach, fifelse(cur, "*", ""), n_games))]
-pb[, `:=`(panel = "2. DYING WITH THEM LATE (share of close losses)",
+pb[, `:=`(panel = "2. LEFT ON THE TABLE LATE (share of close losses)",
           value = died_rate,
           lab = sprintf("%.0f%%  (%d/%d)", 100 * died_rate, died_n, n_ctl),
           nm  = sprintf("%s%s  (%d gms)", coach, fifelse(cur, "*", ""), n_games))]
@@ -154,13 +154,13 @@ p <- ggplot(pd, aes(x = value, y = ord, fill = grp)) +
                     guide = "none") +
   facet_wrap(~panel, scales = "free") +
   labs(
-    title = "The two ways to waste a timeout: Mike Martz burned them, Norv Turner died with them",
-    subtitle = "Head-coach timeout discipline, 2000-2025. Left: offensive timeouts taken before the last 4:00 of a half (the delay-of-game bailout), per game vs the league rate that\nseason. Right: share of losses (trailing by 1-8 at the Q4 two-minute mark) finished with a timeout still in the pocket. Worst 8 in red, best 8 in blue; middle folded.",
+    title = "The two ways to waste a timeout: Mike Martz burned them early, Norv Turner left them on the table",
+    subtitle = "Head-coach timeout discipline, 2000-2025. Left: offensive timeouts taken before the last 4:00 of a half (the delay-of-game bailout), per game vs the league rate that\nseason. Right: share of losses (trailing by 1-8 at the Q4 two-minute mark) finished with a timeout still unused. Worst 8 in red, best 8 in blue; middle folded.",
     x = NULL, y = NULL,
     caption = paste0(
       "nflfastR pbp + games.csv, 2000-2025 incl. playoffs; timeouts attributed to the head coach | * = active head coach in 2024-25\n",
       "Burned: charged offensive TOs with >4:00 left in a half (injury TOs excluded), vs season league mean (0.98/gm in 2000 down to 0.62 in 2025); min 80 games, 65 qualify.\n",
-      "Died: regulation losses, trailing 1-8 at Q4 2:00, ending with 1+ TO unused; league 15%, no era trend; min 20 such losses, 33 qualify. Norv Turner 11/31: p = 0.003.\n",
+      "Left on the table: regulation losses, trailing 1-8 at Q4 2:00, ending with 1+ TO unused; league 15%, no era trend; min 20 such losses, 33 qualify. Norv Turner 11/31: p = 0.003.\n",
       "Martz raw rate: 2.02 burns/gm, double the league, in all 6 of his seasons. Mike Shanahan is the only coach in the worst 8 of BOTH panels; Herm Edwards is top-8 in both.\n",
       "Companion analysis in this repo prices a banked timeout at ~0.08 pts when a two-minute drill arises."
     )
