@@ -272,6 +272,17 @@
   @media (max-width: 560px){ .gb-row { grid-template-columns: 1fr; gap: 5px; } .gb-right, .gb-right b { text-align: left; }
     .gb-right b { display: inline; } .gb-coinnote { margin-left: 0; } }
 
+  /* kick log (Carroll) */
+  .klog { display: grid; gap: 7px; margin-bottom: 20px; }
+  .klog .kk { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: baseline;
+    font-family: var(--font-mono); font-size: .78rem; color: var(--panel-dim);
+    border-bottom: 1px solid var(--panel-hair); padding-bottom: 6px; }
+  .klog .kk .ds { color: var(--panel-ink); }
+  .klog .kk .rs { font-weight: 700; text-align: right; letter-spacing: .04em; }
+  .klog .kk.made .rs { color: var(--green); }
+  .klog .kk.miss .rs { color: var(--red); }
+  .klog .kk .tag { color: var(--panel-dim); font-weight: 400; }
+
   .takeaway { border-top: 1px solid var(--hair); padding: clamp(60px,9vw,110px) 0; }
   .takeaway h2 { font-size: clamp(1.7rem, 4.6vw, 2.7rem); max-width: 20ch; }
   .thread { margin-top: 30px; display: grid; gap: 0; }
@@ -592,7 +603,7 @@
       <div class="fgrid">
         <div class="fbody rv">
           <p class="pull">Twenty-six seasons and <strong>2,221 pressure kicks</strong> in, icing shaves maybe three points off a make. The catch is that you cannot tell that apart from doing nothing at all.</p>
-          <p class="dim">Control for distance, kicker quality, weather and the moment, and icing is worth about 2.9 fewer points of make probability, with a confidence interval that runs straight through zero. Score every coach's personal icing record against luck and 20 of 21 land inside the noise cone. The one that pokes out, Pete Carroll, is exactly the single fluke you would expect from 21 tries. Nobody owns the ice.</p>
+          <p class="dim">Control for distance, kicker quality, weather and the moment, and icing is worth about 2.9 fewer points of make probability, with a confidence interval that runs straight through zero. Score every coach's personal icing record against luck and 20 of 21 land inside the noise cone. The one that pokes out, Pete Carroll, is the outlier you turn up when you screen 21 coaches, and he does not survive a closer look. Nobody owns the ice.</p>
         </div>
         <div class="panel rv">
           <div class="panel-label"><span>Each coach's icing effect vs pure luck</span><span>min 8 iced kicks</span></div>
@@ -615,6 +626,37 @@
           <div class="bignum" style="margin-top:18px">20&#8202;/&#8202;21</div>
           <div class="bigcap">coaches whose icing record is <span class="dim">indistinguishable from random chance.</span></div>
           <div class="panel-note">Adjusted effect <b>2.9 points</b> lower, 95% CI runs from 7.0 lower to 1.2 higher. Heaviest icer: <b>Matt LaFleur, 67%</b> of chances. The ritual is not fading, near 33% every era.</div>
+        </div>
+      </div>
+
+      <div class="beat2">
+        <p class="beatlab rv">The lone outlier</p>
+        <div class="fgrid rev">
+          <div class="fbody rv">
+            <p class="pull">So what about Pete Carroll, the one dot outside the cone? Kickers made just 3 of the 8 he iced. It reads like a coach who picks his spots and cashes in.</p>
+            <p class="dim">It comes apart the moment you look closely. Eight kicks is nothing, and one was a 64-yard heave that had barely a one-in-three chance to begin with. Being choosy is not the secret either: league-wide, how selective a coach is has no bearing on whether his icing works, and Kyle Shanahan ices twice as often as Carroll and watched all twelve of his go through. Run the whole thing as a coin flip, a world where the timeout does nothing, and the luckiest of 21 coaches still matches Carroll about once a decade. He is not the exception to the rule. He is the reason you have to check.</p>
+          </div>
+          <div class="panel rv">
+            <div class="panel-label"><span>Every pressure kick Carroll iced</span><span>2012 to 2025</span></div>
+            <div class="klog">
+              <div class="kk made"><span class="ds">2012</span><span>49 yd</span><span class="rs">made</span></div>
+              <div class="kk miss"><span class="ds">2018</span><span>45 yd</span><span class="rs">missed</span></div>
+              <div class="kk miss"><span class="ds">2018</span><span>52 yd</span><span class="rs">missed</span></div>
+              <div class="kk miss"><span class="ds">2019</span><span>47 yd</span><span class="rs">missed</span></div>
+              <div class="kk made"><span class="ds">2021</span><span>52 yd</span><span class="rs">made</span></div>
+              <div class="kk miss"><span class="ds">2022</span><span>64 yd <span class="tag">· 34% anyway</span></span><span class="rs">missed</span></div>
+              <div class="kk miss"><span class="ds">2023</span><span>51 yd</span><span class="rs">missed</span></div>
+              <div class="kk made"><span class="ds">2025</span><span>41 yd</span><span class="rs">made</span></div>
+            </div>
+            <div class="bignum">3 <span class="u">of 8 made</span></div>
+            <div class="bigcap">the whole case for Carroll. <span class="dim">Eight kicks across fourteen years, one of them a 64-yarder.</span></div>
+            <div class="panel-note">He ices only <b>21%</b> of his chances, below the league's 33%. But selectivity is not the edge: across coaches, how often you ice and how well it works correlate <b>r = +0.01</b>.</div>
+          </div>
+        </div>
+
+        <div class="exhibit rv">
+          <div class="exfig"><img src="CHART:icing-carroll" alt="Simulation: in worlds where icing does nothing, the flukiest of 21 coaches still matches Carroll about once a decade."></div>
+          <p class="excap">Twenty thousand simulated seasons where a timeout changes nothing. The single luckiest of 21 coaches still lands near Carroll's mark about a tenth of the time. Click to enlarge.</p>
         </div>
       </div>
       <div class="charts rv">
