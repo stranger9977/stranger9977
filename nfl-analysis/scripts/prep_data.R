@@ -3,7 +3,12 @@
 # remain in data/ for anything needing extra columns (use fread select=).
 suppressMessages(library(data.table))
 
-dir <- "/home/user/stranger9977/nfl-analysis/data"
+dir <- local({
+  cands <- c("/Users/nick/stranger9977/nfl-analysis/data",
+             "/home/user/stranger9977/nfl-analysis/data")
+  hit <- cands[dir.exists(cands)]
+  if (length(hit)) hit[1] else file.path(getwd(), "data")
+})
 cols <- c(
   "play_id","game_id","season","week","season_type","home_team","away_team",
   "posteam","defteam","qtr","down","ydstogo","yardline_100","goal_to_go",

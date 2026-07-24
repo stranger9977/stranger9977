@@ -38,9 +38,16 @@ theme_nfl <- function(base_size = 13) {
     )
 }
 
+# Portable project root: works on the cloud Linux box and on the local Mac.
+nfl_root <- local({
+  cands <- c("/Users/nick/stranger9977/nfl-analysis",
+             "/home/user/stranger9977/nfl-analysis")
+  hit <- cands[dir.exists(cands)]
+  if (length(hit)) hit[1] else getwd()
+})
+
 save_chart <- function(p, name, width = 10, height = 6.5) {
-  path <- file.path("/home/user/stranger9977/nfl-analysis/charts",
-                    paste0(name, ".png"))
+  path <- file.path(nfl_root, "charts", paste0(name, ".png"))
   ggsave(path, p, width = width, height = height, dpi = 150, bg = col_surface)
   cat("SAVED:", path, "\n")
 }

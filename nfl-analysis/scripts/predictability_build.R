@@ -7,8 +7,14 @@
 suppressMessages(library(data.table))
 setDTthreads(2)
 
-DATA <- "/home/user/stranger9977/nfl-analysis/data"
-OUT  <- "/tmp/claude-0/-home-user-stranger9977/f03221fa-fab0-55bd-bf7a-5b49b7ec5a63/scratchpad"
+ROOT <- local({
+  cands <- c("/Users/nick/stranger9977/nfl-analysis",
+             "/home/user/stranger9977/nfl-analysis")
+  hit <- cands[dir.exists(cands)]; if (length(hit)) hit[1] else getwd()
+})
+DATA <- file.path(ROOT, "data")
+OUT  <- file.path(ROOT, "scratch")
+dir.create(OUT, showWarnings = FALSE)
 
 # ---- 1. Load & filter called plays -----------------------------------
 keep <- c("game_id","season","week","posteam","home_team","away_team",
@@ -148,6 +154,14 @@ tab <- merge(tab, nxt, by=c("off_play_caller","season"), all.x=TRUE)
 
 saveRDS(tab, file.path(OUT,"pred_tab.rds"))
 saveRDS(lg,  file.path(OUT,"pred_league_cells.rds"))
+
+# play-level attributed table for downstream deep-dive tracks (consistent
+# caller attribution + situation cells). Join participation/ftn on
+# game_id+play_id; join QB fields from pbp on game_id+play_id.
+saveRDS(d[, .(game_id, play_id, season, week, posteam, off_play_caller, cs,
+              down, ydstogo, yardline_100, togo_b, zone_b, score_b, half,
+              cell, lg_p, is_pass, pass_oe, epa, drive, prev_pass)],
+        file.path(OUT,"pred_plays.rds"))
 
 # ---- 9. Career aggregation (weight by plays) -------------------------
 career <- tab[, .(
