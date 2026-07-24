@@ -188,6 +188,38 @@
                    font-size: 1.1rem; color: var(--cyan); min-width: 3.4em; }
   .robust .ri .d { font-family: var(--font-mono); font-size: .74rem; color: var(--panel-dim); line-height: 1.4; }
 
+  /* inline chart carousel + lightbox */
+  .charts { margin-top: 12px; }
+  .chartset { border-top: 1px solid var(--hair); }
+  .chartset > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono); font-size: .78rem; letter-spacing: .04em; color: var(--accent-ink); padding: 15px 0; }
+  .chartset > summary::-webkit-details-marker { display: none; }
+  .chartset > summary::before { content: "\25B8"; transition: transform .2s; display: inline-block; }
+  .chartset[open] > summary::before { transform: rotate(90deg); }
+  .chartset > summary .cnt { color: var(--ink-dim); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+  .chartset > summary:hover .ctoggle { text-decoration: underline; }
+  .carousel { position: relative; margin: 4px 0 22px; }
+  .ctrack { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 2px 14px;
+    scrollbar-width: thin; scrollbar-color: var(--hair-strong) transparent; }
+  .ctrack::-webkit-scrollbar { height: 8px; }
+  .ctrack::-webkit-scrollbar-thumb { background: var(--hair-strong); border-radius: 4px; }
+  .ctrack > figure { flex: 0 0 min(100%, 720px); scroll-snap-align: start; margin: 0; }
+  .ctrack > figure img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--hair);
+    background: #fbfbf9; cursor: zoom-in; }
+  .ctrack > figure figcaption { font-family: var(--font-mono); font-size: .72rem; color: var(--ink-dim); margin-top: 8px; line-height: 1.5; }
+  .cnav { position: absolute; top: calc(50% - 18px); transform: translateY(-50%); z-index: 3; width: 40px; height: 40px;
+    border-radius: 50%; border: 1px solid var(--hair-strong); background: color-mix(in srgb, var(--field) 86%, transparent);
+    backdrop-filter: blur(6px); color: var(--ink); cursor: pointer; display: none; place-items: center; font-size: 20px; line-height: 1; }
+  .carousel.multi .cnav { display: grid; }
+  .cnav.prev { left: 6px; } .cnav.next { right: 6px; }
+  .cnav:hover { border-color: var(--accent-ink); }
+  .cnav:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+  @media (max-width: 680px){ .carousel.multi .cnav { display: none; } }
+  .lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(6,10,8,.88); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out; }
+  .lightbox.on { display: flex; }
+  .lightbox img { max-width: 96vw; max-height: 93vh; border-radius: 10px; background: #fbfbf9; box-shadow: 0 30px 90px rgba(0,0,0,.6); }
+
   .takeaway { border-top: 1px solid var(--hair); padding: clamp(60px,9vw,110px) 0; }
   .takeaway h2 { font-size: clamp(1.7rem, 4.6vw, 2.7rem); max-width: 20ch; }
   .thread { margin-top: 30px; display: grid; gap: 0; }
@@ -261,7 +293,6 @@
         <div class="fbody rv">
           <p class="pull">The usual version is about sequence: pound the run on first and second down, and the third down throw comes open. So we lined up every third down pass by how the offense got there.</p>
           <p class="dim">Hold the third down distance fixed, because how you reach third down sets the yardage you face, and the pattern reverses the folk wisdom. At the medium distances that decide drives, teams that <b>passed</b> on first and second throw better on third than teams that ran twice. Run, run, then pass sits at the bottom of the group. Stacking more runs earlier in a drive doesn't lift the next pass either once the situation is held equal. Running first doesn't soften the defense. It just spends a down.</p>
-          <div class="foot-link"><a class="chartlink" href="#ax1">See the third down and sequencing charts</a></div>
         </div>
         <div class="panel rv">
           <div class="panel-label"><span>Third down pass, EPA at 3rd and 3 to 7</span><span>2015 to 2025</span></div>
@@ -283,7 +314,6 @@
           <div class="fbody rv">
             <p class="pull">There is a bigger version too: grind it early and the pass opens up later, in the second half, in the fourth quarter, when it counts. <strong>That doesn't happen either.</strong></p>
             <p class="dim">Line up how much a team ran in the first half against how well it threw later, in neutral game states so a lead isn't quietly doing the work. The connection is nothing. Later in the same half, the second half, the fourth quarter: all flat. Flat even when the early runs actually gained yards. Flat for play-action, the one throw that supposedly needs a run game to sell it. Teams that ran the most early passed a touch worse late, not better.</p>
-            <div class="foot-link"><a class="chartlink" href="#ax1">See the game-level chart</a></div>
           </div>
           <div class="panel rv">
             <div class="panel-label"><span>Does early running predict later passing?</span><span>game-script controlled</span></div>
@@ -306,7 +336,6 @@
           <div class="fbody rv">
             <p class="pull">Fine, says the coach, forget sequence. It is about <em>attrition</em>. Keep running and the front seven cracks by the fourth quarter. And the pass? The pass is a luxury. The run is the foundation.</p>
             <p class="dim">Neither survives contact. Run efficiency is flat across all four quarters, and a team's fourth-quarter running is completely unrelated to how much it pounded the ball early. Nobody gets worn down. As for the run being the foundation, the tape says it is the other way around: runs work when the box is light, and a light box is something the <b>passing</b> game earns. The more a team throws, the fewer defenders it sees stacked against the run. You don't run to set up the pass. You pass to open up the run.</p>
-            <div class="foot-link"><a class="chartlink" href="#ax1b">See the wear-down and box charts</a></div>
           </div>
           <div class="panel rv">
             <div class="panel-label"><span>The run works when the box is light</span><span>early downs</span></div>
@@ -333,7 +362,6 @@
           <div class="fbody rv">
             <p class="pull">Here is where the coach finally lands a punch. <strong>In the cold, you have to be able to run it.</strong> And the data mostly backs him.</p>
             <p class="dim">Passing is a big edge in a dome or in September. Drop the temperature and that edge melts. Below 25 degrees the advantage of throwing over running falls by three-quarters, down to a rounding error, and in the coldest games it is no longer distinguishable from zero. Heavy wind does the same thing. So the frozen-field coach is right that the gap closes. He is just wrong about the last step: the passing edge shrinks toward zero, but it never actually flips. Throwing stays the marginally better bet even in the deep freeze, and teams barely change their run-pass mix to match.</p>
-            <div class="foot-link"><a class="chartlink" href="#ax1b">See the temperature chart</a></div>
           </div>
           <div class="panel rv">
             <div class="panel-label"><span>Passing edge over running, by temperature</span><span>outdoors, EPA per play</span></div>
@@ -353,6 +381,23 @@
           </div>
         </div>
       </div>
+      <div class="charts rv">
+        <details class="chartset">
+          <summary><span class="ctoggle">Explore the full charts</span> <span class="cnt">6 charts</span></summary>
+          <div class="carousel multi">
+            <button class="cnav prev" type="button" aria-label="Previous chart">‹</button>
+            <div class="ctrack">
+              <figure><img src="CHART:establish-run-setup" alt="Third-down pass EPA by first and second down calls"><figcaption>The next play: ran twice then threw sits at or below passed twice, at the distances that decide drives.</figcaption></figure>
+              <figure><img src="CHART:establish-run-latepass" alt="Correlation of early running with later passing, flat"><figcaption>The long game: early running predicts later passing at essentially zero, at every horizon including play-action.</figcaption></figure>
+              <figure><img src="CHART:sequencing_death" alt="Next-play run-then-pass effect by game state"><figcaption>The granular next-play test: no game state shows a real run-then-pass bump.</figcaption></figure>
+              <figure><img src="CHART:steelman-weardown" alt="Run success by quarter, flat"><figcaption>Attrition: run efficiency is flat across quarters, and unrelated to how much a team ran early.</figcaption></figure>
+              <figure><img src="CHART:steelman-pass-sets-run" alt="Run success by defenders in box"><figcaption>Foundation: runs work against light boxes, and passing is what earns the light box.</figcaption></figure>
+              <figure><img src="CHART:steelman-cold" alt="Passing edge over running by temperature"><figcaption>December: the passing edge shrinks by three-quarters in the deep cold, but never flips to running.</figcaption></figure>
+            </div>
+            <button class="cnav next" type="button" aria-label="Next chart">›</button>
+          </div>
+        </details>
+      </div>
     </section>
 
     <!-- ============ 02 PREDICTABILITY (two beats) ============ -->
@@ -366,7 +411,6 @@
         <div class="fbody rv">
           <p class="pull">It runs the other way. Account for the situation a caller faces, and the most predictable ones run the <strong>best</strong> offenses.</p>
           <p class="dim">Raw numbers say unpredictable teams score more, but that is a mirage. Good offenses simply live in friendlier down and distance, where the run-pass split is naturally balanced. Compare each caller to the league in the exact same spots and the sign flips. The clearest case is the man the booth needles for it: <b>Andy Reid</b> is the easiest elite caller to predict, and he runs the single best offense in football. It also holds up as more than a quarterback effect, and it is a real trait, not a one-year blip.</p>
-          <div class="foot-link"><a class="chartlink" href="#ax2">See the leaderboard and the quarterback control</a></div>
         </div>
         <div class="panel rv">
           <div class="panel-label"><span>Predictability vs offensive EPA</span><span>2015 to 2025</span></div>
@@ -400,7 +444,6 @@
           <div class="fbody rv">
             <p class="pull">So should a caller ever go off script to stay unpredictable? The data says the payoff is a gradient, and <strong>surprise pays nowhere.</strong></p>
             <p class="dim">Being predictable helps most on early downs, where committing to what works matters more than disguise. The edge is smaller on obvious passing downs and vanishes in the thin late-and-short samples. But no situation rewards being harder to guess. On early downs, Andy Reid and Joe Brady are both near the top for predictability and near the top for offense, well clear of the league. The early down edge survives a quarterback quality control too, so it is not just star passers.</p>
-            <div class="foot-link"><a class="chartlink" href="#ax2b">See the situation breakdown</a></div>
           </div>
           <div class="panel rv">
             <div class="panel-label"><span>Predictability paired with better offense, by situation</span><span>correlation</span></div>
@@ -420,6 +463,21 @@
           </div>
         </div>
       </div>
+      <div class="charts rv">
+        <details class="chartset">
+          <summary><span class="ctoggle">Explore the full charts</span> <span class="cnt">4 charts</span></summary>
+          <div class="carousel multi">
+            <button class="cnav prev" type="button" aria-label="Previous chart">‹</button>
+            <div class="ctrack">
+              <figure><img src="CHART:predictability_leaderboard" alt="Play-caller predictability leaderboard"><figcaption>Most predictable callers are elite offenses; the unpredictable skew below average.</figcaption></figure>
+              <figure><img src="CHART:caller-vs-qb" alt="Predictability stability and QB control"><figcaption>Stable year to year, and the offense link holds after removing quarterback quality.</figcaption></figure>
+              <figure><img src="CHART:pred_by_situation" alt="Predictability payoff by situation"><figcaption>Biggest edge on early downs, nothing negative anywhere. Surprise pays nowhere.</figcaption></figure>
+              <figure><img src="CHART:tendency-fingerprints" alt="Pass-rate fingerprints by down and distance"><figcaption>Read Andy Reid’s tendencies right off the grid. His offense is still the best.</figcaption></figure>
+            </div>
+            <button class="cnav next" type="button" aria-label="Next chart">›</button>
+          </div>
+        </details>
+      </div>
     </section>
 
     <!-- ============ 03 ICE THE KICKER ============ -->
@@ -431,7 +489,6 @@
         <div class="fbody rv">
           <p class="pull">Twenty-six seasons and <strong>2,221 pressure kicks</strong> in, icing shaves maybe three points off a make. The catch is that you cannot tell that apart from doing nothing at all.</p>
           <p class="dim">Control for distance, kicker quality, weather and the moment, and icing is worth about 2.9 fewer points of make probability, with a confidence interval that runs straight through zero. Score every coach's personal icing record against luck and 20 of 21 land inside the noise cone. The one that pokes out, Pete Carroll, is exactly the single fluke you would expect from 21 tries. Nobody owns the ice.</p>
-          <div class="foot-link"><a class="chartlink" href="#ax3">See the coach funnel and make curve</a></div>
         </div>
         <div class="panel rv">
           <div class="panel-label"><span>Each coach's icing effect vs pure luck</span><span>min 8 iced kicks</span></div>
@@ -456,6 +513,19 @@
           <div class="panel-note">Adjusted effect <b>2.9 points</b> lower, 95% CI runs from 7.0 lower to 1.2 higher. Heaviest icer: <b>Matt LaFleur, 67%</b> of chances. The ritual is not fading, near 33% every era.</div>
         </div>
       </div>
+      <div class="charts rv">
+        <details class="chartset">
+          <summary><span class="ctoggle">Explore both charts</span> <span class="cnt">2 charts</span></summary>
+          <div class="carousel multi">
+            <button class="cnav prev" type="button" aria-label="Previous chart">‹</button>
+            <div class="ctrack">
+              <figure><img src="CHART:icing-the-kicker" alt="Make probability iced vs not iced"><figcaption>The adjusted effect of about three points has a confidence interval that runs through zero.</figcaption></figure>
+              <figure><img src="CHART:icing-coach-funnel" alt="Coach icing effects vs a noise cone"><figcaption>20 of 21 coaches inside the luck cone; one outlier chance predicts.</figcaption></figure>
+            </div>
+            <button class="cnav next" type="button" aria-label="Next chart">›</button>
+          </div>
+        </details>
+      </div>
     </section>
 
     <!-- ============ 04 TIMEOUTS ============ -->
@@ -467,7 +537,6 @@
         <div class="fbody rv">
           <p class="pull">A timeout gets wasted two ways: <strong>burned early</strong> to escape a play clock jam, or <strong>left on the table</strong>, still in hand at the gun of a one-score loss. Different coaches, different habit.</p>
           <p class="dim">Mike Martz burned them at twice the league rate in every season he coached. Norv Turner walked off 35% of his close losses with a timeout unused, against a league mark of 15%. And the twist the booth never mentions: <b>Andy Reid</b>, forever roasted for clock management, almost never leaves them unused, 4 times in 61 close losses, the best rate of any long-tenured coach.</p>
-          <div class="foot-link"><a class="chartlink" href="#ax4">See the full coach leaderboard</a></div>
         </div>
         <div class="panel rv">
           <div class="panel-label"><span>Timeout discipline, head coaches</span><span>2000 to 2025</span></div>
@@ -492,6 +561,16 @@
           <div class="callout">League average: coaches leave a timeout unused in <b>15%</b> of one-score losses. Mike Shanahan is the only coach in the worst eight of <b>both</b> lists.</div>
         </div>
       </div>
+      <div class="charts rv">
+        <details class="chartset">
+          <summary><span class="ctoggle">Explore the leaderboard</span> <span class="cnt">1 chart</span></summary>
+          <div class="carousel">
+            <div class="ctrack">
+              <figure><img src="CHART:timeout_discipline" alt="Timeout discipline leaderboard"><figcaption>Martz burns them early; Norv Turner leaves them on the table; Andy Reid rarely does either.</figcaption></figure>
+            </div>
+          </div>
+        </details>
+      </div>
     </section>
   </main>
 
@@ -509,79 +588,14 @@
     </div>
   </section>
 
-  <!-- ============ APPENDIX ============ -->
-  <section class="appendix" id="appendix">
-    <div class="col">
-      <p class="eyebrow" style="margin-bottom:14px">Appendix</p>
-      <h2>The full charts</h2>
-      <p class="dim read" style="margin-top:14px">Every headline above compresses a fully controlled analysis. These are the source charts, with samples, confidence intervals, era splits and the named leaderboards. Built in R over nflverse and nflfastR play-by-play.</p>
-
-      <div class="ax" id="ax1">
-        <div class="axhead"><span class="n">01</span><h3>The run does not set up the pass, near or far</h3></div>
-        <p class="axsub">Two timescales. Left: the third down throw by the first and second down calls, within distance. Right: first-half running vs later passing, game-script controlled, at every horizon including play-action.</p>
-        <div class="figrow two">
-          <figure><img src="CHART:establish-run-setup" alt="Third-down pass EPA split by whether the offense ran or passed on first and second down."><figcaption>The next play: ran twice then threw sits at or below passed twice, at the distances that decide drives.</figcaption></figure>
-          <figure><img src="CHART:establish-run-latepass" alt="Correlation of first-half running with later passing efficiency, flat at every timescale."><figcaption>The long game: early running predicts later passing at essentially zero, later in the half, the second half, the fourth quarter, and play-action.</figcaption></figure>
-        </div>
-        <div class="figrow" style="margin-top:18px">
-          <figure><img src="CHART:sequencing_death" alt="The extra EPA a pass gains after a prior run vs a prior pass, by game state, all within the negligible band."><figcaption>And the granular next-play test: no game state shows a real run-then-pass bump.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="ax" id="ax1b">
-        <div class="axhead"><span class="n">01</span><h3>The run-first coach, answered point by point</h3></div>
-        <p class="axsub">The wear-down claim, the foundation claim, and the one that holds up: December football.</p>
-        <div class="figrow two">
-          <figure><img src="CHART:steelman-weardown" alt="Run success rate by quarter is flat; defenses do not wear down."><figcaption>Attrition: run efficiency is flat across quarters, and unrelated to how much a team ran early.</figcaption></figure>
-          <figure><img src="CHART:steelman-pass-sets-run" alt="Early-down run success rate rises as the box gets lighter; passing earns light boxes."><figcaption>Foundation: runs work against light boxes, and passing is what earns the light box (r = -0.51).</figcaption></figure>
-        </div>
-        <div class="figrow" style="margin-top:18px">
-          <figure><img src="CHART:steelman-cold" alt="Passing edge over running by temperature; shrinks in the cold but never flips."><figcaption>December: the passing edge shrinks by three-quarters in the deep cold, but never flips to running.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="ax" id="ax2">
-        <div class="axhead"><span class="n">02a</span><h3>The best play-callers are more predictable, and it is not the quarterback</h3></div>
-        <p class="axsub">Career predictability leaderboard, and the trait's stability plus the quarterback control.</p>
-        <div class="figrow two">
-          <figure><img src="CHART:predictability_leaderboard" alt="Leaderboard of most and least predictable play-callers colored by offensive quality."><figcaption>Most predictable callers are elite offenses; the unpredictable skew below average.</figcaption></figure>
-          <figure><img src="CHART:caller-vs-qb" alt="Predictability is stable season to season and its link to offense survives controlling for the quarterback."><figcaption>Stable year to year, and the offense link holds after removing quarterback quality.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="ax" id="ax2b">
-        <div class="axhead"><span class="n">02b</span><h3>Where predictability pays</h3></div>
-        <p class="axsub">The predictability-to-offense link by situation, and what a readable-but-elite tendency actually looks like on the grid.</p>
-        <div class="figrow two">
-          <figure><img src="CHART:pred_by_situation" alt="Correlation of predictability with offense by situation; largest on early downs, never negative."><figcaption>Biggest edge on early downs, nothing negative anywhere. Surprise pays nowhere.</figcaption></figure>
-          <figure><img src="CHART:tendency-fingerprints" alt="Pass-rate fingerprints by down and distance for named callers vs the league."><figcaption>Read Andy Reid's tendencies right off the grid. His offense is still the best.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="ax" id="ax3">
-        <div class="axhead"><span class="n">03</span><h3>Icing the kicker: nobody owns the ice</h3></div>
-        <p class="axsub">Adjusted make probability iced vs not, and each coach's icing effect against a binomial noise cone.</p>
-        <div class="figrow two">
-          <figure><img src="CHART:icing-the-kicker" alt="Make probability by distance, iced vs not iced, with adjusted effect and confidence interval."><figcaption>The adjusted effect of 2.9 points has a confidence interval that runs through zero.</figcaption></figure>
-          <figure><img src="CHART:icing-coach-funnel" alt="Funnel plot: 20 of 21 coaches' icing effects inside the luck cone."><figcaption>20 of 21 coaches inside the luck cone; one outlier chance predicts.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="ax" id="ax4">
-        <div class="axhead"><span class="n">04</span><h3>The two ways to waste a timeout</h3></div>
-        <p class="axsub">Head-coach leaderboards, 2000 to 2025: burning them early, and leaving them on the table in one-score losses.</p>
-        <div class="figrow">
-          <figure><img src="CHART:timeout_discipline" alt="Dual-panel coach leaderboard: burned-early rate and left-on-the-table rate, best and worst named."><figcaption>Martz burns them early; Norv Turner leaves them on the table; Andy Reid rarely does either.</figcaption></figure>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <footer>
     <div class="col">
       <p>Source: nflverse and nflfastR play-by-play, 2000 to 2025, plus FTN charting, Next Gen Stats and samhoppen play-caller data. Analyses and charts built in R (data.table, ggplot2). Each finding controls for down, distance, field position, score state, era and the relevant confounders; see the source charts for samples and confidence intervals. Headlines compress full results. A null with a tight interval is reported as a null, not a discovery. EPA is expected points added.</p>
     </div>
   </footer>
+
+  <div class="lightbox" id="lightbox"><img alt="Expanded chart"></div>
 </div>
 
 <script>
@@ -606,5 +620,17 @@
       }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
       rvs.forEach(function (el, i) { el.style.transitionDelay = ((i % 5) * 55) + 'ms'; io.observe(el); });
     }
+    // chart carousel nav + lightbox
+    document.querySelectorAll('.carousel.multi').forEach(function (c) {
+      var track = c.querySelector('.ctrack');
+      c.querySelector('.prev').addEventListener('click', function () { track.scrollBy({ left: -track.clientWidth * 0.9, behavior: 'smooth' }); });
+      c.querySelector('.next').addEventListener('click', function () { track.scrollBy({ left: track.clientWidth * 0.9, behavior: 'smooth' }); });
+    });
+    var lb = document.getElementById('lightbox'), lbimg = lb.querySelector('img');
+    document.querySelectorAll('.ctrack img').forEach(function (im) {
+      im.addEventListener('click', function () { lbimg.src = im.src; lb.classList.add('on'); });
+    });
+    lb.addEventListener('click', function () { lb.classList.remove('on'); lbimg.removeAttribute('src'); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('on'); } });
   })();
 </script>
