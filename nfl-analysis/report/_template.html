@@ -243,6 +243,35 @@
   .excap { font-family: var(--font-mono); font-size: .74rem; color: var(--ink-dim); margin-top: 10px; line-height: 1.5; }
   .excap b { color: var(--ink); font-weight: 600; }
 
+  /* "call the play" explainer */
+  .guessbox { margin-top: 26px; border: 1px solid var(--hair); border-radius: 14px; background: var(--field-soft);
+    padding: clamp(20px, 3vw, 30px); max-width: 780px; }
+  .gb-sit { font-family: var(--font-body); font-size: 1.06rem; line-height: 1.5; color: var(--ink); margin: 0 0 4px; }
+  .gb-sit b { font-weight: 700; }
+  .gb-sub { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 22px; }
+  .gb-row { display: grid; grid-template-columns: 132px 1fr 108px; align-items: center; gap: 14px; margin-bottom: 13px; }
+  .gb-name { font-family: var(--font-display); font-weight: 700; font-size: .92rem; color: var(--ink); }
+  .gb-tag { display: block; font-family: var(--font-mono); font-weight: 400; font-size: .62rem; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-dim); margin-top: 2px; }
+  .gb-track { position: relative; height: 30px; border-radius: 7px; background: color-mix(in srgb, var(--ink) 8%, transparent); }
+  .gb-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 7px;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold)); }
+  .gb-fill.cool { background: linear-gradient(90deg, color-mix(in srgb, var(--cyan) 70%, #000 8%), var(--cyan)); }
+  .gb-fill.mute { background: color-mix(in srgb, var(--ink-dim) 55%, transparent); }
+  .gb-plab { position: absolute; top: 50%; transform: translateY(-50%); right: 9px; font-family: var(--font-mono);
+    font-size: .72rem; font-weight: 700; color: #17130a; }
+  .gb-coin { position: absolute; left: 50%; top: -6px; bottom: -6px; width: 2px; background: var(--ink-dim); opacity: .55; }
+  .gb-right { font-family: var(--font-mono); font-size: .74rem; color: var(--ink-dim); text-align: right; line-height: 1.25; }
+  .gb-right b { display: block; font-size: 1.15rem; color: var(--ink); }
+  .gb-right.hi b { color: var(--accent-ink); } .gb-right.cool b { color: var(--cyan); }
+  .gb-coinnote { font-family: var(--font-mono); font-size: .64rem; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-dim); margin: 2px 0 0 146px; }
+  .gb-note { font-family: var(--font-body); font-size: 1.02rem; line-height: 1.55; color: var(--ink-dim);
+    margin-top: 20px; border-top: 1px solid var(--hair); padding-top: 18px; }
+  .gb-note b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 560px){ .gb-row { grid-template-columns: 1fr; gap: 5px; } .gb-right, .gb-right b { text-align: left; }
+    .gb-right b { display: inline; } .gb-coinnote { margin-left: 0; } }
+
   .takeaway { border-top: 1px solid var(--hair); padding: clamp(60px,9vw,110px) 0; }
   .takeaway h2 { font-size: clamp(1.7rem, 4.6vw, 2.7rem); max-width: 20ch; }
   .thread { margin-top: 30px; display: grid; gap: 0; }
@@ -443,7 +472,28 @@
       <div class="fhead"><span class="fnum rv">02</span><span class="kicker rv">Play-calling</span></div>
       <p class="belief rv"><span class="q">"</span>The great play-callers keep a defense guessing.<span class="q">"</span></p>
       <div class="verdict-tag rv"><span class="dot"></span> Verdict: backwards</div>
-      <p class="read rv" style="margin-top:22px; font-size:1.12rem; line-height:1.55">First, what does <em>predictable</em> even mean? Not random, and not boring. It means a defender who knows only the down, the distance, and the score can call your run or pass better than he could against an average team. On second and long, when the whole stadium expects a throw, <b>Andy Reid throws even more than the league does, 81 percent of the time.</b> Guess pass and you are right four times in five. That is predictable, and it has not stopped Reid from running the best offense in football.</p>
+      <p class="read rv" style="margin-top:22px; font-size:1.12rem; line-height:1.55">First, what does <em>predictable</em> even mean? Picture yourself as the defense. Before the snap you know the down, the distance, and the score, and you have to call it: run or pass. Take one spot every team faces, <b>2nd and long</b>, a passing down. How often does each offense actually throw, and how often would you guess right?</p>
+      <div class="guessbox rv">
+        <p class="gb-sit"><b>2nd and 8 or more to go.</b> You call pass. Are you right?</p>
+        <p class="gb-sub">Share of these plays each offense actually passes</p>
+        <div class="gb-row">
+          <span class="gb-name">Ben Johnson<span class="gb-tag">hardest to read</span></span>
+          <div class="gb-track"><span class="gb-fill cool" style="width:66%"></span><span class="gb-coin"></span><span class="gb-plab">66% pass</span></div>
+          <span class="gb-right cool">right<b>66<span style="font-size:.6em">/100</span></b></span>
+        </div>
+        <div class="gb-row">
+          <span class="gb-name">League average</span>
+          <div class="gb-track"><span class="gb-fill mute" style="width:72%"></span><span class="gb-coin"></span><span class="gb-plab">72% pass</span></div>
+          <span class="gb-right">right<b>72<span style="font-size:.6em">/100</span></b></span>
+        </div>
+        <div class="gb-row">
+          <span class="gb-name">Andy Reid<span class="gb-tag">easiest to call</span></span>
+          <div class="gb-track"><span class="gb-fill" style="width:81%"></span><span class="gb-coin"></span><span class="gb-plab">81% pass</span></div>
+          <span class="gb-right hi">right<b>81<span style="font-size:.6em">/100</span></b></span>
+        </div>
+        <p class="gb-coinnote">the middle line is a 50/50 coin flip</p>
+        <p class="gb-note">Reid leans into the obvious call harder than anyone, so you can sit on the pass and be right 81 times out of 100. Ben Johnson keeps you closer to a coin flip. Now do that in <b>every</b> situation, down, distance and score, and add it up. Against Reid a defense calls about <b>3 more plays per 100 correctly</b> than against an average team, the most in the league. Ben Johnson lands below zero. That gap is what "predictable" means here. And it has not cost Reid a thing.</p>
+      </div>
 
       <p class="beatlab rv" style="margin-top:36px">The flip</p>
       <div class="fgrid">
