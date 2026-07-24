@@ -291,9 +291,9 @@
       <span class="yardline" style="left:84%"></span>
     </div>
     <div class="col">
-      <p class="eyebrow rv">NFL Play-by-Play, 2000 to 2025, every snap</p>
-      <h1 class="rv" style="margin-top:22px">Everybody knows.<br><span class="off">The data</span> <span class="on">doesn't.</span></h1>
-      <p class="lede read rv">Establish the run. Keep the defense guessing. Ice the kicker. Four things the whole sport takes as gospel, checked against a quarter century of every play ever charted. They don't hold up, and the coaches you would least expect come out looking smart.</p>
+      <p class="eyebrow rv">NFL conventional wisdom vs the tape, 2000 to 2025</p>
+      <h1 class="rv" style="margin-top:22px">Against <span class="off">the</span> <span class="on">Book.</span></h1>
+      <p class="lede read rv">Establish the run. Keep the defense guessing. Ice the kicker. Four things the whole sport coaches by, put on trial against a quarter century of every play ever charted. Most don't survive, and the coaches who come out looking smartest aren't the ones you'd guess.</p>
       <div class="meta rv">
         <span class="stat"><b>532k+</b> plays modeled</span>
         <span class="stat"><b>26</b> seasons</span>
@@ -443,12 +443,13 @@
       <div class="fhead"><span class="fnum rv">02</span><span class="kicker rv">Play-calling</span></div>
       <p class="belief rv"><span class="q">"</span>The great play-callers keep a defense guessing.<span class="q">"</span></p>
       <div class="verdict-tag rv"><span class="dot"></span> Verdict: backwards</div>
+      <p class="read rv" style="margin-top:22px; font-size:1.12rem; line-height:1.55">First, what does <em>predictable</em> even mean? Not random, and not boring. It means a defender who knows only the down, the distance, and the score can call your run or pass better than he could against an average team. On second and long, when the whole stadium expects a throw, <b>Andy Reid throws even more than the league does, 81 percent of the time.</b> Guess pass and you are right four times in five. That is predictable, and it has not stopped Reid from running the best offense in football.</p>
 
-      <p class="beatlab rv" style="margin-top:26px">The flip</p>
+      <p class="beatlab rv" style="margin-top:36px">The flip</p>
       <div class="fgrid">
         <div class="fbody rv">
           <p class="pull">It runs the other way. Account for the situation a caller faces, and the most predictable ones run the <strong>best</strong> offenses.</p>
-          <p class="dim">Raw numbers say unpredictable teams score more, but that is a mirage. Good offenses simply live in friendlier down and distance, where the run-pass split is naturally balanced. Compare each caller to the league in the exact same spots and the sign flips. The clearest case is the man the booth needles for it: <b>Andy Reid</b> is the easiest elite caller to predict, and he runs the single best offense in football. It also holds up as more than a quarterback effect, and it is a real trait, not a one-year blip.</p>
+          <p class="dim">Raw numbers say unpredictable teams score more, but that is a mirage. Good offenses simply live in friendlier down and distance, where the run-pass split is naturally balanced. Compare each caller to the league in the exact same spots and the sign flips. Reid sits at the readable extreme, and so do McVay, LaFleur and Joe Brady, all near the top of the league. The lone holdout is Detroit's <b>Ben Johnson</b>, the one elite play-caller who genuinely keeps you guessing, elite offense on a near coin-flip. Everyone else at the top is easy to call and wins anyway. And it survives a quarterback control, so it is the caller, not just the passer.</p>
         </div>
         <div class="panel rv">
           <div class="panel-label"><span>Predictability vs offensive EPA</span><span>2015 to 2025</span></div>
@@ -474,6 +475,21 @@
           </div>
           <div class="panel-note">Conditional-entropy predictability across <b>305,827</b> called plays, empirical-Bayes de-biased. The raw signal (r = +0.33 the other way) is a game-script illusion.</div>
         </div>
+      </div>
+
+      <div class="exhibit rv">
+        <p class="exlabel">Every play-caller, and it holds in any metric</p>
+        <div class="segtoggle" role="group" aria-label="Choose a metric">
+          <button class="seg on" type="button" data-m="epa">Expected points</button>
+          <button class="seg" type="button" data-m="success">Success rate</button>
+          <button class="seg" type="button" data-m="wpa">Win probability</button>
+        </div>
+        <div class="exfig">
+          <img data-m="epa" src="CHART:predictability-offense-epa" alt="Career play-callers, predictability vs offensive EPA; the prolific names sit on the right and up.">
+          <img data-m="success" src="CHART:predictability-offense-success" alt="Predictability vs offensive success rate, same rising trend." hidden>
+          <img data-m="wpa" src="CHART:predictability-offense-wpa" alt="Predictability vs win probability added, same rising trend." hidden>
+        </div>
+        <p class="excap">Reid, Brady, McVay, Shanahan and LaFleur cluster on the predictable, high-scoring side. <b>Ben Johnson</b> is the exception in the top left: an elite offense that stays hard to read. Switch the metric and the tilt doesn't move. Click to enlarge.</p>
       </div>
 
       <div class="beat2">
