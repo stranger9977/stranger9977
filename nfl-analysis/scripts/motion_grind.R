@@ -54,14 +54,15 @@ sgn <- function(v) sprintf("%+.2f", v)
 sc <- list(
   title  = c(0.0,   3.5),
   claim  = c(3.5,   8.0),
-  down   = c(8.0,  16.0),
-  long   = c(16.0, 23.0),
-  wear   = c(23.0, 31.0),
-  rev    = c(31.0, 39.0),
-  dec    = c(39.0, 46.0),
-  verd   = c(46.0, 50.5)
+  quotes = c(8.0,  18.5),
+  down   = c(18.5, 26.5),
+  long   = c(26.5, 33.5),
+  wear   = c(33.5, 41.5),
+  rev    = c(41.5, 53.0),
+  dec    = c(53.0, 60.0),
+  verd   = c(60.0, 64.5)
 )
-TOTAL <- 50.5; NFRAMES <- round(TOTAL * FPS)
+TOTAL <- 64.5; NFRAMES <- round(TOTAL * FPS)
 
 # ---- chrome: yard stripes, chapter label, progress ------------------
 chrome <- function(f, chapter = NULL, chalpha = 1) {
@@ -106,6 +107,54 @@ s_claim <- function(tt) {
     txt(.14, .715 - (i - 1) * .058, ls[i], BODY, 3, 2.3, ink, ai)
   }
   txt(.14, .325, "EVERY RUN-FIRST COACH, SOME VERSION OF IT", MONO, 1, .95, mid, fi(tt, 1.5, .6) * out)
+}
+
+# =====================================================================
+# SCENE 2b - the quote wall. Real, sourced quotes, flooding the screen.
+# Every line here is verbatim (… marks omitted words); see QUOTES.md.
+# =====================================================================
+QW <- list(
+  list(.06, .900, 1.12, 0, "\"Running the football, it's our identity.\"",            "JOHN HARBAUGH  ·  RAVENS  ·  2016",   ink),
+  list(.94, .853, 0.92, 1, "\"You gotta run that football.\"",                        "DAN ROONEY  ·  STEELERS OWNER",       iron),
+  list(.06, .806, 0.84, 0, "\"Any team that can run the football has an advantage.\"", "GREG ROMAN  ·  RAVENS OC  ·  2021",  iron),
+  list(.94, .757, 1.28, 1, "\"I want to run the damn ball…\"",                        "MIKE McCARTHY  ·  COWBOYS  ·  2023",  rust),
+  list(.06, .708, 0.86, 0, "\"…we're gonna run to win.\"",                            "SHANE STEICHEN  ·  COLTS  ·  2023",   ink),
+  list(.94, .659, 1.02, 1, "\"Our identity will be physical.\"",                      "KIRBY SMART  ·  GEORGIA  ·  2026",    iron),
+  list(.06, .610, 1.16, 0, "\"…you're darn right we are.\"",                          "REX RYAN  ·  BILLS  ·  2015",         rust),
+  list(.94, .561, 0.84, 1, "\"You got to be able to establish the run…\"",            "NICK SABAN  ·  2025",                 ink),
+  list(.06, .512, 0.82, 0, "\"…control the line of scrimmage.\"",                     "BRIAN DABOLL  ·  GIANTS  ·  2025",    iron),
+  list(.94, .463, 1.00, 1, "\"…run it more.\"",                                       "PETE CARROLL  ·  SEAHAWKS  ·  2021",  ink),
+  list(.06, .414, 0.82, 0, "\"…nine times out of 10, they will break.\"",             "ROQUAN SMITH  ·  RAVENS  ·  2024",    iron),
+  list(.94, .365, 1.10, 1, "\"We're a running team…\"",                               "JOHN HARBAUGH  ·  RAVENS  ·  2025",   rust),
+  list(.06, .316, 0.84, 0, "\"I'm looking for that physical, tough running presence.\"","RON RIVERA  ·  PANTHERS  ·  2017",  ink),
+  list(.94, .267, 0.86, 1, "\"…three yards and a cloud of dust.\"",                    "WOODY HAYES  ·  OHIO STATE  ·  1959", iron),
+  list(.06, .218, 0.82, 0, "\"…hang our hat on, running the ball…\"",                  "DeMECO RYANS  ·  TEXANS  ·  2023",    ink),
+  list(.94, .169, 0.84, 1, "\"…it takes a whole defense to stop it…\"",                "MIKE SHANAHAN  ·  BRONCOS",           iron),
+  list(.06, .120, 0.86, 0, "\"Because it's the best way to not screw it up.\"",        "PETE CARROLL  ·  SEAHAWKS  ·  2018",  ink),
+  list(.94, .071, 0.82, 1, "\"…physically run the ball and control the game.\"",       "KYLE SHANAHAN  ·  49ERS  ·  2025",    iron)
+)
+s_quotes <- function(tt) {
+  out <- fo(tt, 9.9, .5)
+  # quotes flood in, accelerating
+  for (i in seq_along(QW)) {
+    q <- QW[[i]]
+    st <- 0.20 + (i - 1) * 0.36 - (i - 1)^2 * 0.0075  # accelerating cadence
+    ai <- fi(tt, st, .40)
+    dim <- 1 - 0.72 * eo((tt - 7.4) / .8)             # dim when the stamp lands
+    txt(q[[1]], q[[2]], q[[5]], BODY, 3, q[[3]], q[[7]], ai * dim * out,
+        adj = c(q[[4]], .5))
+    txt(q[[1]], q[[2]] - .0245, q[[6]], MONO, 1, .47, mid, ai * dim * .9 * out,
+        adj = c(q[[4]], .5))
+  }
+  # the stamp
+  as <- fi(tt, 7.6, .5) * out
+  if (as > .001) {
+    rect2(0, .50, 1, .185, bone, as, just = c("left", "centre"))
+    lin(.06, .585, .94, .585, rust, 4, as)
+    txt(.06, .535, "THEY ALL SAY IT.", DISP, 1, 3.4, ink, as)
+    lin(.06, .445, .94, .445, rust, 4, as)
+  }
+  txt(.06, .400, "So we tested it. Five ways.", BODY, 1, 1.75, mid, fi(tt, 8.5, .5) * out)
 }
 
 # =====================================================================
@@ -228,32 +277,67 @@ s_wear <- function(tt) {
 # SCENE 6 - test 4, the reverse
 # =====================================================================
 s_rev <- function(tt) {
-  out <- fo(tt, 7.5, .45)
-  txt(.07, .885, "TEST 4  ·  THE REVERSE", MONO, 2, 1.0, rust, fi(tt, 0, .45) * out)
-  txt(.07, .815, "The pass sets up the run", DISP, 1, 3.0, ink, fi(tt, .15, .5) * out)
-  txt(.07, .750, "Early-down run success, by defenders in the box", BODY, 1, 1.55, mid, fi(tt, .3, .5) * out)
+  out <- fo(tt, 11.0, .5)
+  txt(.07, .905, "TEST 4  ·  THE REVERSE", MONO, 2, 1.0, rust, fi(tt, 0, .45) * out)
+  txt(.07, .845, "So what DOES open up the run?", DISP, 1, 2.7, ink, fi(tt, .15, .5) * out)
 
-  rows <- list(list("LIGHT box  (6 or fewer)", .39, gain),
-               list("EVEN box  (7)",           .37, iron),
-               list("STACKED box  (8+)",       .35, rust))
-  bx <- .07; bw <- .70
+  # ---- STEP 1: runs work against light boxes -------------------------
+  a1 <- fi(tt, .9, .5) * out
+  txt(.07, .775, "STEP 1", MONO, 2, .82, rust, a1)
+  txt(.175, .775, "A run works when fewer defenders are in the box", BODY, 1, 1.35, mid, a1)
+  rows <- list(list("6 or fewer in the box", .39, gain),
+               list("7 in the box",          .37, iron),
+               list("8 or more in the box",  .35, rust))
+  bx <- .07; bw <- .60
   for (i in seq_along(rows)) {
-    y  <- .655 - (i - 1) * .095
-    ai <- fi(tt, .55 + i * .36, .45) * out
-    tv <- cl((tt - (.6 + i * .36)) / 1.2)
+    y  <- .700 - (i - 1) * .074
+    ai <- fi(tt, 1.1 + i * .55, .5) * out
+    tv <- cl((tt - (1.15 + i * .55)) / 1.3)
     v  <- num(0, rows[[i]][[2]], tv)
-    txt(bx, y + .036, rows[[i]][[1]], BODY, 2, 1.5, ink, ai)
-    rect2(bx, y - .019, bw * (v / .45), .038, rows[[i]][[3]], ai)
-    txt(bx + bw * (v / .45) + .015, y, sprintf("%.0f%%", v * 100), DISP, 1, 2.0, rows[[i]][[3]], ai, adj = c(0, .5))
+    txt(bx, y + .029, rows[[i]][[1]], BODY, 2, 1.28, ink, ai)
+    rect2(bx, y - .014, bw * (v / .45), .030, rows[[i]][[3]], ai)
+    txt(bx + bw * (v / .45) + .014, y, sprintf("%.0f%%", v * 100), DISP, 1, 1.7,
+        rows[[i]][[3]], ai, adj = c(0, .5))
   }
-  # the flip
-  a4 <- fi(tt, 3.3, .55) * out
-  lin(.07, .345, .93, .345, rule, 2, a4)
-  txt(.07, .275, sprintf("%.2f", num(0, -0.51, cl((tt - 3.4) / 1.4))), DISP, 1, 3.8, rust, a4)
-  txt(.07, .205, "pass rate vs the box you face", BODY, 1, 1.6, ink, fi(tt, 5.4, .5) * out)
-  a5 <- fi(tt, 4.9, .55) * out
-  txt(.07, .135, "You don't run to set up the pass.", BODY, 1, 1.9, mid, a5)
-  txt(.07, .085, "You PASS to open up the run.", DISP, 1, 2.5, ink, fi(tt, 5.4, .5) * out)
+  txt(.07, .506, "early-down run success rate", MONO, 1, .78, mid, fi(tt, 3.4, .5) * out)
+
+  # ---- STEP 2: throwing is what empties the box ----------------------
+  a2 <- fi(tt, 4.4, .55) * out
+  lin(.07, .466, .93, .466, rule, 2, a2)
+  txt(.07, .416, "STEP 2", MONO, 2, .82, rust, a2)
+  txt(.175, .416, "And throwing is what empties the box", BODY, 1, 1.35, mid, a2)
+
+  # causal chain: more passing -> lighter box -> runs work
+  cy <- .322; bw2 <- .255; bh <- .078
+  chain <- list(list(.07,  "THE MORE\nYOU THROW",   rust),
+                list(.375, "THE LIGHTER\nTHE BOX",  iron),
+                list(.68,  "THE BETTER\nRUNS WORK", gain))
+  for (i in seq_along(chain)) {
+    ac <- fi(tt, 5.0 + (i - 1) * .8, .5) * out
+    cx <- chain[[i]][[1]]
+    if (ac > .001) {
+      grid.rect(x = cx, y = cy, width = bw2, height = bh, just = c("left", "centre"),
+                gp = gpar(fill = card, col = chain[[i]][[3]], lwd = 2, alpha = cl(ac)))
+      txt(cx + bw2 / 2, cy, chain[[i]][[2]], BODY, 2, 1.16, chain[[i]][[3]], ac,
+          adj = c(.5, .5), lh = 1.05)
+    }
+    if (i < 3) {
+      aa <- fi(tt, 5.4 + (i - 1) * .8, .4) * out
+      if (aa > .001)
+        grid.segments(x0 = cx + bw2 + .008, x1 = cx + bw2 + .040, y0 = cy, y1 = cy,
+                      gp = gpar(col = ink, lwd = 3, alpha = cl(aa)),
+                      arrow = arrow(length = unit(5, "pt"), type = "closed"))
+    }
+  }
+  a3 <- fi(tt, 7.4, .55) * out
+  txt(.07, .238, sprintf("%.2f", num(0, -0.51, cl((tt - 7.5) / 1.4))), DISP, 1, 2.3, rust, a3)
+  txt(.205, .238, "correlation: heavier passing, lighter boxes", BODY, 1, 1.32, ink, a3)
+
+  # ---- payoff --------------------------------------------------------
+  a5 <- fi(tt, 8.8, .6) * out
+  lin(.07, .192, .93, .192, rule, 2, a5)
+  txt(.07, .134, "You don't run to set up the pass.", BODY, 1, 1.82, mid, a5)
+  txt(.07, .076, "You throw to open up the run.", DISP, 1, 2.45, ink, fi(tt, 9.4, .55) * out)
 }
 
 # =====================================================================
@@ -316,7 +400,7 @@ s_verd <- function(tt) {
 # render
 # =====================================================================
 chap <- function(tt_name) switch(tt_name,
-  title = NULL, claim = NULL, down = "THE GRIND", long = "THE GRIND",
+  title = NULL, claim = NULL, quotes = NULL, down = "THE GRIND", long = "THE GRIND",
   wear = "THE GRIND", rev = "THE GRIND", dec = "THE GRIND", verd = NULL)
 
 cat("rendering", NFRAMES, "frames...\n")
@@ -329,7 +413,8 @@ for (f in 0:(NFRAMES - 1)) {
   if (is.na(nm)) nm <- "verd"
   chrome(f, chap(nm), 1)
   tt <- s - sc[[nm]][1]
-  switch(nm, title = s_title(tt), claim = s_claim(tt), down = s_down(tt), long = s_long(tt),
+  switch(nm, title = s_title(tt), claim = s_claim(tt), quotes = s_quotes(tt),
+         down = s_down(tt), long = s_long(tt),
          wear = s_wear(tt), rev = s_rev(tt), dec = s_dec(tt), verd = s_verd(tt))
   dev.off()
   if (f %% 150 == 0) cat("  ", f, "/", NFRAMES, "\n")
