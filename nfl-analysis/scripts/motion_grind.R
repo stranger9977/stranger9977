@@ -1,5 +1,5 @@
 # =====================================================================
-# THE GRIND - motion video (4:5 vertical, 30fps, ~33s)
+# THE GRIND - motion video (4:5 vertical, 30fps, ~50s)
 # Renders frames with grid graphics, stitched to MP4 by ffmpeg.
 #   Rscript scripts/motion_grind.R  &&  see motion/grind.mp4
 # =====================================================================
@@ -52,16 +52,16 @@ sgn <- function(v) sprintf("%+.2f", v)
 
 # ---- scene timing (seconds) ----------------------------------------
 sc <- list(
-  title  = c(0.0,  3.0),
-  claim  = c(3.0,  7.0),
-  down   = c(7.0, 13.0),
-  long   = c(13.0, 18.0),
-  wear   = c(18.0, 23.0),
-  rev    = c(23.0, 29.0),
-  dec    = c(29.0, 34.0),
-  verd   = c(34.0, 37.5)
+  title  = c(0.0,   3.5),
+  claim  = c(3.5,   8.0),
+  down   = c(8.0,  16.0),
+  long   = c(16.0, 23.0),
+  wear   = c(23.0, 31.0),
+  rev    = c(31.0, 39.0),
+  dec    = c(39.0, 46.0),
+  verd   = c(46.0, 50.5)
 )
-TOTAL <- 37.5; NFRAMES <- round(TOTAL * FPS)
+TOTAL <- 50.5; NFRAMES <- round(TOTAL * FPS)
 
 # ---- chrome: yard stripes, chapter label, progress ------------------
 chrome <- function(f, chapter = NULL, chalpha = 1) {
@@ -80,7 +80,7 @@ chrome <- function(f, chapter = NULL, chalpha = 1) {
 # =====================================================================
 s_title <- function(tt) {
   a1 <- fi(tt, .15, .55); a2 <- fi(tt, .5, .55); a3 <- fi(tt, 1.05, .6)
-  out <- fo(tt, 2.6, .4)
+  out <- fo(tt, 3.1, .4)
   y0 <- .60
   txt(.07, .78, "AGAINST THE BOOK   ·   PART 1 OF 4", MONO, 2, .95, rust, a1 * out)
   # THE / GRIND with slide-up
@@ -97,7 +97,7 @@ s_title <- function(tt) {
 # SCENE 2 - the claim
 # =====================================================================
 s_claim <- function(tt) {
-  a <- fi(tt, .1, .6); out <- fo(tt, 3.5, .4)
+  a <- fi(tt, .1, .6); out <- fo(tt, 4.0, .4)
   lin(.09, .70, .09, .40, rust, 9, a * out)
   ls <- c('"You wear them down.', 'Establish the run,', 'impose your will,', 'and by the fourth quarter,',
           'by December,', 'they break."')
@@ -112,7 +112,7 @@ s_claim <- function(tt) {
 # SCENE 3 - test 1, the third-down setup
 # =====================================================================
 s_down <- function(tt) {
-  a <- fi(tt, 0, .45); out <- fo(tt, 5.5, .45)
+  a <- fi(tt, 0, .45); out <- fo(tt, 7.5, .45)
   txt(.07, .875, "TEST 1  ·  THE NEXT PLAY", MONO, 2, 1.0, rust, a * out)
   txt(.07, .80, "Run, run, then throw", DISP, 1, 3.4, ink, fi(tt, .15, .5) * out)
   txt(.07, .735, "Third-down pass, by what the offense did on 1st & 2nd", BODY, 1, 1.55, mid, fi(tt, .3, .5) * out)
@@ -123,32 +123,32 @@ s_down <- function(tt) {
   txt(zx, .645, "0", MONO, 1, .95, mid, fi(tt, .5, .4) * out, adj = c(.5, .5))
 
   # row 1: passed twice -> +0.03
-  t1 <- cl((tt - .9) / 1.1); a1 <- fi(tt, .8, .4) * out
+  t1 <- cl((tt - 1.0) / 1.5); a1 <- fi(tt, .8, .4) * out
   v1 <- num(0, .03, t1)
   txt(.07, .565, "PASSED on 1st & 2nd", BODY, 2, 1.6, ink, a1)
   rect2(zx, .515, max(0, v1) * scale, .046, gain, a1)
   txt(zx + max(0, v1) * scale + .015, .538, sgn(v1), DISP, 1, 2.1, gain, a1, adj = c(0, .5))
 
   # row 2: ran twice -> -0.04
-  t2 <- cl((tt - 1.9) / 1.1); a2 <- fi(tt, 1.8, .4) * out
+  t2 <- cl((tt - 2.3) / 1.5); a2 <- fi(tt, 1.8, .4) * out
   v2 <- num(0, -.04, t2)
   txt(.07, .445, "RAN on 1st & 2nd", BODY, 2, 1.6, ink, a2)
   rect2(zx + v2 * scale, .395, abs(v2) * scale, .046, rust, a2)
   txt(zx + v2 * scale - .015, .418, sgn(v2), DISP, 1, 2.1, rust, a2, adj = c(1, .5))
 
   # payoff
-  a3 <- fi(tt, 3.4, .6) * out
+  a3 <- fi(tt, 4.6, .6) * out
   lin(.07, .335, .93, .335, rule, 2, a3)
   txt(.07, .265, "Grinding it first makes the", BODY, 1, 2.05, ink, a3)
-  txt(.07, .215, "third-down throw WORSE.", DISP, 1, 2.6, rust, fi(tt, 3.8, .5) * out)
-  txt(.07, .145, "EXPECTED POINTS PER PLAY  ·  2015-2025  ·  n = 666-2,549", MONO, 1, .82, mid, fi(tt, 4.2, .5) * out)
+  txt(.07, .215, "third-down throw WORSE.", DISP, 1, 2.6, rust, fi(tt, 5.1, .5) * out)
+  txt(.07, .145, "EXPECTED POINTS PER PLAY  ·  2015-2025  ·  n = 666-2,549", MONO, 1, .82, mid, fi(tt, 5.6, .5) * out)
 }
 
 # =====================================================================
 # SCENE 4 - test 2, the long game (dots collapse to zero)
 # =====================================================================
 s_long <- function(tt) {
-  out <- fo(tt, 4.5, .45)
+  out <- fo(tt, 6.5, .45)
   txt(.07, .875, "TEST 2  ·  THE LONG GAME", MONO, 2, 1.0, rust, fi(tt, 0, .45) * out)
   txt(.07, .80, "Pound it early, throw it late", DISP, 1, 3.0, ink, fi(tt, .15, .5) * out)
   txt(.07, .735, "Does first-half running predict later passing?", BODY, 1, 1.55, mid, fi(tt, .3, .5) * out)
@@ -164,8 +164,8 @@ s_long <- function(tt) {
                c("The fourth quarter", -0.05), c("Play-action, 2nd half", -0.02))
   for (i in seq_along(rows)) {
     y  <- .565 - (i - 1) * .075
-    ai <- fi(tt, .7 + i * .22, .45) * out
-    tv <- cl((tt - (.75 + i * .22)) / .9)
+    ai <- fi(tt, .8 + i * .30, .45) * out
+    tv <- cl((tt - (.85 + i * .30)) / 1.2)
     # slides in from where the myth would put it (+0.30) to reality
     v  <- 0.30 + (as.numeric(rows[[i]][2]) - 0.30) * eio(tv)
     txt(.07, y, rows[[i]][1], BODY, 1, 1.5, ink, ai)
@@ -173,19 +173,19 @@ s_long <- function(tt) {
                 gp = gpar(fill = rust, col = NA, alpha = cl(ai)))
     txt(zx + v * scale, y + .032, sprintf("%+.2f", v), MONO, 2, .95, rust, ai, adj = c(.5, .5))
   }
-  a4 <- fi(tt, 2.9, .6) * out
+  a4 <- fi(tt, 3.9, .6) * out
   lin(.07, .225, .93, .225, rule, 2, a4)
   txt(.07, .155, "Every horizon. Nothing.", DISP, 1, 2.6, rust, a4)
-  txt(.07, .095, "Neutral game states only, so a lead isn't doing the work", MONO, 1, .82, mid, fi(tt, 3.3, .5) * out)
+  txt(.07, .095, "Neutral game states only, so a lead isn't doing the work", MONO, 1, .82, mid, fi(tt, 4.4, .5) * out)
 }
 
 # =====================================================================
 # SCENE 5 - test 3, the wear-down
 # =====================================================================
 s_wear <- function(tt) {
-  out <- fo(tt, 4.5, .45)
+  out <- fo(tt, 7.0, .45)
   txt(.07, .875, "TEST 3  ·  THE WEAR-DOWN", MONO, 2, 1.0, rust, fi(tt, 0, .45) * out)
-  txt(.07, .80, "Nobody breaks", DISP, 1, 3.4, ink, fi(tt, .15, .5) * out)
+  txt(.07, .80, "The break doesn't show", DISP, 1, 3.0, ink, fi(tt, .15, .5) * out)
   txt(.07, .735, "Run success rate by quarter, neutral game states", BODY, 1, 1.55, mid, fi(tt, .3, .5) * out)
 
   x0 <- .12; x1 <- .90; yb <- .33; yt <- .64
@@ -198,13 +198,13 @@ s_wear <- function(tt) {
 
   # ghost: what wearing down would look like
   ag <- fi(tt, .8, .5) * out
-  pg <- cl((tt - .9) / 1.0)
+  pg <- cl((tt - 1.0) / 1.4)
   gx <- x0 + (x1 - x0) * pg
   lin(x0, yv(.394), gx, yv(.394 + (.455 - .394) * pg), iron, 3, ag * .55, lty = 2)
   txt(x1, yv(.462), "if defenses wore down", MONO, 1, .88, iron, fi(tt, 1.6, .5) * out * .8, adj = c(1, .5))
 
   # actual: flat line drawing across
-  pa <- cl((tt - 1.5) / 1.3); aa <- fi(tt, 1.5, .3) * out
+  pa <- cl((tt - 1.9) / 1.8); aa <- fi(tt, 1.9, .3) * out
   seg <- pa * 3
   for (i in 1:3) {
     fseg <- cl(seg - (i - 1))
@@ -215,18 +215,20 @@ s_wear <- function(tt) {
     if (seg >= i - 1) grid.circle(x = x0 + (i-1)/3*(x1-x0), y = yv(vals[i]), r = .012,
                                   gp = gpar(fill = rust, col = NA, alpha = cl(aa)))
   }
-  a3 <- fi(tt, 3.0, .55) * out
-  lin(.07, .265, .93, .265, rule, 2, a3)
-  txt(.07, .195, "+0.00", DISP, 1, 3.6, rust, a3)
-  txt(.07, .125, "early carries vs 4th-quarter running", BODY, 1, 1.6, ink, fi(tt, 3.3, .5) * out)
-  txt(.07, .078, "Whatever the grind does, it isn't softening anyone up", MONO, 1, .82, mid, fi(tt, 3.6, .5) * out)
+  a3 <- fi(tt, 3.6, .55) * out
+  lin(.07, .285, .93, .285, rule, 2, a3)
+  txt(.07, .215, "+0.00", DISP, 1, 3.6, rust, a3)
+  txt(.07, .145, "early carries vs 4th-quarter running", BODY, 1, 1.6, ink, fi(tt, 4.1, .5) * out)
+  a4 <- fi(tt, 4.8, .55) * out
+  txt(.07, .092, "Attrition may well be real. Modern lines rotate,", MONO, 1, .82, mid, a4)
+  txt(.07, .060, "and whatever it does never reaches the box score.", MONO, 1, .82, mid, a4)
 }
 
 # =====================================================================
 # SCENE 6 - test 4, the reverse
 # =====================================================================
 s_rev <- function(tt) {
-  out <- fo(tt, 5.5, .45)
+  out <- fo(tt, 7.5, .45)
   txt(.07, .885, "TEST 4  ·  THE REVERSE", MONO, 2, 1.0, rust, fi(tt, 0, .45) * out)
   txt(.07, .815, "The pass sets up the run", DISP, 1, 3.0, ink, fi(tt, .15, .5) * out)
   txt(.07, .750, "Early-down run success, by defenders in the box", BODY, 1, 1.55, mid, fi(tt, .3, .5) * out)
@@ -237,28 +239,28 @@ s_rev <- function(tt) {
   bx <- .07; bw <- .70
   for (i in seq_along(rows)) {
     y  <- .655 - (i - 1) * .095
-    ai <- fi(tt, .5 + i * .28, .45) * out
-    tv <- cl((tt - (.55 + i * .28)) / .9)
+    ai <- fi(tt, .55 + i * .36, .45) * out
+    tv <- cl((tt - (.6 + i * .36)) / 1.2)
     v  <- num(0, rows[[i]][[2]], tv)
     txt(bx, y + .036, rows[[i]][[1]], BODY, 2, 1.5, ink, ai)
     rect2(bx, y - .019, bw * (v / .45), .038, rows[[i]][[3]], ai)
     txt(bx + bw * (v / .45) + .015, y, sprintf("%.0f%%", v * 100), DISP, 1, 2.0, rows[[i]][[3]], ai, adj = c(0, .5))
   }
   # the flip
-  a4 <- fi(tt, 2.7, .55) * out
+  a4 <- fi(tt, 3.3, .55) * out
   lin(.07, .345, .93, .345, rule, 2, a4)
-  txt(.07, .275, sprintf("%.2f", num(0, -0.51, cl((tt - 2.8) / 1.0))), DISP, 1, 3.8, rust, a4)
-  txt(.07, .205, "pass rate vs the box you face", BODY, 1, 1.6, ink, fi(tt, 3.2, .5) * out)
-  a5 <- fi(tt, 3.9, .55) * out
+  txt(.07, .275, sprintf("%.2f", num(0, -0.51, cl((tt - 3.4) / 1.4))), DISP, 1, 3.8, rust, a4)
+  txt(.07, .205, "pass rate vs the box you face", BODY, 1, 1.6, ink, fi(tt, 5.4, .5) * out)
+  a5 <- fi(tt, 4.9, .55) * out
   txt(.07, .135, "You don't run to set up the pass.", BODY, 1, 1.9, mid, a5)
-  txt(.07, .085, "You PASS to open up the run.", DISP, 1, 2.5, ink, fi(tt, 4.3, .5) * out)
+  txt(.07, .085, "You PASS to open up the run.", DISP, 1, 2.5, ink, fi(tt, 5.4, .5) * out)
 }
 
 # =====================================================================
 # SCENE 7 - December, the grain of truth
 # =====================================================================
 s_dec <- function(tt) {
-  out <- fo(tt, 4.5, .45)
+  out <- fo(tt, 6.5, .45)
   txt(.07, .885, "THE GRAIN OF TRUTH", MONO, 2, 1.0, rust, fi(tt, 0, .45) * out)
   txt(.07, .815, "December football", DISP, 1, 3.4, ink, fi(tt, .15, .5) * out)
   txt(.07, .750, "How much better passing is than running, by temperature", BODY, 1, 1.5, mid, fi(tt, .3, .5) * out)
@@ -271,7 +273,7 @@ s_dec <- function(tt) {
   txt(x0, yb - .035, "0  ·  running is the better call below this line", MONO, 1, .84, mid, ax)
   for (i in 1:4) txt(x0 + (i - 1)/3 * (x1 - x0), yt + .045, labs[i], MONO, 2, .95, mid, ax, adj = c(.5, .5))
 
-  pa <- cl((tt - .9) / 1.5); aa <- fi(tt, .85, .35) * out
+  pa <- cl((tt - 1.0) / 2.0); aa <- fi(tt, .85, .35) * out
   seg <- pa * 3
   for (i in 1:3) {
     fs <- cl(seg - (i - 1))
@@ -282,11 +284,11 @@ s_dec <- function(tt) {
     grid.circle(x = x0 + (i-1)/3*(x1-x0), y = yv(vals[i]), r = .012, gp = gpar(fill = rust, col = NA, alpha = cl(aa)))
     txt(x0 + (i-1)/3*(x1-x0), yv(vals[i]) + .042, sprintf("+%.2f", vals[i]), MONO, 2, .95, rust, aa, adj = c(.5, .5))
   }
-  a3 <- fi(tt, 2.7, .55) * out
+  a3 <- fi(tt, 3.6, .55) * out
   lin(.07, .295, .93, .295, rule, 2, a3)
   txt(.07, .225, "The edge nearly vanishes.", BODY, 1, 1.95, ink, a3)
-  txt(.07, .160, "It never flips.", DISP, 1, 3.0, rust, fi(tt, 3.1, .5) * out)
-  txt(.07, .092, "Throwing stays the better bet even on a frozen field", MONO, 1, .84, mid, fi(tt, 3.5, .5) * out)
+  txt(.07, .160, "It never flips.", DISP, 1, 3.0, rust, fi(tt, 4.1, .5) * out)
+  txt(.07, .092, "Throwing stays the better bet even on a frozen field", MONO, 1, .84, mid, fi(tt, 4.6, .5) * out)
 }
 
 # =====================================================================
@@ -296,16 +298,16 @@ s_verd <- function(tt) {
   a <- fi(tt, 0, .5)
   txt(.07, .855, "THE VERDICT", MONO, 2, 1.05, rust, a)
   ls <- list(c("The run does not set up the pass.", ink),
-             c("Defenses do not wear down.", ink),
+             c("The wear-down never shows up.", ink),
              c("Passing is what opens the run.", rust))
   for (i in seq_along(ls)) {
-    txt(.07, .745 - (i - 1) * .085, ls[[i]][1], DISP, 1, 2.7, ls[[i]][2], fi(tt, .25 + i * .30, .5))
+    txt(.07, .745 - (i - 1) * .085, ls[[i]][1], DISP, 1, 2.7, ls[[i]][2], fi(tt, .35 + i * .38, .5))
   }
-  a2 <- fi(tt, 1.75, .6)
+  a2 <- fi(tt, 2.3, .6)
   lin(.07, .445, .93, .445, rule, 2, a2)
   txt(.07, .375, "The one thing the grinders get right", BODY, 1, 1.8, mid, a2)
   txt(.07, .325, "is the weather.", BODY, 1, 1.8, mid, a2)
-  a3 <- fi(tt, 2.4, .6)
+  a3 <- fi(tt, 3.0, .6)
   txt(.07, .205, "AGAINST THE BOOK", DISP, 1, 2.4, ink, a3)
   txt(.07, .150, "PART 1 OF 4  ·  nflverse play-by-play, 2015-2025", MONO, 1, .95, mid, a3)
 }
