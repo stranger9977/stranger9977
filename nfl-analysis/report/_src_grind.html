@@ -1,0 +1,319 @@
+<style>
+  /* ===========================================================
+     THE GRIND — establish the run. Trench-warfare identity:
+     worn field chalk, clay rust, heavy condensed type,
+     yard-stripe section rules. Mobile-first single column.
+     =========================================================== */
+  :root {
+    --bg:      #e7e3d9;   /* bone / worn field paint */
+    --bg-2:    #ded9cd;
+    --card:    #f3f0e9;
+    --ink:     #1c1a15;
+    --ink-2:   #57534733;
+    --ink-mid: #575347;
+    --rule:    #1c1a1520;
+    --rust:    #b0431f;   /* clay */
+    --rust-ink:#8f3617;
+    --iron:    #4c534d;
+    --gain:    #2f6b46;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      --bg:#151310; --bg-2:#1b1815; --card:#1f1c18; --ink:#f0ece2; --ink-mid:#a49c8c;
+      --rule:#f0ece21f; --rust:#e2643a; --rust-ink:#e2643a; --iron:#8c968e; --gain:#5cc088;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#151310; --bg-2:#1b1815; --card:#1f1c18; --ink:#f0ece2; --ink-mid:#a49c8c;
+    --rule:#f0ece21f; --rust:#e2643a; --rust-ink:#e2643a; --iron:#8c968e; --gain:#5cc088;
+  }
+
+  *,*::before,*::after { box-sizing: border-box; }
+  .g { background: var(--bg); color: var(--ink); overflow-x: hidden;
+       font-family: "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+       -webkit-font-smoothing: antialiased; }
+  .g ::selection { background: var(--rust); color: #fff; }
+  .wrap { max-width: 660px; margin-inline: auto; padding-inline: 20px; }
+
+  .disp { font-family: "Haettenschweiler", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+          font-weight: 900; letter-spacing: -.015em; line-height: .92; text-transform: uppercase;
+          font-stretch: condensed; margin: 0; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+  /* stripes */
+  .stripes { position: relative; }
+  .stripes::before { content:""; position:absolute; inset:0; pointer-events:none;
+    background: repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px 20%); }
+
+  /* hero */
+  .hero { padding: clamp(48px,13vw,92px) 0 clamp(30px,7vw,48px); }
+  .eyebrow { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: .68rem; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--rust-ink); margin: 0 0 16px; font-weight: 700; }
+  h1.disp { font-size: clamp(3.4rem, 19vw, 6.4rem); }
+  h1.disp .l2 { display: block; color: var(--iron); }
+  .dek { font-size: clamp(1.06rem,4.2vw,1.22rem); line-height: 1.5; margin: 22px 0 0; max-width: 34ch; }
+  .verdict { display:inline-flex; align-items:center; gap:9px; margin-top: 24px; padding: 8px 14px;
+    border:1px solid var(--rust); border-radius: 2px; color: var(--rust-ink);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
+  .verdict b { width:7px;height:7px;background:var(--rust);border-radius:50%; }
+
+  /* the claim, quoted */
+  .claim { margin: clamp(34px,8vw,54px) 0 0; padding: 22px 0 22px 20px; border-left: 4px solid var(--rust);
+    font-size: clamp(1.14rem,4.6vw,1.4rem); line-height: 1.4; font-style: italic; color: var(--ink); }
+  .claim cite { display:block; font-style:normal; font-family: ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mid); margin-top:12px; }
+
+  /* sections */
+  section.blk { padding: clamp(38px,9vw,64px) 0 0; }
+  .marker { display:flex; align-items:center; gap:12px; margin-bottom: 14px; }
+  .down { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; font-weight:700; letter-spacing:.12em;
+    background: var(--rust); color:#fff; padding: 5px 9px; border-radius:2px; text-transform:uppercase; }
+  .mtitle { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--ink-mid); }
+  h2.disp { font-size: clamp(1.7rem,7.4vw,2.5rem); margin-bottom: 14px; }
+  p.body { font-size: 1.05rem; line-height: 1.62; margin: 0 0 1em; }
+  p.body b { font-weight: 700; }
+  .lead { font-size: clamp(1.08rem,4.4vw,1.2rem); line-height: 1.5; }
+
+  /* stat slab */
+  .slab { background: var(--card); border: 1px solid var(--rule); border-radius: 3px;
+    padding: clamp(20px,5vw,28px); margin: 24px 0; }
+  .slab .num { font-family:"Haettenschweiler","Arial Narrow",ui-sans-serif,system-ui,sans-serif; font-weight:900;
+    font-size: clamp(3.2rem,16vw,4.6rem); line-height:.86; letter-spacing:-.02em; color: var(--rust-ink);
+    font-variant-numeric: tabular-nums; }
+  .slab .num small { font-size:.26em; letter-spacing:.06em; color: var(--ink); display:block; margin-top:10px;
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-weight:400; text-transform:uppercase; }
+  .slab .cap { margin-top: 14px; font-size: 1rem; line-height:1.5; color: var(--ink); }
+  .slab .cap b { color: var(--rust-ink); }
+
+  /* compare rows */
+  .cmp { display:grid; gap:14px; margin: 22px 0 6px; }
+  .cmp .r { display:grid; grid-template-columns: 1fr auto; gap:6px 12px; align-items:baseline; }
+  .cmp .lb { font-size:.94rem; line-height:1.3; }
+  .cmp .vl { font-family:"Haettenschweiler","Arial Narrow",ui-sans-serif,system-ui,sans-serif; font-weight:900;
+    font-size:1.4rem; font-variant-numeric:tabular-nums; }
+  .cmp .vl.up { color: var(--gain); } .cmp .vl.dn { color: var(--rust-ink); }
+  .cmp .bar { grid-column:1/-1; height:8px; background: var(--rule); border-radius:2px; position:relative; }
+  .cmp .bar i { position:absolute; top:0; bottom:0; border-radius:2px; display:block; }
+  .cmp .bar i.up { background: var(--gain); } .cmp .bar i.dn { background: var(--rust); }
+  .cmp .zero { position:absolute; top:-3px; bottom:-3px; width:1px; background: var(--ink-mid); opacity:.6; }
+
+  /* figure */
+  figure { margin: 26px 0 0; }
+  figure img { width:100%; height:auto; display:block; border:1px solid var(--rule); border-radius:3px;
+    background:#fcfcfb; cursor: zoom-in; }
+  figcaption { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.7rem; line-height:1.5;
+    color: var(--ink-mid); margin-top:10px; }
+  .zoomhint { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.1em;
+    text-transform:uppercase; color: var(--ink-mid); margin-top:6px; display:block; }
+
+  /* metric toggle */
+  .segs { display:flex; gap:4px; padding:4px; border:1px solid var(--rule); border-radius:999px;
+    margin: 22px 0 14px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .segs button { flex:1 0 auto; min-height:40px; border:none; background:transparent; color: var(--ink-mid);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem; font-weight:700; letter-spacing:.04em;
+    padding: 9px 14px; border-radius:999px; cursor:pointer; white-space:nowrap; }
+  .segs button.on { background: var(--rust); color:#fff; }
+  .segs button:focus-visible { outline:2px solid var(--rust); outline-offset:2px; }
+
+  /* kicker/closer */
+  .closer { margin-top: clamp(44px,10vw,72px); padding: clamp(24px,6vw,34px) 0; border-top: 3px solid var(--rust); }
+  .closer h2 { margin-bottom: 16px; }
+  .rule { height:1px; background: var(--rule); margin: clamp(34px,8vw,54px) 0 0; }
+
+  /* cross links */
+  .more { margin-top: clamp(38px,9vw,60px); }
+  .more h3 { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.68rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--ink-mid); margin:0 0 14px; font-weight:600; }
+  .more a { display:flex; align-items:baseline; gap:10px; padding:15px 0; border-top:1px solid var(--rule);
+    color: var(--ink); text-decoration:none; min-height:44px; }
+  .more a:last-child { border-bottom:1px solid var(--rule); }
+  .more a .n { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; color: var(--rust-ink); font-weight:700; }
+  .more a .t { font-family:"Haettenschweiler","Arial Narrow",ui-sans-serif,system-ui,sans-serif; font-weight:900;
+    text-transform:uppercase; font-size:1.05rem; letter-spacing:-.01em; }
+  .more a .s { font-size:.86rem; color: var(--ink-mid); margin-left:auto; text-align:right; }
+  .more a:hover .t { color: var(--rust-ink); }
+
+  footer { padding: 30px 0 60px; }
+  footer p { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.68rem; line-height:1.7;
+    color: var(--ink-mid); margin:0; }
+
+  /* lightbox */
+  .lb { position:fixed; inset:0; z-index:60; background:rgba(10,9,7,.94); display:none;
+    align-items:center; justify-content:center; padding:12px; cursor: zoom-out; overflow:auto; }
+  .lb.on { display:flex; }
+  .lb img { max-width:100%; max-height:94vh; border-radius:3px; background:#fcfcfb; touch-action: pinch-zoom; }
+  .lb .x { position:fixed; top:14px; right:14px; width:44px; height:44px; border-radius:50%; border:1px solid #fff4;
+    background:#0000; color:#fff; font-size:20px; cursor:pointer; }
+
+  .tt { position:fixed; top:12px; right:12px; z-index:20; width:42px; height:42px; border-radius:50%;
+    border:1px solid var(--rule); background: var(--card); color: var(--ink); cursor:pointer; font-size:15px; }
+</style>
+
+<div class="g">
+  <button class="tt" id="tt" aria-label="Toggle theme">◑</button>
+
+  <header class="hero stripes">
+    <div class="wrap">
+      <p class="eyebrow">Against the Book · Part 1 of 4 · Offense</p>
+      <h1 class="disp">The<span class="l2">Grind</span></h1>
+      <p class="dek">Establish the run and the pass opens up. It is the oldest article of faith in football. We tested it five ways.</p>
+      <span class="verdict"><b></b> Mostly myth · one grain of truth</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <blockquote class="claim">
+      "You wear them down. Establish the run, impose your will, and by the fourth quarter, by December, they break."
+      <cite>Every run-first coach, some version of it</cite>
+    </blockquote>
+
+    <section class="blk">
+      <div class="marker"><span class="down">1st</span><span class="mtitle">The next play</span></div>
+      <h2 class="disp">Run, run, then throw</h2>
+      <p class="body lead">The everyday version is about sequence: pound it on first and second down, and the third-down throw comes open.</p>
+      <p class="body">So we lined up every third-down pass by how the offense got there, holding the third-down distance fixed. That control matters: how you reach third down decides the yardage you face.</p>
+      <div class="cmp">
+        <div class="r"><span class="lb">Passed on 1st &amp; 2nd, then threw</span><span class="vl up">+0.03</span>
+          <span class="bar"><i class="up" style="left:50%;width:11%"></i><span class="zero" style="left:50%"></span></span></div>
+        <div class="r"><span class="lb">Ran on 1st &amp; 2nd, then threw</span><span class="vl dn">&minus;0.04</span>
+          <span class="bar"><i class="dn" style="left:36%;width:14%"></i><span class="zero" style="left:50%"></span></span></div>
+      </div>
+      <p class="body" style="margin-top:16px">Expected points on the third-down pass, at 3rd and 3 to 7, the distances that decide drives. The ground-and-pound path comes out <b>behind</b>, not ahead.</p>
+      <figure>
+        <img src="CHART:establish-run-setup" alt="Third-down pass EPA split by whether the offense ran or passed on first and second down, within each distance.">
+        <figcaption>Every third-down dropback, split by the first and second down calls, within distance. n = 666 to 2,549 per group.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker"><span class="down">2nd</span><span class="mtitle">The long game</span></div>
+      <h2 class="disp">Pound it early, throw it late</h2>
+      <p class="body lead">The bigger version: grind it in the first half and the pass opens up later, when it counts.</p>
+      <p class="body">Line up first-half running against later passing, in neutral game states so a lead is not quietly doing the work. Later in the same half, the second half, the fourth quarter, and play-action, the one throw that supposedly needs a run game to sell it. All flat.</p>
+      <div class="slab">
+        <div class="num">&asymp;&#8202;0<small>correlation, every horizon</small></div>
+        <p class="cap">And it is not about running <b>well</b> versus running a <b>lot</b>. An efficient early run game does just as little as a busy one. Pick your yardstick below.</p>
+      </div>
+      <div class="segs" role="group" aria-label="Choose a metric">
+        <button class="on" data-m="epa" type="button">Expected points</button>
+        <button data-m="success" type="button">Success rate</button>
+        <button data-m="wpa" type="button">Win probability</button>
+      </div>
+      <figure>
+        <img data-m="epa" src="CHART:establish-run-quality-epa" alt="Correlation of early running, by volume and efficiency, with later passing and running. All near zero.">
+        <img data-m="success" src="CHART:establish-run-quality-success" alt="Same test measured in success rate. All near zero." hidden>
+        <img data-m="wpa" src="CHART:establish-run-quality-wpa" alt="Same test measured in win probability added. All near zero." hidden>
+        <figcaption>First-half running (volume and efficiency) against later passing and running, neutral win probability only. 1,638 to 2,548 team-games per row.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker"><span class="down">3rd</span><span class="mtitle">The wear-down</span></div>
+      <h2 class="disp">Nobody breaks</h2>
+      <p class="body lead">Forget sequence, says the coach. It is about attrition. Keep running and the front seven cracks late.</p>
+      <p class="body">Run efficiency is flat across all four quarters. And a team's fourth-quarter running is <b>completely unrelated</b> to how much it pounded the ball in the first half.</p>
+      <div class="slab">
+        <div class="num">+0.00<small>early carries vs 4th-quarter running</small></div>
+        <p class="cap">Fourteen hundred team-games. Whatever the grind is doing, it is not softening anybody up for the fourth quarter.</p>
+      </div>
+      <figure>
+        <img src="CHART:steelman-weardown" alt="Run success rate by quarter in neutral game states, flat from first to fourth.">
+        <figcaption>Run success rate by quarter, neutral win probability so clock-killing leads do not skew it.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker"><span class="down">4th</span><span class="mtitle">The reverse</span></div>
+      <h2 class="disp">The pass sets up the run</h2>
+      <p class="body lead">Here is the part that turns the whole idea inside out.</p>
+      <p class="body">Runs work when the box is light. And a light box is something the <b>passing</b> game earns: the more a team throws, the fewer defenders it sees stacked in the box.</p>
+      <div class="cmp">
+        <div class="r"><span class="lb">Run vs light box (6 or fewer)</span><span class="vl up">39%</span>
+          <span class="bar"><i class="up" style="left:0;width:86%"></i></span></div>
+        <div class="r"><span class="lb">Run vs even box (7)</span><span class="vl">37%</span>
+          <span class="bar"><i class="up" style="left:0;width:78%;opacity:.6"></i></span></div>
+        <div class="r"><span class="lb">Run vs stacked box (8 or more)</span><span class="vl dn">35%</span>
+          <span class="bar"><i class="dn" style="left:0;width:70%"></i></span></div>
+      </div>
+      <div class="slab" style="margin-top:26px">
+        <div class="num">&minus;0.51<small>pass rate vs box count faced</small></div>
+        <p class="cap">Heavier passing, lighter boxes. You do not run to set up the pass. <b>You pass to open up the run.</b></p>
+      </div>
+      <figure>
+        <img src="CHART:steelman-pass-sets-run" alt="Early-down run success rate rises as the box gets lighter; passing earns the light box.">
+        <figcaption>Early-down run success by defenders in the box, 2016 to 2023 charting window.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker"><span class="down">4th &amp; 1</span><span class="mtitle">The grain of truth</span></div>
+      <h2 class="disp">December football</h2>
+      <p class="body lead">Here the run-first coach finally lands a punch, and the numbers back him.</p>
+      <p class="body">Passing is a big edge in a dome or in September. Drop the temperature and that edge melts. Below 25 degrees it falls by three-quarters, to the point where it is no longer distinguishable from zero. Heavy wind does the same.</p>
+      <div class="cmp">
+        <div class="r"><span class="lb">Above 70&deg;F</span><span class="vl">+0.15</span><span class="bar"><i class="up" style="left:0;width:100%"></i></span></div>
+        <div class="r"><span class="lb">46 to 55&deg;F</span><span class="vl">+0.12</span><span class="bar"><i class="up" style="left:0;width:82%"></i></span></div>
+        <div class="r"><span class="lb">26 to 35&deg;F</span><span class="vl">+0.09</span><span class="bar"><i class="up" style="left:0;width:60%"></i></span></div>
+        <div class="r"><span class="lb">25&deg;F and below</span><span class="vl">+0.04</span><span class="bar"><i class="up" style="left:0;width:24%;opacity:.55"></i></span></div>
+      </div>
+      <p class="body" style="margin-top:16px">The passing edge, in expected points per play. It shrinks toward nothing in the cold. But it <b>never flips</b>. Throwing stays the marginally better bet even on a frozen field, and teams barely change their mix to match.</p>
+      <figure>
+        <img src="CHART:steelman-cold" alt="Passing edge over running by game temperature: shrinks by three-quarters in the deep cold but never turns negative.">
+        <figcaption>Pass minus run expected points per play, outdoor games by game-time temperature, 2015 to 2025.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <section class="closer">
+      <h2 class="disp">The verdict</h2>
+      <p class="body lead">Running does not set up the pass. Not on the next snap, not in the fourth quarter, not through play-action. Defenses do not wear down. If anything the causality runs backwards: throwing is what thins the box and makes the run work.</p>
+      <p class="body">The one thing the grinders get right is the weather. When it is freezing or blowing, the gap between throwing and running nearly closes. It just never opens the other way.</p>
+    </section>
+
+    <nav class="more">
+      <h3>The rest of the series</h3>
+      <a href="LINK:tell"><span class="n">02</span><span class="t">The Tell</span><span class="s">Predictable play-callers win</span></a>
+      <a href="LINK:ice"><span class="n">03</span><span class="t">Cold Snap</span><span class="s">Icing the kicker is theater</span></a>
+      <a href="LINK:clock"><span class="n">04</span><span class="t">Two-Minute Panic</span><span class="s">Who wastes timeouts</span></a>
+    </nav>
+
+    <footer>
+      <p>Data: nflverse / nflfastR play-by-play 2015 to 2025, participation charting 2016 to 2023, FTN charting 2022 to 2024. Analysis in R. Later-play comparisons are limited to neutral win probability (20 to 80 percent) so game script does not drive the result, and the pattern holds within each team's own games. Correlation, not proof of cause. EPA is expected points added.</p>
+    </footer>
+  </div>
+
+  <div class="lb" id="lb"><button class="x" aria-label="Close">✕</button><img alt="Expanded chart"></div>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, tt=document.getElementById('tt');
+  function cur(){ return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); }
+  tt.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n); tt.textContent=n==='dark'?'◐':'◑'; });
+  var lb=document.getElementById('lb'), li=lb.querySelector('img');
+  document.querySelectorAll('figure img').forEach(function(im){
+    im.addEventListener('click',function(){ li.src=im.src; lb.classList.add('on'); document.body.style.overflow='hidden'; });
+  });
+  function close(){ lb.classList.remove('on'); li.removeAttribute('src'); document.body.style.overflow=''; }
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  var segs=document.querySelectorAll('.segs button'), figs=document.querySelectorAll('figure img[data-m]');
+  segs.forEach(function(b){ b.addEventListener('click',function(){
+    segs.forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    var m=b.dataset.m; figs.forEach(function(f){ f.hidden = f.dataset.m!==m; });
+  });});
+})();
+</script>

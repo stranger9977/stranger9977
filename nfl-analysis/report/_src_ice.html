@@ -1,0 +1,273 @@
+<style>
+  /* ===========================================================
+     COLD SNAP — icing the kicker. Frost identity: glacier white,
+     ice cyan, geometric sans, hairline rules, clinical spacing.
+     The finding is "no signal", so the design is lab-report cool.
+     =========================================================== */
+  :root {
+    --bg:      #eef4f7;
+    --card:    #ffffff;
+    --ink:     #0d1a20;
+    --ink-mid: #526670;
+    --rule:    #0d1a2018;
+    --hair:    #0d1a2030;
+    --ice:     #1f8fb8;
+    --ice-dp:  #14647f;
+    --frost:   #a8d4e4;
+    --warm:    #d4713f;   /* the kick that goes in */
+    --null:    #7d8f98;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      --bg:#071319; --card:#0d1e26; --ink:#e8f2f6; --ink-mid:#8ba4b0;
+      --rule:#e8f2f618; --hair:#e8f2f630; --ice:#4fb8dd; --ice-dp:#4fb8dd; --frost:#2c5f74; --warm:#e08c58; --null:#6b8f9d;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#071319; --card:#0d1e26; --ink:#e8f2f6; --ink-mid:#8ba4b0;
+    --rule:#e8f2f618; --hair:#e8f2f630; --ice:#4fb8dd; --ice-dp:#4fb8dd; --frost:#2c5f74; --warm:#e08c58; --null:#6b8f9d;
+  }
+
+  *,*::before,*::after { box-sizing: border-box; }
+  .i { background: var(--bg); color: var(--ink); overflow-x:hidden;
+       font-family: "Avenir Next", Avenir, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+       -webkit-font-smoothing: antialiased; }
+  .i ::selection { background: var(--ice); color:#fff; }
+  .wrap { max-width: 640px; margin-inline:auto; padding-inline: 20px; }
+  .mono { font-family: ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+
+  /* hero */
+  .hero { padding: clamp(52px,14vw,100px) 0 clamp(30px,7vw,46px); position:relative; }
+  .frost { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .frost i { position:absolute; background: var(--hair); opacity:.5; }
+  .eyebrow { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; letter-spacing:.24em;
+    text-transform:uppercase; color: var(--ice-dp); margin:0 0 22px; font-weight:600; }
+  h1 { font-size: clamp(2.9rem,14vw,4.8rem); font-weight:300; letter-spacing:-.035em; line-height:.98; margin:0; }
+  h1 b { font-weight:700; display:block; color: var(--ice-dp); }
+  .dek { font-size: clamp(1.06rem,4.2vw,1.2rem); line-height:1.55; margin:24px 0 0; max-width:36ch; font-weight:400; color: var(--ink); }
+  .verdict { display:inline-flex; align-items:center; gap:9px; margin-top:22px; padding:9px 15px;
+    border:1px solid var(--hair); border-radius:999px; color: var(--ink-mid);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; }
+  .verdict b { width:6px;height:6px;background:var(--null);border-radius:50%; }
+
+  section.blk { padding: clamp(38px,9vw,62px) 0 0; }
+  .marker { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.2em;
+    text-transform:uppercase; color: var(--ice-dp); margin-bottom:12px; font-weight:600; }
+  h2 { font-size: clamp(1.6rem,6.6vw,2.2rem); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin:0 0 14px; }
+  p.body { font-size:1.04rem; line-height:1.62; margin:0 0 1em; font-weight:400; }
+  .lead { font-size: clamp(1.06rem,4.3vw,1.18rem); line-height:1.5; }
+  p.body b { font-weight:600; }
+
+  /* readout card */
+  .readout { background: var(--card); border:1px solid var(--rule); border-radius:8px;
+    padding: clamp(22px,5.5vw,30px); margin:24px 0; }
+  .readout .lbl { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.6rem; letter-spacing:.16em;
+    text-transform:uppercase; color: var(--ink-mid); margin:0 0 14px; }
+  .readout .big { font-size: clamp(2.8rem,13vw,4rem); font-weight:300; letter-spacing:-.04em; line-height:1;
+    font-variant-numeric:tabular-nums; }
+  .readout .big b { font-weight:700; color: var(--ice-dp); }
+  .readout .ci { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.78rem; color: var(--ink-mid); margin-top:14px; }
+  .readout .cap { margin-top:14px; font-size:1rem; line-height:1.5; }
+
+  /* CI bar showing zero inside */
+  .cibar { margin: 20px 0 4px; }
+  .cibar .track { position:relative; height:44px; }
+  .cibar .axis { position:absolute; left:0; right:0; top:50%; height:1px; background: var(--hair); }
+  .cibar .zero { position:absolute; top:4px; bottom:4px; width:2px; background: var(--ink-mid); }
+  .cibar .span { position:absolute; top:50%; height:4px; transform:translateY(-50%); border-radius:2px;
+    background: linear-gradient(90deg, var(--frost), var(--ice)); }
+  .cibar .pt { position:absolute; top:50%; width:14px; height:14px; border-radius:50%; background: var(--ice-dp);
+    transform:translate(-50%,-50%); }
+  .cibar .ticks { position:relative; height:1.3em; margin-top:6px;
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; color: var(--ink-mid); }
+  .cibar .ticks span { position:absolute; transform:translateX(-50%); }
+  .cibar .note { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; color: var(--ink-mid);
+    margin-top:8px; text-align:center; }
+
+  /* kick log */
+  .log { margin:22px 0; }
+  .log .row { display:grid; grid-template-columns: 48px 1fr auto; gap:12px; align-items:baseline;
+    padding:11px 0; border-bottom:1px solid var(--rule);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.8rem; }
+  .log .row .yr { color: var(--ink-mid); }
+  .log .row .ds { color: var(--ink); }
+  .log .row .ds em { font-style:normal; color: var(--ink-mid); }
+  .log .row .rs { font-weight:700; letter-spacing:.04em; text-align:right; }
+  .log .row.made .rs { color: var(--warm); }
+  .log .row.miss .rs { color: var(--ice-dp); }
+  .log .tot { display:flex; justify-content:space-between; padding-top:14px;
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem; color: var(--ink-mid); }
+
+  .facts { display:grid; gap:0; margin:22px 0; }
+  .facts .f { display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:baseline;
+    border-top:1px solid var(--rule); padding:14px 0; }
+  .facts .f .k { font-size:1.6rem; font-weight:300; color: var(--ice-dp); font-variant-numeric:tabular-nums; min-width:3.2em; letter-spacing:-.02em; }
+  .facts .f .d { font-size:.96rem; line-height:1.45; color: var(--ink-mid); }
+  .facts .f .d b { color: var(--ink); font-weight:600; }
+
+  figure { margin:26px 0 0; }
+  figure img { width:100%; height:auto; display:block; border:1px solid var(--rule); border-radius:6px;
+    background:#fcfcfb; cursor:zoom-in; }
+  figcaption { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.68rem; line-height:1.5;
+    color: var(--ink-mid); margin-top:10px; }
+  .zoomhint { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.6rem; letter-spacing:.1em;
+    text-transform:uppercase; color: var(--ink-mid); margin-top:6px; display:block; }
+
+  .rule { height:1px; background: var(--rule); margin: clamp(34px,8vw,52px) 0 0; }
+  .closer { margin-top: clamp(42px,10vw,70px); padding-top: clamp(24px,6vw,32px); border-top:2px solid var(--ice); }
+
+  .more { margin-top: clamp(38px,9vw,58px); }
+  .more h3 { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--ink-mid); margin:0 0 14px; font-weight:600; }
+  .more a { display:flex; align-items:baseline; gap:10px; padding:15px 0; border-top:1px solid var(--rule);
+    color: var(--ink); text-decoration:none; min-height:44px; }
+  .more a:last-child { border-bottom:1px solid var(--rule); }
+  .more a .n { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; color: var(--ice-dp); }
+  .more a .t2 { font-weight:600; font-size:1.05rem; letter-spacing:-.01em; }
+  .more a .s { font-size:.84rem; color: var(--ink-mid); margin-left:auto; text-align:right; }
+  .more a:hover .t2 { color: var(--ice-dp); }
+
+  footer { padding:30px 0 60px; }
+  footer p { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; line-height:1.7; color: var(--ink-mid); margin:0; }
+
+  .lb { position:fixed; inset:0; z-index:60; background:rgba(4,12,16,.94); display:none; align-items:center;
+    justify-content:center; padding:12px; cursor:zoom-out; overflow:auto; }
+  .lb.on { display:flex; }
+  .lb img { max-width:100%; max-height:94vh; border-radius:5px; background:#fcfcfb; touch-action:pinch-zoom; }
+  .lb .x { position:fixed; top:14px; right:14px; width:44px; height:44px; border-radius:50%; border:1px solid #fff4;
+    background:#0000; color:#fff; font-size:20px; cursor:pointer; }
+  .tt { position:fixed; top:12px; right:12px; z-index:20; width:42px; height:42px; border-radius:50%;
+    border:1px solid var(--hair); background: var(--card); color: var(--ink); cursor:pointer; font-size:15px; }
+</style>
+
+<div class="i">
+  <button class="tt" id="tt" aria-label="Toggle theme">◑</button>
+
+  <header class="hero">
+    <div class="frost" aria-hidden="true">
+      <i style="left:0;right:0;top:24%;height:1px"></i>
+      <i style="left:0;right:0;top:61%;height:1px"></i>
+      <i style="left:18%;top:0;bottom:0;width:1px"></i>
+      <i style="left:74%;top:0;bottom:0;width:1px"></i>
+    </div>
+    <div class="wrap">
+      <p class="eyebrow">Against the Book · Part 3 of 4 · Special teams</p>
+      <h1>Cold<b>Snap</b></h1>
+      <p class="dek">Call timeout. Freeze him. Make him think about it. Twenty-six seasons of pressure kicks say the whole ritual does nothing at all.</p>
+      <span class="verdict"><b></b> Verdict: no signal</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="blk">
+      <div class="marker">The effect that isn't</div>
+      <h2>Three points, and a shrug</h2>
+      <p class="body lead">There have been 2,221 pressure field goals since 2000: the final two minutes of a half or overtime, with the kick tying the game or taking the lead. Defenses iced 585 of them.</p>
+      <p class="body">Compare only the kicks where the defense actually had a timeout to spend, which kills the obvious confound, and control for distance, kicker quality, weather, era and the moment itself. Icing is worth about three fewer points of make probability.</p>
+      <div class="readout">
+        <p class="lbl">Adjusted effect of icing</p>
+        <div class="big">&minus;2.9<b> pts</b></div>
+        <div class="cibar">
+          <div class="track">
+            <div class="axis"></div>
+            <div class="span" style="left:8%;width:64%"></div>
+            <div class="zero" style="left:80%"></div>
+            <div class="pt" style="left:38%"></div>
+          </div>
+          <div class="ticks"><span style="left:8%">&minus;7.0</span><span style="left:38%">&minus;2.9</span><span style="left:80%">0</span><span style="left:96%">+1.2</span></div>
+          <p class="note">the confidence interval runs straight through zero</p>
+        </div>
+        <p class="cap">The best estimate leans the defense's way. But after a quarter century of kicks, you still cannot tell it apart from doing nothing.</p>
+      </div>
+      <figure>
+        <img src="CHART:icing-the-kicker" alt="Adjusted make probability by kick distance, iced versus not iced, with the effect and confidence interval.">
+        <figcaption>Pressure kicks only, comparison restricted to the 1,782 where the defense had a timeout available. Dots are raw five-yard bins.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker">The coaches</div>
+      <h2>Nobody owns the ice</h2>
+      <p class="body lead">Maybe it works for someone. Some coach with a feel for the moment.</p>
+      <p class="body">Score every coach's personal icing record against what pure luck would produce, and 20 of 21 land inside the noise cone. Not close to the edge. Inside it.</p>
+      <div class="facts">
+        <div class="f"><span class="k">20/21</span><span class="d">Coaches whose icing record is <b>indistinguishable from chance</b>.</span></div>
+        <div class="f"><span class="k">67%</span><span class="d">of his chances iced by <b>Matt LaFleur</b>, the league's most trigger-happy freezer.</span></div>
+        <div class="f"><span class="k">33%</span><span class="d">league icing rate, essentially unchanged since 2000. The ritual is not fading.</span></div>
+      </div>
+      <figure>
+        <img src="CHART:icing-coach-funnel" alt="Funnel plot of each coach's icing effect against a binomial noise cone; 20 of 21 sit inside it.">
+        <figcaption>Iced-kick make rate minus model expectation had those kicks not been iced. Gray cone is the 95 percent band of pure luck.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker">The trap</div>
+      <h2>The Pete Carroll problem</h2>
+      <p class="body lead">One dot sits outside the cone. Kickers made just three of the eight Carroll iced. He ices rarely, so it reads like a coach who picks his spots and cashes in.</p>
+      <p class="body">Then you look at the actual kicks.</p>
+      <div class="readout" style="padding-top:20px">
+        <p class="lbl">Every pressure kick Carroll iced</p>
+        <div class="log">
+          <div class="row made"><span class="yr">2012</span><span class="ds">49 yd</span><span class="rs">MADE</span></div>
+          <div class="row miss"><span class="yr">2018</span><span class="ds">45 yd</span><span class="rs">missed</span></div>
+          <div class="row miss"><span class="yr">2018</span><span class="ds">52 yd</span><span class="rs">missed</span></div>
+          <div class="row miss"><span class="yr">2019</span><span class="ds">47 yd</span><span class="rs">missed</span></div>
+          <div class="row made"><span class="yr">2021</span><span class="ds">52 yd</span><span class="rs">MADE</span></div>
+          <div class="row miss"><span class="yr">2022</span><span class="ds">64 yd <em>· 34% anyway</em></span><span class="rs">missed</span></div>
+          <div class="row miss"><span class="yr">2023</span><span class="ds">51 yd</span><span class="rs">missed</span></div>
+          <div class="row made"><span class="yr">2025</span><span class="ds">41 yd</span><span class="rs">MADE</span></div>
+          <div class="tot"><span>14 seasons</span><span>3 of 8 made</span></div>
+        </div>
+        <p class="cap">Eight kicks is the entire case. One was a 64-yard heave with a one-in-three chance no matter what anyone called.</p>
+      </div>
+      <p class="body">Being choosy is not the secret either. Across all coaches, how selective you are has <b>no bearing</b> on whether your icing works: the correlation is +0.01. Kyle Shanahan ices nearly three times as often as Carroll and watched all twelve of his go through.</p>
+      <p class="body">Run the whole thing as a coin flip, twenty thousand simulated seasons where the timeout changes nothing, and the luckiest of 21 coaches still matches Carroll's mark about once a decade. He is not the exception to the rule. He is the reason you have to check.</p>
+      <figure>
+        <img src="CHART:icing-carroll" alt="Simulation showing the flukiest of 21 coaches matches Carroll's icing mark roughly once a decade under pure chance.">
+        <figcaption>Twenty thousand simulated seasons in which icing has no effect. Carroll's real result sits inside the luck.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <section class="closer">
+      <h2>The verdict</h2>
+      <p class="body lead">Icing the kicker is the most-televised piece of strategy in football that does not appear to do anything. Twenty-six seasons, 2,221 pressure kicks, every control we could apply, and the effect still cannot be separated from noise.</p>
+      <p class="body">It is not that it definitely does nothing. It is that if it does something, a quarter century of the best-recorded league in sports has not been enough to prove it. Coaches keep calling it at the same rate they always have.</p>
+    </section>
+
+    <nav class="more">
+      <h3>The rest of the series</h3>
+      <a href="LINK:grind"><span class="n">01</span><span class="t2">The Grind</span><span class="s">Establishing the run</span></a>
+      <a href="LINK:tell"><span class="n">02</span><span class="t2">The Tell</span><span class="s">Predictable callers win</span></a>
+      <a href="LINK:clock"><span class="n">04</span><span class="t2">Two-Minute Panic</span><span class="s">Who wastes timeouts</span></a>
+    </nav>
+
+    <footer>
+      <p>Data: nflverse / nflfastR play-by-play 2000 to 2025. Iced kicks identified by a defensive timeout on the play rows immediately before the snap. Causal comparisons run inside the sample where the defense had a timeout available, controlling for a distance spline, empirical-Bayes kicker quality, roof, wind, temperature, era, situation and tie-versus-lead. Marginal effect estimated by g-computation with simulation intervals. Observational, so coaches may still ice on cues we cannot measure.</p>
+    </footer>
+  </div>
+
+  <div class="lb" id="lb"><button class="x" aria-label="Close">✕</button><img alt="Expanded chart"></div>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, tt=document.getElementById('tt');
+  function cur(){ return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); }
+  tt.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n); tt.textContent=n==='dark'?'◐':'◑'; });
+  var lb=document.getElementById('lb'), li=lb.querySelector('img');
+  document.querySelectorAll('figure img').forEach(function(im){
+    im.addEventListener('click',function(){ li.src=im.src; lb.classList.add('on'); document.body.style.overflow='hidden'; });
+  });
+  function close(){ lb.classList.remove('on'); li.removeAttribute('src'); document.body.style.overflow=''; }
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>

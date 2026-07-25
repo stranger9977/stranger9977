@@ -1,0 +1,271 @@
+<style>
+  /* ===========================================================
+     TWO-MINUTE PANIC — timeouts. Scoreboard identity: stadium
+     charcoal, alarm amber, seven-segment clock numerals,
+     tabular everything. Single-world design (always dark).
+     =========================================================== */
+  :root {
+    --bg:      #121416;
+    --bg-2:    #191c1f;
+    --card:    #1c2023;
+    --ink:     #f0f2f0;
+    --ink-mid: #8f9a9d;
+    --rule:    #f0f2f01c;
+    --amber:   #ffb020;   /* scoreboard */
+    --alarm:   #e2402c;   /* burned */
+    --cool:    #46b98a;   /* disciplined */
+    --dim:     #5b6568;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  .c { background: var(--bg); color: var(--ink); overflow-x:hidden;
+       font-family: "Roboto Condensed", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+       -webkit-font-smoothing: antialiased; }
+  .c ::selection { background: var(--amber); color:#151107; }
+  .wrap { max-width: 640px; margin-inline:auto; padding-inline:20px; }
+  .clockface { font-family: "DIN Alternate", "DIN Condensed", ui-monospace, "SF Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+  .mono { font-family: ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+
+  /* scoreboard strip */
+  .strip { background: #0b0d0e; border-bottom:1px solid var(--rule); padding: 9px 0; }
+  .strip .inner { max-width:640px; margin-inline:auto; padding-inline:20px; display:flex;
+    justify-content:space-between; align-items:center; gap:12px;
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.6rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--dim); }
+  .strip .live { color: var(--amber); display:inline-flex; align-items:center; gap:6px; }
+  .strip .live b { width:6px;height:6px;background:var(--amber);border-radius:50%; display:inline-block; }
+
+  /* hero */
+  .hero { padding: clamp(44px,12vw,86px) 0 clamp(28px,7vw,44px); }
+  .eyebrow { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; letter-spacing:.22em;
+    text-transform:uppercase; color: var(--amber); margin:0 0 18px; font-weight:600; }
+  .bigclock { font-family:"DIN Alternate","DIN Condensed",ui-monospace,Menlo,monospace;
+    font-size: clamp(4.2rem,24vw,8rem); line-height:.86; font-weight:700; color: var(--amber);
+    font-variant-numeric: tabular-nums; letter-spacing:-.02em; text-shadow: 0 0 32px #ffb02033; }
+  h1 { font-size: clamp(2.3rem,10vw,3.6rem); font-weight:700; letter-spacing:-.02em; line-height:1;
+    margin: 12px 0 0; text-transform:uppercase; }
+  h1 span { color: var(--ink-mid); display:block; }
+  .dek { font-size: clamp(1.04rem,4.2vw,1.18rem); line-height:1.55; margin:22px 0 0; max-width:36ch;
+    font-family:"Iowan Old Style", Charter, Georgia, serif; }
+  .verdict { display:inline-flex; align-items:center; gap:9px; margin-top:22px; padding:8px 14px;
+    border:1px solid var(--amber); border-radius:2px; color: var(--amber);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
+  .verdict b { width:6px;height:6px;background:var(--amber);border-radius:50%; }
+
+  section.blk { padding: clamp(36px,9vw,60px) 0 0; }
+  .marker { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .marker .tag { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.58rem; font-weight:700;
+    letter-spacing:.12em; text-transform:uppercase; background: var(--amber); color:#151107; padding:4px 8px; border-radius:2px; }
+  .marker .lbl { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--ink-mid); }
+  h2 { font-size: clamp(1.7rem,7vw,2.3rem); font-weight:700; letter-spacing:-.02em; line-height:1.06;
+    margin:0 0 14px; text-transform:uppercase; }
+  p.body { font-size:1.04rem; line-height:1.62; margin:0 0 1em;
+    font-family:"Iowan Old Style", Charter, Georgia, serif; }
+  .lead { font-size: clamp(1.06rem,4.3vw,1.18rem); line-height:1.5; }
+  p.body b { color: var(--amber); font-weight:600; }
+
+  /* two sins split */
+  .sins { display:grid; gap:14px; margin:24px 0; }
+  .sin { background: var(--card); border:1px solid var(--rule); border-left:3px solid var(--alarm);
+    border-radius:3px; padding: clamp(18px,4.5vw,24px); }
+  .sin.b2 { border-left-color: var(--amber); }
+  .sin .h { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.6rem; letter-spacing:.14em;
+    text-transform:uppercase; color: var(--ink-mid); margin:0 0 8px; }
+  .sin .t { font-size:1.16rem; font-weight:700; margin:0 0 8px; text-transform:uppercase; letter-spacing:-.01em; }
+  .sin .d { font-size:.98rem; line-height:1.5; color: var(--ink-mid);
+    font-family:"Iowan Old Style", Charter, Georgia, serif; margin:0; }
+  .sin .d b { color: var(--ink); font-weight:600; }
+
+  /* leaderboard rows */
+  .board { margin:22px 0; }
+  .board .hd { display:flex; justify-content:space-between; font-family: ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color: var(--dim);
+    border-bottom:1px solid var(--rule); padding-bottom:8px; margin-bottom:4px; }
+  .board .row { display:grid; grid-template-columns: 1fr auto; gap:4px 12px; align-items:center; padding:11px 0;
+    border-bottom:1px solid var(--rule); }
+  .board .row .nm { font-size:.98rem; font-weight:600; }
+  .board .row .vv { font-family:"DIN Alternate",ui-monospace,Menlo,monospace; font-size:1.1rem; font-weight:700;
+    font-variant-numeric:tabular-nums; text-align:right; }
+  .board .row.bad .vv { color: var(--alarm); }
+  .board .row.good .vv { color: var(--cool); }
+  .board .row .bar { grid-column:1/-1; height:6px; background:#ffffff12; border-radius:2px; overflow:hidden; }
+  .board .row .bar i { display:block; height:100%; border-radius:2px; }
+  .board .row.bad .bar i { background: var(--alarm); }
+  .board .row.good .bar i { background: var(--cool); }
+  .board .row .sub { grid-column:1/-1; font-family: ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:.62rem; color: var(--dim); }
+
+  /* quadrant type list */
+  .types { display:grid; gap:2px; margin:22px 0; background: var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden; }
+  .types .ty { background: var(--card); padding:16px clamp(16px,4vw,20px); }
+  .types .ty .h { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.58rem; letter-spacing:.13em;
+    text-transform:uppercase; margin:0 0 7px; }
+  .types .ty.g .h { color: var(--cool); } .types .ty.b .h { color: var(--alarm); } .types .ty.n .h { color: var(--ink-mid); }
+  .types .ty .n2 { font-size:1rem; font-weight:600; line-height:1.4; margin:0; }
+
+  .stat { background: var(--card); border:1px solid var(--rule); border-radius:3px;
+    padding: clamp(20px,5vw,28px); margin:24px 0; }
+  .stat .n { font-family:"DIN Alternate",ui-monospace,Menlo,monospace; font-size: clamp(3rem,15vw,4.4rem);
+    font-weight:700; line-height:.9; color: var(--amber); font-variant-numeric:tabular-nums; }
+  .stat .n small { display:block; font-size:.24em; font-family: ui-monospace,"SF Mono",Menlo,monospace;
+    font-weight:400; letter-spacing:.12em; text-transform:uppercase; color: var(--ink-mid); margin-top:12px; }
+  .stat .cap { margin-top:14px; font-size:1rem; line-height:1.5; font-family:"Iowan Old Style",Charter,Georgia,serif; }
+  .stat .cap b { color: var(--amber); font-weight:600; }
+
+  figure { margin:26px 0 0; }
+  figure img { width:100%; height:auto; display:block; border:1px solid var(--rule); border-radius:3px;
+    background:#fcfcfb; cursor:zoom-in; }
+  figcaption { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; line-height:1.5;
+    color: var(--ink-mid); margin-top:10px; }
+  .zoomhint { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.58rem; letter-spacing:.1em;
+    text-transform:uppercase; color: var(--dim); margin-top:6px; display:block; }
+
+  .rule { height:1px; background: var(--rule); margin: clamp(32px,8vw,50px) 0 0; }
+  .closer { margin-top: clamp(40px,10vw,66px); padding-top: clamp(22px,6vw,30px); border-top:3px solid var(--amber); }
+
+  .more { margin-top: clamp(36px,9vw,56px); }
+  .more h3 { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--ink-mid); margin:0 0 14px; font-weight:600; }
+  .more a { display:flex; align-items:baseline; gap:10px; padding:15px 0; border-top:1px solid var(--rule);
+    color: var(--ink); text-decoration:none; min-height:44px; }
+  .more a:last-child { border-bottom:1px solid var(--rule); }
+  .more a .n { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; color: var(--amber); }
+  .more a .t2 { font-weight:700; font-size:1.04rem; text-transform:uppercase; letter-spacing:-.01em; }
+  .more a .s { font-size:.84rem; color: var(--ink-mid); margin-left:auto; text-align:right;
+    font-family:"Iowan Old Style",Charter,Georgia,serif; }
+  .more a:hover .t2 { color: var(--amber); }
+
+  footer { padding:28px 0 60px; }
+  footer p { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; line-height:1.7; color: var(--dim); margin:0; }
+
+  .lb { position:fixed; inset:0; z-index:60; background:rgba(6,7,8,.95); display:none; align-items:center;
+    justify-content:center; padding:12px; cursor:zoom-out; overflow:auto; }
+  .lb.on { display:flex; }
+  .lb img { max-width:100%; max-height:94vh; border-radius:3px; background:#fcfcfb; touch-action:pinch-zoom; }
+  .lb .x { position:fixed; top:14px; right:14px; width:44px; height:44px; border-radius:50%; border:1px solid #fff4;
+    background:#0000; color:#fff; font-size:20px; cursor:pointer; }
+</style>
+
+<div class="c">
+  <div class="strip"><div class="inner"><span>4th QTR</span><span class="live"><b></b>Two-minute warning</span><span>Timeouts: 3</span></div></div>
+
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Against the Book · Part 4 of 4 · Game management</p>
+      <div class="bigclock clockface">2:00</div>
+      <h1>Two-Minute<span>Panic</span></h1>
+      <p class="dek">Every coach gets three. Two ways to waste them, twenty-six seasons of evidence, and a leaderboard nobody wants to top.</p>
+      <span class="verdict"><b></b> Names named</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="blk">
+      <div class="marker"><span class="tag">01</span><span class="lbl">The two sins</span></div>
+      <h2>How a timeout dies</h2>
+      <p class="body lead">A timeout is worth roughly a tenth of a point when a two-minute drill actually arrives. Small, but coaches throw them away in two distinct ways, and they are not the same coaches.</p>
+      <div class="sins">
+        <div class="sin">
+          <p class="h">Sin one</p>
+          <p class="t">Burned early</p>
+          <p class="d">An offensive timeout called before the last four minutes of a half, almost always to escape a play-clock jam. The bailout. League average has fallen from <b>0.98</b> per game in 2000 to <b>0.62</b> today.</p>
+        </div>
+        <div class="sin b2">
+          <p class="h">Sin two</p>
+          <p class="t">Left on the table</p>
+          <p class="d">Walking off a one-score loss with a timeout still unused. You needed the clock and you never spent it. League average: <b>15%</b> of one-score losses.</p>
+        </div>
+      </div>
+      <p class="body">Sort every head coach since 2000 on both and the extremes are stark.</p>
+
+      <div class="board">
+        <div class="hd"><span>Burned early, per game vs league</span><span>Rate</span></div>
+        <div class="row bad"><span class="nm">Mike Martz</span><span class="vv">+1.02</span><span class="bar"><i style="width:100%"></i></span><span class="sub">double the league in all six of his seasons</span></div>
+        <div class="row bad"><span class="nm">Jim Harbaugh</span><span class="vv">+0.52</span><span class="bar"><i style="width:64%"></i></span></div>
+        <div class="row bad"><span class="nm">Matt LaFleur</span><span class="vv">+0.52</span><span class="bar"><i style="width:64%"></i></span></div>
+        <div class="row bad"><span class="nm">Sean McVay</span><span class="vv">+0.49</span><span class="bar"><i style="width:60%"></i></span></div>
+        <div class="row good"><span class="nm">Jim Caldwell</span><span class="vv">&minus;0.48</span><span class="bar"><i style="width:47%"></i></span><span class="sub">most frugal of the modern era</span></div>
+      </div>
+
+      <div class="board">
+        <div class="hd"><span>Left on the table, share of one-score losses</span><span>Rate</span></div>
+        <div class="row bad"><span class="nm">Norv Turner</span><span class="vv">35%</span><span class="bar"><i style="width:100%"></i></span><span class="sub">11 of 31 · league rate is 15%</span></div>
+        <div class="row bad"><span class="nm">Brian Billick</span><span class="vv">30%</span><span class="bar"><i style="width:86%"></i></span><span class="sub">6 of 20</span></div>
+        <div class="row bad"><span class="nm">Kevin Stefanski</span><span class="vv">29%</span><span class="bar"><i style="width:83%"></i></span><span class="sub">6 of 21</span></div>
+        <div class="row good"><span class="nm">Andy Reid</span><span class="vv">7%</span><span class="bar"><i style="width:20%"></i></span><span class="sub">4 of 61 · best rate of any coach with real mileage</span></div>
+        <div class="row good"><span class="nm">Gary Kubiak</span><span class="vv">0%</span><span class="bar"><i style="width:3%"></i></span><span class="sub">0 of 26 · never once</span></div>
+      </div>
+
+      <figure>
+        <img src="CHART:timeout_discipline" alt="Two-panel head coach leaderboard: burned early per game, and share of one-score losses ending with a timeout unused.">
+        <figcaption>Every head coach since 2000 with 80+ games. Worst eight and best eight on each measure, middle folded.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker"><span class="tag">02</span><span class="lbl">2025</span></div>
+      <h2>Where this year's coaches stand</h2>
+      <p class="body lead">Zoom in on the coaches who will be on your screen this fall and something jumps out: managing the clock early and managing it late are two different skills, and most coaches only have one.</p>
+      <div class="types">
+        <div class="ty g"><p class="h">Sharp at both ends</p><p class="n2">Dan Campbell · Brian Daboll · Dan Quinn</p></div>
+        <div class="ty b"><p class="h">Loose at both ends</p><p class="n2">Matt LaFleur · Mike McDaniel</p></div>
+        <div class="ty n"><p class="h">Sloppy early, clutch late</p><p class="n2">Sean McVay · Kyle Shanahan · Jim Harbaugh</p></div>
+        <div class="ty n"><p class="h">Sharp early, sloppy late</p><p class="n2">Kevin Stefanski · John Harbaugh · Mike Tomlin</p></div>
+      </div>
+      <p class="body">McVay and Shanahan burn timeouts early at some of the highest rates in the league, then almost never leave one unused with a game on the line. Stefanski and Harbaugh are the mirror image: tidy before the two-minute warning, then repeatedly walking off one-score losses with one still in hand.</p>
+      <figure>
+        <img src="CHART:timeout-current" alt="Map of every head coach active in 2025 on burning timeouts early versus leaving them unused in one-score losses.">
+        <figcaption>Career figures for every 2025 head coach with enough mileage to place. Bottom-left is disciplined, top-right is loose with both.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker"><span class="tag">03</span><span class="lbl">The twist</span></div>
+      <h2>The clock-management joke</h2>
+      <p class="body lead">No coach gets mocked for clock management more than Andy Reid. It has been a running punchline for two decades.</p>
+      <div class="stat">
+        <div class="n">4<small>of 61 one-score losses</small></div>
+        <p class="cap">Times Reid walked off a one-score loss with a timeout unused. That is <b>7%</b>, against a league rate of 15%, and the best mark of any coach with a large sample.</p>
+      </div>
+      <p class="body">He burns a few extra early, which is where the reputation comes from and where the broadcast catches him. But when the game is genuinely on the line, he is the most reliable timeout manager of his generation. The joke has it backwards.</p>
+    </section>
+
+    <section class="closer">
+      <h2>The verdict</h2>
+      <p class="body lead">Timeouts get wasted in public. Every burn is on camera, every unused one sits on the scoreboard as the clock runs out. The numbers just tell you who does it and how often.</p>
+      <p class="body">The caveat worth stating: a banked timeout is worth about a tenth of a point, not the half-point the broadcast implies. These are small edges. But they are also free, and the same names keep appearing at both extremes for a reason.</p>
+    </section>
+
+    <nav class="more">
+      <h3>The rest of the series</h3>
+      <a href="LINK:grind"><span class="n">01</span><span class="t2">The Grind</span><span class="s">Establishing the run</span></a>
+      <a href="LINK:tell"><span class="n">02</span><span class="t2">The Tell</span><span class="s">Predictable callers win</span></a>
+      <a href="LINK:ice"><span class="n">03</span><span class="t2">Cold Snap</span><span class="s">Icing the kicker</span></a>
+    </nav>
+
+    <footer>
+      <p>Data: nflverse / nflfastR play-by-play and games, 2000 to 2025, 14,030 team-games, playoffs included. Burned = charged offensive timeouts with more than 4:00 left in a half, injury timeouts excluded, compared to the league average that season because the rate has drifted. Left on the table = regulation losses while trailing by one score at the Q4 two-minute mark that end with at least one timeout unused. Minimum 80 games, and 20 such losses for the second measure. Norv Turner's mark is the extreme of a 33-coach board, so treat the single p-value with care; the pattern, not one name, is the finding.</p>
+    </footer>
+  </div>
+
+  <div class="lb" id="lb"><button class="x" aria-label="Close">✕</button><img alt="Expanded chart"></div>
+</div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lb'), li=lb.querySelector('img');
+  document.querySelectorAll('figure img').forEach(function(im){
+    im.addEventListener('click',function(){ li.src=im.src; lb.classList.add('on'); document.body.style.overflow='hidden'; });
+  });
+  function close(){ lb.classList.remove('on'); li.removeAttribute('src'); document.body.style.overflow=''; }
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>

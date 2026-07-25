@@ -1,0 +1,324 @@
+<style>
+  /* ===========================================================
+     THE TELL — predictability. Fortune-teller identity: midnight
+     indigo, antique gold, high-contrast serif, arcana card frame.
+     Mobile-first single column.
+     =========================================================== */
+  :root {
+    --bg:      #14132a;   /* midnight (single-world design, dark by default) */
+    --bg-2:    #1b1a36;
+    --card:    #1e1d3c;
+    --ink:     #f2eede;
+    --ink-mid: #a9a4c9;
+    --rule:    #f2eede22;
+    --gold:    #d9b04a;
+    --gold-dp: #a8801f;
+    --violet:  #8f7fe0;
+    --cool:    #59c0d6;
+    --warn:    #e0685c;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  .t { background:
+        radial-gradient(120% 70% at 50% -8%, #2a2657 0%, transparent 58%),
+        var(--bg);
+       color: var(--ink); overflow-x: hidden;
+       font-family: "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+       -webkit-font-smoothing: antialiased; }
+  .t ::selection { background: var(--gold); color: #1a1508; }
+  .wrap { max-width: 660px; margin-inline: auto; padding-inline: 20px; }
+
+  .disp { font-family: "Didot", "Bodoni 72", "Playfair Display", "Iowan Old Style", Georgia, serif;
+          font-weight: 700; letter-spacing: -.01em; line-height: 1.02; margin: 0; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+  /* starfield */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .5;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 18%, #fff6 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 78% 12%, #fff5 50%, transparent 51%),
+      radial-gradient(1.6px 1.6px at 34% 42%, #fff4 50%, transparent 51%),
+      radial-gradient(1.1px 1.1px at 88% 61%, #fff5 50%, transparent 51%),
+      radial-gradient(1.3px 1.3px at 22% 77%, #fff4 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 62% 88%, #fff5 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 52% 28%, #fff3 50%, transparent 51%);
+  }
+  .t > *:not(.stars) { position: relative; z-index: 1; }
+
+  /* hero: arcana card */
+  .hero { padding: clamp(40px,11vw,76px) 0 clamp(28px,7vw,44px); }
+  .eyebrow { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; letter-spacing:.22em;
+    text-transform: uppercase; color: var(--gold); margin: 0 0 20px; font-weight: 600; }
+  .card { border: 1px solid var(--gold-dp); border-radius: 6px; padding: clamp(26px,7vw,42px) clamp(20px,5vw,30px);
+    background: linear-gradient(180deg, #ffffff08, #ffffff02); position: relative; }
+  .card::before, .card::after { content:""; position:absolute; width:16px; height:16px; border:1px solid var(--gold-dp); }
+  .card::before { top:7px; left:7px; border-right:none; border-bottom:none; }
+  .card::after { bottom:7px; right:7px; border-left:none; border-top:none; }
+  .card .roman { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.68rem; letter-spacing:.3em;
+    color: var(--gold); text-align:center; display:block; margin-bottom: 18px; }
+  h1.disp { font-size: clamp(3rem, 15vw, 5rem); text-align:center; font-style: italic; }
+  h1.disp em { font-style: normal; display:block; color: var(--gold); }
+  .card .sub { text-align:center; font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem;
+    letter-spacing:.24em; text-transform:uppercase; color: var(--ink-mid); margin: 18px 0 0; }
+  .dek { font-size: clamp(1.06rem,4.2vw,1.2rem); line-height:1.55; margin: 26px 0 0; }
+  .verdict { display:inline-flex; align-items:center; gap:9px; margin-top: 20px; padding: 8px 14px;
+    border:1px solid var(--gold-dp); border-radius: 999px; color: var(--gold);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; }
+  .verdict b { width:6px;height:6px;background:var(--gold);border-radius:50%; }
+
+  section.blk { padding: clamp(38px,9vw,62px) 0 0; }
+  .marker { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; letter-spacing:.2em;
+    text-transform:uppercase; color: var(--gold); margin-bottom: 12px; }
+  h2.disp { font-size: clamp(1.7rem,7vw,2.4rem); margin-bottom: 14px; }
+  p.body { font-size:1.05rem; line-height:1.64; margin:0 0 1em; }
+  .lead { font-size: clamp(1.08rem,4.4vw,1.2rem); line-height:1.52; }
+  p.body b { color: var(--gold); font-weight:400; }
+
+  /* the read: call-the-play */
+  .read { border:1px solid var(--rule); border-radius:6px; background: var(--card);
+    padding: clamp(20px,5vw,28px); margin: 24px 0; }
+  .read .q { font-size:1.06rem; line-height:1.45; margin:0 0 4px; }
+  .read .qs { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.12em;
+    text-transform:uppercase; color: var(--ink-mid); margin:0 0 22px; }
+  .rr { margin-bottom: 16px; }
+  .rr .top { display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .rr .nm { font-size:.96rem; font-weight:600; }
+  .rr .nm i { display:block; font-style:normal; font-family: ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color: var(--ink-mid); margin-top:2px; }
+  .rr .sc { font-family:"Didot","Bodoni 72",Georgia,serif; font-weight:700; font-size:1.35rem; font-variant-numeric:tabular-nums; }
+  .rr .sc small { font-size:.55em; color: var(--ink-mid); }
+  .rr.hi .sc { color: var(--gold); } .rr.lo .sc { color: var(--cool); }
+  .rr .tr { position:relative; height:26px; border-radius:4px; background:#ffffff10; overflow:hidden; }
+  .rr .tr i { position:absolute; left:0; top:0; bottom:0; display:block; border-radius:4px; }
+  .rr.hi .tr i { background: linear-gradient(90deg, var(--gold-dp), var(--gold)); }
+  .rr.lo .tr i { background: linear-gradient(90deg, #3d7f92, var(--cool)); }
+  .rr.mid .tr i { background: #ffffff2e; }
+  .rr .tr b { position:absolute; right:8px; top:50%; transform:translateY(-50%);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.68rem; font-weight:700; color:#141228; }
+  .rr.mid .tr b { color: var(--ink); }
+  .rr .coin { position:absolute; left:50%; top:-4px; bottom:-4px; width:1px; background: var(--ink-mid); opacity:.5; }
+  .read .note { border-top:1px solid var(--rule); margin-top:18px; padding-top:16px; font-size:1rem; line-height:1.55; color: var(--ink-mid); }
+  .read .note b { color: var(--gold); font-weight:400; }
+  .coinlab { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.58rem; letter-spacing:.08em;
+    text-transform:uppercase; color: var(--ink-mid); text-align:center; margin:2px 0 0; }
+
+  /* big stat */
+  .stat { text-align:center; padding: clamp(22px,6vw,32px) 0; }
+  .stat .n { font-family:"Didot","Bodoni 72",Georgia,serif; font-weight:700; font-size: clamp(3.4rem,17vw,5rem);
+    line-height:1; color: var(--gold); font-variant-numeric:tabular-nums; }
+  .stat .c { font-size:1.02rem; line-height:1.5; margin-top:12px; color: var(--ink); max-width:34ch; margin-inline:auto; }
+  .stat .c span { color: var(--ink-mid); }
+
+  .facts { display:grid; gap:12px; margin: 22px 0; }
+  .facts .f { display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:baseline;
+    border-top:1px solid var(--rule); padding-top:12px; }
+  .facts .f .k { font-family:"Didot","Bodoni 72",Georgia,serif; font-weight:700; font-size:1.5rem; color: var(--cool);
+    font-variant-numeric:tabular-nums; min-width:2.8em; }
+  .facts .f .d { font-size:.95rem; line-height:1.45; color: var(--ink-mid); }
+
+  figure { margin: 26px 0 0; }
+  figure img { width:100%; height:auto; display:block; border:1px solid var(--rule); border-radius:5px;
+    background:#fcfcfb; cursor: zoom-in; }
+  figcaption { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.68rem; line-height:1.5;
+    color: var(--ink-mid); margin-top:10px; }
+  .zoomhint { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.6rem; letter-spacing:.1em;
+    text-transform:uppercase; color: var(--ink-mid); margin-top:6px; display:block; }
+
+  .segs { display:flex; gap:4px; padding:4px; border:1px solid var(--rule); border-radius:999px;
+    margin: 22px 0 14px; overflow-x:auto; }
+  .segs button { flex:1 0 auto; min-height:40px; border:none; background:transparent; color: var(--ink-mid);
+    font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.7rem; font-weight:700; letter-spacing:.04em;
+    padding:9px 14px; border-radius:999px; cursor:pointer; white-space:nowrap; }
+  .segs button.on { background: var(--gold); color:#191227; }
+  .segs button:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+
+  .rule { height:1px; background: var(--rule); margin: clamp(34px,8vw,52px) 0 0; }
+  .closer { margin-top: clamp(42px,10vw,68px); padding-top: clamp(24px,6vw,32px); border-top:2px solid var(--gold-dp); }
+
+  .more { margin-top: clamp(38px,9vw,58px); }
+  .more h3 { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--ink-mid); margin:0 0 14px; font-weight:600; }
+  .more a { display:flex; align-items:baseline; gap:10px; padding:15px 0; border-top:1px solid var(--rule);
+    color: var(--ink); text-decoration:none; min-height:44px; }
+  .more a:last-child { border-bottom:1px solid var(--rule); }
+  .more a .n { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.64rem; color: var(--gold); }
+  .more a .t2 { font-family:"Didot","Bodoni 72",Georgia,serif; font-weight:700; font-size:1.08rem; }
+  .more a .s { font-size:.84rem; color: var(--ink-mid); margin-left:auto; text-align:right; }
+  .more a:hover .t2 { color: var(--gold); }
+
+  footer { padding: 30px 0 60px; }
+  footer p { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size:.66rem; line-height:1.7; color: var(--ink-mid); margin:0; }
+
+  .lb { position:fixed; inset:0; z-index:60; background:rgba(8,7,18,.95); display:none; align-items:center;
+    justify-content:center; padding:12px; cursor:zoom-out; overflow:auto; }
+  .lb.on { display:flex; }
+  .lb img { max-width:100%; max-height:94vh; border-radius:4px; background:#fcfcfb; touch-action: pinch-zoom; }
+  .lb .x { position:fixed; top:14px; right:14px; width:44px; height:44px; border-radius:50%; border:1px solid #fff4;
+    background:#0000; color:#fff; font-size:20px; cursor:pointer; }
+</style>
+
+<div class="t">
+  <div class="stars" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Against the Book · Part 2 of 4 · Play-calling</p>
+      <div class="card">
+        <span class="roman">II</span>
+        <h1 class="disp">The<em>Tell</em></h1>
+        <p class="sub">Andy Reid · the readable genius</p>
+      </div>
+      <p class="dek">Every broadcast says the great play-callers keep a defense guessing. The numbers say the best ones are the easiest to read in football.</p>
+      <span class="verdict"><b></b> Verdict: backwards</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="blk">
+      <div class="marker">First, the definition</div>
+      <h2 class="disp">What "predictable" actually means</h2>
+      <p class="body lead">Picture yourself as the defense. Before the snap you know three things: the down, the distance, the score. You have to call it. Run or pass.</p>
+      <p class="body">Take one spot every team faces. Second and long. A passing down. You call pass. How often are you right?</p>
+
+      <div class="read">
+        <p class="q"><b>2nd and 8 or more to go.</b> You call pass.</p>
+        <p class="qs">Share of these plays each offense actually throws</p>
+        <div class="rr lo">
+          <div class="top"><span class="nm">Ben Johnson<i>hardest to read</i></span><span class="sc">66<small>/100</small></span></div>
+          <div class="tr"><i style="width:66%"></i><span class="coin"></span><b>66% pass</b></div>
+        </div>
+        <div class="rr mid">
+          <div class="top"><span class="nm">League average</span><span class="sc">72<small>/100</small></span></div>
+          <div class="tr"><i style="width:72%"></i><span class="coin"></span><b>72% pass</b></div>
+        </div>
+        <div class="rr hi">
+          <div class="top"><span class="nm">Andy Reid<i>easiest to call</i></span><span class="sc">81<small>/100</small></span></div>
+          <div class="tr"><i style="width:81%"></i><span class="coin"></span><b>81% pass</b></div>
+        </div>
+        <p class="coinlab">the middle line is a 50/50 coin flip</p>
+        <p class="note">Reid leans into the obvious call harder than anyone, so you can sit on the pass and be right four times in five. Now do that in <b>every</b> situation, down, distance and score, and add it up. Against Reid a defense calls about <b>3 more plays per 100</b> correctly than against an average team. That gap is what predictable means here.</p>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker">The flip</div>
+      <h2 class="disp">Readable, and better for it</h2>
+      <p class="body lead">Raw numbers say unpredictable teams score more. That is a mirage.</p>
+      <p class="body">Good offenses simply live in friendlier down and distance, where the run-pass split is naturally balanced. Compare each caller to the league <b>in the exact same spots</b> and the sign flips.</p>
+      <div class="stat">
+        <div class="n">r = &minus;0.37</div>
+        <p class="c">More predictable, once you control for the situation, means <span>a better offense.</span></p>
+      </div>
+      <p class="body">Reid sits at the readable extreme and runs the best offense in football. So do McVay, LaFleur and Joe Brady. Switch the yardstick and nothing moves.</p>
+      <div class="segs" role="group" aria-label="Choose a metric">
+        <button class="on" data-m="epa" type="button">Expected points</button>
+        <button data-m="success" type="button">Success rate</button>
+        <button data-m="wpa" type="button">Win probability</button>
+      </div>
+      <figure>
+        <img data-m="epa" src="CHART:predictability-offense-epa" alt="Career play-callers plotted by predictability against offensive EPA. The trend rises.">
+        <img data-m="success" src="CHART:predictability-offense-success" alt="Same relationship measured in success rate." hidden>
+        <img data-m="wpa" src="CHART:predictability-offense-wpa" alt="Same relationship measured in win probability added." hidden>
+        <figcaption>Every career play-caller with 1,000+ plays, 2015 to 2025. Right is more predictable than the league in the same situations.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker">The obvious objection</div>
+      <h2 class="disp">"That's just Mahomes"</h2>
+      <p class="body lead">Fair. So strip the quarterback out.</p>
+      <div class="facts">
+        <div class="f"><span class="k">&minus;0.26</span><span class="d">The link survives after removing quarterback accuracy. It is the caller, not only the passer.</span></div>
+        <div class="f"><span class="k">0.54</span><span class="d">Season-to-season correlation. Predictability is a stable coaching trait, not a one-year blip.</span></div>
+        <div class="f"><span class="k">3</span><span class="d">Metrics tested. Expected points, success rate, win probability. Same answer in all of them.</span></div>
+      </div>
+      <figure>
+        <img src="CHART:caller-vs-qb" alt="Predictability is stable season to season and its link to offense survives controlling for the quarterback.">
+        <figcaption>Left: a caller's predictability one season against the next, including across a quarterback change. Right: the offense link before and after quarterback controls.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker">Read the grid</div>
+      <h2 class="disp">Tipping the hand</h2>
+      <p class="body lead">Here is what it looks like up close. Each grid is a play-caller, by down and distance.</p>
+      <p class="body">Red means easier to guess than the league. Blue means closer to a coin flip. Reid runs deep red and wins. Ben Johnson stays blue and wins too. Adam Gase is unreadable and goes nowhere.</p>
+      <figure>
+        <img src="CHART:tendency-fingerprints" alt="Down-by-distance pass-rate fingerprints for six play-callers, colored by how guessable each cell is versus the league.">
+        <figcaption>Andy Reid, Sean McVay, Matt LaFleur, Kyle Shanahan, Adam Gase and Ben Johnson. Numbers are the caller's pass rate in that cell.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker">Where it pays</div>
+      <h2 class="disp">Surprise pays nowhere</h2>
+      <p class="body lead">So should a caller ever go off script to stay unpredictable? Not on this evidence.</p>
+      <p class="body">Being predictable helps most on early downs, where committing to what works beats disguise. The edge is smaller on obvious passing downs and undetectable in the thin late-and-short samples. But <b>no situation rewards being harder to guess.</b> Nothing lands negative.</p>
+      <figure>
+        <img src="CHART:pred_by_situation" alt="Correlation of predictability with offense by situation: largest on early downs, never negative anywhere.">
+        <figcaption>The early-down edge survives a passer-quality control (partial r = +0.25).</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="blk">
+      <div class="marker">2025</div>
+      <h2 class="disp">This year's play-callers</h2>
+      <p class="body lead">Every team's current play-caller on the same scale.</p>
+      <p class="body">Joe Brady and Andy Reid sit at the readable extreme and run two of the league's best offenses. Chip Kelly is the cautionary tale at the other end: hard to guess, going nowhere. And Ben Johnson, now in Chicago, remains the exception that proves the rule.</p>
+      <figure>
+        <img src="CHART:predictability-current" alt="Every 2025 play-caller ranked by predictability, colored by offensive efficiency.">
+        <figcaption>Career figures, current play-caller per team. Attribution from the samhoppen/NFL_public play-caller dataset.</figcaption>
+        <span class="zoomhint">Tap chart to enlarge</span>
+      </figure>
+    </section>
+
+    <section class="closer">
+      <h2 class="disp">The verdict</h2>
+      <p class="body lead">Unpredictability is not the skill. Knowing what is coming and stopping it are very different problems, and the best play-callers bet on that difference. They find what works, commit to it, and dare eleven men to do something about it.</p>
+      <p class="body">Being hard to read, it turns out, is mostly what struggling coordinators do while they look for something that works.</p>
+    </section>
+
+    <nav class="more">
+      <h3>The rest of the series</h3>
+      <a href="LINK:grind"><span class="n">01</span><span class="t2">The Grind</span><span class="s">Establishing the run</span></a>
+      <a href="LINK:ice"><span class="n">03</span><span class="t2">Cold Snap</span><span class="s">Icing the kicker</span></a>
+      <a href="LINK:clock"><span class="n">04</span><span class="t2">Two-Minute Panic</span><span class="s">Who wastes timeouts</span></a>
+    </nav>
+
+    <footer>
+      <p>Data: nflverse / nflfastR play-by-play 2015 to 2025, 305,827 called plays; play-caller attribution from samhoppen/NFL_public. Predictability is the within-situation entropy of a caller's run-pass split versus the league in the same down, distance, field-position and score cells, empirical-Bayes de-biased so small samples are not mistaken for tendencies. Correlation, not proof of cause. EPA is expected points added.</p>
+    </footer>
+  </div>
+
+  <div class="lb" id="lb"><button class="x" aria-label="Close">✕</button><img alt="Expanded chart"></div>
+</div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lb'), li=lb.querySelector('img');
+  document.querySelectorAll('figure img').forEach(function(im){
+    im.addEventListener('click',function(){ li.src=im.src; lb.classList.add('on'); document.body.style.overflow='hidden'; });
+  });
+  function close(){ lb.classList.remove('on'); li.removeAttribute('src'); document.body.style.overflow=''; }
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  var segs=document.querySelectorAll('.segs button'), figs=document.querySelectorAll('figure img[data-m]');
+  segs.forEach(function(b){ b.addEventListener('click',function(){
+    segs.forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    var m=b.dataset.m; figs.forEach(function(f){ f.hidden = f.dataset.m!==m; });
+  });});
+})();
+</script>
