@@ -208,35 +208,50 @@ s_down <- function(tt) {
 # SCENE 4 - test 2, the long game (dots collapse to zero)
 # =====================================================================
 s_long <- function(tt) {
-  out <- fo(tt, 11.4, .45)
-  txt(.07, .875, "TEST 2  ·  THE LONG GAME", MONO, 2, 1.0, rust, fi(tt, 0, 0.517) * out)
-  txt(.07, .80, "Pound it early, throw it late", DISP, 1, 3.0, ink, fi(tt, 0.257, 0.575) * out)
-  txt(.07, .735, "Does first-half running predict later passing?", BODY, 1, 1.55, mid, fi(tt, 0.513, 0.575) * out)
+  out <- fo(tt, 11.4, .52)
+  txt(.07, .900, "TEST 2  ·  THE LONG GAME", MONO, 2, 1.0, rust, fi(tt, 0, .52) * out)
+  txt(.07, .830, "Pound it early, throw it late", DISP, 1, 3.0, ink, fi(tt, .26, .58) * out)
+  txt(.07, .766, "Does first-half running predict later passing?", BODY, 1, 1.55, mid, fi(tt, .51, .58) * out)
+  # say plainly what is being measured
+  ac <- fi(tt, .85, .58) * out
+  txt(.07, .722, "Each dot is a CORRELATION: how much a team ran early,", BODY, 1, 1.24, mid, ac)
+  txt(.07, .692, "against how well it threw later in the game.", BODY, 1, 1.24, mid, ac)
 
-  zx <- .62; scale <- .85
-  # "no effect" band
-  ab <- fi(tt, 0.941, 0.575) * out
-  rect2(zx - .05 * scale, .28, .10 * scale, .33, "#b9d2c4", ab * .55, just = c("left","bottom"))
-  txt(zx, .625, "NO EFFECT", MONO, 2, .82, gain, ab, adj = c(.5, .5))
-  lin(zx, .28, zx, .61, rule, 2, ab)
+  zx <- .565; scale <- .95                 # zero position, and units -> npc
+  xat <- function(v) zx + v * scale
+  ab  <- fi(tt, 1.15, .58) * out
+
+  rect2(xat(-.05), .345, .10 * scale, .295, "#b9d2c4", ab * .55, just = c("left", "bottom"))
+  txt(zx, .652, "NO EFFECT", MONO, 2, .78, gain, ab, adj = c(.5, .5))
+  lin(zx, .345, zx, .640, rule, 2, ab)
+  ar <- fi(tt, 1.5, .58) * out
+  lin(xat(.30), .345, xat(.30), .640, iron, 2, ar * .8, lty = 2)
+  txt(xat(.30), .652, "A REAL EFFECT", MONO, 2, .78, iron, ar, adj = c(.5, .5))
 
   rows <- list(c("Later in the same half", -0.03), c("The second half", -0.05),
                c("The fourth quarter", -0.05), c("Play-action, 2nd half", -0.02))
   for (i in seq_along(rows)) {
-    y  <- .565 - (i - 1) * .075
-    ai <- fi(tt, 1.368 + i * 0.513, 0.517) * out
-    tv <- cl((tt - (1.454 + i * 0.513)) / 1.38)
-    # slides in from where the myth would put it (+0.30) to reality
+    y  <- .592 - (i - 1) * .066
+    ai <- fi(tt, 1.85 + i * .52, .52) * out
+    tv <- cl((tt - (1.95 + i * .52)) / 1.38)
     v  <- 0.30 + (as.numeric(rows[[i]][2]) - 0.30) * eio(tv)
-    txt(.07, y, rows[[i]][1], BODY, 1, 1.5, ink, ai)
-    grid.circle(x = zx + v * scale, y = y, r = .0135,
-                gp = gpar(fill = rust, col = NA, alpha = cl(ai)))
-    txt(zx + v * scale, y + .032, sprintf("%+.2f", v), MONO, 2, .95, rust, ai, adj = c(.5, .5))
+    txt(.07, y, rows[[i]][1], BODY, 1, 1.42, ink, ai)
+    grid.circle(x = xat(v), y = y, r = .0128, gp = gpar(fill = rust, col = NA, alpha = cl(ai)))
+    txt(xat(v), y + .030, sprintf("%+.2f", v), MONO, 2, .90, rust, ai, adj = c(.5, .5))
   }
-  a4 <- fi(tt, 6.669, 0.69) * out
-  lin(.07, .225, .93, .225, rule, 2, a4)
-  txt(.07, .155, "Every horizon. Nothing.", DISP, 1, 2.6, rust, a4)
-  txt(.07, .095, "Neutral game states only, so a lead isn't doing the work", MONO, 1, .82, mid, fi(tt, 7.524, 0.575) * out)
+
+  aa <- fi(tt, 5.0, .58) * out
+  lin(xat(-.10), .318, xat(.36), .318, rule, 2, aa)
+  txt(zx, .288, "0", MONO, 1, .82, mid, aa, adj = c(.5, .5))
+  txt(xat(.30), .288, "+0.30", MONO, 1, .82, mid, aa, adj = c(.5, .5))
+  txt(.07, .288, "CORRELATION", MONO, 2, .82, mid, aa)
+  txt(.07, .258, "0 = no relationship at all", MONO, 1, .78, mid, fi(tt, 5.5, .58) * out)
+
+  a4 <- fi(tt, 6.7, .69) * out
+  lin(.07, .214, .93, .214, rule, 2, a4)
+  txt(.07, .148, "Every horizon. Nothing.", DISP, 1, 2.6, rust, a4)
+  txt(.07, .086, "Neutral game states only, so a lead isn't doing the work", MONO, 1, .82, mid,
+      fi(tt, 7.5, .58) * out)
 }
 
 # =====================================================================
@@ -341,8 +356,9 @@ s_rev <- function(tt) {
     }
   }
   a3 <- fi(tt, 10.952, 0.632) * out
-  txt(.07, .238, sprintf("%.2f", num(0, -0.51, cl((tt - 11.1) / 1.61))), DISP, 1, 2.3, rust, a3)
-  txt(.205, .238, "correlation: heavier passing, lighter boxes", BODY, 1, 1.32, ink, a3)
+  txt(.07, .240, sprintf("+%.2f", num(0, 0.51, cl((tt - 11.1) / 1.61))), DISP, 1, 2.3, gain, a3)
+  txt(.205, .258, "CORRELATION between how much a team throws", BODY, 1, 1.28, ink, a3)
+  txt(.205, .225, "and how light a box its runs face", BODY, 1, 1.28, ink, a3)
 
   # ---- payoff --------------------------------------------------------
   a5 <- fi(tt, 13.024, 0.69) * out
