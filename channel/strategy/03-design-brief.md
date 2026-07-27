@@ -201,6 +201,41 @@ Full detail in `02-monetization.md`. Ad-relevant design consequences:
 
 ## 7. Skill architecture
 
+### The governing principle: the hour buys taste
+
+The single most important constraint is that **one hour a day is not enough to make the
+video — it is exactly enough to supply the judgment.** That's not a limitation to work
+around, it's the design spec.
+
+So the split isn't "automate what's easy." It's:
+
+> **Anything a machine can do deterministically, a machine does. The hour is spent only on
+> the things that require taste, and on nothing else.**
+
+What taste means here, concretely — the irreducible human contribution:
+
+- Deciding which belief is worth putting on trial, and whether you actually care
+- Judging whether the steelman is *genuine* or a strawman wearing a costume
+- Recognizing when a finding has a reversal and when it's just a number
+- **Verifying that a number is right.** Never delegate this. LLMs hallucinate statistics
+  fluently and confidently, and for an NFL analytics audience one wrong number is a
+  credibility event you don't recover from.
+- The analogy that makes an abstraction concrete — the Stuart Scott move
+- Where the joke goes, and whether it survives the chart being removed
+- Whether the title is a promise the video keeps
+
+Everything else — data pulls, chart rendering, HTML assembly, loudness normalization,
+captions, thumbnail compositing, clip compliance, metadata — is machine work. If you find
+yourself spending the hour on any of it, the tooling has failed and fixing the tooling is
+the higher-value use of the hour.
+
+**This is also why the voice can be iterated rather than specified up front.** The
+narration register in `style/narration-voice.md` is a starting position, not a finished
+product. You'll refine it by making things and noticing what sounds like you. The
+references get better; the machine layer stays constant.
+
+### The mechanical split
+
 The design principle you named, which is right: **decompose every task into what must be
 judgment, what can be deterministic, and what must be consistent.**
 
