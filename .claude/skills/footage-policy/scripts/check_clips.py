@@ -56,9 +56,18 @@ FORBIDDEN_SOURCES = {
         "documented strike outcome (XOS/Catapult vs Brett Kollmann, May 2025). "
         "Substitute data viz, licensed stills, or diagrams."
     ),
+    "unlicensed_still": (
+        "Unlicensed press/wire stills sit OUTSIDE Content ID -- which means the "
+        "risk that remains is manual DMCA, i.e. the strike track rather than the "
+        "claim track. UFC sent five DMCA takedowns to Boxing Now over videos "
+        "using still images. License them (Imagn, Icon Sportswire, IMAGO, Getty) "
+        "or use original animation."
+    ),
 }
 
-CLEAN_SOURCES = {"original", "licensed_program", "licensed_stock"}
+# animation is original work: no reference file exists, so nothing can match it.
+CLEAN_SOURCES = {"original", "animation", "licensed_program", "licensed_stock",
+                 "licensed_still"}
 KNOWN_SOURCES = CLEAN_SOURCES | {"broadcast", "league_upload"} | set(FORBIDDEN_SOURCES)
 
 

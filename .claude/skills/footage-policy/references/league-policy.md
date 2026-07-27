@@ -180,6 +180,79 @@ videos.
 
 ---
 
+## Stills and animation — a different risk shape
+
+This is the most commonly misunderstood part of the topic, and it matters because
+animation-plus-stills is the Fern / New Rockstars production model.
+
+### Animation and original graphics — genuinely zero
+
+**[Documented]** Content ID works by fingerprinting **reference files**, and per YouTube's
+own documentation references are **audio, visual, or audiovisual** works supplied by
+rightsholders. Original animation, original charts and original diagrams have no reference
+file anywhere in the system, so nothing can match them.
+[What is a reference?](https://support.google.com/youtube/answer/107004) ·
+[How Content ID works](https://support.google.com/youtube/answer/2797370)
+
+This is why Fern's entire channel is Blender reconstruction, and why it's the structurally
+safest high-production format available. It's also the hardest to copy, which makes it a
+moat rather than a compromise.
+
+### Stills — outside Content ID, but *not* outside copyright
+
+**[Documented + Inference]** There is no still-image reference type in Content ID. So
+press and wire photos sit **outside the automated claim system** — you will not get
+auto-claimed for using them.
+
+**That's not the same as safe.** It changes the *shape* of the risk rather than removing
+it:
+
+| | Video footage | Stills |
+|---|---|---|
+| Detection | Automated, near-certain | Manual, human-initiated |
+| Frequency | High | Low |
+| Consequence | Claim — revenue on one video | **DMCA — a strike** |
+| Severity | Survivable indefinitely | Three in 90 days = termination |
+
+**You trade high-frequency/low-severity for low-frequency/high-severity.**
+
+The documented case is exactly this. **[Documented]** UFC sent **five DMCA takedowns** to
+John MacKay's "Boxing Now" commentary channel over videos that used **still images**. He
+counter-noticed all five and YouTube reinstated each time, because UFC never sued — but he
+lost days of revenue per round and was carrying strike exposure the whole way.
+[EFF](https://www.eff.org/press/releases/youtube-user-fights-unfair-takedown-campaign-ufc)
+
+Photo agencies are a separate and well-known enforcement culture: Getty in particular is
+documented as sending **demand letters** for unlicensed use, entirely outside the YouTube
+system.
+[Trademarkia](https://www.trademarkia.com/news/business/getty-images-free-to-use)
+
+**[Inference]** Note also the New Rockstars comparison doesn't port cleanly. They work from
+film and trailer frames, where studios are a different enforcement culture from sports
+leagues *plus* wire photo agencies — sports has two sets of rightsholders to annoy, not one.
+
+### Licensing stills is actually affordable
+
+Unlike video, where a 12-minute explainer could run $1,500–4,500 in Getty editorial fees,
+sports stills are within reach for a solo creator. This is the practical answer.
+
+- **Imagn** — the largest US sports-image wire; 300+ photographers, 10,000+ events a year,
+  high school through pro. ⚠️ **Their published terms license "one time editorial use,"
+  with additional use requiring additional payment.** Whether that cleanly covers a
+  monetized YouTube video in perpetuity is genuinely unclear — **clarify directly with
+  them before building a workflow on it.**
+  [imagn.com](https://imagn.com/) · [license terms](https://imagn.com/licenseAgreement)
+- **Icon Sportswire** — positions explicitly on affordable licensed sports photos.
+  [iconsportswire.com/license](https://iconsportswire.com/license)
+- **IMAGO** — has a creator-facing sports licensing product.
+  [imago-images.com](https://connect.imago-images.com/en/licensed-sports-images-for-creators-publishers-and-communities)
+- **Getty / AP** — the expensive, safest, best-indemnified option.
+
+**Recommended production stack:** original animation as the spine, licensed stills as
+texture, broadcast video sparingly and only from NBA or NFL. That gets you Fern's
+production values, New Rockstars' pacing, and almost none of the risk either of them
+carries.
+
 ## Licensing paths
 
 **NFL Access Pass** — the strongest program for an explainer channel, and the one to chase.

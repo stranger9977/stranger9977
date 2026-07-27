@@ -36,11 +36,22 @@ you should know them cold.
 | Source | Risk | Action |
 |---|---|---|
 | College coaching film / All-22 / school-provided | **STRIKE** | **Never.** The one documented strike-generator. |
+| **Unlicensed press / wire stills** | **STRIKE** | Outside Content ID, so no auto-claim — but that leaves manual DMCA, the strike track. UFC sent 5 takedowns over stills. **License them.** |
 | Live broadcast feed, any league | Claim near-certain | League rules, step 2 |
 | A league's own YouTube highlight upload | Claim near-certain | Being on YouTube doesn't license you |
 | Licensed program footage (NFL Access Pass, NBA/WSC) | **Zero** | This is the prize |
-| Getty / Veritone / IMG licensed | **Zero** | Budget-dependent |
-| Your own camera, licensed stills, data viz, animation, diagrams | **Zero** | **The backbone** |
+| Licensed stills (Imagn, Icon Sportswire, IMAGO, Getty) | **Zero** | Affordable, unlike video |
+| **Original animation, data viz, diagrams, your own camera** | **Zero** | **The backbone.** No reference file exists, so nothing can match. |
+
+**Animation is the only genuinely free lunch here.** Content ID matches against reference
+files, and references are audio/visual/audiovisual works supplied by rightsholders.
+Original animation has no reference anywhere in the system. It's why Fern's whole channel
+is Blender reconstruction, and it's a moat rather than a compromise because it's hard to
+copy.
+
+**Stills change the shape of the risk, not the size.** No automated claims, but what's left
+is manual DMCA — low frequency, high severity, and it's the track that ends channels.
+See `references/league-policy.md` for the full comparison and licensing options.
 
 ### Step 2 — Classify the league
 
