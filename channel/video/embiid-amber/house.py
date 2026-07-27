@@ -46,9 +46,18 @@ class HouseScene(Scene):
     """Base with the beat helpers every scene uses."""
 
     def kicker(self, s):
-        """Small uppercase label, top-left. Orients without explaining."""
+        """Small uppercase label, top-left. Orients without explaining.
+
+        Replaces any kicker already on screen. Two kickers stacked in the
+        same corner is a real bug that renders as illegible overlap, so the
+        helper owns the slot rather than trusting every scene to clear it.
+        """
+        old = getattr(self, "_kicker", None)
         k = txt(s.upper(), 22, DIM).to_corner(UL, buff=0.7)
+        if old is not None and old in self.mobjects:
+            self.play(FadeOut(old), run_time=0.35)
         self.play(FadeIn(k), run_time=0.6)
+        self._kicker = k
         return k
 
     def statement(self, s, size=38, color=BONE, hold=HOLD_LONG, weight=NORMAL):
@@ -71,6 +80,7 @@ class HouseScene(Scene):
         return t
 
     def clear_all(self, run_time=0.9):
+        self._kicker = None
         if self.mobjects:
             self.play(*[FadeOut(m) for m in self.mobjects], run_time=run_time)
         self.wait(0.4)

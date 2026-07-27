@@ -4,8 +4,8 @@ series: Against the Book
 subject: Joel Embiid, playoff availability, and two beliefs about it
 verdict: both mostly myth · one grain of truth each
 reversal: It was never the games he played hurt. It's the games he missed — and the fact that he has arrived at every second round of his career already compromised.
-runtime_target: 10–12 min
-status: DRAFT — Act 2 pending research; every number needs re-verification before record
+runtime: 10:30 rendered
+status: DRAFT — complete; every number needs re-verification before record
 ---
 
 # Amber
@@ -63,18 +63,103 @@ already has the silence; the words go in the gaps, not over the motion.
 
 ## ACT 2 — MYTH ONE: SEVEN-FOOTERS BREAK
 
-> ⚠️ **NOT WRITTEN — research pending.** Do not draft this until the height-and-injury
-> evidence is in. If the literature turns out to be thin, **say that** — "the evidence
-> is thinner than the belief" is a legitimate verdict for this channel and it's the
-> honest one. See *Cold Snap* for the model: a null is a piece.
+**Verdict: unresolved, leaning weaker than the folklore.** The belief is not supported by
+the peer-reviewed record, the best-powered study points the other way, and the vivid
+version of it does not survive the league's own medical data.
+
+### `A2_Belief` + `A2_TheOrigin` — give it full strength
+
+> Big men are made of glass. It's the oldest scouting instinct in basketball, and there
+> is a graveyard of names behind it. Walton. Bowie. Yao. Oden. Embiid.
 >
-> Beats to hit once the research lands:
-> - The belief in a real voice, with the graveyard of names
-> - The biomechanical argument, given its best hearing — square-cube law, joint loading
-> - What the literature actually shows, with effect sizes
-> - The confounds: position, minutes, mass, prior injury, and the selection effect that
->   very tall players get drafted with conditions that would wash a shorter player out
-> - Verdict
+> And there's a real number underneath it. In 2014, FiveThirtyEight took every lottery
+> pick since 2000 and sorted them by height.
+>
+> Six-eight and under missed thirteen and a half percent of their potential games.
+> Six-nine and up: seventeen-nine. Seven feet and up: about twenty-four percent.
+>
+> A clean gradient. Taller, more missed.
+
+*Source: Jeff Stotts / FiveThirtyEight, 2014. Stotts is the most credible injury tracker
+in the sport — but this is journalism on lottery picks with no controls and no intervals.*
+
+### `A2_Physics` — the mechanism deserves a hearing
+
+> And the physics agrees.
+>
+> Double a body's height and its mass goes up eightfold — volume is a cube. But the
+> cross-section of the bone carrying that mass only goes up fourfold, because area is a
+> square. Twice the stress through the same bone.
+>
+> A private lab that has tested six hundred NBA athletes found the tallest produce about
+> fifteen percent less braking force, pound for pound. Their phrase for it: an Escalade
+> with a Honda brake.
+>
+> So the belief has a mechanism. It should be easy to confirm.
+
+*P3 Applied Sports Science, via Undark. **Attribute to P3 by name — it's a private
+database reported through science journalism, not a peer-reviewed study.***
+
+### `A2_TheLiterature` — the turn
+
+> It is not.
+>
+> The largest direct test of height in the NBA: 627 players, 73,000 games, 1,663 injury
+> events, holding fatigue and game load constant.
+>
+> Injury odds rose ten-point-six percent for every six centimetres of height — *lost*.
+>
+> The shorter players got hurt more.
+>
+> And it isn't one study. A seventeen-season overview of eleven hundred players found
+> demographics weren't correlated with injury at all. Eleven hundred ankle and knee
+> injuries: height, no association. Two hundred thirty-eight season-ending injuries:
+> minutes played, not anthropometrics.
+
+*Lewis 2018, J Athletic Training. Drakos 2010, Sports Health. Ononuju 2024. Menon 2024.*
+
+### `A2_TheFoot` — the sharpest finding
+
+> Take the most vivid version. The navicular fracture — the bone that ended Bill Walton,
+> the one Embiid broke before he ever played an NBA game.
+>
+> The league went looking in its own medical records. Every lower-body stress fracture,
+> six seasons.
+>
+> Twenty-two of them. Seventeen in the foot.
+>
+> Distributed evenly across positions.
+>
+> The signature big-man injury is not concentrated in big men.
+>
+> Zydrunas Ilgauskas was seven foot three. He broke the same bone. Then played nine more
+> seasons. You remember Walton and Yao. You do not remember Ilgauskas.
+
+*Rizzi 2022, OJSM. Note honestly: n=22 is underpowered to detect a positional effect.*
+
+### `A2_Verdict` — why they disagree, and the honest answer
+
+> So why do the two sets of numbers disagree?
+>
+> Because games missed is not the same as getting hurt. Height may not change how often
+> you break. It may change how long you're gone. A sprained ankle costs days. A navicular
+> fracture costs thirty-seven games.
+>
+> Nobody has cleanly tested that.
+>
+> And one more thing. Tall lottery picks get drafted on projection. Short ones get drafted
+> on what they've already done. Teams knowingly accept medical risk to get size.
+>
+> Joel Embiid was drafted third with a broken navicular.
+>
+> That is the selection effect, wearing a jersey.
+>
+> So — do seven-footers break more? The honest answer is that nobody knows. There have
+> never been enough of them to find out.
+>
+> What does predict injury, in every study: prior injury, minutes played, usage, age.
+>
+> Not height.
 
 ---
 
@@ -290,8 +375,7 @@ already has the silence; the words go in the gaps, not over the motion.
 
 ## Production notes
 
-**Runtime.** Acts 1, 3 and 4 render to 6 minutes 35 seconds of animation. Act 2 should
-add 2–4 minutes, landing at 9–11 total.
+**Runtime.** 10:30 rendered across sixteen scenes. Act 2 is 4:00 of that.
 
 **The joke rule.** There's exactly one dry line in this script — *"and that is not a
 repeatable basketball outcome, it's a matchup"* — and it's sourced from the data, which
@@ -304,16 +388,22 @@ in the piece. Don't rush it, and don't undercut it afterward.
 
 **Chapters** (hooks, not labels):
 ```
-0:00  Seventy-eight games
-0:40  Everybody knows two things
-1:00  [Act 2 — pending]
---:--  The number that looks damning
---:--  One soft series
---:--  This test has no power
---:--  The screenshot number
---:--  He has never played a healthy second round
---:--  Everybody is hurt in May
---:--  It was never the amber
+0:00   Seventy-eight games
+0:35   Everybody knows two things
+0:52   The graveyard of names
+1:14   Taller, more missed
+1:39   An Escalade with a Honda brake
+2:13   The shorter players got hurt more
+2:48   The big-man injury that isn't
+3:41   Nobody knows, and here's why
+4:52   The number that looks damning
+5:17   One soft series
+6:31   This test has no power
+7:27   The screenshot number
+7:53   He has never played a healthy second round
+8:41   Everybody is hurt in May
+9:21   It was never the amber
+9:51   Half the championship
 ```
 
 **Footage.** Nothing in this cut requires any. If clips get added, the piece is NBA-only,
