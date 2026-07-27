@@ -5,7 +5,9 @@ Two beliefs on trial: that seven-footers break, and that Embiid can't play hurt.
 ```
 house.py    the theme module — palette, beat lengths, shared helpers.
             Build once; every future video inherits it.
-scenes.py   the scenes. Each class is one act beat.
+scenes.py   Acts 1, 3, 4 — the record, the second myth, the turn.
+act2.py     Act 2 — do seven-footers break? (verdict: nobody knows)
+sim.py      "How we simulate" — the mechanism act. Standalone-capable.
 build.sh    render all at 1080p30 and concat -> amber.mp4
 ```
 
@@ -21,9 +23,12 @@ Script: `../../scripts/amber.md`
 
 ## Status
 
-Acts 1, 3 and 4 built — 6:35 of animation. **Act 2 (the seven-footer myth) is not
-written**, pending research on whether height actually predicts injury. If that
-evidence turns out thin, say so; a null is a piece.
+**Complete: 10:30 across sixteen scenes**, rendered to `amber.mp4`.
+
+`sim.py` is a separate 2:06 mechanism act — one game, one run, ten runs, ten thousand,
+then the number. It can drop into the film before the availability findings, or ship as
+its own evergreen video. See `.claude/skills/animate/references/mechanism.md` for why
+that kind of piece is the channel's strongest lane.
 
 ## Every number needs verifying
 

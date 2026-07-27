@@ -23,6 +23,11 @@ spine, and the sports-specific components.
 
 Also load the **`dataviz`** skill before choosing any chart form or palette.
 
+**Read `references/mechanism.md` before animating anything.** It carries the most
+important strategic point: Manim's job is explaining *how the model works*, not reporting
+what it found. Findings are cheap and any tool makes them. Mechanism is the moat, because
+you built the model and nobody can explain it without doing the work first.
+
 ---
 
 ## The architecture rule
