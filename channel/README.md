@@ -17,6 +17,7 @@ arguing about.
 | `strategy/02-monetization.md` | The honest arithmetic. Ads are 10–15%. What actually pays. |
 | `strategy/30-day-plan.md` | Week-by-week for the first month, plus 30 validated ideas. |
 | `style/house-style.md` | The written voice, reverse-engineered from the five finished articles. |
+| `style/narration-voice.md` | The spoken voice. Different register from the articles — first person, fallible. |
 
 ## The daily loop
 
@@ -41,9 +42,13 @@ One hour. Invoke `morning-hour` and it runs the sequence.
 | `write-article` | Belief-on-trial article in house voice. |
 | `write-script` | Article → narrated script with retention structure. |
 | `package-video` | Titles, thumbnail spec, description, chapters, pre-publish checklist. |
+| `footage-policy` | League-by-league Content ID decision table + deterministic clip checker. |
+| `animate` | The Remotion pipeline — charts, title cards, 3D play reconstruction. |
 
-Planned, not yet built: `footage-policy` (league-by-league Content ID decision procedure),
-`build-artifact` (markdown → designed HTML), `make-charts` (deterministic rendering).
+Planned, not yet built: `build-artifact` (markdown → designed HTML).
+
+External skills to install: `npx skills add remotion-dev/skills` for React/Remotion
+mechanics, and load the built-in `dataviz` skill before any chart work.
 
 ## Skill design principle
 
@@ -74,4 +79,5 @@ Five finished articles, published as Claude artifacts — a hub and four spokes:
 - Late July 2026. US sports ad dead zone runs through August — the right time to build a
   library, not launch into silence.
 - Two videos near-ready. Target: 4–5 pieces live before NFL Week 1.
-- Cadence: 6–8 minutes every 7–10 days to start. Earn the twelve minutes.
+- Cadence: 6–8 minutes every 2–3 weeks. Earn the twelve minutes.
+- Animation stack: Remotion. Decision record in `.claude/skills/animate/references/`.

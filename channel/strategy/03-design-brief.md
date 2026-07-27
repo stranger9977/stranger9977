@@ -148,17 +148,40 @@ The binding constraint, and the one most likely to kill this.
 Which means 12 minutes weekly is **not achievable** at one hour a day, and pretending
 otherwise is how this ends.
 
+**Corrected after the animation research.** An earlier draft of this brief suggested 6–8
+minutes every 7–10 days. **That is not achievable and the number was wrong.** Measured
+hours-per-finished-minute for a programmatic pipeline is 12–20 while learning and **2–4
+once a component library exists** (see `.claude/skills/animate/references/stack-decision.md`).
+
+So at one hour a day, honestly:
+
+| Length | Intermediate hours | Real cadence |
+|---|---|---|
+| 6–7 min | 14–28 | **2–4 weeks** |
+| 12 min | 24–48 | **4–7 weeks** |
+
+And the first two or three videos take **three to four times** those numbers.
+
 Three honest options:
 
 | Option | Cadence | Trade |
 |---|---|---|
-| **A. Short and frequent** | 6–8 min, every 7–10 days | Most reps, fastest learning, fewer mid-rolls |
-| **B. Long and slow** | 12 min, every 2–3 weeks | Better ad load, but slow feedback and easy to stall |
-| **C. Hybrid** | 12 min monthly flagship + 5–6 min pieces between | Complex, but matches the hub-and-spoke you already built |
+| **A. Short and steady** | 6–8 min, every 2–3 weeks | Most reps, fastest learning, fewer mid-rolls |
+| **B. Long and slow** | 12 min, monthly | Better ad load, slow feedback, easy to stall |
+| **C. Hybrid** | Monthly 12-min flagship + articles between | Matches the hub-and-spoke you already built |
 
-**Recommendation: A now, C later.** Start at 6–8 minutes every 7–10 days. You need reps
-far more than runtime, and the retention data from ten short videos is worth more than
-three long ones. Earn the twelve minutes.
+**Recommendation: A now, C later.** Ship 6–8 minute pieces every two to three weeks. You
+need reps far more than runtime, and retention data from ten short videos beats three long
+ones. Earn the twelve minutes.
+
+**Articles are the cadence filler.** They're cheap for you — you're already writing them —
+and they keep the series alive in the gaps where a video can't land. This is a further
+argument for making the article the *research artifact* the script is cut from rather than
+a second deliverable.
+
+**The two-video investment that changes the math:** the theme file and the component
+library. Hours-per-minute drops by roughly 4–5x once they exist. Building them is worth
+more than the two videos you'd otherwise have made.
 
 The counter-argument, which is real: **absolute watch-time minutes is what browse traffic
 optimizes for**, and a 12-minute video at 45% retention beats a 6-minute video at 70%. So
