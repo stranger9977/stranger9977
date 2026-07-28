@@ -143,9 +143,29 @@ def build() -> dict:
                "was": round(float(r.was), 1), "now": round(float(r.now), 1),
                "z": float(r.z)} for r in d.head(40).itertuples()]
 
+    # Every number the prose quotes comes from here.
+    # Hardcoding them in the copy means they go stale the moment another
+    # research agent lands, and a stale number in an editorial claim is
+    # worse than no number.
+    import crossref as cx
+
+    rep_df = cx.load_reported()
+    comp_df = cx.load_computed()
+    comp_df = comp_df[comp_df.team.isin(rep_df.team.unique())]
+    mo = cx.media_only(rep_df, comp_df)
+    res = cx.resolution_check(rep_df, mo)
+    coverage = {
+        "reported": int(len(rep_df)),
+        "mediaOnly": int(len(mo)),
+        "bySide": {k: {"reported": int(v.reported), "invisible": int(v.invisible),
+                       "pct": int(v.pct_invisible)}
+                   for k, v in res.iterrows()},
+    }
+
     return {
         "teams": teams,
         "movers": movers,
+        "coverage": coverage,
         "window": str(d.window.iloc[0]) if len(d) else None,
         "researchedCount": len(researched),
         "totals": {

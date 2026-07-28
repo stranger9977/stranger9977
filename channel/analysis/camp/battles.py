@@ -24,6 +24,8 @@ roster, and one passed the other. Everything else is the transaction wire.
 from __future__ import annotations
 
 import argparse
+import ast
+import json
 import warnings
 from pathlib import Path
 
@@ -71,6 +73,28 @@ def classify(hist: pd.DataFrame, source: str = "espn",
         .rename(columns={"prev_player": "lost_by", "player": "won_by"})
 
 
+def as_list(v) -> list[str]:
+    """Coerce a contenders cell back to a list of names.
+
+    Parquet round-trips of object columns are not reliably typed, and a
+    list that comes back as the string '["A","B"]' iterates as characters
+    rather than raising -- which turns a name join into a silent zero.
+    Every reader of true_battles.parquet should go through here.
+    """
+    if isinstance(v, str):
+        try:
+            out = json.loads(v)
+        except json.JSONDecodeError:
+            try:
+                out = ast.literal_eval(v)
+            except (ValueError, SyntaxError):
+                return [v]
+        return [str(x) for x in out] if isinstance(out, list) else [str(out)]
+    if v is None:
+        return []
+    return [str(x) for x in v]
+
+
 FANTASY_POS = {"QB", "RB", "WR", "TE", "PK", "KR", "PR"}
 FANTASY_DEPTH = {"QB": 2, "RB": 3, "WR": 5, "TE": 2, "PK": 1, "KR": 1, "PR": 1}
 
@@ -98,16 +122,25 @@ def battles(ch: pd.DataFrame) -> pd.DataFrame:
             seq += [lost, won]
         return list(dict.fromkeys(x for x in seq if isinstance(x, str)))
 
-    g = (c.groupby(["team", "pos", "rank"])
-         .apply(lambda d: pd.Series({
-             "flips": len(d),
-             "contenders": both_sides(d),
-             "current": d.won_by.iloc[-1],
-             "displaced": d.lost_by.iloc[0],
-             "last_flip": d.day.max(),
-         }))
-         .reset_index())
-    g["flips"] = g.flips.astype(int)
+    # Build column-wise, not as a list of Series.
+    #
+    # groupby().apply(lambda d: pd.Series({...})) returns an all-object frame
+    # because each row mixes int, list, str and Timestamp. pyarrow then can
+    # not infer a list type for `contenders` and serialises it as a JSON
+    # string, so the next reader gets '["A","B"]' and iterating it yields
+    # characters. Nothing raises -- the name join simply matches nothing.
+    rows = {"team": [], "pos": [], "rank": [], "flips": [], "contenders": [],
+            "current": [], "displaced": [], "last_flip": []}
+    for (team, pos, rank), d in c.groupby(["team", "pos", "rank"]):
+        rows["team"].append(team)
+        rows["pos"].append(pos)
+        rows["rank"].append(int(rank))
+        rows["flips"].append(len(d))
+        rows["contenders"].append(both_sides(d))
+        rows["current"].append(d.won_by.iloc[-1])
+        rows["displaced"].append(d.lost_by.iloc[0])
+        rows["last_flip"].append(d.day.max())
+    g = pd.DataFrame(rows)
     g["fantasy"] = [is_fantasy(p, r) for p, r in zip(g.pos, g["rank"])]
     return collapse_swaps(g).sort_values(["flips", "fantasy"], ascending=False)
 
@@ -127,14 +160,21 @@ def collapse_swaps(g: pd.DataFrame) -> pd.DataFrame:
     """
     g = g.copy()
     g["_key"] = [frozenset(c) for c in g.contenders]
-    keep = []
-    for (_team, _k), grp in g.groupby(["team", "_key"], sort=False):
-        top = grp.sort_values(["rank", "flips"], ascending=[True, False]).iloc[0].copy()
-        top["flips"] = int(grp.flips.max())
-        top["slots"] = sorted({f"{p}{r}" for p, r in zip(grp.pos, grp["rank"])})
-        top["fantasy"] = bool(grp.fantasy.any())
-        keep.append(top)
-    return pd.DataFrame(keep).drop(columns=["_key"]).reset_index(drop=True)
+    cols = ["team", "pos", "rank", "flips", "contenders", "current",
+            "displaced", "last_flip", "fantasy", "slots"]
+    out = {c: [] for c in cols}
+    for _, grp in g.groupby(["team", "_key"], sort=False):
+        top = grp.sort_values(["rank", "flips"], ascending=[True, False]).iloc[0]
+        for c in cols:
+            if c == "flips":
+                out[c].append(int(grp.flips.max()))
+            elif c == "fantasy":
+                out[c].append(bool(grp.fantasy.any()))
+            elif c == "slots":
+                out[c].append(sorted({f"{p}{r}" for p, r in zip(grp.pos, grp["rank"])}))
+            else:
+                out[c].append(top[c])
+    return pd.DataFrame(out)
 
 
 if __name__ == "__main__":

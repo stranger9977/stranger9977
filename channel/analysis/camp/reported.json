@@ -172,6 +172,169 @@
   ],
   "_agent": "agent-a05d3bd802b297721"
  },
+ "SEA": {
+  "team": "SEA",
+  "campOpens": "unknown \u2014 no Seahawks-specific reporting was reachable this session. Context: 22 of 32 teams in the local research set report veterans Tuesday July 28, 2026, so that is the overwhelming league default, but I could not confirm Seattle's date and am not going to state one I did not verify.",
+  "battles": [
+   {
+    "position": "RB1 / lead back",
+    "contenders": [
+     "Zach Charbonnet",
+     "Jadarian Price",
+     "Kenny McIntosh",
+     "George Holani"
+    ],
+    "why": "Kenneth Walker III left for Kansas City after taking 49% of the offensive snaps in 2025, and Seattle spent the 32nd pick \u2014 the last of round one, theirs by winning Super Bowl LX \u2014 on Jadarian Price to replace him.",
+    "stakes": "Seattle ran a true 50/50 committee during the title run (Walker 49%, Charbonnet 46%); whoever wins the vacated half inherits roughly 200 touches on the reigning champion's offense.",
+    "realness": "genuine",
+    "moneyNote": "Price signed a 4yr/$16.78M rookie deal that is 100% guaranteed ($4.20M APY) \u2014 first-round backs essentially never lose camp battles outright. Charbonnet is a 2023 second-rounder entering the final year of his rookie contract with no extension on file, so Seattle has every financial incentive to find out what Price is."
+   },
+   {
+    "position": "Strong safety / third safety",
+    "contenders": [
+     "Ty Okada",
+     "Bud Clark",
+     "D'Anthony Bell",
+     "Rodney Thomas II"
+    ],
+    "why": "Quandre Diggs and Coby Bryant both left, and the incumbent listed as the starter is Ty Okada \u2014 a third-year undrafted player with zero guaranteed money \u2014 while Seattle used the 64th pick on Bud Clark.",
+    "stakes": "Seattle played heavy three-safety looks in 2025 (Love 89% of defensive snaps, Emmanwori 86%, Okada 59%); this is a genuine every-down job on a defense that just won a Super Bowl.",
+    "realness": "genuine",
+    "moneyNote": "Okada is a UDFA on a minimum deal \u2014 nothing protects him. Clark is the 64th pick (2026 R2). Julian Love (3yr/$33M, $11.97M gtd) is locked at free safety and Nick Emmanwori (2025 R2, pick 35, $11.6M fully guaranteed) is locked into a role; the contested spot is the one behind them."
+   },
+   {
+    "position": "CB3 / nickel",
+    "contenders": [
+     "Julian Neal",
+     "Nehemiah Pritchett",
+     "Noah Igbinoghene",
+     "Shemar Jean-Charles",
+     "Michael Dansby"
+    ],
+    "why": "Riq Woolen (to Philadelphia) and Coby Bryant (to Chicago) both left, and the only holdover with meaningful 2025 defensive snaps behind the top two is Pritchett at 7% \u2014 he was a special-teamer (58% ST).",
+    "stakes": "With Emmanwori apparently manning the star/nickel spot, the third outside corner is the last unfilled piece of a championship secondary that lost three contributors.",
+    "realness": "genuine",
+    "moneyNote": "Julian Neal is the 99th pick (2026 R3) \u2014 real but not decisive capital. Nobody in this group has guaranteed money. Note this is CB3 only: CB1 Devon Witherspoon (2023, pick 5) and CB2 Josh Jobe are settled."
+   },
+   {
+    "position": "RG",
+    "contenders": [
+     "Anthony Bradford",
+     "Christian Haynes",
+     "Bryce Cabeldue",
+     "Beau Stephens"
+    ],
+    "why": "It is the one interior line spot not held by a first-rounder or an established starter, and Seattle keeps drafting guards \u2014 Haynes (2024 R3), Cabeldue (2025 R6), Stephens (2026 R5) \u2014 which reads as an open job from the outside.",
+    "stakes": "The only non-fixed spot on the line protecting a $100.5M quarterback; realistically the competition is for the swing-guard roster spots, not the start.",
+    "realness": "likely-settled",
+    "moneyNote": "Bradford played 97% of the offensive snaps across all 20 games of the Super Bowl run. Haynes managed 6% and Cabeldue 5%. A guy who just started a title season wire-to-wire is not losing his job in August. The rest of the line is financially untouchable: Charles Cross 4yr/$104.4M ($43.06M gtd, signed 2026), Abraham Lucas 3yr/$46M, Grey Zabel (2025 pick 18, $18.47M fully guaranteed) at LG, Jalen Sundell at center after 92% of snaps."
+   },
+   {
+    "position": "WR2",
+    "contenders": [
+     "Rashid Shaheed",
+     "Cooper Kupp",
+     "Tory Horton"
+    ],
+    "why": "ESPN's depth chart has flipped Kupp and Shaheed at the WR2 slot during the offseason, and Kupp out-snapped Shaheed 76% to 49% in 2025 (Shaheed arrived midseason).",
+    "stakes": "Second target share behind Jaxon Smith-Njigba on the league's champion offense.",
+    "realness": "likely-settled",
+    "moneyNote": "This is the cleanest money read on the roster. Seattle gave Shaheed 3yr/$51M with $23M guaranteed this offseason. Kupp is 33, in year two of a 3yr/$45M signed in 2025 whose $17.5M guarantee is largely earned out. Fresh guarantees beat old ones. Jaxon Smith-Njigba (4yr/$168.6M, $69.13M gtd, signed 2026) makes WR1 a non-question."
+   }
+  ],
+  "biggestUnknown": "The back end of the secondary. Seattle lost Riq Woolen, Coby Bryant and Quandre Diggs in one offseason and replaced them with a 2026 second-rounder (Bud Clark, pick 64), a third-rounder (Julian Neal, pick 99), one $8M-per-year corner signing (Josh Jobe, 3yr/$24M) and a returning undrafted starter (Ty Okada, 59% of defensive snaps). Devon Witherspoon and Julian Love are fixed; literally every other coverage snap is up for grabs, and it is the only unit on a Super Bowl-winning roster where the projected personnel is materially worse on paper than what won the title.",
+  "notes": "READ THIS FIRST \u2014 a methodology caveat that changes how you should use everything above. I could not obtain a single piece of Seahawks beat reporting this session: the WebSearch budget for the session was already exhausted (200/200) before my first call, and the agent proxy returns 403 on every general web host (seahawks.com, fieldgulls.com, ESPN, SI, PFR, Wikipedia all refused CONNECT). So there are no coach quotes, no camp date, and no injury news after roughly May 2026 in this answer. What I do have is unusually strong primary data pulled live from nflverse: 2026 contracts with guarantees, 2026 draft picks with exact slots, 2025 per-game snap shares, 2025-26 game results, and the local repo's 127 daily ESPN depth-chart snapshots running through 27 July 2026. Every name, dollar figure, draft slot and snap percentage above is verified against those. The realness judgments rest on money and snaps, which is the most reliable basis anyway \u2014 but treat this as a data-derived brief, not a reported one.\n\nTHE ACTUAL STORY, and it is a good one for a data writer: Seattle won Super Bowl LX, beating New England 29-13 (and beating the Rams 31-27 in the NFC title game and San Francisco 41-6 in the divisional round). That is why they picked 32nd, 64th and 99th. And their depth chart is the most frozen in football. Across the full 22 March - 27 July 2026 window, SEA registered exactly two starter-level changes \u2014 and both happened on the same day, 27 March, when ESPN swapped Jarran Reed and Byron Murphy II between the NT and RDE labels. That is a relabeling, not a personnel change. Seattle has had ZERO genuine starter turnover in four months. All 15 of the tracked depth-chart flips on this roster occurred at ranks 2 through 5. The league-wide context from FINDINGS.md: March produced 489 starter changes, July produced 13; 91.5% of all 881 starting slots league-wide are unchanged since 1 May. Seattle is at the extreme settled end (2 changes, tied near Denver's 0, Cincinnati's 1, Buffalo's 2).\n\nTHINGS THAT WILL BE WRITTEN AS BATTLES THIS WEEK THAT ARE NOT BATTLES:\n- Kicker. Jason Myers is the only kicker on the 91-man roster. There is no competitor. Any \"Myers under pressure\" story is pure invention.\n- Quarterback / the Jalen Milroe push. Darnold is on 3yr/$100.5M with $37.5M guaranteed and just won a Super Bowl. Milroe (2025 R3, pick 92) is listed third, behind Drew Lock. The depth data shows zero QB flips for Seattle all offseason \u2014 and only three QB starter changes league-wide across all 32 teams. Media-manufactured.\n- Left tackle, left guard, center, WR1, MLB. Cross ($43.06M gtd), Zabel (fully guaranteed R1), Sundell (92% of snaps), Smith-Njigba ($69.13M gtd), Ernest Jones (93% of defensive snaps) \u2014 all locked.\n\nONE MORE THING WORTH A PARAGRAPH: the edge rotation. Boye Mafe left for Cincinnati, and Seattle re-signed Derick Hall for 3yr/$42M with $15.27M guaranteed \u2014 the largest edge commitment in the building \u2014 yet ESPN still lists Hall behind Uchenna Nwosu (2yr/$19.51M, only $6.98M gtd) at SLB. In 2025 the snaps split Lawrence 62% / Nwosu 55% / Hall 46%. I did not list this as a battle because Hall's guarantee settles who plays; but if you want a number that exposes a depth chart being wrong, that is the one. Dante Fowler Jr. is also on the roster (11 years experience) as a fourth body.\n\nAlso useful: Seattle's full 2026 draft was Price (RB, 32), Clark (S, 64), Neal (CB, 99), Beau Stephens (G, 148), Emmanuel Henderson Jr. (WR, 199), Andre Fuller (CB, 236), Deven Eastern (DT, 242), Michael Dansby (DB, 255). Four of eight picks were defensive backs or a back-seven body \u2014 which independently corroborates that the secondary is where they knew they had a hole. Full departure list: Mafe (CIN), Woolen (PHI), Bryant (CHI), Walker III (KC), Diggs, Hankins, Shaquill Griffin, Cam Akers, Dareke Young (LV), Shane Lemieux, plus depth.",
+  "confidence": "medium",
+  "sources": [
+   "nflverse-data historical_contracts.parquet (Over The Cap contracts, incl. 2026 signings and guarantees) \u2014 https://github.com/nflverse/nflverse-data/releases/download/contracts/historical_contracts.parquet",
+   "nflverse-data draft_picks.parquet (2026 draft slots) \u2014 https://github.com/nflverse/nflverse-data/releases/download/draft_picks/draft_picks.parquet",
+   "nflverse-data snap_counts_2025.parquet (per-game 2025 offensive/defensive/ST snap shares incl. postseason) \u2014 https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2025.parquet",
+   "nflverse-data roster_2025.parquet and roster_2026.parquet (departure/arrival diff) \u2014 https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_2026.parquet",
+   "nfldata games.csv (2025 postseason results, confirming Super Bowl LX) \u2014 https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
+   "Local repo: /home/user/stranger9977/channel/analysis/camp/depth_2026.parquet \u2014 127 daily ESPN depth-chart snapshots, 22 Mar to 27 Jul 2026",
+   "Local repo: /home/user/stranger9977/channel/analysis/camp/battles.json and camp.json \u2014 derived SEA flip counts",
+   "Local repo: /home/user/stranger9977/channel/analysis/camp/FINDINGS.md \u2014 league-wide offseason churn baseline",
+   "NOT USED (unavailable): no Seahawks beat reporting. WebSearch budget exhausted at 200/200 before this task began; agent proxy returned 403 CONNECT for seahawks.com, fieldgulls.com, espn.com, si.com, pro-football-reference.com and wikipedia.org."
+  ],
+  "_agent": "agent-a16d7c2543f98f7b3"
+ },
+ "WAS": {
+  "team": "Washington Commanders",
+  "campOpens": "unknown \u2014 could not confirm a reported report date; no beat reporting was reachable this session. Camp site is the OrthoVirginia Training Center at Commanders Park, Ashburn, VA (per the repo's camp.json venue field).",
+  "battles": [
+   {
+    "position": "WR2/WR3 (perimeter/flanker opposite Terry McLaurin)",
+    "contenders": [
+     "Antonio Williams",
+     "Luke McCaffrey"
+    ],
+    "why": "This is the only Washington slot that registered in the league-wide \"movers\" table over the 22 Jun - 27 Jul window: Antonio Williams climbed from WR3 to WR2 (z=+0.73) while Luke McCaffrey slid the other way (z=-0.68), meaning the outside view actively changed its mind here rather than merely listing two names.",
+    "stakes": "The No. 2 target share in a Jayden Daniels offense \u2014 the difference between a real weekly role and WR4 rotation snaps.",
+    "realness": "genuine",
+    "moneyNote": "Neither player has guarantees that end a competition. McCaffrey is 2024 third-round capital (Rice, pick ~100) \u2014 real but two years stale and not decisive. Williams is late-round/UDFA-tier capital, which is exactly the profile that wins camp jobs outright. Nothing here is bought."
+   },
+   {
+    "position": "LB3 / rotational off-ball linebacker and core special teams",
+    "contenders": [
+     "Jordan Magee",
+     "Kain Medrano",
+     "Nick Bellore",
+     "Ale Kaho"
+    ],
+    "why": "Five of Washington's 16 flipped slots are off-ball linebacker, and the churn is concentrated at ranks 2-4 (LILB2, LILB3, LILB4, RILB2) \u2014 the third-linebacker and special-teams-core spots behind the two paid starters flipped repeatedly across the window.",
+    "stakes": "In a defense that plays real base snaps, LB3 is a rotational job plus the special-teams captaincy; it is also where two of the last three linebacker draft picks either stick or become cut candidates.",
+    "realness": "genuine",
+    "moneyNote": "No guaranteed money anywhere in this group. Magee is 2024 fifth-round capital, Medrano 2025 sixth-round capital \u2014 late-Day-3 picks are the least protected players on any roster. Bellore is a veteran-minimum special-teams specialist. Nothing has been decided by contract."
+   },
+   {
+    "position": "RB3 (backup running back / final RB roster spot)",
+    "contenders": [
+     "Jerome Ford",
+     "Kaytron Allen",
+     "Jeremy McNichols"
+    ],
+    "why": "RB3, RB4 and RB5 all flipped, with the three names cycling through each other's slots \u2014 but RB1 and RB2 never moved once, so the top of the room is stable and the churn is entirely about the back end.",
+    "stakes": "One of these three likely does not make the 53. Whoever wins it is the change-of-pace/pass-protection back and the injury insurance behind a young lead back.",
+    "realness": "genuine",
+    "moneyNote": "Kaytron Allen is 2026 draft capital, which makes him very hard to cut in Year 1 \u2014 that is the one thumb on the scale here. Ford is a veteran free-agent add on what is almost certainly a short, low-guarantee deal; McNichols is veteran-minimum special-teams value. Draft capital probably protects Allen; Ford and McNichols are competing for what's left."
+   },
+   {
+    "position": "Starting off-ball LB pairing / green-dot side designation",
+    "contenders": [
+     "Frankie Luvu",
+     "Leo Chenal"
+    ],
+    "why": "The LILB1 slot flipped between Luvu and Chenal during the window, which reads as a starting-job battle in a depth chart but is almost certainly the outside view shuffling which side of the formation each man is listed on.",
+    "stakes": "Who wears the green dot and calls the defense matters; whether both play is not in question.",
+    "realness": "likely-settled",
+    "moneyNote": "This is the money case. Luvu signed a three-year deal worth roughly $31.5M with about $19M guaranteed in March 2024 and has been the defense's most-used off-ball linebacker since. Chenal arrived as a 2026 free-agent signing \u2014 teams do not pay for a linebacker in March and then bench him in July. Two paid starters, two starting jobs. Treat any \"Luvu vs Chenal\" framing as noise."
+   },
+   {
+    "position": "CB4/CB5 (cornerback depth / bubble)",
+    "contenders": [
+     "Car'lin Vigers",
+     "Tre Hawkins III",
+     "Antonio Hamilton Sr."
+    ],
+    "why": "LCB3 flipped twice and LCB4 once, the second-most-volatile cluster on the roster \u2014 but CB1 and CB2 never moved, so this is a depth and roster-count fight, not a starting competition.",
+    "stakes": "The fifth corner and the dime/special-teams role; realistically one roster spot between a rookie and two journeymen.",
+    "realness": "genuine",
+    "moneyNote": "Vigers is a 2026 draft pick, and drafted rookies almost never lose these outright in Year 1 \u2014 that alone makes him the favorite regardless of camp reps. Hawkins is 2023 sixth-round capital now in a contract year, Hamilton Sr. is a veteran-minimum journeyman with no protection at all. Genuinely open, but the capital points one way."
+   }
+  ],
+  "biggestUnknown": "The off-ball linebacker room behind Frankie Luvu \u2014 specifically who the third linebacker is and who inherits the communication role. Five of Washington's 16 unstable depth-chart slots sit at LILB/RILB, more than double any other position group on the roster, and the instability runs from the starter designation all the way down to LB4. Everything else that moved was WR/RB/CB depth or backup interior offensive line.",
+  "notes": "Read this with the methodology caveat front and center, because it changes how you'd use it.\n\nWHAT THIS IS: I had no live web access this session (search budget exhausted at 200/200 before I began; the egress gateway 403s every CONNECT \u2014 nfl.com, ESPN, commanders.com, Hogs Haven, Google News RSS and Wikipedia all failed). Zero beat reporting, zero coach quotes, no confirmed report date. Every battle above is derived from the repo's own dataset at /home/user/stranger9977/channel/analysis/camp/camp.json, which holds daily ESPN depth-chart snapshots covering 22 Jun - 27 Jul 2026, plus my own knowledge of contracts and draft capital (cutoff May 2026). Washington is flagged researched:false in that file \u2014 it is one of 10 teams the pipeline has not yet covered with real reporting, so nothing in reported.json exists for WAS to cross-check against.\n\nTHE MOST USEFUL DATA-DRIVEN FINDING: Washington is a comparatively settled roster. It ranks 23rd of 32 in depth-chart churn over the window (16 unstable slots vs. a 18.3 league mean; NYJ 36, DAL 32, PIT 32 at the top, DEN 7 and CIN 8 at the bottom). If you're hunting camp-battle content, Washington is a thin team to hunt on.\n\nTHE FRAMING ANGLE, WHICH IS BETTER THAN THE BATTLES: none of Washington's instability is at a starting job. QB, RB1/RB2, WR1, both tackles, both starting guards, CB1 and CB2 never flipped once across five weeks. Sixteen flipped slots, and fifteen of them are rank 2 or lower. The one rank-1 flip (LILB1) is two paid starters trading sides. That is the whole story: this roster's real decisions were made in March, not July \u2014 which lines up exactly with the repo's own FINDINGS.md (489 league-wide starter changes in March vs. 13 in July, and only 5 in the week camp opened).\n\nWHAT I DELIBERATELY DID NOT PROMOTE: Receiver 9/10/11 flipped (Jacoby Jones, Nick Nash, Jaden Bradley, Chris Hilton Jr.) \u2014 that is camp-body churn at the back of a 90-man, not a battle. Backup interior OL also flipped (LG2: Tanoa Togiai vs. Timothy McKay; RG3: Julian Good-Jones vs. Tyler Cooper) but both starting guard spots were stable, so it's swing-depth only and I left it out of the top five.\n\nMETHODOLOGICAL LIMIT YOU SHOULD RESPECT: this measures ESPN changing its mind, not the team's actual meeting-room board. Flips are decent evidence a slot is unsettled; the absence of flips is only weak evidence a slot is settled. A genuine competition that ESPN never noticed would be invisible here \u2014 and that is the single likeliest way this analysis is wrong. Do not publish any of this without one round of actual beat confirmation (Ben Standig, John Keim, Nicki Jhabvala, JP Finlay).",
+  "confidence": "low",
+  "sources": [
+   "/home/user/stranger9977/channel/analysis/camp/camp.json \u2014 ESPN daily depth-chart snapshots via nflverse/nfl_data_py, window 22 Jun 2026 to 27 Jul 2026 (WAS entry, 16 unstable slots, plus league-wide movers table)",
+   "/home/user/stranger9977/channel/analysis/camp/FINDINGS.md \u2014 league-wide monthly starter-change counts and the March-vs-July churn baseline",
+   "/home/user/stranger9977/channel/analysis/camp/README.md \u2014 dataset provenance and stated limitations",
+   "/home/user/stranger9977/channel/analysis/camp/reported.json \u2014 checked and confirmed to contain NO Washington entry (22 of 32 teams researched; WAS not among them)",
+   "Contract and draft-capital context from model knowledge, cutoff May 2026 \u2014 UNVERIFIED this session, treat Luvu's and Chenal's deal terms as needing confirmation",
+   "NO live web sources: WebSearch budget exhausted (200/200) and all outbound HTTPS blocked by the agent proxy gateway"
+  ],
+  "_agent": "agent-a18c6965bc1767c13"
+ },
  "IND": {
   "battles": [
    {
@@ -801,6 +964,178 @@
   "team": "Cincinnati Bengals",
   "_agent": "agent-a4060668e658fb9d4"
  },
+ "PHI": {
+  "team": "Philadelphia Eagles (PHI)",
+  "campOpens": "unknown",
+  "confidence": "low",
+  "biggestUnknown": "The second safety spot next to Andrew Mukuba, and the knock-on question of where Cooper DeJean actually lines up. Reed Blankenship left for Houston (3yr/$24.75M, $16.5M gtd) and Sydney Brown is off the roster, leaving Marcus Epps \u2014 a 39%-snap rotational safety in 2025 on a 1yr/$1.55M deal with $125K guaranteed \u2014 nominally holding a starting job. That is the only spot on the roster where the listed starter has essentially no money and no draft capital behind him, and the answer determines whether Michael Carter II (1yr/$2.765M, $1.45M gtd) inherits the nickel.",
+  "battles": [
+   {
+    "position": "S (strong safety, opposite Andrew Mukuba)",
+    "contenders": [
+     "Marcus Epps",
+     "Cooper DeJean",
+     "Michael Carter II",
+     "Cole Wisniewski",
+     "Andre' Sam"
+    ],
+    "why": "Reed Blankenship signed with Houston and Sydney Brown is gone, leaving no funded starter next to Mukuba; ESPN's chart shuffled the entire SS2-SS4 stack on 23 May and the nominal SS1 has $125K guaranteed.",
+    "stakes": "Whether Philadelphia can keep Cooper DeJean in the slot \u2014 moving him to safety solves one hole by opening another, and forces a $2.7M journeyman into full-time nickel snaps against the NFC East's slot receivers.",
+    "realness": "genuine",
+    "moneyNote": "Marcus Epps: 1yr/$1.55M, only $125K guaranteed, and played just 39% of defensive snaps in 13 games in 2025 \u2014 that is a placeholder contract, not a starter's. Mukuba (2025 R2, #64) is locked at FS. DeJean (2024 R2, #40) played 98% of defensive snaps in 2025, so he plays somewhere regardless. Blankenship's departure (3yr/$24.75M, $16.5M gtd to HOU) is the cause of the vacancy."
+   },
+   {
+    "position": "WR3 (behind DeVonta Smith and Makai Lemon)",
+    "contenders": [
+     "Dontayvion Wicks",
+     "Marquise \"Hollywood\" Brown",
+     "Elijah Moore",
+     "Johnny Wilson",
+     "Darius Cooper"
+    ],
+    "why": "A.J. Brown was traded to New England in early June, vacating a huge target share; the Eagles replaced him with a first-round rookie plus three separate one-year veteran fliers, and the public depth chart has re-sorted WR2 through WR9 twice since (2 June and 21 July) \u2014 the most churn anywhere on this roster.",
+    "stakes": "With Dallas Goedert on a one-year deal and Saquon Barkley aging, the WR3 job is the third-most-targeted skill role in a Jalen Hurts offense that just lost its alpha receiver.",
+    "realness": "genuine",
+    "moneyNote": "Dontayvion Wicks: 1yr/$10.25M, $9M guaranteed \u2014 nearly 2x Marquise Brown's 1yr/$5M ($5M gtd) and far above Elijah Moore (1yr/$1.315M, $0 guaranteed). The money leans hard toward Wicks, so treat this as genuine only for the WR4/WR5 order; WR3 itself is probably Wicks. Note that WR2 is NOT open \u2014 see the Lemon entry in notes."
+   },
+   {
+    "position": "KR / PR (kick and punt returner)",
+    "contenders": [
+     "Will Shipley",
+     "Tank Bigsby",
+     "Elijah Mitchell",
+     "Britain Covey",
+     "Dameon Pierce"
+    ],
+    "why": "Five backs and a returner-specialist are stacked in the same room with no separation, and returner was the single churniest slot type league-wide this offseason (7 KR and 6 PR changes post-draft, versus 3 QB changes across all 32 teams).",
+    "stakes": "Under the dynamic kickoff, returner is now a real field-position lever rather than a roster afterthought \u2014 and for Shipley, Bigsby, Mitchell and Pierce it is likely the difference between making the 53 and not.",
+    "realness": "genuine",
+    "moneyNote": "Nobody in this group has leverage: Covey 2yr/$2.315M with $0 guaranteed, Elijah Mitchell 1yr/$1.215M with $0 guaranteed, Dameon Pierce 1yr/$1.29M with $250K guaranteed, Shipley (2024 R4) $717K remaining guaranteed. When no contender has guaranteed money, the competition is real by default."
+   },
+   {
+    "position": "RG",
+    "contenders": [
+     "Tyler Steen",
+     "Hollin Pierce",
+     "Jaeden Roberts",
+     "Micah Morris",
+     "Willie Lampkin",
+     "Fred Johnson"
+    ],
+    "why": "Steen is in the final year of his rookie deal with no extension, which perennially generates a 'can he hold the job' storyline in Philadelphia \u2014 but he took 96% of the offensive snaps across 18 games in 2025 and nobody behind him is funded.",
+    "stakes": "The only non-elite spot on an offensive line where the other four starters (Mailata $41M gtd, Dickerson $28.9M gtd, Jurgens $23.3M gtd, Lane Johnson $25M gtd) are all locked in.",
+    "realness": "likely-settled",
+    "moneyNote": "Steen (2023 R3, #65) has just $1.18M guaranteed left, which is what fuels the storyline \u2014 but his challengers have less than nothing: Hollin Pierce $0 guaranteed, Jaeden Roberts $20K guaranteed, Micah Morris (2026 R6, #207) $256K guaranteed, Willie Lampkin $30K guaranteed. A 96%-snap incumbent does not lose to a room of UDFA-money backups. The RG2 flip ESPN logged on 14 May was a backup shuffle, not a threat to the starter."
+   },
+   {
+    "position": "NT / interior defensive line",
+    "contenders": [
+     "Jordan Davis",
+     "Zion Wilson",
+     "Ta'Quon Graham",
+     "Uar Bernard"
+    ],
+    "why": "ESPN's public depth chart currently lists NO player at NT1 for Philadelphia and has done so every single day since 22 March \u2014 which will read to anyone scraping it as a gaping hole in the middle of the defense. It is a data artifact: Jordan Davis is on the active roster and just got paid.",
+    "stakes": "None, in reality. Flagged because this is the exact kind of chart artifact that generates a fake 'Eagles have no nose tackle' storyline going into camp.",
+    "realness": "media-manufactured",
+    "moneyNote": "Jordan Davis signed a 3yr/$78M extension in 2026 with $38.938M guaranteed ($26M APY, 8.6% of the cap) \u2014 the third-largest guarantee on the roster behind only Jalen Hurts and Jonathan Greenard. He played 60% of defensive snaps across 18 games in 2025. He is not in a competition with anyone. Caveat: I am flagging this from the depth-chart artifact and the contract, not from observed coverage \u2014 I could not reach any beat outlet this session."
+   }
+  ],
+  "notes": "METHOD CAVEAT FIRST \u2014 READ THIS: I obtained ZERO beat reporting for this team. The session's web-search budget was exhausted before my first query, and direct fetches to bleedinggreennation.com, philadelphiaeagles.com, nbcsportsphiladelphia.com and si.com all returned HTTP 403. Everything below is derived from primary data only: nflverse/OverTheCap active contracts, nflverse draft picks, 2025 snap counts, and the daily timestamped ESPN depth-chart archive (127 snapshots, 22 Mar - 27 Jul 2026, latest 27 Jul 10:38). That combination is actually strong for the realness judgement you care most about \u2014 guarantees and snap shares do not lie \u2014 but it is blind to coach quotes, injuries, holdouts, and anything that happened in the last few days. Hence confidence: low. Treat the money notes as solid and the battle framing as a hypothesis a beat writer should confirm.\n\nTHE BIG ROSTER NEWS THE DATA SHOWS: A.J. Brown is gone \u2014 traded to New England (his 2024 3yr/$96M, $51M gtd deal now shows team \"NE/PHI\"), and ESPN dropped him from the WR1 slot on 2 June. That is the single largest change to this roster and it cascades through every receiver entry above.\n\nSPOTS THE MEDIA WILL CALL BATTLES THAT THE MONEY HAS ALREADY DECIDED:\n- WR2: Makai Lemon (2026 R1, #20 overall) has $20.81M FULLY guaranteed on a 4yr/$20.81M rookie deal. A receiver taken 20th overall with a full guarantee, on a team that just traded its WR1, starts. Do not write this as open.\n- LCB: Riq/Tariq Woolen signed 1yr/$12M with all $12M guaranteed. A one-year, fully-guaranteed $12M deal is a \"you are starting\" contract. Kelee Ringo (2023 R4, $821K gtd, contract year, 26% of defensive snaps in 2025) is not taking it from him. If you see a \"Ringo vs Woolen\" story, it is not real.\n- Edge/SLB: Jonathan Greenard, 2yr/$60M with $50M guaranteed \u2014 the second-largest guarantee on the roster after Hurts ($110M gtd). Untouchable.\n- QB2: ESPN flipped Tanner McKee to Andy Dalton on 28 May and it has not moved in two months. Dalton is on 1yr/$3.5M FULLY guaranteed; McKee (2023 R6) has $187K guaranteed in his contract year. Money and chart agree \u2014 likely-settled toward Dalton, despite this being an obvious storyline generator. Cole Payton (2026 R5, NDSU) is QB4.\n- TE2: Eli Stowers (2026 R2, #54) has $7.28M guaranteed, versus Grant Calcaterra ($700K gtd) and Johnny Mundt ($750K gtd). Settled. The TE3 flip ESPN logged on 21 July is noise. Goedert is on a 1yr/$7M fully guaranteed deal at TE1.\n- K and P: both re-signed this offseason (Jake Elliott 3yr/$17M, Braden Mann 4yr/$14M). No competition, which is worth noting because kicker was one of the churniest slots league-wide (5 changes) \u2014 just not here.\n\nSCHEME NOTE: ESPN now lists Philadelphia's base defense as a 3-4 (pos_grp \"Base 3-4 D\"), with Jalen Carter at LDE, Moro Ojomo at RDE and Greenard/Nolan Smith at the outside linebacker spots. If that reflects a real alignment change it is a bigger story than any individual battle. I could not confirm it against any team source.\n\nONE MORE HALF-OPEN SPOT I COULD NOT RANK: Moro Ojomo is the RDE1 with just $78K guaranteed in the last year of a 2023 seventh-round contract \u2014 by money, the least-secure listed starter on the entire roster. But he played 66% of defensive snaps across 18 games in 2025, and his challengers are Ty Robinson (2025 R4, 15% of snaps in 11 games) and Gabe Hall ($0 gtd). Incumbency probably holds; the genuine competition is for the fourth interior spot in the rotation behind Carter, Davis and Ojomo, where ESPN logged three separate flips in June.\n\nCONTEXT FROM THE LEAGUE-WIDE DATASET (analysis/camp/FINDINGS.md): July is the deadest month of the NFL calendar by depth-chart movement \u2014 13 starter changes league-wide in July 2026 versus 489 in March. 91.5% of the league's 881 starting slots have not moved since 1 May. Philadelphia is mid-pack in churn. So the prior for \"this camp battle is real\" should be low everywhere, and the burden of proof is on the storyline.",
+  "sources": [
+   "nflverse/OverTheCap active contracts via nfl_data_py.import_contracts() \u2014 guarantees, APY, year signed, team (accessed 28 Jul 2026)",
+   "nflverse draft picks via nfl_data_py.import_draft_picks([2024,2025,2026]) \u2014 round/overall for Lemon (R1 #20), Stowers (R2 #54), Bell (R3 #68), Morris (R6 #207), Wisniewski (R7 #244)",
+   "nflverse 2025 snap counts via nfl_data_py.import_snap_counts([2025]) \u2014 offense_pct/defense_pct by player",
+   "nflverse 2026 seasonal rosters via nfl_data_py.import_seasonal_rosters([2026]) \u2014 92-man PHI roster, confirms Jordan Davis active despite blank NT1 on the public chart",
+   "ESPN daily timestamped depth-chart archive, 127 snapshots 22 Mar - 27 Jul 2026 (local: /home/user/stranger9977/channel/analysis/camp/depth_2026.parquet); latest snapshot 2026-07-27 10:38:21",
+   "Derived PHI slot-flip table (local: /home/user/stranger9977/channel/analysis/camp/true_battles.parquet) \u2014 23 flagged PHI slots with flip counts and dates",
+   "League-wide churn analysis (local: /home/user/stranger9977/channel/analysis/camp/FINDINGS.md)",
+   "NO beat reporting obtained \u2014 bleedinggreennation.com, philadelphiaeagles.com, nbcsportsphiladelphia.com and si.com/nfl/eagles all returned HTTP 403; WebSearch budget (200/200) was exhausted before this agent ran"
+  ],
+  "_agent": "agent-a475196c995dcc61c"
+ },
+ "TB": {
+  "battles": [
+   {
+    "position": "Off-ball LB next to Alex Anzalone (ESPN \"RILB\")",
+    "contenders": [
+     "Christian Rozeboom",
+     "SirVocea Dennis",
+     "Josiah Trotter"
+    ],
+    "why": "Lavonte David came off the roster in the 9-10 March free-agency turnover after more than a decade as the defensive signal-caller, and Tampa replaced him with a veteran free agent (Anzalone), a low-cost addition (Rozeboom) and a second-round rookie rather than one clear answer.",
+    "stakes": "The pairing next to Anzalone sets the run-fit and coverage identity of a defense that also lost Haason Reddick and Jamel Dean in the same week.",
+    "realness": "genuine",
+    "moneyNote": "Trotter carries the most draft capital in the room (2026 R2, No. 46 overall). Rozeboom is a veteran add, Dennis a late-round 2023 pick. Nobody in this group appears to be protected by significant guaranteed money -- which is exactly why it is real. CAVEAT: contract terms could not be verified in this session (no contract feed, no accessible reporting). ESPN's chart already flipped this slot once, Dennis to Rozeboom on 24 March, and has left it alone since."
+   },
+   {
+    "position": "WR3 (third receiver in 3-WR sets)",
+    "contenders": [
+     "Jalen McMillan",
+     "Ted Hurst III",
+     "Tez Johnson",
+     "Kameron Johnson"
+    ],
+    "why": "Mike Evans left the roster on 9 March; the chart now runs Egbuka-Godwin-McMillan with a 2026 third-round pick (Hurst) fourth and two speed receivers behind him, and none of the bottom four has separated in four months.",
+    "stakes": "Without Evans there is no vertical X on the roster; whoever wins WR3 decides whether the passing game is a two-man route tree or three-deep.",
+    "realness": "genuine",
+    "moneyNote": "McMillan (2024 R3, No. 92) and Hurst (2026 R3, No. 84) hold near-identical draft capital and both sit on rookie contracts, so nothing financial pre-decides this. Godwin's 2025 three-year deal and Egbuka's 2025 first-round status protect the top two spots only -- they do not touch WR3."
+   },
+   {
+    "position": "Kick returner / punt returner",
+    "contenders": [
+     "Kenny Gainwell",
+     "Kameron Johnson",
+     "Tez Johnson",
+     "Sean Tucker",
+     "Josh Williams"
+    ],
+    "why": "Returner is the most-churned slot class on the public depth chart league-wide this offseason, and Tampa's is live: KR1 flipped from Kameron Johnson to Gainwell on 2 May, with KR2 and KR3 flipping three more times through mid-May.",
+    "stakes": "Under the current kickoff rules return field position is a real margin, and this is the likeliest path onto the 53 for Kameron Johnson or Tez Johnson.",
+    "realness": "genuine",
+    "moneyNote": "No contender carries meaningful guarantees or premium draft capital -- Gainwell is a veteran addition, the rest are late-round or UDFA-tier. Nothing pre-decides it, which is the whole point: the genuinely open jobs on this roster are the ones nobody writes about."
+   },
+   {
+    "position": "EDGE opposite Yaya Diaby (ESPN \"WLB\")",
+    "contenders": [
+     "Rueben Bain Jr.",
+     "Chris Braswell",
+     "Anthony Nelson",
+     "David Walker"
+    ],
+    "why": "Haason Reddick left on 10 March, and Tampa installed its rookie edge at the top of the slot on 24 April -- the day after the draft -- where he has now sat unmoved for 93 consecutive daily snapshots.",
+    "stakes": "Pass rush opposite Diaby is the swing variable on a defense that just turned over its linebacker corps and one starting corner.",
+    "realness": "likely-settled",
+    "moneyNote": "Bain took the No. 1 rank the day after the 2026 draft and never lost it -- behavior consistent with a first-round pick (his round is missing from the local draft-capital join, so treat the exact capital as unverified). Braswell is 2024 R2 and Walker 2025 R4, so there is a genuine snap-count fight behind him, but a rookie who takes the top slot on draft weekend and holds it for three months essentially never gets displaced in camp."
+   },
+   {
+    "position": "WR1 vs WR2 (Egbuka over Godwin)",
+    "contenders": [
+     "Emeka Egbuka",
+     "Chris Godwin Jr."
+    ],
+    "why": "ESPN flipped Egbuka ahead of Godwin on 21 July -- the only change to any Tampa Bay rank-1 slot since April, and precisely the kind of move that generates a week of content.",
+    "stakes": "Nothing on the roster. Both start in three-receiver sets. It is a target-share question wearing a depth-chart battle's clothes.",
+    "realness": "media-manufactured",
+    "moneyNote": "Godwin reportedly signed a three-year deal in March 2025 with roughly $44M guaranteed; Egbuka was the No. 19 pick in 2025. Two players with that much money and capital both play. Nobody loses a job here -- the ordinal label is cosmetic, and the flip is a public chart reordering itself, not competition."
+   }
+  ],
+  "campOpens": "unknown -- could not verify a Buccaneers-specific report date. All web access failed this session (search budget exhausted; buccaneers.com, pewterreport.com, joebucsfan.com, bucswire, ESPN and Google News RSS all returned HTTP 403). League-wide, the local dataset flags the week of 26 July 2026 as camp-opening week, so Tampa Bay almost certainly reports in the 26-29 July window, but that is inference, not reporting.",
+  "biggestUnknown": "The second off-ball linebacker spot next to Anzalone -- and behind it, whether the whole front seven survives losing Lavonte David and Haason Reddick in the same week. It is the only starting job on the roster where a Day 2 rookie, a returning starter and a veteran free agent all have a legitimate claim and none of them appears to be protected by guaranteed money.",
+  "confidence": "low",
+  "notes": "READ THIS FIRST -- METHOD CAVEAT. I obtained zero beat reporting. The WebSearch budget for this session was already spent (200/200) before my first call, and every direct fetch was refused with HTTP 403: buccaneers.com, pewterreport.com, joebucsfan.com, bucswire.usatoday.com, espn.com, en.wikipedia.org, and a Google News RSS query. So there are no coach quotes, no reported camp battles, and no verified contract figures behind any of this. Everything below is derived from the workspace's own data at /home/user/stranger9977/channel/analysis/camp -- daily timestamped ESPN depth-chart snapshots covering 22 March to 27 July 2026, plus a draft-capital join -- supplemented by my own recall for contract context, which is flagged inline wherever used. Confidence is low by construction, not because the roster is unusually murky.\n\nWHAT THE DATA ACTUALLY SHOWS.\n1. Tampa Bay lost five significant players in a 48-hour window, 9-10 March: Mike Evans, Lavonte David, Rachaad White, Haason Reddick and Jamel Dean all came off the chart at once. That is a WR1, a franchise linebacker, the RB2, a starting edge and a starting corner. Nearly every genuine battle listed traces directly back to one of those five departures. If a data-driven piece wants a Tampa Bay hook, that cluster is it: the \"camp battles\" are actually the aftershocks of a single week in March.\n2. Despite that turnover, the starting lineup has been frozen since April. Only six Buccaneers rank-1 slots changed all offseason, and five of them settled by 24 April. Exactly one starter slot has moved since 1 May: WR1, on 21 July -- and I judge that one cosmetic. The offensive line (Wirfs-Bredeson-Barton-Mauch-Goedeke) has not moved a single slot in 127 consecutive daily snapshots.\n3. TB shows 10 total starter changes across the offseason, which places it among the eight most unstable teams league-wide -- but the classification logic in battles.py matters here: most of that was arrival/departure churn (free agency and the draft), not competition. Tampa Bay is a high-transaction team, not a high-competition team. Anyone quoting the raw churn number for TB is quoting a trade tracker.\n4. Chart artifact worth knowing before you write: ESPN lists Calijah Kancey as LDE2 behind Elijah Roberts. Kancey is a 2023 first-round interior rusher and this is a 3-4 alignment-labeling quirk, not a demotion. Do not write it as a battle. Similar caution on the SLB/WLB labels -- those are the edge spots, not off-ball linebacker.\n5. Kicker is not a battle. Chase McLaughlin has held PK1 unbroken; B.T. Potter joined after March and is a camp leg. If you see a Bucs kicker-competition story, it is manufactured.\n6. Rookie class on the chart: Trotter (R2, 46), Hurst (R3, 84), Keionte Scott (R4, 116), Capehart (R5, 155), Schrauth (R5, 160), Sharp (R6, 185), plus Bain Jr. entering on draft weekend with no round recorded in the local join. Only Bain opens as a rank-1 starter. Not one of the other six has moved a single rank in three months -- which is itself a finding for the \"rookies do not actually climb in July\" angle.\n7. Two spots I considered and rejected as battles: CB2 (Benjamin Morrison, 2025 R2, has held RCB1 every day since March with Josh Hayes behind him -- draft capital plus zero chart movement) and nickel (Jacob Parrish, 2025 R3, unmoved, with R4 rookie Keionte Scott behind). Both read likely-settled.\n\nWHAT WOULD CHANGE THIS. One pass of real beat reporting -- Pewter Report, JoeBucsFan, the Tampa Bay Times -- on the linebacker room and the WR3 job would move confidence from low to medium quickly. Raising CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION, or unblocking those hosts, is all that is needed.",
+  "sources": [
+   "/home/user/stranger9977/channel/analysis/camp/depth_2026.parquet -- daily timestamped ESPN depth-chart snapshots, 22 Mar to 27 Jul 2026 (via nflreadr/nfl_data_py)",
+   "/home/user/stranger9977/channel/analysis/camp/depth_2025.parquet -- same series, 3 Aug 2025 to 14 Mar 2026; used to date the Evans/David/White/Reddick/Dean departures to 9-10 March 2026",
+   "/home/user/stranger9977/channel/analysis/camp/true_battles.parquet -- competition-vs-transaction classified slot flips (see battles.py for the classifier)",
+   "/home/user/stranger9977/channel/analysis/camp/rookie_traj.parquet -- 2026 rookie draft capital and chart trajectory",
+   "/home/user/stranger9977/channel/analysis/camp/drift.parquet -- 20-27 July movement window (zero TB rows, i.e. no TB movement in the final week)",
+   "/home/user/stranger9977/channel/analysis/camp/FINDINGS.md -- league-wide churn context and caveats",
+   "NO EXTERNAL SOURCES. Failed with HTTP 403: buccaneers.com, pewterreport.com, joebucsfan.com, bucswire.usatoday.com, espn.com, en.wikipedia.org, news.google.com. WebSearch unavailable: session budget exhausted (200/200)."
+  ],
+  "team": "Tampa Bay Buccaneers",
+  "_agent": "agent-a4db559cb5d418476"
+ },
  "BUF": {
   "battles": [
    {
@@ -1147,6 +1482,85 @@
   ],
   "team": "Arizona Cardinals",
   "_agent": "agent-a7b6008bc4b4a8a25"
+ },
+ "NYJ": {
+  "team": "New York Jets (NYJ)",
+  "campOpens": "unknown \u2014 could not verify an NYJ-specific report date. No news source was reachable this session.",
+  "confidence": "low",
+  "biggestUnknown": "Quarterback, and not for Week 1 \u2014 the Jets' entire QB room carries roughly $5M in total guarantees (Geno Smith 1yr/$3.3M fully guaranteed, Cade Klubnik a 4th-round rookie at $1.2M guaranteed, Brady Cook and Bailey Zappe on nothing), and no quarterback is under meaningful contract past this season. Geno has held ESPN's QB1 slot for all 127 days without a single flip, so the September starter is fairly clear; what is completely unsettled is whether this is a bridge to Klubnik or a placeholder for a 2027 pick. In a rebuild that just spent the #2 overall pick on a defensive end rather than a quarterback, that is the defining open question on the roster.",
+  "battles": [
+   {
+    "position": "CB2 (outside, opposite Brandon Stephens)",
+    "contenders": [
+     "Nahshon Wright",
+     "Azareye'h Thomas",
+     "D'Angelo Ponds",
+     "Tre Brown",
+     "Qwan'tez Stiggers"
+    ],
+    "why": "The Jets traded Sauce Gardner to Indianapolis and never replaced him with a paid outside corner, leaving one boundary job open to five players who have all held a top-two slot on ESPN's chart at some point since March.",
+    "stakes": "It is the single largest hole created by the teardown; the Jets are asking a $3.5M free agent or an unproven young pick to cover the spot an All-Pro just vacated.",
+    "realness": "genuine",
+    "moneyNote": "Brandon Stephens (3yr/$36M, $22.98M guaranteed) is locked into the other boundary spot and is not part of this. Nobody competing for the second spot has money that decides anything: Nahshon Wright's 1yr/$3.5M fully guaranteed is the largest figure in the group, Azareye'h Thomas is a 2025 third-rounder (#73) with only $1.44M guaranteed, Tre Brown has $0 guaranteed, Qwan'tez Stiggers has $254K. D'Angelo Ponds (2026 R2, #50, $8.95M of $9.84M guaranteed) has by far the most capital of the challengers, which is why he is more likely to end up somewhere on the field than any of the others."
+   },
+   {
+    "position": "NB (nickel/slot corner)",
+    "contenders": [
+     "D'Angelo Ponds",
+     "Jarvis Brownlee Jr.",
+     "Jordan Clark"
+    ],
+    "why": "The slot job changed hands three separate times in a two-week window (29 May, 2 June, 12 June) between Ponds and Brownlee, the most volatile slot on the roster and the last one to move before the chart froze.",
+    "stakes": "It is tangled with the outside CB2 question \u2014 where Ponds lands determines who plays the other two coverage jobs, so one decision settles three spots.",
+    "realness": "genuine",
+    "moneyNote": "Ponds is a 2026 second-rounder (#50) with $8.95M guaranteed, Brownlee a 2024 fifth-rounder (#146) with $342K guaranteed playing out a rookie deal. Draft capital says Ponds starts somewhere; it does not say where. Genuinely open as to position, close to settled as to whether Ponds plays."
+   },
+   {
+    "position": "PK (kicker)",
+    "contenders": [
+     "Jason Sanders",
+     "Cade York"
+    ],
+    "why": "Five different kickers occupied a slot on this depth chart between March and June \u2014 Will Ferrin, Lenny Krieg, Younghoe Koo, Cade York and Jason Sanders \u2014 with York losing the top job to Sanders on 4 June.",
+    "stakes": "Low individually, but it is the cleanest genuinely open job on the roster and the sort of spot that quietly costs a rebuilding team two games.",
+    "realness": "genuine",
+    "moneyNote": "The textbook case: Sanders is on 1yr/$1.3M with $0 guaranteed and York on 1yr/$1.145M with $0 guaranteed. Neither contract protects anyone for a single day. There is no financial reason this cannot flip again in August."
+   },
+   {
+    "position": "QB1",
+    "contenders": [
+     "Geno Smith",
+     "Cade Klubnik",
+     "Brady Cook",
+     "Bailey Zappe"
+    ],
+    "why": "Geno Smith is on a 1yr/$3.3M deal, which is the kind of number that normally signals a placeholder, and the Jets drafted Klubnik in April \u2014 so this will be written as a battle all camp.",
+    "stakes": "Whether the Jets spend 2026 evaluating a rookie or running out a veteran bridge determines where they pick in 2027.",
+    "realness": "likely-settled",
+    "moneyNote": "The settling force here is the challenger's lack of capital, not the incumbent's money. Cade Klubnik went in the 4th round (#110) with $1.22M guaranteed \u2014 the Jets held three first-round picks and used them on David Bailey, Kenyon Sadiq and Omar Cooper Jr. rather than a quarterback. A team that declined to spend real capital at the position is not handing the job to a Day 3 rookie in August. ESPN has not moved Geno off QB1 once in 127 days; the only movement was Klubnik passing Brady Cook for QB2 on 29 May."
+   },
+   {
+    "position": "TE1",
+    "contenders": [
+     "Kenyon Sadiq",
+     "Mason Taylor",
+     "Jeremy Ruckert"
+    ],
+    "why": "The Jets took Sadiq 16th overall a year after taking Mason Taylor 42nd overall, and ESPN flipped Sadiq into the TE1 slot on draft night, which reads like a demotion for last year's pick.",
+    "stakes": "None, really \u2014 that is the point. Both are being deployed, not chosen between.",
+    "realness": "media-manufactured",
+    "moneyNote": "Sadiq (2026 R1, #16) has all $22.34M of his deal guaranteed; Mason Taylor (2025 R2, #42) has $9.56M guaranteed; Jeremy Ruckert is on 2yr/$10M with $4.97M guaranteed. That is roughly $37M in guarantees across three tight ends. A team does not commit two premium picks in consecutive drafts to the position in order to bench one of them \u2014 the plan is heavy 12 personnel. Any 'who is TE1' storyline is a depth-chart label, not a competition."
+   }
+  ],
+  "notes": "READ THIS FIRST \u2014 the confidence rating is doing real work. I obtained zero beat reporting. The session's web-search budget was exhausted before my first query, and every news host I tried returned HTTP 403 through the proxy (newyorkjets.com, ganggreennation.com, espn.com, and both DuckDuckGo endpoints; the proxy log also shows prior denials to ourlads.com, rotowire.com and nfl.com). What I do have is hard and worth more than aggregator copy for the specific question you asked: nflverse's OverTheCap contract table (guarantees, APY, years) and the full 2022-2026 draft-pick table, both pulled live, plus 127 consecutive daily ESPN depth-chart snapshots from 22 March to 27 July 2026 sitting in this repo. So the realness judgements \u2014 which are a money-and-capital question \u2014 are well grounded. The battle list itself is not corroborated by anyone covering the team, and there may be a camp storyline nobody's chart reflects. Set expectations accordingly.\n\nTHE FRAME YOU'RE MISSING: this is year one of a teardown, and it is more severe than the headline suggests. Sauce Gardner now appears at LCB1 for Indianapolis, Quinnen Williams at LDE1 for Dallas, and Jermaine Johnson II at RDE1 for Tennessee on the 27 July charts. All three still show as Jets in the contract file, which lags trades \u2014 do not get caught by that. The return was three 2026 first-rounders: David Bailey (#2, edge), Kenyon Sadiq (#16, TE), Omar Cooper Jr. (#30, WR), plus D'Angelo Ponds at #50. Nearly every battle on this roster is downstream of that teardown.\n\nCHURN NUMBER FOR YOUR PIECE: NYJ is the second-most-unstable depth chart in the league this offseason (17 starter-slot changes; only MIA at 20 is higher, against a league median near 4 and Denver at zero). But run the competition/arrival/departure classifier and the texture changes: of 119 total NYJ slot changes since 22 March, 93 classify as actual competition rather than transaction churn \u2014 a much higher competition share than the raw number implies. And the chart has not moved once since 12 June. Six weeks frozen going into camp week.\n\nTHINGS THAT ARE NOT BATTLES, WHATEVER GETS WRITTEN:\n- The offensive line is entirely bought. All five projected starters carry real money: Olu Fashanu (2024 R1 #11, $20.51M fully guaranteed), Dylan Parham (2yr/$16M, $7.49M gtd), Joe Tippmann (4yr/$62M, $21.42M gtd, $15.5M APY), Josh Myers (2yr/$11M, $5.2M gtd), Armand Membou (2025 R1 #7, $31.91M fully guaranteed). There is no personnel competition here. The one genuine question is alignment, not bodies \u2014 ESPN currently lists Tippmann at right guard with Myers at center, which moves Tippmann off his natural spot. If you see an \"OL battle\" story, it is an alignment story wearing a costume.\n- Edge is settled by money four deep: Bailey ($54.67M fully guaranteed, the largest guarantee on the roster), Joseph Ossai (3yr/$34.5M, $22.49M gtd), Kingsley Enagbare (1yr/$9M, $8.49M gtd), Will McDonald IV (2023 R1 #15, $16.32M fully gtd). The RDE2 through RDE5 slots flipped constantly through late May and early June, which looks like competition on a churn chart but is rotation depth sorting itself.\n- Breece Hall (3yr/$43.5M, $29M gtd), Garrett Wilson (4yr/$130M, $38.32M gtd), Minkah Fitzpatrick (3yr/$40M, $20.5M gtd), Jamien Sherwood (3yr/$45M, $30M gtd) and Demario Davis (2yr/$22M, $15M gtd) are all untouchable. The MLB1/WLB1 flips between Sherwood and Davis on 29 May and 2 June are a labeling artifact \u2014 both are paid starters, the chart just could not decide which letter to give them.\n\nTWO I CUT FOR SPACE THAT ARE REAL:\n- Strong safety opposite Minkah Fitzpatrick. Andre Cisco (1yr/$2.5M, $1.25M gtd) has held SS1 for all 127 days, but Dane Belton actually has more guaranteed money ($2M on 1yr/$4M) and a higher APY while sitting at FS2, and Malachi Moore is a 2025 fourth-rounder. Nobody in that room has money that decides anything. Genuine, just quieter \u2014 the FS2 and FS3 slots both flipped on 29 May.\n- WR2. Adonai Mitchell (2024 R2 #52, acquired from Indianapolis, $4.82M gtd) currently sits ahead of Omar Cooper Jr., but Cooper is a 2026 first-rounder at #30 with all $17.47M guaranteed. First-round money behind a $130M WR1 does not stay third. I would call that likely-settled toward Cooper by October even though the chart says otherwise today.\n\nMETHOD NOTE FOR THE CHART: the depth-chart evidence is ESPN's chart, not the Jets'. Teams do not publish real ones until late August. What the 127-day series measures is the informed outside view changing its mind \u2014 arguably the more interesting quantity, but say so rather than passing it off as the team's own board.",
+  "sources": [
+   "nflverse import_contracts (OverTheCap): guarantees, APY, years, draft round/overall \u2014 pulled live 28 Jul 2026",
+   "nflverse import_draft_picks 2022-2026: full 2026 NYJ draft class (Bailey #2, Sadiq #16, Cooper Jr. #30, Ponds #50, Jackson Jr. #103, Klubnik #110, Anez Cooper #188, Payne #228)",
+   "nflverse/nflreadr import_depth_charts: 127 daily ESPN depth-chart snapshots, 22 Mar - 27 Jul 2026, local history.parquet",
+   "Local competition/arrival/departure classifier (analysis/camp/battles.py) applied to the NYJ slot-change series",
+   "NO BEAT REPORTING OBTAINED \u2014 web search budget exhausted; newyorkjets.com, ganggreennation.com, espn.com, ourlads.com, rotowire.com, nfl.com and DuckDuckGo all returned 403 through the proxy"
+  ],
+  "_agent": "agent-a89f4c4f79ff2684a"
  },
  "DAL": {
   "team": "Dallas Cowboys",
@@ -1593,6 +2007,84 @@
    "https://denversports.com/nfl/denver-broncos/broncos-powers"
   ],
   "_agent": "agent-abb066a15ea08a62b"
+ },
+ "TEN": {
+  "team": "TEN",
+  "campOpens": "unknown \u2014 could not verify. No beat source was reachable this session. Depth-chart telemetry confirms the roster was live and being updated through July 27, 2026, and non-Hall-of-Fame-Game clubs conventionally report ~July 27-28, with Titans camp at Ascension Saint Thomas Sports Park in Nashville \u2014 but treat that as inference, not reporting.",
+  "confidence": "low",
+  "battles": [
+   {
+    "position": "RG",
+    "contenders": [
+     "Cordell Volson",
+     "Jackson Slater",
+     "Garrett Dellinger",
+     "Fernando Carmona"
+    ],
+    "why": "Three of the five line spots are locked by capital \u2014 JC Latham (No. 7 overall, 2024) at RT, Peter Skoronski (No. 11, 2023) at LG, Dan Moore Jr. as the paid free-agent LT \u2014 and right guard is the one interior spot the Titans filled with a journeyman rather than an investment; Volson holds RG1 on the current chart as a former Bengals fourth-rounder who was Cincinnati's weakest starter, with two Day 3 developmental guards behind him.",
+    "stakes": "Cam Ward's second year is the whole season, and interior pressure is what wrecked him as a rookie; this is the last soft spot in front of him.",
+    "realness": "genuine",
+    "moneyNote": "Volson is a 2022 fourth-round pick (No. 136, CIN) playing on a modest veteran deal \u2014 no draft capital or guarantee protecting the job. Slater was TEN's own 2025 fifth-rounder (No. 167), Dellinger a 2025 seventh (No. 243, BAL), Carmona a 2026 fifth (No. 142). Nobody here has enough capital to be handed the job. NOTE: 2026 contract dollars could not be verified \u2014 the only contract dataset reachable from this environment is stale through 2022."
+   },
+   {
+    "position": "C",
+    "contenders": [
+     "Austin Schlottmann",
+     "Pat Coogan",
+     "Andre James"
+    ],
+    "why": "Schlottmann sits atop the chart at 33 as a career backup-caliber center the Titans never replaced with real money or picks, and rookie Pat Coogan already climbed past Trey Hill into the C2 slot on May 14 \u2014 the fastest riser on the offensive line.",
+    "stakes": "Pairs with right guard as the interior-line question; a rookie sixth-rounder winning it would mean Tennessee is starting two unproven interior linemen in Ward's pivotal year.",
+    "realness": "genuine",
+    "moneyNote": "Coogan is a 2026 sixth-round pick (No. 194) \u2014 low capital, so no thumb on the scale for him either; Schlottmann is an eight-year journeyman with no guarantee leverage. This is one of the rare spots where neither side is protected by money or capital, which is exactly what makes it real."
+   },
+   {
+    "position": "MLB",
+    "contenders": [
+     "Cody Barton",
+     "Anthony Hill Jr."
+    ],
+    "why": "The classic stopgap-veteran-versus-draft-capital setup: Barton is a seventh-year journeyman signed to hold the middle, Hill is the 2026 second-round pick (No. 60) who was one of the most heavily scouted linebackers in the class and sits directly behind him at MLB2.",
+    "stakes": "Determines whether Tennessee's front seven rebuild \u2014 Hill, Keldric Faulk, Oluwafemi Oladejo \u2014 is actually on the field in 2026 or deferred another year.",
+    "realness": "genuine",
+    "moneyNote": "Hill's second-round capital (No. 60 overall, largely guaranteed rookie deal) means he is playing significant snaps regardless of what the chart says in August; Barton is a cheap veteran with nothing guaranteed protecting the starting title. Lean Hill by midseason even if Barton opens Week 1."
+   },
+   {
+    "position": "CB2 / nickel",
+    "contenders": [
+     "Alontae Taylor",
+     "Joshua Williams",
+     "Marcus Harris",
+     "Micah Robinson"
+    ],
+    "why": "The entire secondary alignment behind Cor'Dale Flott re-shuffled in one move on May 8 \u2014 Taylor slid from nickel to outside RCB1, Williams dropped to RCB2, and 2025 sixth-rounder Marcus Harris inherited the nickel \u2014 and none of those three has the resume or contract to make the arrangement stick.",
+    "stakes": "Tennessee plays nickel on most snaps, so this is really a starting job; it also decides whether Taylor, the most proven cover man of the group, is used at his best position.",
+    "realness": "genuine",
+    "moneyNote": "Taylor (2022 second round, No. 49, NO) is the highest-capital player in the group but was acquired, not drafted here, so there is no organizational sunk cost defending a specific alignment. Harris is a 2025 sixth-rounder (No. 183) with nothing guaranteed; Williams a 2022 fourth (No. 135, KC). Genuinely capital-neutral, which is why it moved once already and can move again."
+   },
+   {
+    "position": "LDE (edge opposite Jermaine Johnson II)",
+    "contenders": [
+     "John Franklin-Myers",
+     "Keldric Faulk",
+     "Oluwafemi Oladejo"
+    ],
+    "why": "Franklin-Myers holds LDE1 as the veteran, but Keldric Faulk was taken 31st overall in 2026 and Oladejo was a 2025 second-rounder \u2014 two recent premium investments stacked behind a 30-year-old on the depth chart.",
+    "stakes": "Whether the pass rush Tennessee has spent three straight drafts and a Jermaine Johnson acquisition building is actually deployed in 2026.",
+    "realness": "likely-settled",
+    "moneyNote": "Faulk's No. 31 overall selection carries a fully guaranteed four-year rookie deal \u2014 first-round edge rushers effectively never lose a camp battle to a 30-year-old veteran on a non-guaranteed year. Expect Franklin-Myers to open as the nominal starter and Faulk to take the snaps; the 'battle' is about timing, not outcome. Jermaine Johnson II (2022 No. 26, NYJ) is locked at the other end."
+   }
+  ],
+  "biggestUnknown": "The interior offensive line in front of Cam Ward. Center and right guard are both currently manned by low-cost veterans \u2014 Austin Schlottmann, a career backup, and Cordell\u0412\u0430\u0442sonn \u2014 with no player at either spot carrying draft capital or guaranteed money to settle it, and four Day 3 rookies/second-year linemen churning behind them. Every other high-leverage spot on this roster is decided by capital: Ward at QB (No. 1 overall, 2025), Latham and Skoronski at tackle/guard, Simmons on the interior D-line, Carnell Tate at receiver (No. 4 overall, 2026). The middle of the offensive line is the one place where the Titans made no decision, and it sits directly in front of the franchise's entire reason for existing right now.",
+  "notes": "READ THIS FIRST \u2014 SOURCING FAILURE. I could not do the web research you asked for. The WebSearch budget for this session was already exhausted (200/200 used) before my first query, and the outbound proxy policy-denied every news host I tried: tennessean.com, tennesseetitans.com, espn.com, profootballrumors.com, ourlads.com, overthecap.com, spotrac.com, cbssports.com, si.com, yahoo, bleacherreport, nbcsports, foxsports, sportingnews \u2014 all 403 at CONNECT. Wikipedia too. The only reachable host was raw/github. So there is ZERO beat reporting, zero coach quotes, and zero 2026 contract data behind anything above. That is why confidence is low and why I did not fabricate a camp-open date.\n\nWHAT THE BATTLES ARE ACTUALLY BUILT FROM. Two verifiable datasets: (1) nflverse's ESPN depth-chart feed for TEN, 127 daily snapshots from 2026-03-22 through 2026-07-27, which shows who is stacked behind whom and exactly when the chart moved; (2) nflverse's 2026 roster file, which gave me verified draft round/overall/year for every player \u2014 that is the draft-capital half of every realness call. The money half is missing: the only contract dataset reachable here (nflverse historical_contracts) is stale through 2022. So every moneyNote leans on capital, not dollars. If a Titans guard signed a deal with real guarantees this spring, I would not know, and that could flip the RG call from genuine to likely-settled.\n\nTHE CHART HAS BARELY MOVED SINCE MAY, WHICH IS ITSELF A FINDING. Across 127 days there were only five starter-level changes, and four of them landed on a single day \u2014 May 8, a post-draft bulk update: Kevin Winston Jr. took FS1 from Tony Adams, Alontae Taylor moved from nickel to RCB1, Joshua Williams dropped to RCB2, Marcus Harris inherited the nickel. The fifth was Carnell Tate taking WR1 from Calvin Ridley on April 24, the day after the draft. Those are editorial reorderings around draft results, not competition outcomes. Since June 17, the entire TEN depth chart has produced exactly four rank changes, none above the fourth string except one: Chimere Dike passed Elic Ayomanor for WR4 on July 21 and has held it for a week. That is the single most recent piece of live signal on this roster and the only fantasy-relevant movement.\n\nFOUR THINGS I WOULD HAVE CHASED WITH REAL SOURCES. (1) Will Levis is listed QB3, behind Mitchell Trubisky. A 2023 second-round pick (No. 33) third on the chart heading into camp is either a roster-cut story or a trade story, and the depth chart cannot tell me which \u2014 this may be the most under-covered item on the team. (2) Calvin Ridley is listed WR3 behind Wan'Dale Robinson at age 31, one pick after Tennessee spent No. 4 overall on Tate; a veteran receiver falling to WR3 on his own chart usually precedes a contract conversation. (3) FS is Kevin Winston Jr. over Tony Adams \u2014 I rate that likely-settled (Winston is a 2025 third-rounder, No. 82, and took the job in May and never gave it back) and would have cut it from the list even with sourcing. (4) RB behind Tony Pollard: Tyjae Spears, Michael Carter and 2026 fifth-rounder Nicholas Singleton, with zero chart movement all offseason \u2014 I deliberately left this out because a Day 3 back with no chart movement is the exact profile of a media-manufactured battle, and without reporting I could not confirm it is anything more.\n\nONE FALSE POSITIVE I CAUGHT AND KILLED. The raw flip data flags an RDE1 change on April 17 from \"Jermaine Johnson\" to \"Jermaine Johnson II.\" That is a name-normalization artifact in the feed, not a competition. If you run this pipeline across all 32 teams, suffix changes (Jr./II/III) will manufacture phantom battles \u2014 worth a filter.\n\nHOW TO TREAT THIS ENTRY. Every position above is structurally defensible and the contenders are real players in real chart positions as of July 27. What is NOT verified is the framing: whether Titans coaches or beat writers are actually calling these competitions, and whether contracts signed this spring have already quietly decided the RG and C spots. Please flag this team for a re-run once search budget resets \u2014 the depth-chart skeleton here is sound and would only need the reporting layer added on top.",
+  "sources": [
+   "nflverse ESPN depth charts, TEN, 127 daily snapshots 2026-03-22 to 2026-07-27 (local: /home/user/stranger9977/channel/analysis/camp/depth_2026.parquet)",
+   "nflverse 2026 roster file, draft round/overall/entry year per player (https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_2026.csv)",
+   "Computed contested-slot table for TEN (local: /home/user/stranger9977/channel/analysis/camp/true_battles.parquet)",
+   "ATTEMPTED AND BLOCKED (proxy 403 at CONNECT): tennessean.com, tennesseetitans.com, espn.com, profootballrumors.com, ourlads.com, overthecap.com, spotrac.com, cbssports.com, si.com, sports.yahoo.com, bleacherreport.com, nbcsports.com, foxsports.com, sportingnews.com, en.wikipedia.org",
+   "ATTEMPTED AND UNUSABLE: nflverse historical_contracts.csv.gz \u2014 dataset is stale through 2022, no 2026 Titans contract or guarantee figures available"
+  ],
+  "_agent": "agent-abd865a77616f1f90"
  },
  "LV": {
   "battles": [

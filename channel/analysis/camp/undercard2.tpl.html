@@ -257,13 +257,13 @@ footer{border-top:3px solid var(--ink);padding:22px 0 50px;font-family:var(--mon
   <section>
     <h2 class="sec">One thing this can't tell you</h2>
     <div class="read">
-      <p>Fifty-nine battles that beat writers wrote about never moved the depth
-        chart at all. The tempting read is that the coverage invented them.
-        That read is wrong, and the data says so.</p>
+      <p><strong id="mo"></strong> battles that beat writers wrote about never
+        moved the depth chart at all. The tempting read is that the coverage
+        invented them. That read is wrong, and the data says so.</p>
 
       <p>Sort those by side of the ball and the pattern is structural:
-        <strong>70%</strong> of covered defensive battles never register,
-        against <strong>25%</strong> of offensive-line battles. That gradient
+        <strong id="pdef"></strong> of covered defensive battles never register,
+        against <strong id="pol"></strong> of offensive-line battles. That gradient
         isn't media behavior — it's chart resolution. A public depth chart
         lists DE, DT, LB, CB, S. It has no row for the nickel, no row for the
         third safety, no row for a rotational edge. The fight can be
@@ -273,7 +273,7 @@ footer{border-top:3px solid var(--ink);padding:22px 0 50px;font-family:var(--mon
         competitions nobody is covering</mark>. The reverse needs a source
         that can see defensive sub-packages, and a public depth chart can't.</p>
     </div>
-    <p class="note">Ten teams are missing beat research — the agent pool ran
+    <p class="note"><span id="nores"></span> teams are missing beat research — the agent pool ran
       out its search budget mid-run and the remaining agents correctly returned
       nothing rather than inventing coverage. Those teams are hollow on the
       board and excluded from the coverage split. Missing research is not
@@ -298,6 +298,14 @@ document.getElementById('dateline').textContent =
   new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 document.getElementById('win').textContent = P.window || '';
 document.getElementById('nb').textContent = P.totals.battles;
+
+/* Coverage claims read from the payload so the prose can't go stale as
+   more team research lands. */
+const C = P.coverage, side = C.bySide;
+document.getElementById('mo').textContent = C.mediaOnly;
+document.getElementById('pdef').textContent = (side.defense?.pct ?? 0)+'%';
+document.getElementById('pol').textContent  = (side['o-line']?.pct ?? 0)+'%';
+document.getElementById('nores').textContent = 32 - P.researchedCount;
 
 /* --------------------------------------------------------------- tally */
 const uncovered = P.totals.battles - P.totals.covered;

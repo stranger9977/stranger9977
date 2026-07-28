@@ -110,7 +110,11 @@ def load_reported() -> pd.DataFrame:
 
 def load_computed() -> pd.DataFrame:
     c = pd.read_parquet(COMPUTED).reset_index(drop=True)
+    from battles import as_list
+    c["contenders"] = c.contenders.apply(as_list)
     c["names"] = c.contenders.apply(lambda h: frozenset(norm(x) for x in h))
+    if not c.names.map(len).sum():
+        raise SystemExit("contenders parsed to nothing -- check true_battles.parquet")
     return c
 
 
