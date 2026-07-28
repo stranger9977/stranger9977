@@ -1,0 +1,1999 @@
+{
+ "ARI": {
+  "total": 11,
+  "starter": 2,
+  "depth": 9,
+  "slots": 8,
+  "battles": [
+   {
+    "pos": "RG",
+    "rank": 1,
+    "changes": 2,
+    "contenders": [
+     "Isaiah Adams",
+     "Chase Bisontis"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Ka'ena Decambra",
+     "Ka'ena De Cambra",
+     "Hayden Conner"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Chase Bisontis",
+     "Isaiah Adams"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Demontrey Jacobs",
+     "Josh Fryar"
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Kei'Trel Clark",
+     "Isaiah Oliver"
+    ]
+   },
+   {
+    "pos": "LDT",
+    "rank": 3,
+    "changes": 1,
+    "contenders": [
+     "Kaleb Proctor",
+     "Zachary Carter"
+    ]
+   }
+  ]
+ },
+ "ATL": {
+  "total": 24,
+  "starter": 4,
+  "depth": 20,
+  "slots": 19,
+  "battles": [
+   {
+    "pos": "KR",
+    "rank": 3,
+    "changes": 3,
+    "contenders": [
+     "Natrone Brooks",
+     "Deven Thompkins",
+     "Dylan Drummond"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Dylan Drummond",
+     "Natrone Brooks",
+     "Vinny Anthony II"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Kam Dewberry",
+     "Layden Robinson"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Ethan Onianwa",
+     "Brandon Walton",
+     "Andrew Stueber"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Deven Thompkins",
+     "Zachariah Branch"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Jake Matthews",
+     null
+    ]
+   }
+  ]
+ },
+ "BAL": {
+  "total": 16,
+  "starter": 3,
+  "depth": 13,
+  "slots": 13,
+  "battles": [
+   {
+    "pos": "LG",
+    "rank": 3,
+    "changes": 3,
+    "contenders": [
+     "Jared Penning",
+     "Olaivavega Ioane",
+     "Hakeem Adeniji"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Evan Beerntsen",
+     "John Simpson"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Corey Bullock",
+     "Ethan Pocic"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Olaivavega Ioane",
+     "John Simpson"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "John Simpson",
+     "Olaivavega Ioane"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Jovaughn Gwyn",
+     "Danny Pinter"
+    ]
+   }
+  ]
+ },
+ "BUF": {
+  "total": 17,
+  "starter": 1,
+  "depth": 16,
+  "slots": 16,
+  "battles": [
+   {
+    "pos": "RILB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Keonta Jenkins",
+     "Kaleb Elarms-Orr"
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Davison Igbinosun",
+     "Maxwell Hairston"
+    ]
+   },
+   {
+    "pos": "H",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Tommy Doman",
+     "Tommy Doman Jr."
+    ]
+   },
+   {
+    "pos": "LILB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Joe Andreessen",
+     "Kaleb Elarms-Orr"
+    ]
+   },
+   {
+    "pos": "P",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Tommy Doman",
+     "Tommy Doman Jr."
+    ]
+   },
+   {
+    "pos": "RB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Ty Johnson",
+     "Ray Davis"
+    ]
+   }
+  ]
+ },
+ "CAR": {
+  "total": 16,
+  "starter": 2,
+  "depth": 14,
+  "slots": 15,
+  "battles": [
+   {
+    "pos": "LDE",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Tywone Malone",
+     "Tywone Malone Jr.",
+     "Aaron Hall"
+    ]
+   },
+   {
+    "pos": "TE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Ja'Tavion Sanders",
+     "Tommy Tremble"
+    ]
+   },
+   {
+    "pos": "WLB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Nic Scourton",
+     "Patrick Jones II"
+    ]
+   },
+   {
+    "pos": "LDE",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Aaron Hall",
+     "Elijah Garcia"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Rasheed Walker",
+     "Monroe Freeling"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Chandler Zavala",
+     "Brady Christensen"
+    ]
+   }
+  ]
+ },
+ "CHI": {
+  "total": 10,
+  "starter": 3,
+  "depth": 7,
+  "slots": 8,
+  "battles": [
+   {
+    "pos": "LT",
+    "rank": 1,
+    "changes": 2,
+    "contenders": [
+     "Braxton Jones",
+     "Ozzy Trapilo"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Ozzy Trapilo",
+     "Braxton Jones"
+    ]
+   },
+   {
+    "pos": "PR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Zavion Thomas",
+     "Kalif Raymond"
+    ]
+   },
+   {
+    "pos": "PR",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Kalif Raymond",
+     "Zavion Thomas"
+    ]
+   },
+   {
+    "pos": "RT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Mason Murphy",
+     "Theo Benedet"
+    ]
+   },
+   {
+    "pos": "SS",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Cam Lewis",
+     "Elijah Hicks"
+    ]
+   }
+  ]
+ },
+ "CIN": {
+  "total": 4,
+  "starter": 0,
+  "depth": 4,
+  "slots": 4,
+  "battles": [
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Liam Brown",
+     "Brian Parker II"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Javon Foster",
+     "Cody Ford"
+    ]
+   },
+   {
+    "pos": "RT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Cody Ford",
+     "Andrew Coker"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 3,
+    "changes": 1,
+    "contenders": [
+     "Andrew Coker",
+     "Javon Foster"
+    ]
+   }
+  ]
+ },
+ "CLE": {
+  "total": 19,
+  "starter": 2,
+  "depth": 17,
+  "slots": 16,
+  "battles": [
+   {
+    "pos": "MLB",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Nathaniel Watson",
+     "Winston Reid"
+    ]
+   },
+   {
+    "pos": "MLB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Edefuan Ulofoshio",
+     "Nathaniel Watson"
+    ]
+   },
+   {
+    "pos": "RDE",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Khordae Sydnor",
+     "Benton Whitley"
+    ]
+   },
+   {
+    "pos": "RDE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Myles Garrett",
+     "Jared Verse"
+    ]
+   },
+   {
+    "pos": "WLB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Jeremiah Owusu-Koramoah",
+     "Winston Reid"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Luke Wypler",
+     "Parker Brailsford"
+    ]
+   }
+  ]
+ },
+ "DAL": {
+  "total": 29,
+  "starter": 4,
+  "depth": 25,
+  "slots": 24,
+  "battles": [
+   {
+    "pos": "LILB",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Dee Winters",
+     "Justin Barron",
+     "Jaishawn Barham"
+    ]
+   },
+   {
+    "pos": "TE",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Brevyn Spann-Ford",
+     "Luke Schoonmaker"
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Devin Moore",
+     "Corey Ballentine",
+     "Josh Butler"
+    ]
+   },
+   {
+    "pos": "RILB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Curtis Robinson",
+     "Marist Liufau"
+    ]
+   },
+   {
+    "pos": "TE",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Luke Schoonmaker",
+     "Brevyn Spann-Ford"
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Shavon Revel Jr.",
+     "Cobie Durant"
+    ]
+   }
+  ]
+ },
+ "DEN": {
+  "total": 6,
+  "starter": 0,
+  "depth": 6,
+  "slots": 5,
+  "battles": [
+   {
+    "pos": "RT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Frank Crum",
+     "Tyler Miller",
+     "Reid Holskey"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Alex Palczewski",
+     "Kage Casey"
+    ]
+   },
+   {
+    "pos": "RT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Kage Casey",
+     "Frank Crum"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 3,
+    "changes": 1,
+    "contenders": [
+     "Nash Jones",
+     "Alex Palczewski"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 3,
+    "changes": 1,
+    "contenders": [
+     "Marques Cox",
+     "Gavin Ortega"
+    ]
+   }
+  ]
+ },
+ "DET": {
+  "total": 10,
+  "starter": 1,
+  "depth": 9,
+  "slots": 10,
+  "battles": [
+   {
+    "pos": "RCB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Terrion Arnold",
+     "Keith Abney II"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Ben Bartch",
+     "Juice Scruggs"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Larry Borom",
+     "Giovanni Manu"
+    ]
+   },
+   {
+    "pos": "QB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Teddy Bridgewater",
+     null
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Keith Abney II",
+     "Nick Whiteside"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Miles Frazier",
+     "Colby Sorsdal"
+    ]
+   }
+  ]
+ },
+ "GB": {
+  "total": 20,
+  "starter": 4,
+  "depth": 16,
+  "slots": 20,
+  "battles": [
+   {
+    "pos": "NT",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Devonte Wyatt",
+     "Javon Hargrave"
+    ]
+   },
+   {
+    "pos": "PK",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Brandon McManus",
+     "Trey Smack"
+    ]
+   },
+   {
+    "pos": "RDE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Javon Hargrave",
+     "Devonte Wyatt"
+    ]
+   },
+   {
+    "pos": "WLB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Brenton Cox Jr.",
+     "Lukas Van Ness"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Travis Glover",
+     "Donovan Jennings"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Brant Banks",
+     "Darian Kinnard"
+    ]
+   }
+  ]
+ },
+ "HOU": {
+  "total": 13,
+  "starter": 3,
+  "depth": 10,
+  "slots": 13,
+  "battles": [
+   {
+    "pos": "C",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Jake Andrews",
+     "Keylan Rutledge"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Keylan Rutledge",
+     "Wyatt Teller"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Wyatt Teller",
+     "Ed Ingram"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Jake Andrews"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Tremon Smith",
+     "Woody Marks"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Ed Ingram",
+     "Febechi Nwaiwu"
+    ]
+   }
+  ]
+ },
+ "IND": {
+  "total": 22,
+  "starter": 6,
+  "depth": 16,
+  "slots": 18,
+  "battles": [
+   {
+    "pos": "PK",
+    "rank": 1,
+    "changes": 2,
+    "contenders": [
+     "Blake Grupe",
+     "Spencer Shrader"
+    ]
+   },
+   {
+    "pos": "PK",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Spencer Shrader",
+     "Blake Grupe"
+    ]
+   },
+   {
+    "pos": "SLB",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Bryce Boettcher",
+     "Tahj Chambers"
+    ]
+   },
+   {
+    "pos": "RT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Jack Wilson",
+     "Nolan Rucci",
+     "Bayron Matos"
+    ]
+   },
+   {
+    "pos": "LDE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "JT Tuimoloau",
+     "Jaylahn Tuimoloau"
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Kenny Moore II",
+     "Justin Walley"
+    ]
+   }
+  ]
+ },
+ "JAX": {
+  "total": 16,
+  "starter": 2,
+  "depth": 14,
+  "slots": 10,
+  "battles": [
+   {
+    "pos": "RG",
+    "rank": 3,
+    "changes": 4,
+    "contenders": [
+     "Sal Wormley",
+     "Garrett DiGiorgio",
+     "Jimto Obidegwu",
+     "Wyatt Milum"
+    ]
+   },
+   {
+    "pos": "RB",
+    "rank": 1,
+    "changes": 2,
+    "contenders": [
+     "Chris Rodriguez Jr.",
+     "Bhayshul Tuten"
+    ]
+   },
+   {
+    "pos": "RB",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Bhayshul Tuten",
+     "Chris Rodriguez Jr."
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Wyatt Milum",
+     "Trystan Colon"
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Keni-H Lovely",
+     "Dane Jackson"
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Keith Taylor",
+     "Devon Marshall"
+    ]
+   }
+  ]
+ },
+ "KC": {
+  "total": 17,
+  "starter": 2,
+  "depth": 15,
+  "slots": 16,
+  "battles": [
+   {
+    "pos": "LCB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "D'Arco Perkins-McAllister",
+     "Zelmar Vedder",
+     "Melvin Smith Jr."
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Nohl Williams",
+     "L'Jarius Sneed"
+    ]
+   },
+   {
+    "pos": "TE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Travis Kelce",
+     null
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Melvin Smith Jr.",
+     "Nohl Williams"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Josh Thompson",
+     "C.J. Hanson"
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Chris Roland-Wallace",
+     "Jadon Canady"
+    ]
+   }
+  ]
+ },
+ "LA": {
+  "total": 14,
+  "starter": 1,
+  "depth": 13,
+  "slots": 14,
+  "battles": [
+   {
+    "pos": "SLB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Jared Verse",
+     "Myles Garrett"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Beaux Limmer",
+     "Dylan McMahon"
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Emmanuel Forbes Jr.",
+     "Cam Lampkin"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Justin Dedich",
+     "Beaux Limmer"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "AJ Arcuri",
+     "David Quessenberry"
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Al'zillion Hamilton",
+     "Emmanuel Forbes Jr."
+    ]
+   }
+  ]
+ },
+ "LAC": {
+  "total": 25,
+  "starter": 3,
+  "depth": 22,
+  "slots": 24,
+  "battles": [
+   {
+    "pos": "WLB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Niles King",
+     "Nadame Tucker",
+     "Kyle Kennard"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Trevor Penning",
+     "Jake Slaughter"
+    ]
+   },
+   {
+    "pos": "RDE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Justin Eboigbe",
+     "Jamaree Caldwell"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Jake Slaughter",
+     "Cole Strange"
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Jordan Oladokun",
+     "Rodney Shelley"
+    ]
+   },
+   {
+    "pos": "LDE",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Josh Fuga",
+     "Jahmeer Carter"
+    ]
+   }
+  ]
+ },
+ "LV": {
+  "total": 17,
+  "starter": 1,
+  "depth": 16,
+  "slots": 13,
+  "battles": [
+   {
+    "pos": "SLB",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Charles Snowden",
+     "Jahfari Harvey",
+     "Malcolm Koonce"
+    ]
+   },
+   {
+    "pos": "LILB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Chris Thomas",
+     "Cameron McGrone"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Isaiah Jatta",
+     "Kamar Missouri"
+    ]
+   },
+   {
+    "pos": "SLB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Jahfari Harvey",
+     "Cian Slone"
+    ]
+   },
+   {
+    "pos": "SLB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Malcolm Koonce",
+     "Kwity Paye"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Trey Zuhn III",
+     "Jordan Meredith"
+    ]
+   }
+  ]
+ },
+ "MIA": {
+  "total": 18,
+  "starter": 4,
+  "depth": 14,
+  "slots": 16,
+  "battles": [
+   {
+    "pos": "SS",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Isaiah Johnson",
+     "Jordan Colbert",
+     "Louis Moore"
+    ]
+   },
+   {
+    "pos": "SS",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Jordan Colbert",
+     "Louis Moore",
+     "Major Burns"
+    ]
+   },
+   {
+    "pos": "FS",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Lonnie Johnson Jr.",
+     "Zayne Anderson"
+    ]
+   },
+   {
+    "pos": "LDT",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Jordan Phillips",
+     "Kenneth Grant"
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Jason Marshall Jr.",
+     "Marco Wilson"
+    ]
+   },
+   {
+    "pos": "RDE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Joshua Uche",
+     "Josh Uche"
+    ]
+   }
+  ]
+ },
+ "MIN": {
+  "total": 15,
+  "starter": 2,
+  "depth": 13,
+  "slots": 14,
+  "battles": [
+   {
+    "pos": "LT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Tristan Leigh",
+     "Caleb Etienne"
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Tavierre Thomas",
+     "Byron Murphy Jr."
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Byron Murphy Jr.",
+     "James Pierre"
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "James Pierre",
+     "Charles Demmings"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Joe Huber",
+     "Henry Byrd"
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Tyreek Chappell",
+     "Tavierre Thomas"
+    ]
+   }
+  ]
+ },
+ "NE": {
+  "total": 13,
+  "starter": 3,
+  "depth": 10,
+  "slots": 10,
+  "battles": [
+   {
+    "pos": "LT",
+    "rank": 1,
+    "changes": 2,
+    "contenders": [
+     "Will Campbell",
+     "James Hudson III"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "James Hudson III",
+     "Will Campbell"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Caleb Lomu",
+     "Lorenz Metz"
+    ]
+   },
+   {
+    "pos": "WR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Romeo Doubs",
+     "A.J. Brown"
+    ]
+   },
+   {
+    "pos": "TE",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Julian Hill",
+     "Eli Raridon"
+    ]
+   },
+   {
+    "pos": "WR",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Kayshon Boutte",
+     "Romeo Doubs"
+    ]
+   }
+  ]
+ },
+ "NO": {
+  "total": 17,
+  "starter": 3,
+  "depth": 14,
+  "slots": 15,
+  "battles": [
+   {
+    "pos": "KR",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Devin Neal",
+     "Barion Brown",
+     "Kendre Miller"
+    ]
+   },
+   {
+    "pos": "RB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Ty Chandler",
+     "Kendre Miller",
+     "Devin Neal"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Kendre Miller",
+     "Barion Brown"
+    ]
+   },
+   {
+    "pos": "LDE",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Vernon Broughton",
+     "Cameron Jordan"
+    ]
+   },
+   {
+    "pos": "PR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Trey Palmer",
+     "Barion Brown"
+    ]
+   },
+   {
+    "pos": "LDE",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Tyree Wilson",
+     "Vernon Broughton"
+    ]
+   }
+  ]
+ },
+ "NYG": {
+  "total": 34,
+  "starter": 7,
+  "depth": 27,
+  "slots": 27,
+  "battles": [
+   {
+    "pos": "NT",
+    "rank": 2,
+    "changes": 3,
+    "contenders": [
+     "Leki Fotu",
+     "Sam Roberts"
+    ]
+   },
+   {
+    "pos": "NT",
+    "rank": 3,
+    "changes": 3,
+    "contenders": [
+     "Bobby Jamison-Travis",
+     "Leki Fotu"
+    ]
+   },
+   {
+    "pos": "LDE",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Shelby Harris",
+     "Zacch Pickens"
+    ]
+   },
+   {
+    "pos": "LDE",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Bobby Jamison-Travis",
+     "Zacch Pickens",
+     "Roy Robertson-Harris"
+    ]
+   },
+   {
+    "pos": "PR",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Jevon Holland",
+     "Gunner Olszewski",
+     "Braxton Berrios"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Gunner Olszewski",
+     "Deonte Banks"
+    ]
+   }
+  ]
+ },
+ "NYJ": {
+  "total": 48,
+  "starter": 9,
+  "depth": 39,
+  "slots": 32,
+  "battles": [
+   {
+    "pos": "NB",
+    "rank": 1,
+    "changes": 3,
+    "contenders": [
+     "Jarvis Brownlee Jr.",
+     "D'Angelo Ponds"
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 2,
+    "changes": 3,
+    "contenders": [
+     "Jordan Clark",
+     "Jarvis Brownlee Jr."
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 2,
+    "changes": 3,
+    "contenders": [
+     "Nahshon Wright",
+     "Qwan'tez Stiggers",
+     "D'Angelo Ponds",
+     "Tre Brown"
+    ]
+   },
+   {
+    "pos": "WLB",
+    "rank": 1,
+    "changes": 2,
+    "contenders": [
+     "Kiko Mauigoa",
+     "Jamien Sherwood",
+     "Demario Davis"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Xavier Newman",
+     "Landon Young"
+    ]
+   },
+   {
+    "pos": "PK",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Lenny Krieg",
+     "Younghoe Koo",
+     "Cade York"
+    ]
+   }
+  ]
+ },
+ "PHI": {
+  "total": 23,
+  "starter": 1,
+  "depth": 22,
+  "slots": 17,
+  "battles": [
+   {
+    "pos": "RILB",
+    "rank": 3,
+    "changes": 3,
+    "contenders": [
+     "Chandler Martin",
+     "Deontae Lawson"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Micah Morris",
+     "Mike Jordan",
+     "Michael Jordan"
+    ]
+   },
+   {
+    "pos": "QB",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Tanner McKee",
+     "Andy Dalton",
+     null
+    ]
+   },
+   {
+    "pos": "RDE",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Ty Robinson",
+     "AJ Epenesa"
+    ]
+   },
+   {
+    "pos": "RDE",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Gabe Hall",
+     "Ty Robinson"
+    ]
+   },
+   {
+    "pos": "WR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "A.J. Brown",
+     "DeVonta Smith"
+    ]
+   }
+  ]
+ },
+ "PIT": {
+  "total": 24,
+  "starter": 2,
+  "depth": 22,
+  "slots": 22,
+  "battles": [
+   {
+    "pos": "LILB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Daylan Carnell",
+     "Jamin Davis",
+     "Malik Harrison"
+    ]
+   },
+   {
+    "pos": "TE",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "JJ Galbreath",
+     "Jaheim Bell",
+     "Robert Tonyan"
+    ]
+   },
+   {
+    "pos": "LILB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Malik Harrison",
+     "Payton Wilson"
+    ]
+   },
+   {
+    "pos": "QB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Mason Rudolph",
+     "Aaron Rodgers"
+    ]
+   },
+   {
+    "pos": "C",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Brock Hoffman",
+     "Ryan McCollum"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Jaylen Warren",
+     "Eli Heidenreich"
+    ]
+   }
+  ]
+ },
+ "SEA": {
+  "total": 15,
+  "starter": 0,
+  "depth": 15,
+  "slots": 12,
+  "battles": [
+   {
+    "pos": "LCB",
+    "rank": 3,
+    "changes": 3,
+    "contenders": [
+     "Shemar Jean-Charles",
+     "Andre Fuller",
+     "Brandon Johnson"
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Andre Fuller",
+     "Tyrone Broden",
+     "Shemar Jean-Charles"
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Nehemiah Pritchett",
+     "Michael Dansby"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Christian Haynes",
+     "Beau Stephens"
+    ]
+   },
+   {
+    "pos": "RG",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Beau Stephens",
+     "Christian Haynes"
+    ]
+   },
+   {
+    "pos": "RT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Mason Richman",
+     "Amari Kight"
+    ]
+   }
+  ]
+ },
+ "SF": {
+  "total": 19,
+  "starter": 0,
+  "depth": 19,
+  "slots": 13,
+  "battles": [
+   {
+    "pos": "FS",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Darrick Forrest",
+     "Derrick Canteen",
+     "Ashtyn Davis"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Brett Toth",
+     "Carver Willis",
+     "Connor Colby"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Carver Willis",
+     "Vederian Lowe",
+     "Austen Pleasants"
+    ]
+   },
+   {
+    "pos": "FS",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Derrick Canteen",
+     "Patrick McMorris"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Connor Colby",
+     "Brett Toth",
+     "Nick Zakelj"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Vederian Lowe",
+     "Austen Pleasants"
+    ]
+   }
+  ]
+ },
+ "TB": {
+  "total": 16,
+  "starter": 3,
+  "depth": 13,
+  "slots": 14,
+  "battles": [
+   {
+    "pos": "KR",
+    "rank": 1,
+    "changes": 2,
+    "contenders": [
+     "Kameron Johnson",
+     "Kenneth Gainwell",
+     "Kenny Gainwell"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Owen Wright",
+     "Josh Williams",
+     "Sean Tucker"
+    ]
+   },
+   {
+    "pos": "WR",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Chris Godwin Jr.",
+     "Emeka Egbuka"
+    ]
+   },
+   {
+    "pos": "KR",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Josh Williams",
+     "Kameron Johnson"
+    ]
+   },
+   {
+    "pos": "LS",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Wesley Brown",
+     "Scott Daly"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Justin Skule",
+     "Benjamin Chukwuma"
+    ]
+   }
+  ]
+ },
+ "TEN": {
+  "total": 21,
+  "starter": 3,
+  "depth": 18,
+  "slots": 18,
+  "battles": [
+   {
+    "pos": "C",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Pat Coogan",
+     "Trey Hill",
+     "Andre James"
+    ]
+   },
+   {
+    "pos": "LDT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Cam Horsley",
+     "C.J. Ravenell"
+    ]
+   },
+   {
+    "pos": "LT",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Brandon Crenshaw-Dickson",
+     "Ryan Hayes",
+     "Rasheed Miller"
+    ]
+   },
+   {
+    "pos": "FS",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Tony Adams",
+     "Kevin Winston Jr."
+    ]
+   },
+   {
+    "pos": "NB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Alontae Taylor",
+     "Marcus Harris"
+    ]
+   },
+   {
+    "pos": "RCB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Joshua Williams",
+     "Alontae Taylor"
+    ]
+   }
+  ]
+ },
+ "WAS": {
+  "total": 15,
+  "starter": 1,
+  "depth": 14,
+  "slots": 12,
+  "battles": [
+   {
+    "pos": "LCB",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Tre Hawkins III",
+     "Antonio Hamilton Sr.",
+     "Rasul Douglas"
+    ]
+   },
+   {
+    "pos": "LG",
+    "rank": 2,
+    "changes": 2,
+    "contenders": [
+     "Tanoa Togiai",
+     "Timothy McKay"
+    ]
+   },
+   {
+    "pos": "LCB",
+    "rank": 3,
+    "changes": 2,
+    "contenders": [
+     "Car'lin Vigers",
+     "Tre Hawkins III",
+     "Antonio Hamilton Sr."
+    ]
+   },
+   {
+    "pos": "LILB",
+    "rank": 1,
+    "changes": 1,
+    "contenders": [
+     "Frankie Luvu",
+     "Leo Chenal"
+    ]
+   },
+   {
+    "pos": "LILB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Jordan Magee",
+     "Frankie Luvu"
+    ]
+   },
+   {
+    "pos": "RILB",
+    "rank": 2,
+    "changes": 1,
+    "contenders": [
+     "Leo Chenal",
+     "Nick Bellore"
+    ]
+   }
+  ]
+ }
+}

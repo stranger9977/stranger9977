@@ -1,0 +1,361 @@
+<title>The Undercard</title>
+<style>
+  /* ==========================================================
+     THE UNDERCARD — a fight-card reading of NFL camp battles.
+     Identity: vintage boxing marquee. Aged poster stock, gold
+     leaf, one blood red. Heavy condensed display, everything
+     caps, ornamental rules. Single visual world (always dark) —
+     a fight poster is not a light-mode object.
+     ========================================================== */
+  :root{
+    --night:#0c0a08; --night-2:#141110; --card:#f3ecde; --card-2:#e6dcc7;
+    --ink:#191410; --ink-dim:#6b5f4d; --paper-rule:#19141033;
+    --gold:#c9a227; --gold-hi:#e8c65a; --blood:#a8321f;
+    --dim:#8a7c66; --steel:#4a5560;
+    --disp:"Haettenschweiler","Arial Narrow","Helvetica Neue Condensed",ui-sans-serif,system-ui,sans-serif;
+    --body:"Iowan Old Style",Charter,Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  .pg{background:var(--night);color:var(--card);font-family:var(--body);
+      -webkit-font-smoothing:antialiased;overflow-x:hidden;
+      background-image:radial-gradient(120% 80% at 50% -10%, #1d1813 0%, transparent 60%)}
+  .pg ::selection{background:var(--gold);color:#17120a}
+  .wrap{max-width:920px;margin-inline:auto;padding-inline:clamp(18px,5vw,40px)}
+  h1,h2,h3{font-family:var(--disp);font-weight:900;text-transform:uppercase;
+           letter-spacing:-.01em;line-height:.94;margin:0;text-wrap:balance}
+  p{margin:0 0 1em;line-height:1.62;font-size:1.03rem}
+  p:last-child{margin-bottom:0}
+  .dim{color:var(--dim)}
+  .mono{font-family:var(--mono)}
+
+  /* ---------- marquee ---------- */
+  .marquee{padding:clamp(40px,9vw,74px) 0 clamp(26px,5vw,40px);text-align:center;position:relative}
+  .rule-orn{display:flex;align-items:center;gap:14px;justify-content:center;color:var(--gold);margin:0 0 22px}
+  .rule-orn::before,.rule-orn::after{content:"";height:1px;flex:1;max-width:120px;background:currentColor;opacity:.6}
+  .rule-orn span{font-family:var(--mono);font-size:.66rem;letter-spacing:.32em;text-transform:uppercase}
+  .marquee h1{font-size:clamp(3.2rem,14vw,7rem);color:var(--card);
+              text-shadow:0 2px 0 #0006}
+  .marquee h1 em{font-style:normal;color:var(--gold);display:block}
+  .presents{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;
+            text-transform:uppercase;color:var(--dim);margin:20px 0 0}
+  .dek{font-size:clamp(1.05rem,3.6vw,1.2rem);line-height:1.55;max-width:56ch;
+       margin:26px auto 0;color:var(--card-2)}
+  .dek b{color:var(--gold);font-weight:400}
+
+  /* ---------- tale of the tape ---------- */
+  .tape{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ffffff14;
+        border:1px solid #ffffff1f;margin:clamp(28px,5vw,44px) 0 0}
+  .tape .c{background:var(--night-2);padding:20px 14px;text-align:center}
+  .tape .n{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,7vw,3rem);
+           line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+  .tape .c:first-child .n{color:var(--steel)}
+  .tape .l{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;
+           text-transform:uppercase;color:var(--dim);margin-top:9px;line-height:1.45}
+
+  /* ---------- the venue map ---------- */
+  .ring{margin:clamp(40px,8vw,70px) 0 0}
+  .ringhead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+            border-bottom:1px solid #ffffff26;padding-bottom:12px;margin-bottom:6px}
+  .ringhead h2{font-size:clamp(1.4rem,5vw,1.9rem)}
+  .ringhead .hint{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;
+                  text-transform:uppercase;color:var(--dim);margin-left:auto}
+  .stage{position:relative;border:1px solid #ffffff1f;background:
+         radial-gradient(90% 70% at 50% 40%, #17130f 0%, #0b0908 70%);
+         overflow:hidden;margin-top:14px}
+  svg.map{display:block;width:100%;height:auto;touch-action:manipulation}
+  .venues{transition:transform .85s cubic-bezier(.65,.02,.28,1)}
+  .v-hit{cursor:pointer}
+  .v-dot{transition:r .3s ease, opacity .5s ease, fill .3s ease}
+  .v-lab{font-family:var(--mono);font-size:9px;letter-spacing:.06em;fill:#c9bda6;
+         pointer-events:none;opacity:.72;transition:opacity .4s ease}
+  .v-hit:hover .v-dot{r:9}
+  .v-hit:hover .v-lab{opacity:1}
+  .dimmed .v-dot{opacity:.16}
+  .dimmed .v-lab{opacity:0}
+  .dimmed .sel .v-dot{opacity:1}
+  .dimmed .sel .v-lab{opacity:1}
+  .halo{fill:none;stroke:var(--gold);stroke-width:1.5;opacity:0;transition:opacity .5s ease}
+  .sel .halo{opacity:.9}
+
+  .backbar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:10px;
+           padding:10px 12px;background:linear-gradient(transparent,#0b0908cc 40%);
+           align-items:center;pointer-events:none}
+  .backbar button{pointer-events:auto;font-family:var(--mono);font-size:.66rem;
+    letter-spacing:.14em;text-transform:uppercase;background:#0000;color:var(--gold);
+    border:1px solid #c9a22766;padding:8px 14px;cursor:pointer;border-radius:2px}
+  .backbar button:hover{background:#c9a2271a}
+  .backbar button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .backbar .note{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;
+                 text-transform:uppercase;color:var(--dim)}
+
+  /* ---------- fight card ---------- */
+  .card{background:linear-gradient(#f5efe3,#e9dfca);color:var(--ink);
+        margin-top:16px;padding:clamp(20px,4vw,34px);
+        box-shadow:0 24px 60px -30px #000, inset 0 0 0 1px #0002;
+        display:none}
+  .card.on{display:block;animation:drop .5s cubic-bezier(.2,.8,.3,1) both}
+  @keyframes drop{from{opacity:0;transform:translateY(10px)}}
+  @media (prefers-reduced-motion:reduce){
+    .card.on{animation:none}.venues{transition:none}
+  }
+  .card .top{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;
+             border-bottom:2px solid var(--ink);padding-bottom:14px}
+  .card .team{font-family:var(--disp);font-weight:900;text-transform:uppercase;
+              font-size:clamp(1.8rem,6vw,2.6rem);line-height:.92;color:var(--ink)}
+  .card .team small{display:block;font-family:var(--mono);font-weight:400;
+    font-size:.6rem;letter-spacing:.2em;color:var(--ink-dim);margin-top:7px}
+  .card .rec{margin-left:auto;text-align:right;font-family:var(--mono);
+             font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+  .card .rec b{display:block;font-family:var(--disp);font-size:2rem;color:var(--blood);
+               letter-spacing:0;line-height:1;margin-bottom:3px}
+
+  .bouts{margin-top:18px;display:grid;gap:0}
+  .bout{padding:15px 0;border-bottom:1px solid var(--paper-rule)}
+  .bout:last-child{border-bottom:none}
+  .bout .bh{display:flex;align-items:baseline;gap:10px;margin-bottom:9px}
+  .bout .slot{font-family:var(--disp);font-weight:900;text-transform:uppercase;
+              font-size:1.02rem;color:var(--ink)}
+  .bout .tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.13em;
+             text-transform:uppercase;padding:3px 7px;border:1px solid currentColor}
+  .tag.main{color:var(--blood)}
+  .tag.under{color:#6a6152}
+  .bout .cnt{margin-left:auto;font-family:var(--mono);font-size:.66rem;color:var(--ink-dim)}
+  .fighters{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+  .fighter{font-family:var(--body);font-size:1.02rem;color:var(--ink)}
+  .fighter.hold{font-weight:700}
+  .vs{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--blood)}
+  .card .foot{margin-top:16px;padding-top:12px;border-top:1px solid var(--paper-rule);
+    font-family:var(--mono);font-size:.62rem;line-height:1.6;color:var(--ink-dim)}
+
+  .empty{padding:34px 6px;text-align:center;font-family:var(--mono);
+         font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+  /* ---------- prose ---------- */
+  section.txt{padding:clamp(40px,8vw,70px) 0 0}
+  section.txt h2{font-size:clamp(1.5rem,5.4vw,2.1rem);margin-bottom:16px}
+  section.txt .kick{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+  .read{max-width:62ch}
+  .pull{border-left:3px solid var(--gold);padding:6px 0 6px 20px;margin:26px 0;
+        font-size:clamp(1.1rem,4vw,1.35rem);line-height:1.42;color:var(--card)}
+  .bars{margin:26px 0;display:grid;gap:9px}
+  .br{display:grid;grid-template-columns:78px 1fr 52px;align-items:center;gap:12px}
+  .br .k{font-family:var(--mono);font-size:.68rem;color:var(--dim);text-align:right}
+  .br .t{height:22px;background:#ffffff0f;position:relative}
+  .br .t i{position:absolute;left:0;top:0;bottom:0;background:var(--gold);display:block}
+  .br .t i.lo{background:var(--steel)}
+  .br .n{font-family:var(--disp);font-weight:900;font-size:1.15rem;color:var(--card);
+         font-variant-numeric:tabular-nums}
+  .caveat{border:1px solid #ffffff1f;padding:18px 20px;margin-top:28px;background:#ffffff08}
+  .caveat p{font-size:.94rem;color:var(--dim);margin:0}
+  .caveat b{color:var(--card-2);font-weight:600}
+  footer{margin-top:clamp(44px,8vw,70px);border-top:1px solid #ffffff26;padding:22px 0 64px}
+  footer p{font-family:var(--mono);font-size:.66rem;line-height:1.75;color:var(--dim)}
+</style>
+
+<div class="pg">
+  <div class="wrap">
+
+    <header class="marquee">
+      <div class="rule-orn"><span>27 July 2026 · Camps Open</span></div>
+      <h1>The<em>Undercard</em></h1>
+      <p class="presents">881 starting jobs · 32 venues · one honest question</p>
+      <p class="dek">Everybody covers the main event. We counted every roster move in the
+        NFL for a year, and found the fight is <b>somewhere else entirely</b>.</p>
+
+      <div class="tape">
+        <div class="c"><div class="n" id="t-r1">—</div><div class="l">starter jobs<br>that moved</div></div>
+        <div class="c"><div class="n" id="t-dep">—</div><div class="l">moves below<br>the starter line</div></div>
+        <div class="c"><div class="n" id="t-jul">13</div><div class="l">moves in all<br>of July</div></div>
+      </div>
+    </header>
+
+    <section class="ring">
+      <div class="ringhead">
+        <h2>The Venues</h2>
+        <span class="hint">Tap a camp</span>
+      </div>
+      <div class="stage">
+        <svg class="map" viewBox="0 0 1000 600" role="img" aria-label="NFL training camp locations, sized by roster churn">
+          <g class="venues" id="venues"></g>
+        </svg>
+        <div class="backbar">
+          <button id="back" hidden>← All 32 camps</button>
+          <span class="note" id="status">Marker size = roster moves since 1 May</span>
+        </div>
+      </div>
+      <div class="card" id="card"></div>
+    </section>
+
+    <section class="txt">
+      <p class="kick">The finding</p>
+      <h2>The main event is a walkover</h2>
+      <div class="read">
+        <p>Every starting job in the NFL is a slot on a depth chart, and every day since
+          March that chart has been photographed. Which means you can count, precisely,
+          how often a job actually changes hands.</p>
+        <p>Sort those moves by where they sit on the depth chart and the shape is the
+          opposite of the coverage.</p>
+      </div>
+      <div class="bars" id="rankbars"></div>
+      <p class="pull">The competition doesn't thin out below the starter.
+        It <em>intensifies</em>.</p>
+      <div class="read">
+        <p>Three and a half times as much movement at the third string as at the first.
+          The job being fought over in August is not the starting job. It is the
+          fifty-third one.</p>
+      </div>
+    </section>
+
+    <section class="txt">
+      <p class="kick">The calendar</p>
+      <h2>And the fight was last spring</h2>
+      <div class="bars" id="monthbars"></div>
+      <div class="read">
+        <p>Four hundred and eighty-nine starter changes in March. Thirteen in July. The
+          peaks land on free agency, the franchise tag window, and the fifty-three man
+          cutdown — never on camp.</p>
+      </div>
+      <div class="caveat">
+        <p><b>What this actually measures.</b> These are ESPN's depth charts, not any
+          team's — teams don't publish real ones until late August. So this is the
+          informed outside view changing its mind, which is a different thing from a
+          coach changing his. Only two seasons carry the timestamped data, and there is
+          no July 2025 baseline, which means it cannot yet separate <b>rosters are
+          settled</b> from <b>the chart goes quiet in summer</b>. The instrument is
+          demonstrably awake — 79 moves in cutdown week, 30 to 60 every week in season —
+          but awake in November is not proof of awake in July.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Depth charts via nflreadr / ESPN, 3 Aug 2025 – 27 Jul 2026, 346 daily snapshots.
+        A move is recorded when the rank-one player at a position slot differs from the
+        previous day. 881 starting slots, 32 teams. Marker area is proportional to moves
+        since 1 May. Built in Python; source in <span class="mono">channel/analysis/camp</span>.</p>
+    </footer>
+  </div>
+</div>
+
+<script>
+const DATA = /*DATA*/;
+(function(){
+  const NS="http://www.w3.org/2000/svg";
+  const g=document.getElementById("venues"), card=document.getElementById("card");
+  const back=document.getElementById("back"), status=document.getElementById("status");
+
+  // equirectangular-ish projection over the continental US
+  const LON0=-125, LON1=-66.5, LAT0=49.6, LAT1=24.4, W=1000, H=600, PAD=40;
+  const px=lon=>PAD+(lon-LON0)/(LON1-LON0)*(W-2*PAD);
+  const py=lat=>PAD+(LAT0-lat)/(LAT0-LAT1)*(H-2*PAD);
+
+  const teams=Object.keys(DATA.teams);
+  const maxTotal=Math.max(...teams.map(t=>DATA.teams[t].total));
+  let selected=null;
+
+  teams.forEach(abbr=>{
+    const t=DATA.teams[abbr];
+    const x=px(t.lon), y=py(t.lat);
+    const r=4+10*Math.sqrt(t.total/maxTotal);
+
+    const grp=document.createElementNS(NS,"g");
+    grp.setAttribute("class","v-hit"); grp.setAttribute("tabindex","0");
+    grp.setAttribute("role","button");
+    grp.setAttribute("aria-label",`${t.name}, ${t.total} roster moves`);
+    grp.dataset.abbr=abbr;
+
+    const halo=document.createElementNS(NS,"circle");
+    halo.setAttribute("class","halo"); halo.setAttribute("cx",x); halo.setAttribute("cy",y);
+    halo.setAttribute("r",r+7);
+
+    const dot=document.createElementNS(NS,"circle");
+    dot.setAttribute("class","v-dot"); dot.setAttribute("cx",x); dot.setAttribute("cy",y);
+    dot.setAttribute("r",r); dot.setAttribute("fill",t.color);
+    dot.setAttribute("stroke","#e8dfcb"); dot.setAttribute("stroke-width","1.1");
+
+    const lab=document.createElementNS(NS,"text");
+    lab.setAttribute("class","v-lab"); lab.setAttribute("x",x); lab.setAttribute("y",y-r-6);
+    lab.setAttribute("text-anchor","middle"); lab.textContent=abbr;
+
+    grp.append(halo,dot,lab);
+    grp.addEventListener("click",()=>pick(abbr,x,y));
+    grp.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(abbr,x,y);}});
+    g.append(grp);
+  });
+
+  function pick(abbr,x,y){
+    if(selected===abbr){reset();return;}
+    selected=abbr;
+    const k=2.6;
+    g.style.transform=`translate(${W/2-x*k}px, ${H/2-y*k}px) scale(${k})`;
+    g.parentElement.parentElement.classList.add("zoomed");
+    document.querySelectorAll(".v-hit").forEach(n=>n.classList.toggle("sel",n.dataset.abbr===abbr));
+    g.classList.add("dimmed");
+    back.hidden=false;
+    status.textContent=DATA.teams[abbr].name;
+    render(abbr);
+  }
+  function reset(){
+    selected=null; g.style.transform="";
+    g.classList.remove("dimmed");
+    document.querySelectorAll(".v-hit").forEach(n=>n.classList.remove("sel"));
+    back.hidden=true; card.classList.remove("on"); card.innerHTML="";
+    status.textContent="Marker size = roster moves since 1 May";
+  }
+  back.addEventListener("click",reset);
+
+  function render(abbr){
+    const t=DATA.teams[abbr];
+    const bouts=(t.battles||[]).map(b=>{
+      const main=b.rank===1;
+      const f=b.contenders.map((n,i)=>
+        `<span class="fighter${i===b.contenders.length-1?" hold":""}">${n}</span>`
+      ).join('<span class="vs">vs</span>');
+      return `<div class="bout">
+        <div class="bh">
+          <span class="slot">${b.pos}</span>
+          <span class="tag ${main?"main":"under"}">${main?"Main event":"Undercard · "+ordinal(b.rank)}</span>
+          <span class="cnt">${b.changes} change${b.changes>1?"s":""}</span>
+        </div>
+        <div class="fighters">${f}</div>
+      </div>`;
+    }).join("");
+
+    card.innerHTML=`
+      <div class="top">
+        <div class="team">${t.name}<small>${t.camp}</small></div>
+        <div class="rec"><b>${t.total}</b>roster moves<br>since 1 May</div>
+      </div>
+      <div class="bouts">${bouts||'<div class="empty">No contested slots. Nothing moved.</div>'}</div>
+      <div class="foot">${t.starter} at the starter line · ${t.depth} below it.
+        Names listed in the order they held the job; the last name is who holds it today.</div>`;
+    card.classList.add("on");
+    card.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+  const ordinal=n=>n===2?"2nd string":n===3?"3rd string":n+"th";
+
+  // ---- tape + bar charts -------------------------------------------
+  document.getElementById("t-r1").textContent=DATA.rank["1"];
+  document.getElementById("t-dep").textContent=DATA.rank["2"]+DATA.rank["3"];
+
+  const rb=document.getElementById("rankbars");
+  const rmax=Math.max(...Object.values(DATA.rank));
+  [["1","Starter"],["2","2nd string"],["3","3rd string"]].forEach(([k,lab])=>{
+    const v=DATA.rank[k];
+    rb.insertAdjacentHTML("beforeend",
+      `<div class="br"><span class="k">${lab}</span>
+       <span class="t"><i class="${k==="1"?"lo":""}" style="width:${100*v/rmax}%"></i></span>
+       <span class="n">${v}</span></div>`);
+  });
+
+  const mb=document.getElementById("monthbars");
+  const mmax=Math.max(...DATA.months.map(m=>m[1]));
+  DATA.months.forEach(([lab,v])=>{
+    mb.insertAdjacentHTML("beforeend",
+      `<div class="br"><span class="k">${lab}</span>
+       <span class="t"><i class="${v<60?"lo":""}" style="width:${100*v/mmax}%"></i></span>
+       <span class="n">${v}</span></div>`);
+  });
+})();
+</script>
