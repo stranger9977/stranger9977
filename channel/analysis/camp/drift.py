@@ -34,11 +34,26 @@ FANTASY = {"QB": 2, "RB": 3, "WR": 5, "TE": 2, "PK": 1, "KR": 1, "PR": 1}
 
 
 def consensus(hist: pd.DataFrame) -> pd.DataFrame:
-    """Mean rank per player-slot per day, across whatever sources exist."""
-    g = (hist.groupby(["day", "team", "pos", "player"])
+    """Mean rank per player-slot per day, across whatever sources exist.
+
+    Grouped on `pid`, not `player`. Names get rewritten between snapshots
+    ("Cam Ross" -> "Cameron Ross"), and grouping on the string turns one
+    player into two -- one that vanishes off the chart and one that
+    appears on it, which this module would then report as a dropped
+    player and a new arrival. The display name is whichever the source
+    used most recently.
+    """
+    h = hist.copy()
+    if "pid" in h.columns:
+        h["key"] = h.pid.where(h.pid.notna() & (h.pid != ""), h.player)
+    else:
+        h["key"] = h.player
+    g = (h.sort_values("day")
+         .groupby(["day", "team", "pos", "key"])
          .agg(rank=("rank", "mean"),
               spread=("rank", lambda s: s.max() - s.min()),
-              n_src=("source", "nunique"))
+              n_src=("source", "nunique"),
+              player=("player", "last"))
          .reset_index())
     return g
 
@@ -47,9 +62,10 @@ def weekly(cons: pd.DataFrame) -> pd.DataFrame:
     """Collapse to one mean rank per player-slot per ISO week."""
     c = cons.copy()
     c["week"] = c.day.dt.to_period("W").dt.start_time
-    return (c.groupby(["week", "team", "pos", "player"])
+    return (c.sort_values("day")
+            .groupby(["week", "team", "pos", "key"])
             .agg(rank=("rank", "mean"), spread=("spread", "max"),
-                 n_src=("n_src", "max"))
+                 n_src=("n_src", "max"), player=("player", "last"))
             .reset_index())
 
 
@@ -62,9 +78,12 @@ def drift(hist: pd.DataFrame, weeks: int = 2) -> pd.DataFrame:
                          "Run track.py --seed, or wait a week.")
     first, last = keep[0], keep[-1]
 
-    a = wk[wk.week == first][["team", "pos", "player", "rank"]].rename(columns={"rank": "was"})
-    b = wk[wk.week == last][["team", "pos", "player", "rank", "spread", "n_src"]].rename(columns={"rank": "now"})
-    d = b.merge(a, on=["team", "pos", "player"], how="outer")
+    a = wk[wk.week == first][["team", "pos", "key", "rank"]].rename(columns={"rank": "was"})
+    b = wk[wk.week == last][["team", "pos", "key", "rank", "spread", "n_src", "player"]].rename(columns={"rank": "now"})
+    d = b.merge(a, on=["team", "pos", "key"], how="outer")
+    # a player who left the chart has no row in `last`, so no display name
+    names = wk.sort_values("week").groupby("key")["player"].last()
+    d["player"] = d.player.fillna(d.key.map(names))
 
     # entering / leaving the chart are real events, not missing data
     d["status"] = "held"

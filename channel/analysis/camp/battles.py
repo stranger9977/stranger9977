@@ -26,6 +26,8 @@ from __future__ import annotations
 import argparse
 import ast
 import json
+import re
+import unicodedata
 import warnings
 from pathlib import Path
 
@@ -38,32 +40,64 @@ HERE = Path(__file__).parent
 HISTORY = HERE / "history.parquet"
 
 
+NAME_SUFFIX = re.compile(r"\b(jr|sr|ii|iii|iv|v)\b")
+
+
+def name_key(name: str) -> str:
+    """Fallback identity for sources with no player id.
+
+    Strips the things that differ between two typists rather than between
+    two people: punctuation, accents, generational suffixes. Does not fix
+    nicknames -- "Cam Ross" and "Cameron Ross" stay distinct here, which
+    is why gsis_id is preferred wherever it exists.
+    """
+    n = unicodedata.normalize("NFKD", str(name)).encode("ascii", "ignore").decode()
+    n = n.lower().replace(".", " ").replace("'", "").replace("-", " ")
+    n = NAME_SUFFIX.sub(" ", n)
+    return " ".join(n.split())
+
+
 def classify(hist: pd.DataFrame, source: str = "espn",
              since: str | None = None) -> pd.DataFrame:
-    """Label every slot change as competition, arrival, or departure."""
+    """Label every slot change as competition, arrival, or departure.
+
+    IDENTITY IS `pid`, NOT `player`. A depth chart rewrites names between
+    snapshots -- suffixes appear, punctuation drops, nicknames formalise --
+    and comparing name strings turns each of those into a departure plus an
+    arrival. Compare ids; carry names only for display.
+    """
     h = hist[hist.source == source].copy()
     if since:
         h = h[h.day >= pd.Timestamp(since)]
     h = h.sort_values(["team", "pos", "rank", "day"])
 
+    # gsis_id where the source has one, normalised name where it does not
+    if "pid" in h.columns:
+        h["key"] = h.pid.where(h.pid.notna() & (h.pid != ""),
+                               h.player.map(name_key))
+    else:
+        h["key"] = h.player.map(name_key)
+
     # who was on each team's chart, each day
-    on_team = (h.groupby(["team", "day"])["player"]
+    on_team = (h.groupby(["team", "day"])["key"]
                .apply(lambda s: frozenset(s.dropna()))
                .rename("roster").reset_index())
     prev = on_team.copy()
     prev["day"] = prev.day + pd.Timedelta(days=1)
     prev = prev.rename(columns={"roster": "roster_prev"})
 
-    h["prev_player"] = h.groupby(["team", "pos", "rank"])["player"].shift()
-    ch = h[h.prev_player.notna() & (h.player != h.prev_player)].copy()
+    grp = h.groupby(["team", "pos", "rank"])
+    h["prev_key"] = grp["key"].shift()
+    h["prev_player"] = grp["player"].shift()
+    ch = h[h.prev_key.notna() & (h.key != h.prev_key)].copy()
 
     ch = ch.merge(on_team, on=["team", "day"], how="left")
     ch = ch.merge(prev, on=["team", "day"], how="left")
     ch["roster"] = ch.roster.apply(lambda s: s if isinstance(s, frozenset) else frozenset())
     ch["roster_prev"] = ch.roster_prev.apply(lambda s: s if isinstance(s, frozenset) else frozenset())
 
-    ch["out_stayed"] = [p in r for p, r in zip(ch.prev_player, ch.roster)]
-    ch["in_was_here"] = [p in r for p, r in zip(ch.player, ch.roster_prev)]
+    ch["out_stayed"] = [p in r for p, r in zip(ch.prev_key, ch.roster)]
+    ch["in_was_here"] = [p in r for p, r in zip(ch.key, ch.roster_prev)]
 
     ch["kind"] = "competition"
     ch.loc[~ch.out_stayed, "kind"] = "departure"

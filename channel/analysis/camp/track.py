@@ -131,9 +131,19 @@ def seed() -> pd.DataFrame:
          .groupby(["team", "pos_abb", "pos_rank", "day"], as_index=False)
          .last())
 
+    # Carry gsis_id. Identity must not depend on spelling.
+    #
+    # Names are not stable across snapshots: suffixes appear ("Dion Wilson"
+    # -> "Dion Wilson Jr."), punctuation drops ("T.J. Parker" -> "TJ
+    # Parker"), nicknames formalise ("Cam Ross" -> "Cameron Ross", "JT
+    # Tuimoloau" -> "Jaylahn Tuimoloau"). Keyed on name, each of those
+    # reads as one player leaving and another arriving -- 27 phantom
+    # transactions in this season alone. Keyed on gsis_id they are what
+    # they are: nothing happened.
     hist = pd.DataFrame({
         "source": "espn", "team": d.team, "pos": d.pos_abb,
         "rank": d.pos_rank.astype(int), "player": d.player_name,
+        "pid": d.gsis_id,
         "scraped_at": d.dt.astype(str), "day": d.day,
     }).dropna(subset=["player"])
 

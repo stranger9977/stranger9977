@@ -61,10 +61,31 @@ h1{font-family:var(--marquee);font-size:clamp(52px,12vw,132px);line-height:.84;
   color:#9AA39E;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
 .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;
   margin-right:5px;vertical-align:middle}
+.mapctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:#9AA39E}
+.mapctl select{font:inherit;text-transform:none;letter-spacing:0;font-size:12.5px;
+  background:var(--board2);color:var(--boardink);
+  border:1px solid rgba(255,255,255,.2);padding:7px 10px;max-width:100%}
+.mapctl button{font:inherit;background:none;color:#9AA39E;cursor:pointer;
+  border:1px solid rgba(255,255,255,.2);padding:7px 11px}
+.mapctl button:hover{color:var(--boardink);border-color:var(--boardink)}
+.mapctl .here{text-transform:none;letter-spacing:.02em;color:var(--boardink);
+  font-size:12.5px}
+
 .mapbox{background:var(--board2);border:1px solid rgba(255,255,255,.07);
   overflow-x:auto}
 svg.map{display:block;width:100%;min-width:660px;height:auto}
-.grat{stroke:rgba(255,255,255,.055);stroke-width:1}
+.grat{stroke:rgba(255,255,255,.05);stroke-width:1;vector-effect:non-scaling-stroke}
+#land path.usa{fill:rgba(255,255,255,.095);stroke:rgba(255,255,255,.40);
+  stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#land path.lake{fill:var(--board2);stroke:rgba(255,255,255,.16);
+  stroke-width:1;vector-effect:non-scaling-stroke}
+#leaders line{stroke:rgba(255,255,255,.3);stroke-width:1;
+  vector-effect:non-scaling-stroke}
+#leaders circle{fill:rgba(255,255,255,.55)}
+.town{font-family:var(--mono);font-size:8px;fill:#7E8781;text-anchor:middle;
+  pointer-events:none;letter-spacing:.02em}
 .tdot{cursor:pointer}
 .tdot circle.hit{fill:transparent}
 /* halo: labels sit under the dots and must survive a neighbour overlapping them */
@@ -187,13 +208,26 @@ footer{border-top:3px solid var(--ink);padding:22px 0 50px;font-family:var(--mon
         <span><i style="background:var(--dot-y)"></i>size = contested slots</span>
         <span><i style="background:var(--dot-p)"></i>arc = fantasy-relevant</span>
         <span><i style="background:transparent;border:1px dashed #7E8781"></i>no beat research</span>
-        <span>positions nudged apart to stay legible</span>
+        <span>hairline &rarr; the real camp site</span>
       </div>
     </div>
+
+    <div class="mapctl">
+      <label for="teamsel">Check in at camp</label>
+      <select id="teamsel">
+        <option value="">All 32 camps</option>
+      </select>
+      <button id="reset" type="button" hidden>Back to the league</button>
+      <span class="here" id="here"></span>
+    </div>
+
     <div class="mapbox">
-      <svg class="map" viewBox="0 0 900 432" role="img"
-           aria-label="The 32 NFL training camp sites, sized by number of contested depth-chart slots.">
-        <g id="grat"></g><g id="dots"></g>
+      <svg class="map" viewBox="0 0 900 526" role="img"
+           aria-label="The 32 NFL training camp sites on a map of the United States, sized by number of contested depth-chart slots.">
+        <g id="land"></g>
+        <g id="grat"></g>
+        <g id="leaders"></g>
+        <g id="dots"></g>
       </svg>
     </div>
 
@@ -323,113 +357,277 @@ const uncovered = P.totals.battles - P.totals.covered;
 });
 
 /* ----------------------------------------------------------------- map */
-/* Equirectangular, corrected for latitude at the middle of the country so
-   the plot isn't vertically stretched. No coastline: a hand-drawn outline
-   at this scale reads as wrong more often than it reads as a map, and the
-   cities carry the geography on their own. */
-const W=900,H=432,PAD=42;
-const LO0=-123.5,LO1=-69.5,LA0=25.2,LA1=48.4;
-const K=Math.cos(36.5*Math.PI/180);
+/* Equirectangular, with the longitude axis compressed by cos(lat) at the
+   middle of the country so the shape is not vertically stretched. Base
+   units are the full-league viewBox; every zoom is a sub-rectangle of it. */
+const W=900,H=526,PAD=42;   // H derived so lon*cos(lat) and lat share one scale
+const LO0=-125.5,LO1=-66.5,LA0=24.0,LA1=49.6;
 const px=lon=>PAD+((lon-LO0)/(LO1-LO0))*(W-2*PAD);
 const py=lat=>PAD+((LA1-lat)/(LA1-LA0))*(H-2*PAD);
 
-const grat=document.getElementById('grat');
 const NS='http://www.w3.org/2000/svg';
 const mk=(t,a)=>{const e=document.createElementNS(NS,t);
   for(const k in a) e.setAttribute(k,a[k]); return e;};
+const svg=document.querySelector('svg.map');
+
+/* Coastline as coordinates, not as a path string.
+   The outline has to be projected with the same function as the camp
+   sites or the dots drift off the land, and it has to reproject on zoom.
+   A baked <path d="..."> can do neither. Coarse on purpose -- this is a
+   locator map, and detail it does not need is detail that can be wrong. */
+const USA=[[48.4,-124.7],[46.9,-124.1],[46.2,-124.0],[44.6,-124.1],[42.8,-124.5],
+[41.7,-124.2],[40.4,-124.4],[38.9,-123.7],[37.8,-122.5],[36.6,-121.9],[35.4,-120.9],
+[34.4,-120.5],[34.0,-118.5],[33.4,-117.6],[32.5,-117.1],[32.6,-114.7],[31.3,-111.1],
+[31.3,-108.2],[31.8,-106.5],[29.8,-102.8],[29.4,-100.9],[27.5,-99.5],[25.9,-97.4],
+[27.8,-97.4],[28.4,-96.4],[29.3,-94.8],[29.8,-93.3],[29.2,-90.2],[29.1,-89.2],
+[30.3,-88.9],[30.4,-87.2],[29.9,-84.4],[28.0,-82.8],[26.4,-82.1],[25.2,-80.9],
+[25.8,-80.1],[27.3,-80.3],[28.4,-80.6],[30.4,-81.4],[32.0,-80.9],[32.8,-79.9],
+[34.2,-77.9],[35.3,-75.5],[36.9,-76.0],[38.3,-75.1],[39.4,-74.4],[40.5,-74.0],
+[41.1,-71.9],[41.4,-70.0],[42.4,-70.9],[43.1,-70.7],[43.8,-69.8],[44.8,-67.0],
+[47.2,-68.0],[47.4,-69.3],[45.3,-71.1],[45.0,-74.7],[44.1,-76.3],[43.3,-79.1],
+[42.9,-79.1],[42.1,-80.2],[41.5,-81.7],[41.4,-82.7],[42.0,-83.2],[43.0,-82.4],
+[44.0,-83.0],[45.0,-83.4],[45.9,-84.7],[46.5,-84.4],[46.8,-87.0],[46.8,-90.9],
+[48.0,-89.5],[48.6,-93.2],[49.0,-95.2],[49.0,-104.0],[49.0,-114.0],[49.0,-123.0],
+[48.4,-124.7]];
+const LAKES=[
+[[45.8,-85.5],[45.0,-85.0],[44.0,-86.2],[43.0,-86.3],[42.1,-86.4],[41.7,-87.0],
+ [41.8,-87.6],[42.5,-87.8],[43.5,-87.8],[44.5,-87.5],[45.2,-87.0],[45.8,-85.5]],
+[[46.5,-84.5],[46.9,-88.0],[46.8,-90.9],[47.4,-92.1],[48.0,-89.5],[48.7,-88.0],
+ [48.5,-86.5],[47.5,-84.8],[46.5,-84.5]],
+[[43.0,-82.4],[44.0,-83.3],[45.0,-83.4],[45.9,-84.6],[46.3,-83.5],[45.5,-81.5],
+ [44.5,-80.0],[43.5,-81.7],[43.0,-82.4]],
+[[42.0,-83.2],[41.4,-82.7],[41.5,-81.7],[42.1,-80.2],[42.9,-79.1],[42.6,-80.5],
+ [42.3,-82.0],[42.0,-83.2]],
+[[43.3,-79.1],[43.3,-77.7],[43.9,-76.5],[44.2,-76.5],[43.9,-78.0],[43.5,-79.3],
+ [43.3,-79.1]]];
+const ring=pts=>'M '+pts.map(([la,lo])=>`${px(lo).toFixed(1)} ${py(la).toFixed(1)}`)
+  .join(' L ')+' Z';
+const land=document.getElementById('land');
+const usaD=ring(USA);
+land.append(mk('path',{class:'usa',d:usaD}));
+/* Clip the lakes to the land. The northern border runs *through* Lake
+   Superior and Lake Huron, so an unclipped lake polygon paints water on
+   the Canadian side of the line and reads as a hole in the map. */
+const defs=mk('defs',{});
+const cp=mk('clipPath',{id:'onland'});
+cp.append(mk('path',{d:usaD}));
+defs.append(cp); land.append(defs);
+const water=mk('g',{'clip-path':'url(#onland)'});
+LAKES.forEach(l=>water.append(mk('path',{class:'lake',d:ring(l)})));
+land.append(water);
+
+const grat=document.getElementById('grat');
 for(let lo=-120;lo<=-70;lo+=10)
-  grat.append(mk('line',{x1:px(lo),y1:PAD,x2:px(lo),y2:H-PAD,class:'grat'}));
-for(let la=25;la<=48;la+=5)
-  grat.append(mk('line',{x1:PAD,y1:py(la),x2:W-PAD,y2:py(la),class:'grat'}));
+  grat.append(mk('line',{x1:px(lo),y1:0,x2:px(lo),y2:H,class:'grat'}));
+for(let la=25;la<=49;la+=5)
+  grat.append(mk('line',{x1:0,y1:py(la),x2:W,y2:py(la),class:'grat'}));
 
 const teams=Object.entries(P.teams);
 const maxN=Math.max(...teams.map(([,t])=>t.n));
 const maxF=Math.max(...teams.map(([,t])=>t.nFantasy));
 const dots=document.getElementById('dots');
+const leaders=document.getElementById('leaders');
 let picked=null;
-
-/* Seed at true position, then relax overlaps.
-   Eleven of the 32 camps sit in the corridor from Chicago to Boston, so a
-   faithful plot buries half the league under the other half and the labels
-   collide into noise. Nudging them apart costs a little accuracy and buys
-   the whole point of the graphic -- the relative geography survives, which
-   is all a reader takes from it. */
-const nodes = teams.map(([ab,t])=>({
-  ab, t, x:px(t.lon), y:py(t.lat), ax:px(t.lon), ay:py(t.lat),
-  r: 6+Math.sqrt(t.n/maxN)*17
-}));
-const GAP = 18;                      // dot gap plus room for the label under it
-for(let pass=0; pass<300; pass++){
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const a=nodes[i], b=nodes[j];
-      let dx=b.x-a.x, dy=b.y-a.y;
-      let d=Math.hypot(dx,dy);
-      const want=a.r+b.r+GAP;
-      if(d>=want) continue;
-      if(d<0.01){ dx=(i%2?1:-1); dy=(j%2?1:-1); d=Math.hypot(dx,dy); }
-      const push=(want-d)/d*0.5;
-      a.x-=dx*push; a.y-=dy*push; b.x+=dx*push; b.y+=dy*push;
-    }
-  }
-  /* Spring each dot back toward where it actually is.
-     Pure repulsion separates the Northeast but lets the whole field drift:
-     one earlier pass pushed Dallas west of Los Angeles, which is worse than
-     the overlap it fixed. The anchor bounds how far any camp can travel, so
-     crowding is relieved locally and the map still reads as the country. */
-  for(const n of nodes){
-    n.x += (n.ax-n.x)*0.05;
-    n.y += (n.ay-n.y)*0.05;
-    n.x = Math.min(W-PAD-n.r, Math.max(PAD+n.r, n.x));
-    n.y = Math.min(H-PAD-n.r-13, Math.max(PAD+n.r, n.y));
-  }
-}
 
 /* Fantasy count as an arc around the rim, not a ring.
    A ring appears on 26 of 32 teams and so distinguishes almost nothing;
    an arc has a length, and length is readable. */
-function arc(x,y,r,frac){
-  if(frac<=0) return null;
+function arcPath(r,frac){
   const end=-Math.PI/2 + frac*2*Math.PI;
-  const x2=x+r*Math.cos(end), y2=y+r*Math.sin(end);
-  if(frac>=1) return mk('circle',{cx:x,cy:y,r,fill:'none',
-    stroke:'var(--dot-p)','stroke-width':3.5});
-  return mk('path',{fill:'none',stroke:'var(--dot-p)','stroke-width':3.5,
-    'stroke-linecap':'round',
-    d:`M ${x} ${y-r} A ${r} ${r} 0 ${frac>0.5?1:0} 1 ${x2} ${y2}`});
+  return `M 0 ${-r} A ${r} ${r} 0 ${frac>0.5?1:0} 1 `+
+         `${(r*Math.cos(end)).toFixed(2)} ${(r*Math.sin(end)).toFixed(2)}`;
 }
 
-nodes.forEach(({ab,t,x,y,r})=>{
+/* Every dot is drawn once, at the origin, and positioned by a transform
+   that also counter-scales by the zoom. That keeps dots and labels a
+   constant size on screen however far in the view goes -- without it a
+   camp-level zoom turns a 20px dot into a 200px blob. */
+const nodes = teams.map(([ab,t])=>{
   const g=mk('g',{class:'tdot',tabindex:'0',role:'button',
-    'aria-label':`${t.name}, ${t.n} contested slots, ${t.nFantasy} fantasy-relevant`});
-  g.append(mk('circle',{cx:x,cy:y,r,class:'core',fill:t.researched?t.color:'none',
+    'aria-label':`${t.name}, camp at ${t.camp}, ${t.n} contested slots, `+
+                 `${t.nFantasy} fantasy-relevant`});
+  const r=6+Math.sqrt(t.n/maxN)*17;
+  g.append(mk('circle',{cx:0,cy:0,r,class:'core',fill:t.researched?t.color:'none',
     stroke:t.researched?'rgba(255,255,255,.25)':'#7E8781',
     'stroke-width':t.researched?1:1.4,
     'stroke-dasharray':t.researched?'none':'3 3',opacity:.92}));
-  const a=arc(x,y,r+5,t.nFantasy/maxF);
-  if(a) g.append(a);
-  g.append(mk('circle',{cx:x,cy:y,r:Math.max(r,15),class:'hit'}));
-  const tx=mk('text',{x:x,y:y+r+14}); tx.textContent=ab; g.append(tx);
-  const act=()=>pick(ab,g);
+  if(t.nFantasy>0) g.append(mk('path',{d:arcPath(r+5,t.nFantasy/maxF),fill:'none',
+    stroke:'var(--dot-p)','stroke-width':3.5,'stroke-linecap':'round'}));
+  g.append(mk('circle',{cx:0,cy:0,r:Math.max(r,15),class:'hit'}));
+  const lab=mk('text',{x:0,y:r+13}); lab.textContent=ab; g.append(lab);
+  const town=mk('text',{x:0,y:r+23,class:'town'}); town.textContent=t.camp;
+  g.append(town);
+  const lead=mk('line',{x1:0,y1:0,x2:0,y2:0});
+  const tick=mk('circle',{cx:px(t.lon),cy:py(t.lat),r:1.6});
+  leaders.append(lead); leaders.append(tick);
+  const act=()=>select(ab===picked?'':ab);
   g.addEventListener('click',act);
-  g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
+  g.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
   dots.append(g);
+  return {ab,t,g,lab,town,lead,tick,r,
+          ax:px(t.lon), ay:py(t.lat), x:px(t.lon), y:py(t.lat)};
 });
 
-function pick(ab,g){
-  const same = picked===ab;
-  document.querySelectorAll('.tdot.on').forEach(n=>n.classList.remove('on'));
-  picked = same?null:ab;
-  if(!same) g.classList.add('on');
-  document.getElementById('clear').hidden=!picked;
-  render();
-  if(!same) document.getElementById('cards').scrollIntoView({behavior:'smooth',block:'start'});
+/* Decluster in SCREEN space, not map space.
+   Eleven camps sit between Chicago and Boston, so at league zoom they bury
+   each other. The separation any two dots need is a fixed number of screen
+   pixels, which is fewer and fewer map units the further the view zooms in
+   -- so the same routine spreads the Northeast apart at league level and
+   leaves every camp on its true coordinates once you are looking at one
+   region. The spring back to the anchor bounds the drift: pure repulsion
+   once pushed Dallas west of Los Angeles, which is worse than the overlap
+   it fixed. A hairline to a tick marks where the camp actually is. */
+function onScreen(n,view,k){
+  const m=(n.r+30)*k;                     // half a dot of slack at the edge
+  return n.ax>=view.x-m && n.ax<=view.x+view.w+m &&
+         n.ay>=view.y-m && n.ay<=view.y+view.h+m;
 }
-document.getElementById('clear').addEventListener('click',()=>{
-  picked=null;
-  document.querySelectorAll('.tdot.on').forEach(n=>n.classList.remove('on'));
-  document.getElementById('clear').hidden=true; render();
+
+function layout(view){
+  const k=view.w/W;                       // map units per screen unit
+  for(const n of nodes){ n.x=n.ax; n.y=n.ay; }
+  /* Only lay out the camps actually in frame.
+     Clamping every node into the viewport pins the other 28 teams to the
+     border in a heap the moment the view zooms to one camp. A camp outside
+     the frame belongs outside the frame. */
+  const live=nodes.filter(n=>onScreen(n,view,k));
+  for(let pass=0;pass<220;pass++){
+    for(let i=0;i<live.length;i++){
+      for(let j=i+1;j<live.length;j++){
+        const a=live[i],b=live[j];
+        let dx=b.x-a.x, dy=b.y-a.y, d=Math.hypot(dx,dy);
+        const want=(a.r+b.r+22)*k;
+        if(d>=want) continue;
+        if(d<0.001){ dx=(i%2?1:-1)*0.5; dy=(j%2?1:-1)*0.5; d=Math.hypot(dx,dy); }
+        const push=(want-d)/d*0.5;
+        a.x-=dx*push; a.y-=dy*push; b.x+=dx*push; b.y+=dy*push;
+      }
+    }
+    for(const n of live){
+      n.x+=(n.ax-n.x)*0.05; n.y+=(n.ay-n.y)*0.05;
+      n.x=Math.min(view.x+view.w-n.r*k, Math.max(view.x+n.r*k, n.x));
+      n.y=Math.min(view.y+view.h-(n.r+26)*k, Math.max(view.y+n.r*k, n.y));
+    }
+  }
+}
+
+/* Town names, placed greedily where they fit.
+   Every camp label at league zoom is unreadable -- the eleven teams
+   between Chicago and Boston overprint each other into noise. Dropping
+   them all loses the thing that makes this a map of places rather than a
+   scatter plot. So each town is drawn only if its box is clear of every
+   label already placed, biggest team first. The West shows towns at
+   league zoom, the Northeast reveals them as you zoom in, and the
+   selected camp always names itself. */
+function boxOf(cx,cy,dy,chars,k,em){
+  const w=chars*em*0.62*k, h=em*k;
+  return {x:cx-w/2, y:cy+dy*k-h, w, h};
+}
+const hits=(a,b)=>!(a.x+a.w<b.x||b.x+b.w<a.x||a.y+a.h<b.y||b.y+b.h<a.y);
+
+function placeTowns(view,k){
+  const vis=nodes.filter(n=>n.g.style.display!=='none');
+  // obstacles: every abbreviation AND every dot. Testing labels against
+  // labels alone still lets a town print straight across a neighbouring dot.
+  const placed=[];
+  for(const n of vis){
+    placed.push(boxOf(n.x,n.y,n.r+13,n.ab.length,k,9.5));
+    const rr=(n.r+5)*k;
+    placed.push({x:n.x-rr, y:n.y-rr, w:rr*2, h:rr*2});
+  }
+  const order=vis.slice().sort((a,z)=>
+    (z.ab===picked)-(a.ab===picked) || z.t.n-a.t.n);
+  for(const n of order){
+    const b=boxOf(n.x,n.y,n.r+23,n.t.camp.length,k,8);
+    const forced = n.ab===picked;
+    if(!forced && placed.some(p=>hits(b,p))){ n.town.style.display='none'; continue; }
+    n.town.style.display='';
+    placed.push(b);
+  }
+}
+
+function paint(view){
+  const k=view.w/W;
+  svg.setAttribute('viewBox',
+    `${view.x.toFixed(2)} ${view.y.toFixed(2)} ${view.w.toFixed(2)} ${view.h.toFixed(2)}`);
+  for(const n of nodes){
+    const vis = onScreen(n,view,k);
+    n.g.style.display = vis ? '' : 'none';
+    if(!vis){ n.lead.style.display='none'; n.tick.style.display='none'; continue; }
+    n.g.setAttribute('transform',`translate(${n.x.toFixed(2)} ${n.y.toFixed(2)}) scale(${k.toFixed(4)})`);
+    n.lead.setAttribute('x1',n.ax); n.lead.setAttribute('y1',n.ay);
+    n.lead.setAttribute('x2',n.x);  n.lead.setAttribute('y2',n.y);
+    const off=Math.hypot(n.x-n.ax,n.y-n.ay)/k;
+    n.lead.style.display = off>n.r+2 ? '' : 'none';
+    n.tick.style.display = off>n.r+2 ? '' : 'none';
+    n.tick.setAttribute('r',1.6*k);
+  }
+  placeTowns(view,k);
+}
+
+const FULL={x:0,y:0,w:W,h:H};
+let view={...FULL};
+
+function boxFor(ab){
+  if(!ab) return {...FULL};
+  const t=P.teams[ab];
+  const w=W*0.30, h=H*0.30;             // roughly a 600-mile window
+  let x=px(t.lon)-w/2, y=py(t.lat)-h/2;
+  x=Math.min(W-w,Math.max(0,x)); y=Math.min(H-h,Math.max(0,y));
+  return {x,y,w,h};
+}
+
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let anim=null;
+function goTo(target){
+  layout(target);
+  if(anim) cancelAnimationFrame(anim);
+  if(REDUCED){ view={...target}; paint(view); return; }
+  const from={...view}, home=nodes.map(n=>({x:n.x,y:n.y}));
+  // relax to the target layout while the view flies, so dots never jump
+  const seed=nodes.map(n=>({x:n.x,y:n.y}));
+  const startPos=nodes.map((n,i)=>({x:n.g._lx??seed[i].x, y:n.g._ly??seed[i].y}));
+  const t0=performance.now(), DUR=620;
+  const ease=u=>u<0.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+  (function step(now){
+    const u=Math.min(1,(now-t0)/DUR), e=ease(u);
+    view={x:from.x+(target.x-from.x)*e, y:from.y+(target.y-from.y)*e,
+          w:from.w+(target.w-from.w)*e, h:from.h+(target.h-from.h)*e};
+    nodes.forEach((n,i)=>{
+      n.x=startPos[i].x+(home[i].x-startPos[i].x)*e;
+      n.y=startPos[i].y+(home[i].y-startPos[i].y)*e;
+    });
+    paint(view);
+    if(u<1) anim=requestAnimationFrame(step);
+    else nodes.forEach((n,i)=>{n.g._lx=home[i].x; n.g._ly=home[i].y;});
+  })(t0);
+}
+
+/* ---------------------------------------------------------- the dropdown */
+const sel=document.getElementById('teamsel');
+teams.slice().sort((a,z)=>a[1].name.localeCompare(z[1].name)).forEach(([ab,t])=>{
+  const o=document.createElement('option');
+  o.value=ab;
+  o.textContent=`${t.name} — ${t.camp} (${t.n})`;
+  sel.append(o);
 });
+sel.addEventListener('change',()=>select(sel.value));
+document.getElementById('reset').addEventListener('click',()=>select(''));
+
+function select(ab){
+  picked = ab || null;
+  sel.value = ab || '';
+  document.getElementById('reset').hidden = !picked;
+  document.getElementById('clear').hidden = !picked;
+  document.getElementById('here').textContent =
+    picked ? `${P.teams[picked].camp}${P.teams[picked].campOpens?' · camp open':''}` : '';
+  nodes.forEach(n=>n.g.classList.toggle('on', n.ab===picked));
+  goTo(boxFor(picked));
+  render();
+}
+
+layout(FULL); paint(FULL);
 
 /* -------------------------------------------------------------- ticker */
 const mv=document.getElementById('moves');
@@ -443,6 +641,7 @@ P.movers.forEach(m=>{
 
 /* --------------------------------------------------------------- cards */
 let filter='fantasy';
+document.getElementById('clear').addEventListener('click',()=>select(''));
 document.querySelectorAll('.controls button[data-f]').forEach(b=>{
   b.addEventListener('click',()=>{
     filter=b.dataset.f;

@@ -14,9 +14,9 @@ worth calling a camp battle.
 
 | | |
 |---|---|
-| Depth-chart changes since 1 May | 1,106 |
-| …that were actual competition | 806 (73%) |
-| …that were arrivals or departures | 300 (27%) |
+| Depth-chart changes since 1 May | 1,077 |
+| …that were actual competition | 806 (75%) |
+| …that were arrivals or departures | 271 (25%) |
 | Distinct contested slots | **586** |
 | Fantasy-relevant | 54 |
 | With beat/analyst coverage | 173 |
@@ -111,10 +111,26 @@ hands and no beat writer or fantasy analyst has touched them:
 Each of these failed silently — nothing raised, the numbers were just
 wrong.
 
-1. **Never join players on name.** Two DeVonta Smiths on 2026 rosters
-   (Eagles WR, rookie Carolina DB) made a five-year veteran appear as a
-   climbing rookie. Six such collisions this season. Join on gsis
-   `player_id`.
+1. **Never identify players by name — not across rows, not across days.**
+   Two distinct failures, both silent:
+
+   *Collisions.* Two DeVonta Smiths on 2026 rosters (Eagles WR, rookie
+   Carolina DB) made a five-year veteran appear as a climbing rookie. Six
+   such collisions this season.
+
+   *Renames.* The chart rewrites the same player between snapshots —
+   suffixes appear (`Dion Wilson` → `Dion Wilson Jr.`), punctuation drops
+   (`T.J. Parker` → `TJ Parker`), nicknames formalise (`Cam Ross` →
+   `Cameron Ross`, `JT Tuimoloau` → `Jaylahn Tuimoloau`, `Jalen Cropper` →
+   `Jalen Moreno-Cropper`). Compared as strings, each of those is one
+   player leaving and another arriving: **29 phantom transactions**, which
+   inflated the transaction leaderboard by ~10%. Both `battles.py` and
+   `drift.py` now key on `gsis_id` and carry names for display only.
+
+   Battle counts did not move — renames were classified as departures, so
+   they were already excluded from competition. The damage was confined to
+   the transaction wire and to `drift.py`, where a rename would have
+   surfaced as a player dropping off the chart and a stranger appearing.
 2. **`draft_picks.gsis_id` does not hold gsis ids.** It holds PFR-format
    ids (`LOV121782`) while rosters use gsis (`00-0023459`). Merging the
    two matches nothing and every rookie returns UDFA. Join on `pfr_id`
