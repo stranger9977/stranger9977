@@ -80,18 +80,61 @@ def is_fantasy(pos: str, rank: int) -> bool:
 
 
 def battles(ch: pd.DataFrame) -> pd.DataFrame:
-    """Competition only, aggregated per slot, with a fantasy flag."""
+    """Competition only, aggregated per slot, with a fantasy flag.
+
+    `contenders` must be the union of both sides. Aggregating winners
+    alone loses the displaced player entirely -- a slot that flipped once
+    would report a single name, which reads as nobody having competed for
+    it and makes the slot unjoinable against any outside source that
+    names both men.
+    """
     c = ch[ch.kind == "competition"]
     if c.empty:
         return c
+
+    def both_sides(g: pd.DataFrame) -> list[str]:
+        seq = []
+        for lost, won in zip(g.lost_by, g.won_by):
+            seq += [lost, won]
+        return list(dict.fromkeys(x for x in seq if isinstance(x, str)))
+
     g = (c.groupby(["team", "pos", "rank"])
-         .agg(flips=("won_by", "size"),
-              holders=("won_by", lambda s: list(dict.fromkeys(s))),
-              current=("won_by", "last"),
-              last_flip=("day", "max"))
+         .apply(lambda d: pd.Series({
+             "flips": len(d),
+             "contenders": both_sides(d),
+             "current": d.won_by.iloc[-1],
+             "displaced": d.lost_by.iloc[0],
+             "last_flip": d.day.max(),
+         }))
          .reset_index())
+    g["flips"] = g.flips.astype(int)
     g["fantasy"] = [is_fantasy(p, r) for p, r in zip(g.pos, g["rank"])]
-    return g.sort_values(["flips", "fantasy"], ascending=False)
+    return collapse_swaps(g).sort_values(["flips", "fantasy"], ascending=False)
+
+
+def collapse_swaps(g: pd.DataFrame) -> pd.DataFrame:
+    """One battle per contested group, not one per slot.
+
+    When Ray Davis and Ty Johnson trade places, RB2 and RB3 both record a
+    change and the same fight is counted twice. Worse, the two rows
+    disagree about who won -- each slot names whoever landed on it. The
+    same two men fighting over KR1 and PR1 produces the same duplication
+    across different positions entirely.
+
+    So group by (team, set of contenders): one fight, however many slots
+    it touched. The battle is named for its highest slot, since that is
+    the one with something at stake.
+    """
+    g = g.copy()
+    g["_key"] = [frozenset(c) for c in g.contenders]
+    keep = []
+    for (_team, _k), grp in g.groupby(["team", "_key"], sort=False):
+        top = grp.sort_values(["rank", "flips"], ascending=[True, False]).iloc[0].copy()
+        top["flips"] = int(grp.flips.max())
+        top["slots"] = sorted({f"{p}{r}" for p, r in zip(grp.pos, grp["rank"])})
+        top["fantasy"] = bool(grp.fantasy.any())
+        keep.append(top)
+    return pd.DataFrame(keep).drop(columns=["_key"]).reset_index(drop=True)
 
 
 if __name__ == "__main__":
@@ -115,12 +158,12 @@ if __name__ == "__main__":
     b = battles(ch)
     b.to_parquet(HERE / "true_battles.parquet")
     print(f"\n=== TRUE CAMP BATTLES: {len(b)} contested slots ===")
-    cols = ["team", "pos", "rank", "flips", "current", "fantasy"]
+    cols = ["team", "pos", "rank", "flips", "contenders", "current", "fantasy"]
     print(b[cols].head(18).to_string(index=False))
 
     f = b[b.fantasy]
     print(f"\n=== FANTASY-RELEVANT ({len(f)}) ===")
-    print(f[["team", "pos", "rank", "flips", "holders", "current"]].head(15).to_string(index=False))
+    print(f[["team", "pos", "rank", "flips", "contenders", "current"]].head(15).to_string(index=False))
 
     print("\n=== biggest transaction churn (NOT battles) ===")
     tx = (ch[ch.kind != "competition"].groupby("team").size()
