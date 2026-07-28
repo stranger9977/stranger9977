@@ -1331,16 +1331,6 @@
   ],
   "_agent": "agent-a9dc80f8134232f7e"
  },
- "NYG": {
-  "team": "New York Giants",
-  "battles": [],
-  "campOpens": "unknown",
-  "biggestUnknown": "Cannot be determined \u2014 no reporting was reachable. The honest answer is that I could not verify a single thing about the current Giants roster, so I will not name a \"least-settled\" spot I would be guessing at.",
-  "confidence": "low",
-  "notes": "RESEARCH FAILED \u2014 returning zero battles deliberately rather than inventing them.\n\nTwo independent blockers, both verified:\n1. WebSearch budget exhausted before this task started. Every search returned: \"this session has used its web search budget (200 of 200 WebSearch calls).\" Zero searches were available to me; I made 0 of the 6-8 you budgeted.\n2. All direct fetches blocked. The agent proxy is answering 403 to CONNECT for every host tried \u2014 giants.com, bigblueview.com, ourlads.com, spotrac.com, yahoo, wikipedia, duckduckgo. A raw curl loop against espn.com, nj.com, nypost.com, si.com and apnews.com returned HTTP 000 (connection refused) on all five. The proxy status endpoint shows connect_rejected / \"policy denial\" entries, including for other teams' sites, meaning sibling tasks in this run hit the same wall.\n\nWhy I am not filling the array from memory: my training cutoff is May 2026. I have reasonable recall of the Giants through the 2025 season and roughly through the 2026 draft, but I cannot verify who is on the roster today, what the post-draft depth chart looks like, who was signed or cut in June and July, the current coaching staff's public statements, or any injury or PUP news \u2014 which is exactly the material that separates a genuine battle from a media-manufactured one. Producing \"battles\" from stale recall would give you position groups that may have been overhauled, contenders who may not be on the team, and realness judgements with no evidentiary basis. For a data-driven piece that is worse than nothing, because it reads as researched.\n\nWhat to do instead: re-run this task with CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION raised and the proxy allowlist opened for at least giants.com, bigblueview.com (SB Nation beat), nj.com, and nypost.com. The highest-value queries would be (a) the Giants' official camp report date and PUP/NFI list, (b) the beat's post-minicamp depth chart projection, (c) Spotrac guarantees for any position group the beat calls open, and (d) the head coach's own camp-opening press conference, which usually settles two or three \"battles\" outright in a single quote.",
-  "sources": [],
-  "_agent": "agent-aaaa6d69a6d79f8fc"
- },
  "CLE": {
   "battles": [
    {
@@ -1603,16 +1593,6 @@
    "https://denversports.com/nfl/denver-broncos/broncos-powers"
   ],
   "_agent": "agent-abb066a15ea08a62b"
- },
- "NO": {
-  "team": "New Orleans Saints",
-  "campOpens": "unknown",
-  "battles": [],
-  "biggestUnknown": "Unable to determine \u2014 no verified reporting could be retrieved this session. (The structural question most likely to be unsettled for New Orleans is the quarterback room, but I could not confirm the 2026 depth chart, so I am not asserting it as a finding.)",
-  "notes": "RESEARCH FAILED \u2014 no battles are reported because none could be verified, not because the roster is settled. Two independent blockers: (1) The WebSearch budget for this session was already exhausted before I ran a single query (200 of 200 calls used, presumably by sibling agents in this workflow); my first two searches were rejected outright. (2) Every WebFetch fallback returned HTTP 403 at the agent proxy \u2014 the gateway is denying CONNECT by policy for outbound hosts. Confirmed via `curl \"$HTTPS_PROXY/__agentproxy/status\"`, which shows recent `connect_rejected` entries (\"gateway answered 403 to CONNECT (policy denial or upstream failure)\") for ourlads.com, rotowire.com, static.www.nfl.com, patriots.com and patspulpit.com \u2014 i.e. the same denial is hitting other agents in this run, so this is environmental, not Saints-specific. Blocked for me specifically: neworleanssaints.com, espn.com, en.wikipedia.org, google.com, bing.com, html.duckduckgo.com. I deliberately did NOT fall back to writing battles from model memory. My training cutoff is May 2026, which covers the March 2026 free-agency period and the April 2026 draft only partially and with no post-minicamp or late-July signal at all \u2014 exactly the window where camp battles get defined. More importantly, the deliverable you asked for is the realness judgement, and that judgement is only worth anything if the underlying contract-guarantee and draft-capital facts are accurate. Recalled-from-memory guarantee figures and pick slots would be the single most likely thing to be wrong, and wrong money facts would flip a \"likely-settled\" to \"genuine\" or vice versa \u2014 producing confident-sounding output that is actively misleading. An empty result is more useful to you than a fabricated one. TO GET THIS RE-RUN: raise CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION (or re-run this agent in a fresh session with its own budget), and check whether the proxy allowlist can be widened \u2014 nola.com, neworleanssaints.com, theathletic.com, saintswire/USA Today, canalstreetchronicles.com and overthecap.com would be the right source set. Six to eight searches against those would be enough.",
-  "confidence": "low",
-  "sources": [],
-  "_agent": "agent-abd43c2654f6bdd33"
  },
  "LV": {
   "battles": [

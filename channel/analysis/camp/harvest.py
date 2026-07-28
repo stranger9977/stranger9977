@@ -88,11 +88,25 @@ def read_agent(path: Path) -> tuple[str | None, dict | None]:
 
 
 def harvest() -> dict[str, dict]:
+    """Collect every finished agent, dropping the ones that failed.
+
+    A DROPPED TEAM IS NOT A SETTLED TEAM. This run exhausted the session's
+    WebSearch budget partway through (200/200), and every agent after that
+    point returned `battles: []` -- correctly refusing to invent coverage
+    it could not verify. Kept in the file, those empties would be
+    indistinguishable from a roster with no camp battles, and every
+    computed slot on those teams would score as "nobody is covering this"
+    when the truth is that nobody looked.
+
+    So a zero-battle result is discarded rather than recorded. Downstream,
+    a team absent from reported.json is excluded from the cross-reference
+    entirely instead of counting as evidence of absence.
+    """
     if not TRANSCRIPTS.exists():
         raise SystemExit(f"no transcripts at {TRANSCRIPTS}")
 
     found: dict[str, dict] = {}
-    unknown = 0
+    unknown, failed = 0, []
     for f in sorted(TRANSCRIPTS.glob("agent-*.jsonl")):
         team, out = read_agent(f)
         if not out:
@@ -100,18 +114,24 @@ def harvest() -> dict[str, dict]:
         if not team:
             unknown += 1
             continue
-        # an agent may be retried; keep whichever result has more battles
+        if not out.get("battles"):
+            failed.append(team)
+            continue
+        # an agent may be retried; keep whichever result found more
         prior = found.get(team)
-        if prior and len(prior.get("battles", [])) >= len(out.get("battles", [])):
+        if prior and len(prior["battles"]) >= len(out["battles"]):
             continue
         out["_agent"] = f.stem
         found[team] = out
 
-    missing = sorted(set(TEAMS.values()) - set(found))
+    failed = sorted(set(failed) - set(found))
+    missing = sorted(set(TEAMS.values()) - set(found) - set(failed))
     print(f"harvested {len(found)}/32 teams"
           + (f", {unknown} unattributable" if unknown else ""))
+    if failed:
+        print(f"research FAILED (dropped, not 'no battles'): {' '.join(failed)}")
     if missing:
-        print(f"still missing: {' '.join(missing)}")
+        print(f"not yet returned: {' '.join(missing)}")
     return found
 
 

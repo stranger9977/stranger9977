@@ -1,0 +1,503 @@
+<title>The Undercard — NFL Camp Battles 2026</title>
+
+<style>
+:root{
+  --paper:#EDEAE0; --ink:#191C1A; --rule:#5E6560; --faint:#C9C5B8;
+  --board:#141917; --board2:#1B2320; --boardink:#E9E6DC;
+  --mark-y:rgba(227,210,74,.55); --mark-p:rgba(232,85,109,.42);
+  --dot-y:#B8A62E; --dot-p:#C43B54;
+  --marquee:Impact,Haettenschweiler,"Franklin Gothic Bold","Arial Narrow",
+            "Helvetica Neue Condensed",sans-serif;
+  --body:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#14171A; --ink:#E7E4DA; --rule:#7E8781; --faint:#2C3235;
+    --board:#0D1113; --board2:#151B1D; --boardink:#E7E4DA;
+    --mark-y:rgba(227,210,74,.24); --mark-p:rgba(232,85,109,.24);
+    --dot-y:#E3D24A; --dot-p:#E8556D;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14171A; --ink:#E7E4DA; --rule:#7E8781; --faint:#2C3235;
+  --board:#0D1113; --board2:#151B1D; --boardink:#E7E4DA;
+  --mark-y:rgba(227,210,74,.24); --mark-p:rgba(232,85,109,.24);
+  --dot-y:#E3D24A; --dot-p:#E8556D;
+}
+:root[data-theme="light"]{
+  --paper:#EDEAE0; --ink:#191C1A; --rule:#5E6560; --faint:#C9C5B8;
+  --board:#141917; --board2:#1B2320; --boardink:#E9E6DC;
+  --mark-y:rgba(227,210,74,.55); --mark-p:rgba(232,85,109,.42);
+  --dot-y:#B8A62E; --dot-p:#C43B54;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);
+  line-height:1.58;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.read{max-width:66ch}
+h1,h2,h3{text-wrap:balance;margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--dot-p);outline-offset:3px}
+
+/* ---------------------------------------------------------- masthead */
+.mast{border-bottom:3px solid var(--ink);padding:26px 0 12px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rule);display:flex;gap:14px;flex-wrap:wrap}
+h1{font-family:var(--marquee);font-size:clamp(52px,12vw,132px);line-height:.84;
+  letter-spacing:-.015em;text-transform:uppercase;margin:.12em 0 .1em}
+.dek{font-size:19px;color:var(--rule);max-width:62ch;margin:0 0 8px}
+
+/* ------------------------------------------------------------- board */
+.board{background:var(--board);color:var(--boardink);margin:0 0 4px;
+  border-top:1px solid var(--faint)}
+.board .wrap{padding-top:30px;padding-bottom:34px}
+.boardhead{display:flex;justify-content:space-between;align-items:flex-end;
+  gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.boardhead h2{font-family:var(--marquee);font-size:30px;letter-spacing:.01em;
+  text-transform:uppercase;line-height:1}
+.legend{font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:#9AA39E;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:5px;vertical-align:middle}
+.mapbox{background:var(--board2);border:1px solid rgba(255,255,255,.07);
+  overflow-x:auto}
+svg.map{display:block;width:100%;min-width:660px;height:auto}
+.grat{stroke:rgba(255,255,255,.055);stroke-width:1}
+.tdot{cursor:pointer}
+.tdot circle.hit{fill:transparent}
+/* halo: labels sit under the dots and must survive a neighbour overlapping them */
+.tdot text{font-family:var(--mono);font-size:9.5px;fill:#8D968F;
+  text-anchor:middle;pointer-events:none;letter-spacing:.04em;
+  paint-order:stroke fill;stroke:var(--board2);stroke-width:3px;
+  stroke-linejoin:round}
+.tdot:hover text,.tdot.on text{fill:var(--boardink)}
+.tdot circle.core{transition:r .18s ease}
+.tdot:hover circle.core,.tdot.on circle.core{stroke:var(--boardink);stroke-width:2}
+@media (prefers-reduced-motion:reduce){.tdot circle.core{transition:none}}
+
+/* ------------------------------------------------------------ ticker */
+.ticker{border-top:1px solid rgba(255,255,255,.09);margin-top:22px;padding-top:16px}
+.ticker h3{font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:#9AA39E;margin-bottom:10px;font-weight:400}
+.moves{display:flex;gap:9px;overflow-x:auto;padding-bottom:8px}
+.move{flex:0 0 auto;font-family:var(--mono);font-size:12px;
+  border:1px solid rgba(255,255,255,.13);padding:7px 11px;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.move b{font-weight:400;color:#9AA39E}
+.move .up{color:#7FCB93}.move .dn{color:#E8778A}
+
+/* ------------------------------------------------------------ scores */
+.tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--faint);border:1px solid var(--faint);margin:32px 0}
+.tally div{background:var(--paper);padding:16px 18px}
+.tally b{font-family:var(--marquee);font-size:44px;line-height:1;display:block;
+  font-variant-numeric:tabular-nums}
+.tally span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--rule);display:block;margin-top:5px}
+
+/* ------------------------------------------------------------- prose */
+section{padding:34px 0}
+h2.sec{font-family:var(--marquee);font-size:clamp(28px,4.6vw,46px);
+  text-transform:uppercase;letter-spacing:.005em;line-height:.95;
+  border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:18px}
+p{margin:0 0 15px}
+.lede::first-letter{font-family:var(--marquee);float:left;font-size:74px;
+  line-height:.72;padding:6px 9px 0 0}
+.note{font-family:var(--mono);font-size:12.5px;line-height:1.65;
+  border-left:3px solid var(--dot-y);padding:11px 0 11px 15px;color:var(--rule);
+  margin:20px 0;max-width:64ch}
+.editorial{border:2px dashed var(--faint);padding:18px 20px;margin:20px 0;
+  max-width:66ch}
+.editorial h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rule);margin:0 0 7px;font-weight:400}
+.editorial p{color:var(--rule);font-style:italic;margin:0}
+
+/* ------------------------------------------------------------ marker */
+mark.y,mark.p{background:linear-gradient(101deg,transparent 0,var(--mk) 1.5%,
+  var(--mk) 98%,transparent 100%);color:inherit;padding:.06em .22em;
+  border-radius:.18em}
+mark.y{--mk:var(--mark-y)}
+mark.p{--mk:var(--mark-p)}
+
+/* ------------------------------------------------------------- cards */
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 20px;
+  font-family:var(--mono)}
+.controls button{font:inherit;font-size:11.5px;letter-spacing:.08em;
+  text-transform:uppercase;background:none;color:var(--rule);cursor:pointer;
+  border:1px solid var(--faint);padding:7px 12px}
+.controls button[aria-pressed="true"]{background:var(--ink);color:var(--paper);
+  border-color:var(--ink)}
+.controls .count{font-size:11.5px;color:var(--rule);margin-left:auto}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+  gap:1px;background:var(--faint);border:1px solid var(--faint)}
+.card{background:var(--paper);padding:16px 17px 15px;display:flex;
+  flex-direction:column;gap:9px}
+.chead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.cteam{font-family:var(--marquee);font-size:26px;text-transform:uppercase;
+  line-height:.9;letter-spacing:.01em}
+.cslot{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--rule);text-align:right}
+.tape{font-family:var(--mono);font-size:13.5px;border-top:1px solid var(--faint);
+  border-bottom:1px solid var(--faint);padding:9px 0;display:flex;
+  flex-direction:column;gap:5px}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.row .nm{overflow-wrap:anywhere}
+.row.hold .nm{font-weight:700}
+.row .tag{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--rule);white-space:nowrap}
+.badges{display:flex;gap:6px;flex-wrap:wrap;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.09em;text-transform:uppercase}
+.badges span{border:1px solid var(--faint);padding:3px 7px;color:var(--rule)}
+.badges span.f{border-color:var(--dot-p);color:var(--dot-p)}
+.badges span.u{border-color:var(--dot-y);color:var(--dot-y)}
+.why{font-size:14.5px;line-height:1.5;margin:0}
+.asrep{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  color:var(--rule);margin:0}
+.why em{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;font-style:normal;color:var(--rule);display:block;
+  margin-bottom:3px}
+details.money summary{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--rule);cursor:pointer}
+details.money p{font-size:14px;line-height:1.5;margin:7px 0 0;color:var(--rule)}
+.blank{font-family:var(--mono);font-size:12.5px;color:var(--rule);padding:26px 4px}
+
+footer{border-top:3px solid var(--ink);padding:22px 0 50px;font-family:var(--mono);
+  font-size:11.5px;color:var(--rule);line-height:1.8}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="kicker">
+      <span>Training Camp 2026</span><span id="dateline"></span><span>Day One</span>
+    </div>
+    <h1>The Undercard</h1>
+    <p class="dek">Every job in the NFL that is genuinely still open this
+      morning — and the ones nobody has written a word about.</p>
+  </div>
+</header>
+
+<div class="board">
+  <div class="wrap">
+    <div class="boardhead">
+      <h2>The Board</h2>
+      <div class="legend">
+        <span><i style="background:var(--dot-y)"></i>size = contested slots</span>
+        <span><i style="background:var(--dot-p)"></i>arc = fantasy-relevant</span>
+        <span><i style="background:transparent;border:1px dashed #7E8781"></i>no beat research</span>
+        <span>positions nudged apart to stay legible</span>
+      </div>
+    </div>
+    <div class="mapbox">
+      <svg class="map" viewBox="0 0 900 432" role="img"
+           aria-label="The 32 NFL training camp sites, sized by number of contested depth-chart slots.">
+        <g id="grat"></g><g id="dots"></g>
+      </svg>
+    </div>
+
+    <div class="ticker">
+      <h3>Six-week drift &mdash; fantasy slots only &mdash; <span id="win"></span></h3>
+      <div class="moves" id="moves"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tally" id="tally"></div>
+
+  <section>
+    <h2 class="sec">What a battle actually is</h2>
+    <div class="read">
+      <p class="lede">A depth chart is not a document. It is a time series.
+        Every day, the league's charts get rewritten, and almost all of that
+        movement is noise — a trade, a signing, a cut. Somebody arrives,
+        somebody leaves, the list reshuffles, and nothing was contested.</p>
+
+      <p>Strip those out and what remains is the only thing that counts as a
+        camp battle: two players who were <strong>both already on the
+        roster</strong>, and one of them passed the other. No transaction. No
+        new arrival. Just a job changing hands.</p>
+
+      <p>Since May 1 the league's charts recorded <strong>1,106 changes</strong>.
+        Once arrivals and departures are removed, <mark class="y">806 of them
+        were actual competition</mark> — and those resolve to <strong id="nb"></strong>
+        distinct contested slots, because when two players trade places the
+        chart records it twice.</p>
+    </div>
+
+    <div class="editorial">
+      <h4>Nick — open here</h4>
+      <p>This is where the piece needs your voice, not the method. The data
+        below is the reporting; the argument is yours.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">The Cards</h2>
+    <div class="read">
+      <p>Every contested slot in the league, as a tale of the tape. The
+        <mark class="p">pink</mark> ones matter for fantasy. The
+        <mark class="y">yellow</mark> ones are the interesting ones: the chart
+        keeps moving and no beat writer or analyst has touched them.</p>
+    </div>
+
+    <div class="controls">
+      <button data-f="fantasy" aria-pressed="true">Fantasy-relevant</button>
+      <button data-f="uncovered" aria-pressed="false">Nobody's covering it</button>
+      <button data-f="covered" aria-pressed="false">Written about</button>
+      <button data-f="all" aria-pressed="false">Everything</button>
+      <button id="clear" hidden>Clear team</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section>
+    <h2 class="sec">One thing this can't tell you</h2>
+    <div class="read">
+      <p>Fifty-nine battles that beat writers wrote about never moved the depth
+        chart at all. The tempting read is that the coverage invented them.
+        That read is wrong, and the data says so.</p>
+
+      <p>Sort those by side of the ball and the pattern is structural:
+        <strong>70%</strong> of covered defensive battles never register,
+        against <strong>25%</strong> of offensive-line battles. That gradient
+        isn't media behavior — it's chart resolution. A public depth chart
+        lists DE, DT, LB, CB, S. It has no row for the nickel, no row for the
+        third safety, no row for a rotational edge. The fight can be
+        completely real and still have nowhere to appear.</p>
+
+      <p>So the claim runs one direction only: <mark class="y">there are real
+        competitions nobody is covering</mark>. The reverse needs a source
+        that can see defensive sub-packages, and a public depth chart can't.</p>
+    </div>
+    <p class="note">Ten teams are missing beat research — the agent pool ran
+      out its search budget mid-run and the remaining agents correctly returned
+      nothing rather than inventing coverage. Those teams are hollow on the
+      board and excluded from the coverage split. Missing research is not
+      evidence of a settled roster.</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    Depth-chart history: nflverse daily snapshots, 22 Mar &ndash; 27 Jul 2026.
+    Beat coverage: 22 team research agents.<br>
+    Battles are computed, not curated. Method: <span style="color:var(--ink)">battles.py</span>,
+    <span style="color:var(--ink)">crossref.py</span>.
+  </div>
+</footer>
+
+<script>
+const P = /*DATA*/;
+
+/* ------------------------------------------------------------ dateline */
+document.getElementById('dateline').textContent =
+  new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+document.getElementById('win').textContent = P.window || '';
+document.getElementById('nb').textContent = P.totals.battles;
+
+/* --------------------------------------------------------------- tally */
+const uncovered = P.totals.battles - P.totals.covered;
+[[P.totals.battles,'contested slots'],
+ [P.totals.fantasy,'fantasy-relevant'],
+ [P.totals.covered,'written about'],
+ [uncovered,'nobody covering'],
+ [P.researchedCount+'/32','teams researched']
+].forEach(([n,l])=>{
+  const d=document.createElement('div');
+  d.innerHTML='<b></b><span></span>';
+  d.querySelector('b').textContent=n;
+  d.querySelector('span').textContent=l;
+  document.getElementById('tally').append(d);
+});
+
+/* ----------------------------------------------------------------- map */
+/* Equirectangular, corrected for latitude at the middle of the country so
+   the plot isn't vertically stretched. No coastline: a hand-drawn outline
+   at this scale reads as wrong more often than it reads as a map, and the
+   cities carry the geography on their own. */
+const W=900,H=432,PAD=42;
+const LO0=-123.5,LO1=-69.5,LA0=25.2,LA1=48.4;
+const K=Math.cos(36.5*Math.PI/180);
+const px=lon=>PAD+((lon-LO0)/(LO1-LO0))*(W-2*PAD);
+const py=lat=>PAD+((LA1-lat)/(LA1-LA0))*(H-2*PAD);
+
+const grat=document.getElementById('grat');
+const NS='http://www.w3.org/2000/svg';
+const mk=(t,a)=>{const e=document.createElementNS(NS,t);
+  for(const k in a) e.setAttribute(k,a[k]); return e;};
+for(let lo=-120;lo<=-70;lo+=10)
+  grat.append(mk('line',{x1:px(lo),y1:PAD,x2:px(lo),y2:H-PAD,class:'grat'}));
+for(let la=25;la<=48;la+=5)
+  grat.append(mk('line',{x1:PAD,y1:py(la),x2:W-PAD,y2:py(la),class:'grat'}));
+
+const teams=Object.entries(P.teams);
+const maxN=Math.max(...teams.map(([,t])=>t.n));
+const maxF=Math.max(...teams.map(([,t])=>t.nFantasy));
+const dots=document.getElementById('dots');
+let picked=null;
+
+/* Seed at true position, then relax overlaps.
+   Eleven of the 32 camps sit in the corridor from Chicago to Boston, so a
+   faithful plot buries half the league under the other half and the labels
+   collide into noise. Nudging them apart costs a little accuracy and buys
+   the whole point of the graphic -- the relative geography survives, which
+   is all a reader takes from it. */
+const nodes = teams.map(([ab,t])=>({
+  ab, t, x:px(t.lon), y:py(t.lat), ax:px(t.lon), ay:py(t.lat),
+  r: 6+Math.sqrt(t.n/maxN)*17
+}));
+const GAP = 18;                      // dot gap plus room for the label under it
+for(let pass=0; pass<300; pass++){
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i], b=nodes[j];
+      let dx=b.x-a.x, dy=b.y-a.y;
+      let d=Math.hypot(dx,dy);
+      const want=a.r+b.r+GAP;
+      if(d>=want) continue;
+      if(d<0.01){ dx=(i%2?1:-1); dy=(j%2?1:-1); d=Math.hypot(dx,dy); }
+      const push=(want-d)/d*0.5;
+      a.x-=dx*push; a.y-=dy*push; b.x+=dx*push; b.y+=dy*push;
+    }
+  }
+  /* Spring each dot back toward where it actually is.
+     Pure repulsion separates the Northeast but lets the whole field drift:
+     one earlier pass pushed Dallas west of Los Angeles, which is worse than
+     the overlap it fixed. The anchor bounds how far any camp can travel, so
+     crowding is relieved locally and the map still reads as the country. */
+  for(const n of nodes){
+    n.x += (n.ax-n.x)*0.05;
+    n.y += (n.ay-n.y)*0.05;
+    n.x = Math.min(W-PAD-n.r, Math.max(PAD+n.r, n.x));
+    n.y = Math.min(H-PAD-n.r-13, Math.max(PAD+n.r, n.y));
+  }
+}
+
+/* Fantasy count as an arc around the rim, not a ring.
+   A ring appears on 26 of 32 teams and so distinguishes almost nothing;
+   an arc has a length, and length is readable. */
+function arc(x,y,r,frac){
+  if(frac<=0) return null;
+  const end=-Math.PI/2 + frac*2*Math.PI;
+  const x2=x+r*Math.cos(end), y2=y+r*Math.sin(end);
+  if(frac>=1) return mk('circle',{cx:x,cy:y,r,fill:'none',
+    stroke:'var(--dot-p)','stroke-width':3.5});
+  return mk('path',{fill:'none',stroke:'var(--dot-p)','stroke-width':3.5,
+    'stroke-linecap':'round',
+    d:`M ${x} ${y-r} A ${r} ${r} 0 ${frac>0.5?1:0} 1 ${x2} ${y2}`});
+}
+
+nodes.forEach(({ab,t,x,y,r})=>{
+  const g=mk('g',{class:'tdot',tabindex:'0',role:'button',
+    'aria-label':`${t.name}, ${t.n} contested slots, ${t.nFantasy} fantasy-relevant`});
+  g.append(mk('circle',{cx:x,cy:y,r,class:'core',fill:t.researched?t.color:'none',
+    stroke:t.researched?'rgba(255,255,255,.25)':'#7E8781',
+    'stroke-width':t.researched?1:1.4,
+    'stroke-dasharray':t.researched?'none':'3 3',opacity:.92}));
+  const a=arc(x,y,r+5,t.nFantasy/maxF);
+  if(a) g.append(a);
+  g.append(mk('circle',{cx:x,cy:y,r:Math.max(r,15),class:'hit'}));
+  const tx=mk('text',{x:x,y:y+r+14}); tx.textContent=ab; g.append(tx);
+  const act=()=>pick(ab,g);
+  g.addEventListener('click',act);
+  g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
+  dots.append(g);
+});
+
+function pick(ab,g){
+  const same = picked===ab;
+  document.querySelectorAll('.tdot.on').forEach(n=>n.classList.remove('on'));
+  picked = same?null:ab;
+  if(!same) g.classList.add('on');
+  document.getElementById('clear').hidden=!picked;
+  render();
+  if(!same) document.getElementById('cards').scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('clear').addEventListener('click',()=>{
+  picked=null;
+  document.querySelectorAll('.tdot.on').forEach(n=>n.classList.remove('on'));
+  document.getElementById('clear').hidden=true; render();
+});
+
+/* -------------------------------------------------------------- ticker */
+const mv=document.getElementById('moves');
+P.movers.forEach(m=>{
+  const up=m.now<m.was;                     // lower rank number = climbed
+  const d=document.createElement('div'); d.className='move';
+  d.innerHTML=`<b>${m.team}</b> ${m.player} <b>${m.pos}</b>`+
+    `<span class="${up?'up':'dn'}"> ${m.was}→${m.now}</span>`;
+  mv.append(d);
+});
+
+/* --------------------------------------------------------------- cards */
+let filter='fantasy';
+document.querySelectorAll('.controls button[data-f]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    filter=b.dataset.f;
+    document.querySelectorAll('.controls button[data-f]').forEach(o=>
+      o.setAttribute('aria-pressed', String(o===b)));
+    render();
+  });
+});
+
+function rows(b){
+  return b.contenders.map(n=>{
+    const hold=n===b.current;
+    return `<div class="row${hold?' hold':''}"><span class="nm">${esc(n)}</span>`+
+           `<span class="tag">${hold?'holds it':''}</span></div>`;
+  }).join('');
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function render(){
+  let list=[];
+  for(const [ab,t] of teams){
+    if(picked && ab!==picked) continue;
+    for(const b of t.battles) list.push({ab,team:t,b});
+  }
+  if(filter==='fantasy')        list=list.filter(x=>x.b.fantasy);
+  else if(filter==='uncovered') list=list.filter(x=>!x.b.covered && x.team.researched);
+  else if(filter==='covered')   list=list.filter(x=>x.b.covered);
+
+  list.sort((a,z)=>(z.b.fantasy-a.b.fantasy)||(z.b.covered-a.b.covered)||
+                   (z.b.flips-a.b.flips)||a.b.rank-z.b.rank);
+
+  document.getElementById('count').textContent=
+    `${list.length} ${list.length===1?'card':'cards'}${picked?' · '+P.teams[picked].name:''}`;
+
+  const host=document.getElementById('cards');
+  host.innerHTML='';
+  if(!list.length){
+    host.innerHTML='<p class="blank">Nothing matches. Try another filter, or clear the team.</p>';
+    return;
+  }
+  const frag=document.createDocumentFragment();
+  list.slice(0,180).forEach(({ab,team,b})=>{
+    const c=document.createElement('article'); c.className='card';
+    let h=`<div class="chead"><div class="cteam">${esc(team.name)}</div>`+
+          `<div class="cslot">${esc(b.slot)}</div></div>`+
+          `<div class="tape">${rows(b)}</div><div class="badges">`;
+    if(b.fantasy) h+='<span class="f">Fantasy</span>';
+    if(!b.covered && team.researched) h+='<span class="u">Uncovered</span>';
+    if(b.covered && b.realness) h+=`<span>${esc(b.realness)}</span>`;
+    h+=`<span>${b.flips} flip${b.flips===1?'':'s'}</span></div>`;
+    /* The reported position is free text and often scoped wider than the one
+       slot the chart moved -- "WR, essentially every spot after the slot"
+       gets joined to Receiver 5. Naming it keeps the card honest about what
+       the quoted reporting was actually about. */
+    if(b.reportedAs && b.reportedAs.toLowerCase()!==b.slot.toLowerCase())
+      h+=`<p class="asrep">Covered as &ldquo;${esc(b.reportedAs)}&rdquo;</p>`;
+    if(b.why)    h+=`<p class="why"><em>Why it's open</em>${esc(b.why)}</p>`;
+    if(b.stakes) h+=`<p class="why"><em>What it decides</em>${esc(b.stakes)}</p>`;
+    if(b.money)  h+=`<details class="money"><summary>Follow the money</summary><p>${esc(b.money)}</p></details>`;
+    c.innerHTML=h;
+    frag.append(c);
+  });
+  host.append(frag);
+}
+render();
+</script>

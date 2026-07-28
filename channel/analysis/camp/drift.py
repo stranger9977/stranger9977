@@ -72,13 +72,26 @@ def drift(hist: pd.DataFrame, weeks: int = 2) -> pd.DataFrame:
     d.loc[d.now.isna() & d.was.notna(), "status"] = "dropped"
     d["move"] = d.was - d.now                      # positive = climbed
 
-    # z-score within position group, on moves only
-    m = d[d.status == "held"].copy()
-    stats = m.groupby("pos")["move"].agg(["mean", "std"])
-    d = d.merge(stats, on="pos", how="left")
+    # Z-score against the players who ACTUALLY MOVED, not against everyone.
+    #
+    # In any given week ~97% of slots are unchanged. Standardising against
+    # that distribution puts a near-zero std in the denominator, so every
+    # move scores +-10 and z becomes a monotone restatement of raw rank
+    # change -- it stops distinguishing anything and it hands the top of
+    # the leaderboard to whichever WR shuffled between 9th and 12th.
+    #
+    # Conditioning on movement asks the question worth asking: given that
+    # this slot moved at all, is this a normal-sized move for the position
+    # or an unusual one? A WR sliding two spots is ordinary; a QB moving
+    # two spots is the season.
+    m = d[(d.status == "held") & (d.move != 0)]
+    stats = m.groupby("pos")["move"].agg(["mean", "std", "size"])
+    stats = stats[stats["size"] >= 3]        # std of two points is not a scale
+    d = d.merge(stats.drop(columns="size"), on="pos", how="left")
     # .where rather than .replace(0, NA) -- the latter recurses in pandas 2.x
     sd = d["std"].where(d["std"] > 0)
     d["z"] = ((d["move"] - d["mean"]) / sd).round(2)
+    d.loc[d.move == 0, "z"] = pd.NA
 
     d["window"] = f"{pd.Timestamp(first).date()} -> {pd.Timestamp(last).date()}"
     return d.drop(columns=["mean", "std"])

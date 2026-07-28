@@ -16,9 +16,25 @@ overlap:
   DATA ONLY   the chart keeps flipping and nobody has written a word.
               This is the sharpest thing in the file -- it is a story
               that exists and has not been told.
-  MEDIA ONLY  heavily covered, chart never moved. Either the competition
-              is rhetorical, or the team has already decided and is
-              saying otherwise.
+  MEDIA ONLY  covered, chart never moved.
+
+DO NOT READ "MEDIA ONLY" AS "MANUFACTURED". The two buckets are not
+equally trustworthy, and the asymmetry is structural.
+
+DATA ONLY is safe. If the chart moved, the slot demonstrably exists and
+something demonstrably happened at it. Absence of coverage is then a real
+absence.
+
+MEDIA ONLY is not safe, because a battle can be entirely genuine and
+still be invisible to the chart -- the chart has no row for it. ESPN
+lists DE, DT, LB, CB, S. It has no nickel slot, no rotational-edge slot,
+no third-safety slot. `side_of_ball()` measures exactly this: 70% of
+covered defensive battles never register, against 25% of offensive-line
+battles. That gradient is chart resolution, not media invention.
+
+So the defensible claim runs one way only: there are real competitions
+nobody is covering. The reverse claim needs a source that can see
+defensive sub-packages, which a public depth chart cannot.
 
 THE JOIN IS ON PLAYER NAMES, NOT POSITIONS. Computed positions come from
 the depth chart's own vocabulary ("WR", rank 5); reported positions are
@@ -133,6 +149,41 @@ def media_only(rep: pd.DataFrame, comp: pd.DataFrame) -> pd.DataFrame:
     return rep[~pd.Series(hit, index=rep.index)]
 
 
+DEF = re.compile(r"\b(CB|DE|DT|LB|S|safety|corner|nickel|edge|linebacker|"
+                 r"defensive|pass.rush)\b", re.I)
+OL = re.compile(r"\b(LG|RG|LT|RT|C|guard|tackle|center|line)\b", re.I)
+OFF = re.compile(r"\b(QB|RB|WR|TE|K|kicker|punt|return|running back|receiver|"
+                 r"tight end|quarterback)\b", re.I)
+
+
+def side_of_ball(pos: str) -> str:
+    """Bucket a free-text position. Offense wins ties: "WR3 / slot CB" is
+    a receiver question that mentions a corner."""
+    p = str(pos)
+    if OFF.search(p) and not DEF.search(p):
+        return "offense-skill"
+    if DEF.search(p):
+        return "defense"
+    if OL.search(p):
+        return "o-line"
+    return "other"
+
+
+def resolution_check(rep: pd.DataFrame, mo: pd.DataFrame) -> pd.DataFrame:
+    """How much of MEDIA ONLY is the chart simply not having the row.
+
+    Run this before quoting any MEDIA ONLY number. If invisibility tracks
+    side of the ball, the bucket is measuring chart resolution and not
+    media behaviour.
+    """
+    r = rep.assign(side=rep.r_pos.map(side_of_ball))
+    m = mo.assign(side=mo.r_pos.map(side_of_ball))
+    t = pd.DataFrame({"reported": r.side.value_counts(),
+                      "invisible": m.side.value_counts()}).fillna(0).astype(int)
+    t["pct_invisible"] = (t.invisible / t.reported * 100).round(0)
+    return t.sort_values("pct_invisible", ascending=False)
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -171,6 +222,11 @@ if __name__ == "__main__":
     print("\n=== MEDIA ONLY: covered, but the chart never moved ===")
     print(mo.sort_values("n_contenders", ascending=False)
           [["team", "r_pos", "n_contenders", "realness"]].head(15).to_string(index=False))
+
+    print("\n=== is MEDIA ONLY real, or is the chart just blind here? ===")
+    print(resolution_check(rep, mo).to_string())
+    print("Read down pct_invisible. If defense is far higher than o-line, this\n"
+          "bucket is chart resolution, not media invention. Quote DATA ONLY.")
 
     print("\n=== how the agents' own realness call lines up with the data ===")
     tab = pd.crosstab(m.realness.fillna("(uncovered)"), m.fantasy)
