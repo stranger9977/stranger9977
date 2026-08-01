@@ -1,0 +1,19 @@
+name: Sleeper RB ADP Analysis
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/sleeper-league-rb-analysis-x6vlif]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run analysis
+        run: python sleeper_rb_adp_analysis.py | tee analysis_output.txt
+      - name: Publish summary
+        if: always()
+        run: cat analysis_output.txt >> "$GITHUB_STEP_SUMMARY" || true
